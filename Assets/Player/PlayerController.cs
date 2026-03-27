@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour {
-    private enum AimDevice {
+    private enum AimingDevice {
         Mouse, Gamepad
     }
 
-    private AimDevice currentAimDevice = AimDevice.Mouse;
+    private AimingDevice currentAimingDevice = AimingDevice.Mouse;
+    public GameObject Hair;
 
     private Rigidbody2D rigidBody;
 
@@ -18,19 +19,20 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
-        prevMousePos = Mouse.current.position.value;
+        prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
     }
 
     void FixedUpdate() {
-        UpdatePosition();
-        UpdateDirection();
+        UpdatePositionDirection();
+        UpdateHairDirection();
     }
 
-    private void UpdatePosition() {
+    private void UpdatePositionDirection() {
         Vector2 moveInput = MoveAction.ReadValue<Vector2>();
         if (!IsZero(moveInput)) {
             Vector2 position = rigidBody.position + moveInput * MovementSpeed * Time.fixedDeltaTime;
             rigidBody.MovePosition(position);
+            transform.up = moveInput;
         }
     }
 
@@ -38,22 +40,24 @@ public class PlayerController : MonoBehaviour {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
 
-    private void UpdateDirection() {
-        Vector2 gamepadDirection = Gamepad.current.rightStick.value;
-        if (prevMousePos != Mouse.current.position.value) {
-            currentAimDevice = AimDevice.Mouse;
+    private void UpdateHairDirection() {
+        Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
+        Vector2 mousePos = Mouse.current != null ? Mouse.current.position.value : prevMousePos;
+
+        if (prevMousePos != mousePos) {
+            currentAimingDevice = AimingDevice.Mouse;
         } else if (!IsZero(gamepadDirection)) {
-            currentAimDevice = AimDevice.Gamepad;
+            currentAimingDevice = AimingDevice.Gamepad;
         }
 
-        if (currentAimDevice == AimDevice.Gamepad) {
+        if (currentAimingDevice == AimingDevice.Gamepad) {
             if (!IsZero(gamepadDirection))
-                transform.up = gamepadDirection;
-        } else if (currentAimDevice == AimDevice.Mouse) {
-            prevMousePos = Mouse.current.position.value;
-            var mouseScreen = new Vector3(Mouse.current.position.value.x, Mouse.current.position.value.y, -Camera.main.transform.position.z);
+                Hair.transform.up = -gamepadDirection;
+        } else if (currentAimingDevice == AimingDevice.Mouse) {
+            prevMousePos = mousePos;
+            var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z);
             var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-            transform.up = mouseWorld - transform.position;
+            Hair.transform.up = transform.position - mouseWorld;
         }
     }
 }
