@@ -47,6 +47,9 @@ public class PlayerController : MonoBehaviour {
             Vector2 position = rigidBody.position + moveInput * MovementSpeed * Time.fixedDeltaTime;
             rigidBody.MovePosition(position);
             transform.up = moveInput;
+            Vector3 euler = transform.eulerAngles;
+            //little ovverride, so that rotation isn't applied to another axis
+            transform.rotation = Quaternion.Euler(0f, 0f, euler.z);
         }
         animator.SetFloat("playerSpeed", moveInput.magnitude*MovementSpeed);
     }
