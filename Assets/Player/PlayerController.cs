@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     #region movement
     private Rigidbody2D rigidBody;
     public InputAction MoveAction;
+    private Animator animator;
     public float MovementSpeed = 3.0f;
 
     private void UpdatePositionDirection() {
@@ -47,6 +48,7 @@ public class PlayerController : MonoBehaviour {
             rigidBody.MovePosition(position);
             transform.up = moveInput;
         }
+        animator.SetFloat("playerSpeed", moveInput.magnitude);
     }
     #endregion
 
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
         Health = MaxHealth;
     }
