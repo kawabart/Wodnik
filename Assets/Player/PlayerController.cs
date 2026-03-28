@@ -25,15 +25,12 @@ public class PlayerController : MonoBehaviour {
 
         if (currentAimingDevice == AimingDevice.Gamepad) {
             if (!IsZero(gamepadDirection))
-                Hair.transform.up = -gamepadDirection;
+                RotateTowards(Hair, -gamepadDirection);
         } else if (currentAimingDevice == AimingDevice.Mouse) {
             prevMousePos = mousePos;
             var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z);
             var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-            Hair.transform.up = transform.position - mouseWorld;
-            Vector3 euler = Hair.transform.eulerAngles;
-            //little ovverride, so that rotation isn't applied to another axis
-            Hair.transform.rotation = Quaternion.Euler(0f, 0f, euler.z);
+            RotateTowards(Hair, transform.position - mouseWorld);
         }
     }
     #endregion
@@ -49,12 +46,9 @@ public class PlayerController : MonoBehaviour {
         if (!IsZero(moveInput)) {
             Vector2 position = rigidBody.position + moveInput * MovementSpeed * Time.fixedDeltaTime;
             rigidBody.MovePosition(position);
-            transform.up = moveInput;
-            Vector3 euler = transform.eulerAngles;
-            //little ovverride, so that rotation isn't applied to another axis
-            transform.rotation = Quaternion.Euler(0f, 0f, euler.z);
+            RotateTowards(gameObject, moveInput);
         }
-        animator.SetFloat("playerSpeed", moveInput.magnitude*MovementSpeed);
+        animator.SetFloat("playerSpeed", moveInput.magnitude * MovementSpeed);
     }
     #endregion
 
@@ -99,7 +93,16 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private bool IsZero(Vector2 v) {
+    private static bool IsZero(Vector2 v) {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
+    }
+
+    /**
+     * Rotating game objects to face certain direction using transform.up
+     * leads to issues with quaternion rotation, hence this helper.
+     **/
+    private static void RotateTowards(GameObject obj, Vector2 v) {
+        float angle = -Mathf.Atan2(v.x, v.y) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 }
