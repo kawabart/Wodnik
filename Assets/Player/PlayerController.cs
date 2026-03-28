@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour {
             var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z);
             var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
             Hair.transform.up = transform.position - mouseWorld;
+            Vector3 euler = Hair.transform.eulerAngles;
+            //little ovverride, so that rotation isn't applied to another axis
+            Hair.transform.rotation = Quaternion.Euler(0f, 0f, euler.z);
         }
     }
     #endregion
