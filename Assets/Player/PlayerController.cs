@@ -1,3 +1,4 @@
+using Assets.Player;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -59,40 +60,29 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     #region health
-    public int MaxHealth = 3;
-    public int WoundedHealth = 1;
-    public int Health;
+    private HealthComponent health;
 
-    public bool IsAlive {
-        get {
-            return Health > 0;
-        }
-    }
+    public bool IsAlive => health.IsAlive;
 
-    public bool IsWounded {
-        get {
-            return IsAlive && Health <= WoundedHealth;
-        }
-    }
+    public bool IsWounded => health.IsWounded;
 
-    public void TakeDamage(int damage) {
-        Health = Math.Max(0, Health - Math.Max(0, damage));
-    }
+    public void TakeDamage(int damage) => health.TakeDamage(damage);
 
-    public void Heal() {
-        Health = MaxHealth;
-    }
+    public void Heal() => health.Heal();
+
+    public void InitHealth() => health.InitHealth();
     #endregion
 
-    void Start() {
+    public void Start() {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = GetComponent<HealthComponent>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
-        Health = MaxHealth;
+        InitHealth();
     }
 
-    void FixedUpdate() {
+    public void FixedUpdate() {
         if (IsAlive) {
             UpdatePositionDirection();
             UpdateHairDirection();
