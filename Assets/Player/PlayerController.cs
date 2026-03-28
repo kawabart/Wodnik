@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour {
             rigidBody.MovePosition(position);
             transform.up = moveInput;
         }
-        animator.SetFloat("playerSpeed", moveInput.magnitude);
+        animator.SetFloat("playerSpeed", moveInput.magnitude*MovementSpeed);
     }
     #endregion
 
