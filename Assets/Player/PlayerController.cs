@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour {
     private Vector2 prevMousePos;
     private AimingDevice currentAimingDevice = AimingDevice.Mouse;
     public GameObject Hair;
+    private Camera mainCamera;
 
     private void UpdateHairDirection() {
         Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour {
         } else if (currentAimingDevice == AimingDevice.Mouse) {
             prevMousePos = mousePos;
             var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z);
-            var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
+            var mouseWorld = mainCamera.ScreenToWorldPoint(mouseScreen);
             Hair.transform.up = transform.position - mouseWorld;
             Vector3 euler = Hair.transform.eulerAngles;
             //little ovverride, so that rotation isn't applied to another axis
@@ -41,7 +42,7 @@ public class PlayerController : MonoBehaviour {
     #region movement
     private Rigidbody2D rigidBody;
     public InputAction MoveAction;
-    private Animator animator;
+    public Animator animator;
     public float MovementSpeed = 3.0f;
 
     private void UpdatePositionDirection() {
@@ -85,9 +86,11 @@ public class PlayerController : MonoBehaviour {
     #endregion
 
     void Start() {
+        mainCamera = Camera.main;
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        if (animator== null)
+            animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
         Health = MaxHealth;
     }
