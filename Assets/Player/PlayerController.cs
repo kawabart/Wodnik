@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
     #region movement
     private Rigidbody2D rigidBody;
     public InputAction MoveAction;
+    [SerializeField] 
     private Animator animator;
     public float MovementSpeed = 3.0f;
 
@@ -81,7 +82,8 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();
+        if (animator==null)
+            animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
         Health = MaxHealth;
     }
