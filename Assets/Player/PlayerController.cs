@@ -2,10 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
     #region aiminig
-    private enum AimingDevice {
+    private enum AimingDevice
+    {
         Mouse, Gamepad
     }
 
@@ -13,20 +15,27 @@ public class PlayerController : MonoBehaviour {
     private AimingDevice currentAimingDevice = AimingDevice.Mouse;
     public GameObject Hair;
 
-    private void UpdateHairDirection() {
+    private void UpdateHairDirection()
+    {
         Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
         Vector2 mousePos = Mouse.current != null ? Mouse.current.position.value : prevMousePos;
 
-        if (prevMousePos != mousePos) {
+        if (prevMousePos != mousePos)
+        {
             currentAimingDevice = AimingDevice.Mouse;
-        } else if (!IsZero(gamepadDirection)) {
+        }
+        else if (!IsZero(gamepadDirection))
+        {
             currentAimingDevice = AimingDevice.Gamepad;
         }
 
-        if (currentAimingDevice == AimingDevice.Gamepad) {
+        if (currentAimingDevice == AimingDevice.Gamepad)
+        {
             if (!IsZero(gamepadDirection))
                 RotateTowards(Hair, -gamepadDirection);
-        } else if (currentAimingDevice == AimingDevice.Mouse) {
+        }
+        else if (currentAimingDevice == AimingDevice.Mouse)
+        {
             prevMousePos = mousePos;
             var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z);
             var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
@@ -42,9 +51,11 @@ public class PlayerController : MonoBehaviour {
     private Animator animator;
     public float MovementSpeed = 3.0f;
 
-    private void UpdatePositionDirection() {
+    private void UpdatePositionDirection()
+    {
         Vector2 moveInput = MoveAction.ReadValue<Vector2>();
-        if (!IsZero(moveInput)) {
+        if (!IsZero(moveInput))
+        {
             Vector2 position = rigidBody.position + moveInput * MovementSpeed * Time.fixedDeltaTime;
             rigidBody.MovePosition(position);
             RotateTowards(gameObject, moveInput);
@@ -58,28 +69,35 @@ public class PlayerController : MonoBehaviour {
     public int WoundedHealth = 1;
     public int Health;
 
-    public bool IsAlive {
-        get {
+    public bool IsAlive
+    {
+        get
+        {
             return Health > 0;
         }
     }
 
-    public bool IsWounded {
-        get {
+    public bool IsWounded
+    {
+        get
+        {
             return IsAlive && Health <= WoundedHealth;
         }
     }
 
-    public void TakeDamage(int damage) {
+    public void TakeDamage(int damage)
+    {
         Health = Math.Max(0, Health - Math.Max(0, damage));
     }
 
-    public void Heal() {
+    public void Heal()
+    {
         Health = MaxHealth;
     }
     #endregion
 
-    void Start() {
+    void Start()
+    {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody2D>();
         if (animator==null)
@@ -88,14 +106,17 @@ public class PlayerController : MonoBehaviour {
         Health = MaxHealth;
     }
 
-    void FixedUpdate() {
-        if (IsAlive) {
+    void FixedUpdate()
+    {
+        if (IsAlive)
+        {
             UpdatePositionDirection();
             UpdateHairDirection();
         }
     }
 
-    private static bool IsZero(Vector2 v) {
+    private static bool IsZero(Vector2 v)
+    {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
 
