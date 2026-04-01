@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -206,7 +207,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: -0.002, y: 0.011, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,6 +257,26 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cebb4fde8b0f1044bdc07118e42e480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Follower
+  Target: {fileID: 728305636}
+  Offset: {x: 0, y: 0, z: -4}
+  SmoothTime: 0.22
+--- !u!4 &728305636 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 589693085857358320, guid: d9b67186b0a9864449f53aa97b6e4429, type: 3}
+  m_PrefabInstance: {fileID: 7194024727404439657}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7194024727404439657
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,6 +324,10 @@ PrefabInstance:
     - target: {fileID: 589693085857358320, guid: d9b67186b0a9864449f53aa97b6e4429, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5172780327877492691, guid: d9b67186b0a9864449f53aa97b6e4429, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7495267514894647918, guid: d9b67186b0a9864449f53aa97b6e4429, type: 3}
       propertyPath: m_Name
