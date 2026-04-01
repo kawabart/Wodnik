@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         if (currentAimingDevice == AimingDevice.Gamepad)
         {
             if (!IsZero(gamepadDirection))
-                RotateTowards(Hair, new Vector3(gamepadDirection.x,0,gamepadDirection.y));
+                RotateTowards(Hair, new Vector3(gamepadDirection.x, 0, gamepadDirection.y));
         }
         else if (currentAimingDevice == AimingDevice.Mouse)
         {
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     #region movement
     private Rigidbody rigidBody;
     public InputAction MoveAction;
-    [SerializeField] 
+    [SerializeField]
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
@@ -55,9 +55,9 @@ public class PlayerController : MonoBehaviour
     public float Acceleration = 1;
     private void UpdatePositionDirection()
     {
-            rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration *Time.fixedDeltaTime);
-            
-        if (rigidBody.linearVelocity!=Vector3.zero)
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
+
+        if (rigidBody.linearVelocity != Vector3.zero)
             RotateTowards(gameObject, rigidBody.linearVelocity);
     }
     #endregion
@@ -98,7 +98,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
-        if (animator==null)
+        if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
         Health = MaxHealth;
@@ -128,7 +128,8 @@ public class PlayerController : MonoBehaviour
      * Rotating game objects to face certain direction using transform.up
      * leads to issues with quaternion rotation, hence this helper.
      **/
-    private static void RotateTowards(GameObject obj, Vector3 v) {
+    private static void RotateTowards(GameObject obj, Vector3 v)
+    {
         float angle = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
         obj.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
