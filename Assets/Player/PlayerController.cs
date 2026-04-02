@@ -121,6 +121,10 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
+    private static bool IsZero(Vector3 v)
+    {
+        return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f) && Mathf.Approximately(v.z, 0.0f);
+    }
 
     /**
      * Rotating game objects to face certain direction using transform.up
