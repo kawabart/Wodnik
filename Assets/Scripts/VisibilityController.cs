@@ -23,7 +23,7 @@ public class VisibilityController : MonoBehaviour
 
     #region light and shadow
     [SerializeField] private bool includeShadows = false;
-    [SerializeField] private LightController[] lightControllers;
+    private LightController[] lightControllers;
     void CollectLights()
     {
         lightControllers = FindObjectsByType<LightController>();

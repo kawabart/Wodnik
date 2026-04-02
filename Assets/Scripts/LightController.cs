@@ -21,7 +21,7 @@ public class LightController : MonoBehaviour
 
     private LayerMask shadowCastingLayerMask;
     private LayerMask playerMask;
-    
+
 
 
     void Start()
@@ -37,7 +37,7 @@ public class LightController : MonoBehaviour
         if (lightType == LightType.Directional)
             range = Mathf.Infinity;
         else
-            range = lightComponent.range;
+            range = lightComponent.range * 0.8f;
         brightness = lightComponent.intensity / 2;
 
     }
@@ -75,7 +75,7 @@ public class LightController : MonoBehaviour
     }
     private bool IsObscured(Transform target)
     {
-        Vector3 direction = target.position+ Vector3.up * 0.05f - transform.position;
+        Vector3 direction = target.position + Vector3.up * 0.05f - transform.position;
         RaycastHit hit;
         if (Physics.Raycast(transform.position, direction, out hit, range, playerMask))
             if (hit.transform == target)
@@ -102,7 +102,7 @@ public class LightController : MonoBehaviour
         Vector3 direction = -lightComponent.transform.forward;
         RaycastHit hit;
         Debug.DrawRay(target.position + Vector3.up, direction * 100, Color.yellow, 1f);
-        Vector3 point1 = target.position + Vector3.forward * .05f+Vector3.up*.05f;
+        Vector3 point1 = target.position + Vector3.forward * .05f + Vector3.up * .05f;
         Vector3 point2 = target.position - Vector3.forward * .05f + Vector3.up * .05f;
         if (!Physics.Raycast(point1, direction, out hit, 150, shadowCastingLayerMask))
             return false;
