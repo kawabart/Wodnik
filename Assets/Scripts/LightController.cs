@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-public class LightController: MonoBehaviour
+public class LightController : MonoBehaviour
 {
     [SerializeField]
     private Light lightComponent;
@@ -17,15 +17,18 @@ public class LightController: MonoBehaviour
     [SerializeField]
     private bool isOn = true;
     [SerializeField]
-    LayerMask layerMask;
-
-    [SerializeField]
     private bool realtime = false;
 
+    private LayerMask shadowCastingLayerMask;
+    private LayerMask playerMask;
+    
 
-    void Awake()
+
+    void Start()
     {
         lightComponent = GetComponent<Light>();
+        shadowCastingLayerMask = LayerMask.GetMask("Blockout");
+        playerMask = LayerMask.GetMask("Player");
         UpdateLight();
     }
     void UpdateLight()
@@ -37,14 +40,12 @@ public class LightController: MonoBehaviour
             range = lightComponent.range;
         brightness = lightComponent.intensity / 2;
 
-        layerMask = LayerMask.GetMask("Entity", "Blockout", "Bush");
-
     }
     private void Update()
     {
         if (realtime) UpdateLight();
     }
-    
+
     private bool IsInDistance(Transform target)
     {
         return Vector3.Distance(transform.position, target.position) <= range;
@@ -74,9 +75,9 @@ public class LightController: MonoBehaviour
     }
     private bool IsObscured(Transform target)
     {
-        Vector3 direction = target.position - transform.position;
+        Vector3 direction = target.position+ Vector3.up * 0.05f - transform.position;
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, range, layerMask))
+        if (Physics.Raycast(transform.position, direction, out hit, range, playerMask))
             if (hit.transform == target)
                 return false;
         return true;
@@ -84,7 +85,7 @@ public class LightController: MonoBehaviour
     private bool IsAngleRight(Transform target)
     {
         float viewAngle = lightComponent.spotAngle / 2;
-        Vector3 direction = target.position - transform.position + Vector3.up * 1.5f;
+        Vector3 direction = target.position - transform.position + Vector3.up * .05f;
         float angle = Vector3.Angle(transform.forward, direction);
         Color rayColor = Color.white;
 
@@ -100,16 +101,12 @@ public class LightController: MonoBehaviour
     {
         Vector3 direction = -lightComponent.transform.forward;
         RaycastHit hit;
-        LayerMask thisLayerMask = LayerMask.GetMask("Blockout", "Bush");
-        LayerMask bushLayerMask = LayerMask.GetMask("Bush");
         Debug.DrawRay(target.position + Vector3.up, direction * 100, Color.yellow, 1f);
-        Vector3 point1 = target.position + Vector3.up;
-        Vector3 point2 = target.position + Vector3.up * 2;
-        if (Physics.CheckSphere(point1, .2f, bushLayerMask) && Physics.CheckSphere(point2, .2f, bushLayerMask))
-            return true;
-        if (!Physics.Raycast(point1, direction, out hit, 150, thisLayerMask))
+        Vector3 point1 = target.position + Vector3.forward * .05f+Vector3.up*.05f;
+        Vector3 point2 = target.position - Vector3.forward * .05f + Vector3.up * .05f;
+        if (!Physics.Raycast(point1, direction, out hit, 150, shadowCastingLayerMask))
             return false;
-        if (!Physics.Raycast(point2, direction, out hit, 150, thisLayerMask))
+        if (!Physics.Raycast(point2, direction, out hit, 150, shadowCastingLayerMask))
             return false;
         return true;
     }
