@@ -4,6 +4,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region hiding
+    public bool Hidden { get; private set; }
+    private VisibilityController visibilityController;
+    private bool CheckPlayerHiddenState()
+    {
+        if (visibilityController == null) return false;
+        return !visibilityController.Visible;
+    }
+    #endregion
 
     #region aiminig
     private enum AimingDevice
@@ -101,6 +110,7 @@ public class PlayerController : MonoBehaviour
         if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
+        visibilityController = GetComponent<VisibilityController>();
         Health = MaxHealth;
     }
 
@@ -108,6 +118,7 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
+        animator.SetBool("hidden", Hidden);
         UpdateHairDirection();
     }
 
@@ -115,6 +126,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsAlive) return;
         UpdatePositionDirection();
+        Hidden = CheckPlayerHiddenState();
     }
 
     private static bool IsZero(Vector2 v)
