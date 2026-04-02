@@ -139,6 +139,55 @@ MonoBehaviour:
   Target: {fileID: 2578886441223888191}
   Offset: {x: 0, y: 0.1, z: 0}
   SmoothTime: 0
+--- !u!1 &4988120818298034387
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471398039324087276}
+  - component: {fileID: 2180707894545926493}
+  m_Layer: 0
+  m_Name: Player hidden postprocess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1471398039324087276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988120818298034387}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000004768371, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0904299, y: 1.57092, z: 0.004998505}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 589693085857358320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2180707894545926493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4988120818298034387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: e54a53203262039459b3d2987b67fcde, type: 2}
 --- !u!1 &7495267514894647918
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,6 +201,7 @@ GameObject:
   - component: {fileID: 6669696871531238574}
   - component: {fileID: -170988646567326479}
   - component: {fileID: 3365348062764258917}
+  - component: {fileID: 5687107201489483020}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -172,6 +222,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1471398039324087276}
   - {fileID: 8983354076103614180}
   - {fileID: 8051520094044883430}
   m_Father: {fileID: 0}
@@ -188,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f44580169ebd124cb3a36a621554014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  Hidden: 0
   Hair: {fileID: 4368811902275011831}
   MoveAction:
     m_Name: Move
@@ -280,7 +332,7 @@ MonoBehaviour:
     m_Flags: 0
   animator: {fileID: 3384512945747088540}
   MovementSpeed: 5
-  Acceleration: 20
+  Acceleration: 45
   MaxHealth: 2
   WoundedHealth: 1
   Health: 0
@@ -344,6 +396,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3722d3f6febda044b19db5b9188e51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  Visible: 0
+  detectionRadius: 0.5
+  hidingLayers:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &5687107201489483020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495267514894647918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c5f7da5e291384fb96ee05ee7e8b6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPostProcessController
+  volumeHidden: {fileID: 0}
 --- !u!1001 &5517295535915986713
 PrefabInstance:
   m_ObjectHideFlags: 0

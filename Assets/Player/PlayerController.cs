@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region hiding
-    public bool Hidden { get; private set; }
+    public bool Hidden;// { get; private set; }
     private VisibilityController visibilityController;
     private bool CheckPlayerHiddenState()
     {
         if (visibilityController == null) return false;
-        return !visibilityController.Visible;
+        return visibilityController.Hidden;
     }
     #endregion
 
