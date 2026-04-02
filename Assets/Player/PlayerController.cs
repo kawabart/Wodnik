@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
 
-        if (IsZero(rigidBody.linearVelocity))
+        if (!IsZero(rigidBody.linearVelocity))
             RotateTowards(gameObject, rigidBody.linearVelocity);
     }
     #endregion
