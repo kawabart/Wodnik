@@ -3,9 +3,12 @@ using UnityEngine;
 public class PlayerMaterialController : MonoBehaviour
 {
     [SerializeField]
+    private float levelOfDarkening = .5f;
+    [SerializeField]
     private PlayerController playerController;
     private SkinnedMeshRenderer meshRenderer;
     private Color originalEmissionColor;
+
 
     private void Start()
     {
@@ -23,10 +26,8 @@ public class PlayerMaterialController : MonoBehaviour
     {
         if (meshRenderer == null) return;
 
-        Color targetColor = playerController.Hidden ? originalEmissionColor * 0.5f : originalEmissionColor;
+        Color targetColor = playerController.Hidden ? originalEmissionColor * levelOfDarkening : originalEmissionColor;
 
         meshRenderer.materials[0].SetColor("_EmissionColor", targetColor);
-
-        //meshRenderer.material.EnableKeyword("_EMISSION");
     }
 }
