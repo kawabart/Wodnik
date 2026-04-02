@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class VisibilityController : MonoBehaviour
 {
-    public bool Hidden;// { get; private set; }
+    public bool Hidden;
 
     [SerializeField] private float bushDetectionRadius = 0.5f;
     [SerializeField] private LayerMask hidingLayers;

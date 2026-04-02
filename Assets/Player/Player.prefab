@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8983354076103614180}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!212 &5211811675609029221
 SpriteRenderer:
   serializedVersion: 2
@@ -123,7 +123,7 @@ Transform:
   m_Children:
   - {fileID: 2802298416344861325}
   m_Father: {fileID: 589693085857358320}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5394077876800804829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
   m_IsGlobal: 1
-  priority: 0
+  priority: 2
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: e54a53203262039459b3d2987b67fcde, type: 2}
@@ -382,7 +382,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.1
+  m_Radius: 0.2
   m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3365348062764258917
 MonoBehaviour:
@@ -396,11 +396,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3722d3f6febda044b19db5b9188e51c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  Visible: 0
-  detectionRadius: 0.5
+  Hidden: 0
+  bushDetectionRadius: 0.05
   hidingLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 80
+  checkOffsets:
+  - {x: 0.1, y: 0}
+  - {x: -0.1, y: 0}
+  - {x: 0, y: 0.05}
+  - {x: 0, y: -0.05}
 --- !u!114 &5687107201489483020
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01c5f7da5e291384fb96ee05ee7e8b6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPostProcessController
-  volumeHidden: {fileID: 0}
+  volumeHidden: {fileID: 2180707894545926493}
 --- !u!1001 &5517295535915986713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -486,6 +491,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 5eb4f7fe541e8c3438fc045dbf434e7b, type: 2}
+    - target: {fileID: 9209496550801025853, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209496550801025853, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.074
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209496550801025853, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.05
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -493,6 +510,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2911068633404390469, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3384512945747088540}
+    - targetCorrespondingSourceObject: {fileID: 2515927237439144528, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 306390625225916748}
   m_SourcePrefab: {fileID: 100100000, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
 --- !u!4 &2578886441223888191 stripped
 Transform:
@@ -526,6 +546,25 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &7960958350333881673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2515927237439144528, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+  m_PrefabInstance: {fileID: 5517295535915986713}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &306390625225916748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960958350333881673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cd516935efcffb4ab25b74ef2d13e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  levelOfDarkening: 0.3
+  playerController: {fileID: 5836883666691645028}
 --- !u!4 &8051520094044883430 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2534930462580270847, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}

@@ -9,7 +9,6 @@ public class PlayerMaterialController : MonoBehaviour
     private SkinnedMeshRenderer meshRenderer;
     private Color originalEmissionColor;
 
-
     private void Start()
     {
         meshRenderer = GetComponent<SkinnedMeshRenderer>();
