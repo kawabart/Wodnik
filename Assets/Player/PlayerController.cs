@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
 
-        if (rigidBody.linearVelocity != Vector3.zero)
+        if (IsZero(rigidBody.linearVelocity))
             RotateTowards(gameObject, rigidBody.linearVelocity);
     }
     #endregion
@@ -114,9 +114,7 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (!IsAlive) return;
-        {
-            UpdatePositionDirection();
-        }
+        UpdatePositionDirection();
     }
 
     private static bool IsZero(Vector2 v)
