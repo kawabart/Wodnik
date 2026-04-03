@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(SkinnedMeshRenderer))]
 public class PlayerMaterialController : MonoBehaviour
 {
     [SerializeField]

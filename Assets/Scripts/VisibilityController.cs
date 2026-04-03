@@ -26,6 +26,10 @@ public class VisibilityController : MonoBehaviour
     private LightController[] lightControllers;
     void CollectLights()
     {
+        //Can later be expanded so that some manager globally collects all lights in scene,
+        //if we want to have more objects reacting to light, like hiding bodies in shadows.
+        //Also should collect lights in real time, not just on start, if we want to create
+        //sources of light dynamically.
         lightControllers = FindObjectsByType<LightController>();
     }
     bool IsInLight()

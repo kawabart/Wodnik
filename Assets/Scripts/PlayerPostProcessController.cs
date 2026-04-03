@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(PlayerController))]
 public class PlayerPostProcessController : MonoBehaviour
 {
     private PlayerController playerController;
