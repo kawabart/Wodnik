@@ -397,15 +397,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   Hidden: 0
-  bushDetectionRadius: 0.05
+  detectionSphereRadius: 0.05
   hidingLayers:
     serializedVersion: 2
     m_Bits: 80
   checkOffsets:
-  - {x: 0.1, y: 0}
-  - {x: -0.1, y: 0}
-  - {x: 0, y: 0.05}
-  - {x: 0, y: -0.05}
+  - {x: 0, y: 0.05, z: 0.1}
+  - {x: 0, y: 0.05, z: -0.1}
+  - {x: 0.05, y: 0.05, z: 0}
+  - {x: -0.05, y: 0.05, z: 0}
   includeShadows: 1
 --- !u!114 &5687107201489483020
 MonoBehaviour:

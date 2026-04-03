@@ -19,8 +19,10 @@ public class LightController : MonoBehaviour
     private bool isOn = true;
     [SerializeField, Tooltip("If true, it updates in realtime during gameplay. If false, it only reads values once on start.")]
     private bool realtime = false;
+    [SerializeField, Tooltip("How far from target in the direction of directional light should we check for shadow casters.")]
+    private float directionalShadowCheckLength = 50;
 
-    //Nonbinary inputs, that only affect gameplay when using GetLightValueOnObject function. For now we only use binary IsInLight function.
+    //Nonbinary inputs, that only affect gameplay when using GetLightValueOnPoint function. For now we only use binary IsInLight function.
     [SerializeField] 
     private float brightness;
     [SerializeField, Tooltip("Affects value of light over distance.")]
@@ -29,13 +31,11 @@ public class LightController : MonoBehaviour
     private float lightBrightnessOverride = 0.5f;
 
     private LayerMask shadowCastingLayerMask; //layers that block light in gameplay
-    private LayerMask playerMask; //player's layer
 
     void Start()
     {
         lightComponent = GetComponent<Light>();
         shadowCastingLayerMask = LayerMask.GetMask("Blockout");
-        playerMask = LayerMask.GetMask("Player");
         UpdateLight();
     }
     void UpdateLight()
@@ -53,12 +53,7 @@ public class LightController : MonoBehaviour
         if (realtime) UpdateLight();
     }
 
-    private bool IsInDistance(Transform target)
-    {
-        return Vector3.Distance(transform.position, target.position) <= range;
-    }
-
-    public bool IsInLight(Transform target)
+    public bool IsInLight(Vector3 target)
     {
         if (lightComponent == null) return false;
         if (!isOn) return false;
@@ -80,19 +75,22 @@ public class LightController : MonoBehaviour
         }
         return true;
     }
-    private bool IsObscured(Transform target)
+    private bool IsInDistance(Vector3 target)
     {
-        Vector3 direction = target.position + Vector3.up * 0.05f - transform.position;
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, direction, out hit, range, playerMask))
-            if (hit.transform == target)
-                return false;
-        return true;
+        return Vector3.Distance(transform.position, target) <= range;
     }
-    private bool IsAngleRight(Transform target)
+    private bool IsObscured(Vector3 target)
+    {
+        Vector3 direction = target - transform.position;
+        RaycastHit hit;
+        if (!Physics.Raycast(target, direction, out hit, direction.magnitude, shadowCastingLayerMask))
+            return true;
+        return false;
+    }
+    private bool IsAngleRight(Vector3 target)
     {
         float viewAngle = lightComponent.spotAngle / 2;
-        Vector3 direction = target.position - transform.position + Vector3.up * .05f;
+        Vector3 direction = target - transform.position + Vector3.up * .05f;
         float angle = Vector3.Angle(transform.forward, direction);
 
         Color rayColor = Color.white;
@@ -104,23 +102,20 @@ public class LightController : MonoBehaviour
         if (angle > viewAngle) return false;
         return true;
     }
-    private bool IsObscuredDirection(Transform target)
+    private bool IsObscuredDirection(Vector3 target)
     {
         Vector3 direction = -lightComponent.transform.forward;
         RaycastHit hit;
-        Debug.DrawRay(target.position + Vector3.up, direction * 100, Color.yellow, 1f);
-        Vector3 point1 = target.position + Vector3.forward * .05f + Vector3.up * .05f;
-        Vector3 point2 = target.position - Vector3.forward * .05f + Vector3.up * .05f;
-        if (!Physics.Raycast(point1, direction, out hit, 150, shadowCastingLayerMask))
-            return false;
-        if (!Physics.Raycast(point2, direction, out hit, 150, shadowCastingLayerMask))
+        Debug.DrawRay(target + Vector3.up, direction * directionalShadowCheckLength, Color.yellow, 1f);
+
+        if (!Physics.Raycast(target, direction, out hit, directionalShadowCheckLength, shadowCastingLayerMask))
             return false;
         return true;
     }
-    public float GetLightValueOnObject(Transform target)
+    public float GetLightValueOnPoint(Vector3 target)
     {
         float lightValue;
-        float distance = Vector3.Distance(transform.position, target.position);
+        float distance = Vector3.Distance(transform.position, target);
         float lerpValue = 1 - distance / range;
         lerpValue = lightCurve.Evaluate(lerpValue);
         lightValue = Mathf.Lerp(0, brightness, lerpValue);

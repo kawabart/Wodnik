@@ -4,17 +4,18 @@ public class VisibilityController : MonoBehaviour
 {
     public bool Hidden;
 
-    [SerializeField] private float bushDetectionRadius = 0.5f;
+    [SerializeField] private float detectionSphereRadius = 0.5f;
     [SerializeField] private LayerMask hidingLayers;
-    [SerializeField] private Vector2[] checkOffsets;
+    [SerializeField] private Vector3[] checkOffsets;
 
     bool CheckIfHidden()
     {
-        if (includeShadows && !IsInLight()) return true;
         int hits = 0;
         foreach (var offset in checkOffsets)
         {
-            if (Physics.CheckSphere(transform.position + Vector3.forward * offset.x + Vector3.right * offset.y, bushDetectionRadius, hidingLayers)) hits++;
+            Vector3 positionToCheck = transform.position + offset;
+            if (includeShadows && !IsInLight(positionToCheck)) hits++;
+            else if (Physics.CheckSphere(positionToCheck, detectionSphereRadius, hidingLayers)) hits++;
         }
         bool isCovered = hits >= checkOffsets.Length - 1;
 
@@ -32,11 +33,11 @@ public class VisibilityController : MonoBehaviour
         //sources of light dynamically.
         lightControllers = FindObjectsByType<LightController>();
     }
-    bool IsInLight()
+    bool IsInLight(Vector3 position)
     {
         foreach (LightController light in lightControllers)
         {
-            if (light.IsInLight(this.transform)) return true;
+            if (light.IsInLight(position)) return true;
         }
         return false;
     }
@@ -58,7 +59,7 @@ public class VisibilityController : MonoBehaviour
         Gizmos.color = Color.cyan;
         foreach (var offset in checkOffsets)
         {
-            Gizmos.DrawWireSphere(transform.position + Vector3.forward * offset.x + Vector3.right * offset.y, bushDetectionRadius);
+            Gizmos.DrawWireSphere(transform.position + offset, detectionSphereRadius);
         }
     }
 }
