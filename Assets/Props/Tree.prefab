@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5515068334155248530}
   - component: {fileID: 6545831397085226274}
   - component: {fileID: 8644463308405796422}
-  m_Layer: 0
+  - component: {fileID: 4442933402553019400}
+  m_Layer: 7
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2001,6 +2002,28 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!64 &4442933402553019400
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 416273482228242218}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &2061937781036339924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2012,7 +2035,8 @@ GameObject:
   - component: {fileID: 1775472055025944774}
   - component: {fileID: 3122556593839721825}
   - component: {fileID: 1408317171146621390}
-  m_Layer: 0
+  - component: {fileID: 1524816283800709257}
+  m_Layer: 7
   m_Name: big fern (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2027,13 +2051,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2061937781036339924}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.06132426, y: -0.9193798, z: 0.15902813, w: 0.35452834}
+  m_LocalRotation: {x: 0.02890431, y: -0.9300166, z: 0.07495514, w: 0.35863006}
   m_LocalPosition: {x: 0, y: 0.26100004, z: 0.20500124}
   m_LocalScale: {x: 85.217445, y: 18.734499, z: 58.717743}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7076910752112140007}
-  m_LocalEulerAnglesHint: {x: 44.27, y: -62.025, z: 110.343}
+  m_LocalEulerAnglesHint: {x: 9.216, y: -137.825, z: 0}
 --- !u!33 &3122556593839721825
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -2091,6 +2115,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &1524816283800709257
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2061937781036339924}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7495057507405809336, guid: 47dea0aa2f790fa45bc66dd215c34c66, type: 3}
 --- !u!1 &3651610196366340066
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,7 +2147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 467149279821635290}
   - component: {fileID: 862785302980774804}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2118,7 +2164,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7076910752112140007}
@@ -2144,9 +2190,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.1
-  m_Height: 3
+  m_Height: 1
   m_Direction: 1
-  m_Center: {x: 0, y: 1.3, z: 0}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &7095736008956122939
 GameObject:
   m_ObjectHideFlags: 0
@@ -2158,7 +2204,8 @@ GameObject:
   - component: {fileID: 3473206815298624499}
   - component: {fileID: 8356136610082409075}
   - component: {fileID: 5222438121023521202}
-  m_Layer: 0
+  - component: {fileID: 8442079475847585}
+  m_Layer: 7
   m_Name: big fern (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2237,6 +2284,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8442079475847585
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7095736008956122939}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7495057507405809336, guid: 47dea0aa2f790fa45bc66dd215c34c66, type: 3}
 --- !u!1 &7894142005661377860
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2317,8 @@ GameObject:
   - component: {fileID: 4832065050669528333}
   - component: {fileID: 7832647944058595993}
   - component: {fileID: 6987452565875437273}
-  m_Layer: 0
+  - component: {fileID: 4849422622203252953}
+  m_Layer: 7
   m_Name: big fern (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2327,6 +2397,28 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4849422622203252953
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7894142005661377860}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7495057507405809336, guid: 47dea0aa2f790fa45bc66dd215c34c66, type: 3}
 --- !u!1 &8879683032180103809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,7 +2430,8 @@ GameObject:
   - component: {fileID: 8857176389838669016}
   - component: {fileID: 7033710549283614810}
   - component: {fileID: 6064581241279192984}
-  m_Layer: 0
+  - component: {fileID: 6141578662300412628}
+  m_Layer: 7
   m_Name: big fern (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2417,3 +2510,25 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6141578662300412628
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8879683032180103809}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7495057507405809336, guid: 47dea0aa2f790fa45bc66dd215c34c66, type: 3}

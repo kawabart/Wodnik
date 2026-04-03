@@ -4,6 +4,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    #region hiding
+    public bool Hidden
+    {
+        get
+        {
+            return visibilityController == null ? false : visibilityController.Hidden;
+        }
+    }
+    private VisibilityController visibilityController;
+    #endregion
 
     #region aiminig
     private enum AimingDevice
@@ -101,6 +111,7 @@ public class PlayerController : MonoBehaviour
         if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
+        visibilityController = GetComponent<VisibilityController>();
         Health = MaxHealth;
     }
 
@@ -108,6 +119,7 @@ public class PlayerController : MonoBehaviour
     {
         moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
+        animator.SetBool("hidden", Hidden);
         UpdateHairDirection();
     }
 
@@ -121,11 +133,11 @@ public class PlayerController : MonoBehaviour
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
-
     private static bool IsZero(Vector3 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f) && Mathf.Approximately(v.z, 0.0f);
     }
+
     /**
      * Rotating game objects to face certain direction using transform.up
      * leads to issues with quaternion rotation, hence this helper.
