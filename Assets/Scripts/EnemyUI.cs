@@ -1,14 +1,13 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static UnityEngine.Rendering.DebugUI;
 
 [RequireComponent(typeof(UIDocument))]
 public class EnemyUI : MonoBehaviour
 {
     public enum AIState
     {
-        Idle, Investigating, Alerted
+        Idle, Investigating, Searching, Alerted
     }
 
     public AIState State;
@@ -16,6 +15,7 @@ public class EnemyUI : MonoBehaviour
     private UIDocument document;
     private Label label;
 
+    private Color color = Color.white;
     private float blinkingSpeed = 5;
 
     void Start()
@@ -36,15 +36,23 @@ public class EnemyUI : MonoBehaviour
         else if (State == AIState.Investigating)
         {
             label.text = "?";
+            color = Color.yellow;
+            blinkingSpeed = 0;
+        }
+        else if (State == AIState.Searching)
+        {
+            label.text = "??";
+            color = Color.orange;
             blinkingSpeed = 3;
         }
         else if (State == AIState.Alerted)
         {
             label.text = "!!";
+            color = Color.red;
             blinkingSpeed = 10;
         }
 
-        float alpha = (Mathf.Sin(Time.time * blinkingSpeed) + 1.0f) / 2.0f;
-        label.style.color = new StyleColor(label.resolvedStyle.color.WithAlpha(alpha));
+        float alpha = (Mathf.Cos(Time.time * blinkingSpeed) + 1.0f) / 2.0f;
+        label.style.color = new StyleColor(color.WithAlpha(alpha));
     }
 }
