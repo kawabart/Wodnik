@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class VisibilityController : MonoBehaviour
 {
-    public bool Hidden;
-
-    [SerializeField] private float detectionSphereRadius = 0.5f;
-    [SerializeField] private LayerMask hidingLayers;
-    [SerializeField] private Vector3[] checkOffsets;
+    public bool Hidden { get; private set; }
+    [SerializeField, Tooltip("Layers that conceal while collided with.")]
+    private LayerMask hidingLayers;
+    [SerializeField, Tooltip("List of points relative to object position and rotation, that are checked for collision with hiding geometry, or if theyre in shadows.")]
+    private Vector3[] checkOffsets = { Vector3.zero };
+    [SerializeField, Tooltip("Radius to check around points defined in checkOffets.")]
+    private float detectionSphereRadius = 0.5f;
+    [SerializeField, Tooltip("How many points can remain shown for the whole object to be considered hidden. Should be smaller then length of checkOffsets. Leave at 0 if you want all points to be accounted for.")]
+    private int detectionPointsLeniency = 0;
 
     bool CheckIfHidden()
     {
@@ -17,7 +21,7 @@ public class VisibilityController : MonoBehaviour
             if (includeShadows && !IsInLight(positionToCheck)) hits++;
             else if (Physics.CheckSphere(positionToCheck, detectionSphereRadius, hidingLayers)) hits++;
         }
-        bool isCovered = hits >= checkOffsets.Length - 1;
+        bool isCovered = hits >= checkOffsets.Length - detectionPointsLeniency;
 
         return isCovered;
     }

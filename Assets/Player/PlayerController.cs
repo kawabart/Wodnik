@@ -5,13 +5,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     #region hiding
-    public bool Hidden;
-    private VisibilityController visibilityController;
-    private bool CheckPlayerHiddenState()
+    public bool Hidden
     {
-        if (visibilityController == null) return false;
-        return visibilityController.Hidden;
+        get
+        {
+            return visibilityController == null ? false : visibilityController.Hidden;
+        }
     }
+    private VisibilityController visibilityController;
     #endregion
 
     #region aiminig
@@ -126,7 +127,6 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsAlive) return;
         UpdatePositionDirection();
-        Hidden = CheckPlayerHiddenState();
     }
 
     private static bool IsZero(Vector2 v)
