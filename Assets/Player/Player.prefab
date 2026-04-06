@@ -330,10 +330,8 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
   animator: {fileID: 3384512945747088540}
-  MinSpeed: 0.1
   MaxSpeed: 5
-  Acceleration: 50
-  Decceleration: 50
+  Acceleration: 10000
   MaxHealth: 2
   WoundedHealth: 1
   Health: 0
@@ -345,9 +343,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495267514894647918}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0.9
-  m_AngularDamping: 0.05
+  m_Mass: 50
+  m_LinearDamping: 10
+  m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -360,7 +358,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 116
   m_CollisionDetection: 0
@@ -371,7 +369,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495267514894647918}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 935dea90b2b91b14e85334a2338c78a2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

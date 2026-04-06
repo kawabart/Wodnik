@@ -61,28 +61,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    // stop the character below this speed
-    public float MinSpeed = 0.1f;
     public float MaxSpeed = 3.0f;
     public float Acceleration = 1;
-    public float Decceleration = 1;
 
     private void UpdatePositionDirection()
     {
-        Vector3 newVelocity;
-        if (moveInput != Vector3.zero)
-        {
-            newVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity * rigidBody.linearDamping + Acceleration * Time.fixedDeltaTime * moveInput, MaxSpeed);
-        }
-        else
-        {
-            newVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity, Mathf.Max(0, rigidBody.linearVelocity.magnitude * rigidBody.linearDamping - Decceleration * Time.fixedDeltaTime));
-        }
-
-        if (newVelocity.magnitude > MinSpeed)
-        {
-            rigidBody.MovePosition(rigidBody.position + newVelocity * Time.fixedDeltaTime);
-        }
+        rigidBody.AddForce(Acceleration * Time.fixedDeltaTime * moveInput, ForceMode.Acceleration);
 
         if (!IsZero(rigidBody.linearVelocity))
         {
@@ -128,6 +112,7 @@ public class PlayerController : MonoBehaviour
     {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
+        rigidBody.maxLinearVelocity = MaxSpeed;
         if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
