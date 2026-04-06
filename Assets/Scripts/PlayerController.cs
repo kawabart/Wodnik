@@ -61,14 +61,34 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    public float MovementSpeed = 3.0f;
+    // stop the character below this speed
+    public float MinSpeed = 0.1f;
+    public float MaxSpeed = 3.0f;
     public float Acceleration = 1;
+    public float Decceleration = 1;
+
     private void UpdatePositionDirection()
     {
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
+        Vector3 newVelocity;
+        if (moveInput != Vector3.zero)
+        {
+            newVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity * rigidBody.linearDamping + Acceleration * Time.fixedDeltaTime * moveInput, MaxSpeed);
+        }
+        else
+        {
+            newVelocity = Vector3.ClampMagnitude(rigidBody.linearVelocity, Mathf.Max(0, rigidBody.linearVelocity.magnitude * rigidBody.linearDamping - Decceleration * Time.fixedDeltaTime));
+        }
+
+        if (newVelocity.magnitude > MinSpeed)
+        {
+            rigidBody.MovePosition(rigidBody.position + newVelocity * Time.fixedDeltaTime);
+        }
 
         if (!IsZero(rigidBody.linearVelocity))
-            RotateTowards(gameObject, rigidBody.linearVelocity);
+        {
+            float angle = Mathf.Atan2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.z) * Mathf.Rad2Deg;
+            rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
+        }
     }
     #endregion
 
