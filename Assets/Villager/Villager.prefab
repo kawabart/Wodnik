@@ -99,7 +99,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2729769001911704819}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: c2c94ea0102a820438e9fdeab51475b6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123,8 +123,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2729769001911704819}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 1.05
+  m_Mass: 1000
+  m_LinearDamping: 100
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -137,7 +137,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 1
   m_Constraints: 84
