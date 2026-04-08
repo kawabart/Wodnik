@@ -13,8 +13,11 @@ public class HairGenerator : MonoBehaviour
     public float dampness = .1f;
     public int resolution = 20;
     public bool regenerateStrands = false;
-    public float endSize = 0;
+
+    public float startSize = 1f;
     public float middleSize = .5f;
+    public float endSize = 0;
+    
     public int strandCount = 10;
     public float headSize = .5f;
     public Strand[] strands;
@@ -48,7 +51,7 @@ public class HairGenerator : MonoBehaviour
         //lineRenderer.endColor = strand.color;
          lineRenderer.colorGradient = strand.gradient;
 
-        Vector3 A = startpoint.position+startpoint.right*strand.offset.x+startpoint.up*strand.offset.y;
+        Vector3 A = startpoint.position+startpoint.right*strand.offset.x * startSize + startpoint.up*strand.offset.y * startSize;
         Vector3 B = middlepoint.position + startpoint.right * strand.offset.x * middleSize + startpoint.up * strand.offset.y* middleSize;
         Vector3 C = endpoint.position + startpoint.right * strand.offset.x * endSize + startpoint.up * strand.offset.y * endSize;
 
