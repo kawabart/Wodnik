@@ -3,14 +3,14 @@ using Unity.Behavior;
 using UnityEngine;
 
 [Serializable, Unity.Properties.GeneratePropertyBag]
-[Condition(name: "Player is alive", story: "[Player] is alive", category: "Conditions", id: "3b8c846cd39752d5620905d40f222c16")]
-public partial class PlayerIsAliveCondition : Condition
+[Condition(name: "Player is not hidden", story: "[Player] is not hidden", category: "Conditions", id: "8fae171db06a06248efbc89a02e4b017")]
+public partial class PlayerIsNotHiddenCondition : Condition
 {
     [SerializeReference] public BlackboardVariable<PlayerController> Player;
 
     public override bool IsTrue()
     {
-        return Player.Value.IsAlive;
+        return !Player.Value.Hidden;
     }
 
     public override void OnStart()
