@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 589693085857358320}
   - component: {fileID: 5836883666691645028}
-  - component: {fileID: 6669696871531238574}
+  - component: {fileID: 2149064328996226667}
   - component: {fileID: -170988646567326479}
   - component: {fileID: 3365348062764258917}
   - component: {fileID: 5687107201489483020}
@@ -330,12 +330,12 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
   animator: {fileID: 3384512945747088540}
-  MaxSpeed: 5
-  Acceleration: 10000
+  MovementSpeed: 5
+  Acceleration: 45
   MaxHealth: 2
   WoundedHealth: 1
   Health: 0
---- !u!54 &6669696871531238574
+--- !u!54 &2149064328996226667
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -343,9 +343,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495267514894647918}
   serializedVersion: 5
-  m_Mass: 50
-  m_LinearDamping: 10
-  m_AngularDamping: 1
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
