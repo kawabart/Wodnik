@@ -23,6 +23,9 @@ public class HairGenerator : MonoBehaviour
     public Strand[] strands;
     public float middlePointLerp = .5f;
 
+    public float noiseScale = 2f; 
+    public float noiseSpeed = 1f;      
+    public float noiseAmplitude = 0.05f; 
 
     public float maxDistance = 4;
     void GenerateStrands()
@@ -55,7 +58,7 @@ public class HairGenerator : MonoBehaviour
     void CalculateStrand(Strand strand)
     {
         float maxMiddleSize = (startSize + endSize) * 1.5f;
-        float minMiddleSize = -Mathf.Abs(startSize - endSize);
+        float minMiddleSize = (startSize + endSize)/10-.1f;
 
         float distance = (endpoint.position - startpoint.position).magnitude;
         float distanceNormalized = distance /  maxDistance;
@@ -75,6 +78,17 @@ public class HairGenerator : MonoBehaviour
         {
             float t = i / (float)(resolution - 1);
             Vector3 pos = Bezier(A, B, C, t);
+            // waves:
+            Vector3 dir = (C - A).normalized;
+            Vector3 side = Vector3.Cross(dir, Vector3.up);
+            float noise = Mathf.PerlinNoise(
+                t * noiseScale + strand.noiseOffset,
+                Time.time * noiseSpeed
+            ) - 0.5f;
+            float attenuation = t;// 1f - t;
+            // final offset
+            pos += side * noise * noiseAmplitude * attenuation;
+            //
             lineRenderer.SetPosition(i, pos);
         }
     }
@@ -112,8 +126,10 @@ public class Strand
     public Vector3 offset;
     public Color color;
     public Gradient gradient;
+    public float noiseOffset;
     public Strand(float headSize)
     {
+        noiseOffset = UnityEngine.Random.Range(0f, 10f);
         float blackness = UnityEngine.Random.Range(.1f, 0.4f);
         color = new Color(blackness, blackness, blackness);
         offset = new Vector3(UnityEngine.Random.Range(-headSize, headSize), UnityEngine.Random.Range(-headSize, headSize), 0);
