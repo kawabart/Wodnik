@@ -34,7 +34,7 @@ public class HairGenerator : MonoBehaviour
 
         for (int i = 0; i < strandCount; i++)
         {
-            strands[i] = new Strand(headSize);
+            strands[i] = new Strand(headSize,resolution);
         }
     }
     void RemoveStrands()
@@ -47,12 +47,11 @@ public class HairGenerator : MonoBehaviour
     }
     void CalculateMidlepoint()
     {
-        Vector3 middlepointTargetPosition = Vector3.LerpUnclamped(startpoint.position, endpoint.position, middlePointLerp);
-        
-        middlepointVelocity += (middlepointTargetPosition - middlepoint.transform.position) * middlepointStiffness;
-        middlepointVelocity *= dampness;
-        middlepoint.transform.position += middlepointVelocity;
-       
+        Vector3 middlepointTargetPosition = Vector3.LerpUnclamped(startpoint.position, endpoint.position, middlePointLerp);  
+        float dt = Time.deltaTime;
+        middlepointVelocity += (middlepointTargetPosition - middlepoint.position) * middlepointStiffness * dt * 60f;
+        middlepointVelocity *= Mathf.Pow(dampness, dt * 60f);
+        middlepoint.position += middlepointVelocity * dt * 60f;
     }
 
     void CalculateStrand(Strand strand)
@@ -74,23 +73,31 @@ public class HairGenerator : MonoBehaviour
         Vector3 B = middlepoint.position + startpoint.right * strand.offset.x * middleSize + startpoint.up * strand.offset.y* middleSize;
         Vector3 C = endpoint.position + startpoint.right * strand.offset.x * endSize + startpoint.up * strand.offset.y * endSize;
 
+
+        Vector3 dir = (C - A).normalized;
+        Vector3 side = Vector3.Cross(dir, Vector3.up);
+
+        float time = Time.time;
+        float noiseTime = time * noiseSpeed;
+
         for (int i = 0; i < resolution; i++)
         {
             float t = i / (float)(resolution - 1);
             Vector3 pos = Bezier(A, B, C, t);
-            // waves:
-            Vector3 dir = (C - A).normalized;
-            Vector3 side = Vector3.Cross(dir, Vector3.up);
+
+
             float noise = Mathf.PerlinNoise(
                 t * noiseScale + strand.noiseOffset,
-                Time.time * noiseSpeed
+                noiseTime
             ) - 0.5f;
-            float attenuation = t;// 1f - t;
-            // final offset
+
+            float attenuation = t;
             pos += side * noise * noiseAmplitude * attenuation;
-            //
-            lineRenderer.SetPosition(i, pos);
+
+            strand.positions[i] = pos;
         }
+
+        lineRenderer.SetPositions(strand.positions);
     }
     void Start()
     {
@@ -127,8 +134,10 @@ public class Strand
     public Color color;
     public Gradient gradient;
     public float noiseOffset;
-    public Strand(float headSize)
+    public Vector3[] positions;
+    public Strand(float headSize,int resolution)
     {
+        positions = new Vector3[resolution];
         noiseOffset = UnityEngine.Random.Range(0f, 10f);
         float blackness = UnityEngine.Random.Range(.1f, 0.4f);
         color = new Color(blackness, blackness, blackness);
