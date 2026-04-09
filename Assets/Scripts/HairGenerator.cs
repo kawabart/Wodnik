@@ -28,12 +28,19 @@ public class HairGenerator : MonoBehaviour
     void GenerateStrands()
     {
         strands = new Strand[strandCount];
- 
+
+        for (int i = 0; i < strandCount; i++)
+        {
+            strands[i] = new Strand(headSize);
+        }
     }
     void RemoveStrands()
     {
         foreach (Strand strand in strands)
-            Destroy(strand.strand.gameObject);
+        {
+            if (strand.strand != null)
+                Destroy(strand.strand.gameObject);
+        }
     }
     void CalculateMidlepoint()
     {
@@ -105,9 +112,8 @@ public class Strand
     public Vector3 offset;
     public Color color;
     public Gradient gradient;
-    public Strand( )
+    public Strand(float headSize)
     {
-        float headSize = .5f;
         float blackness = UnityEngine.Random.Range(.1f, 0.4f);
         color = new Color(blackness, blackness, blackness);
         offset = new Vector3(UnityEngine.Random.Range(-headSize, headSize), UnityEngine.Random.Range(-headSize, headSize), 0);
