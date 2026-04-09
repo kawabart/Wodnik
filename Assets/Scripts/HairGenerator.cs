@@ -22,6 +22,9 @@ public class HairGenerator : MonoBehaviour
     public float headSize = .5f;
     public Strand[] strands;
     public float middlePointLerp = .5f;
+
+
+    public float maxDistance = 4;
     void GenerateStrands()
     {
         strands = new Strand[strandCount];
@@ -44,7 +47,13 @@ public class HairGenerator : MonoBehaviour
 
     void CalculateStrand(Strand strand)
     {
-        
+        float maxMiddleSize = (startSize + endSize) * 1.5f;
+        float minMiddleSize = -Mathf.Abs(startSize - endSize);
+
+        float distance = (endpoint.position - startpoint.position).magnitude;
+        float distanceNormalized = distance /  maxDistance;
+
+        middleSize = Mathf.Lerp( maxMiddleSize, minMiddleSize,distanceNormalized);
         if (strand.strand==null) strand.strand = GameObject.Instantiate(strandPrefab).GetComponent<LineRenderer>();
         lineRenderer = strand.strand;   
         lineRenderer.positionCount = resolution;
@@ -99,12 +108,12 @@ public class Strand
     public Strand( )
     {
         float headSize = .5f;
-        float blackness = UnityEngine.Random.Range(0, 0.1f);
+        float blackness = UnityEngine.Random.Range(.1f, 0.4f);
         color = new Color(blackness, blackness, blackness);
-      offset = new Vector3(UnityEngine.Random.Range(-headSize, headSize), UnityEngine.Random.Range(-headSize, headSize), 0);
+        offset = new Vector3(UnityEngine.Random.Range(-headSize, headSize), UnityEngine.Random.Range(-headSize, headSize), 0);
         gradient = new Gradient();
         gradient.SetColorKeys(new GradientColorKey[] {
-            new GradientColorKey(color*.1f, 0f),
+            new GradientColorKey(color*.5f, 0f),
             new GradientColorKey(color, 1f)
         });
     }
