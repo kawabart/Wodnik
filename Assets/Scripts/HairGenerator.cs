@@ -58,17 +58,18 @@ public class HairGenerator : MonoBehaviour
     void CalculateStrand(Strand strand)
     {
         float maxMiddleSize = (startSize + endSize) * 1.5f;
-        float minMiddleSize = (startSize + endSize) / 10 - .1f;
+        float minMiddleSize = .05f- (startSize + endSize)/3;
 
         float distance = (endpoint.position - startpoint.position).magnitude;
         float distanceNormalized = distance / maxDistance;
 
         middleSize = Mathf.Lerp(maxMiddleSize, minMiddleSize, distanceNormalized);
-        if (strand.strand == null) strand.strand = GameObject.Instantiate(strandPrefab).GetComponent<LineRenderer>();
-        lineRenderer = strand.strand;
-        lineRenderer.positionCount = resolution;
-        //lineRenderer.endColor = strand.color;
-        lineRenderer.colorGradient = strand.gradient;
+        if (strand.strand == null)
+        {
+            strand.strand = GameObject.Instantiate(strandPrefab).GetComponent<LineRenderer>();
+            strand.strand.positionCount = resolution;
+            strand.strand.colorGradient = strand.gradient;
+        }
 
         Vector3 A = startpoint.position + startpoint.right * strand.offset.x * startSize + startpoint.up * strand.offset.y * startSize;
         Vector3 B = middlepoint.position + startpoint.right * strand.offset.x * middleSize + startpoint.up * strand.offset.y * middleSize;
@@ -98,7 +99,7 @@ public class HairGenerator : MonoBehaviour
             strand.positions[i] = pos;
         }
 
-        lineRenderer.SetPositions(strand.positions);
+        strand.strand.SetPositions(strand.positions);
     }
     void Start()
     {
