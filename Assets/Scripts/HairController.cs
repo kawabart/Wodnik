@@ -3,11 +3,14 @@ using UnityEngine;
 public class HairController : MonoBehaviour
 {
     [SerializeField] HairGenerator hairGenerator;
-    Rigidbody rigidBody;
-    [SerializeField] Transform defaultHairPosition;
-    public Rigidbody grabbedRb;
+    private Rigidbody rigidBody;
+    [SerializeField, Tooltip("Default position that hair end lerps to when it isn't attached to anything.")]
+    private Transform defaultHairPosition;
+    [SerializeField, Tooltip("Rigidbody of object that's currently grabbed by the hair. When null, hair returns to their default position. Drag and drop rigidbody to attach it.")]
+    private Rigidbody grabbedRb;
     public bool Grabbed = false;
-    public SpringJoint springJoint;
+    [SerializeField, Tooltip("Spring joint thats dynamically created (and removed) to attach rb thats grabbed by hair.")]
+    private SpringJoint springJoint;
 
     public void Grab(Rigidbody rb)
     {
@@ -18,7 +21,7 @@ public class HairController : MonoBehaviour
         springJoint = this.gameObject.AddComponent<SpringJoint>();
         springJoint.connectedBody = rb;
         springJoint.autoConfigureConnectedAnchor = false;
-        hairGenerator.maxDistance = 2;
+        hairGenerator.maxDistance = 1;
         //to do: endsize can change based on dimensions of grabbed object.
         //hairGenerator.endSize = .2f;
         Grabbed = true;
@@ -28,7 +31,7 @@ public class HairController : MonoBehaviour
     {
         grabbedRb = null;
         hairGenerator.endpoint.GetComponent<Follower>().Target = defaultHairPosition;
-        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .05f;
+        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .08f;
         hairGenerator.noiseAmplitude = .25f;
         hairGenerator.endSize = .2f;
         if (springJoint)
@@ -37,7 +40,7 @@ public class HairController : MonoBehaviour
             Destroy(springJoint);
             springJoint = null;
         }
-        hairGenerator.maxDistance = .8f;
+        hairGenerator.maxDistance = 1;
         Grabbed = false;
     }
 
@@ -54,7 +57,7 @@ public class HairController : MonoBehaviour
     {
         if (!Grabbed) hairGenerator.noiseSpeed = .2f + rigidBody.linearVelocity.magnitude / 2;
         else hairGenerator.noiseSpeed = .2f;
-        if (grabbedRb != null && !Grabbed) Grab(grabbedRb);
-        if (grabbedRb == null && Grabbed) LetGo();
+        if (grabbedRb != null && !Grabbed && springJoint == null) Grab(grabbedRb);
+        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed)) LetGo();
     }
 }

@@ -3,32 +3,47 @@ using System;
 
 public class HairGenerator : MonoBehaviour
 {
+    [SerializeField, Tooltip("Hair grows from here. Should be at player's head.")]
     public Transform startpoint;
+    [SerializeField, Tooltip("Middle point with velocity applied. It's position is calculated based of startPoint and endPoint positions (along with stifness, dampness etc).")]
     public Transform middlepoint;
+    [SerializeField, Tooltip("Hair ends here. Can be attached to objects.")]
     public Transform endpoint;
 
-    private LineRenderer lineRenderer;
-    public LineRenderer strandPrefab;
-    public Vector3 middlepointVelocity = Vector3.zero;
-    public float middlepointStiffness = .005f;
-    public float dampness = .1f;
-    public int resolution = 20;
-    public bool regenerateStrands = false;
+    [SerializeField, Tooltip("Default object that's instantiated as hairstrand.")]
+    private LineRenderer strandPrefab;
+    [Tooltip("Current velocity of the middlepoint.")]
+    private Vector3 middlepointVelocity = Vector3.zero;
 
+    public float middlepointStiffness = .1f;
+    public float dampness = .9f;
+    [SerializeField, Tooltip("Scale applied to offset of the hair roots.")]
     public float startSize = 1f;
+    [SerializeField, Tooltip("Scale applied to offset in the middle part of hair. Smaller when hair is streched.")]
     public float middleSize = .5f;
+    [SerializeField, Tooltip("Size of the offset at the end of the hair. Could be bigger or smaller based of of the grabbed object size.")]
     public float endSize = 0;
-
-    public int strandCount = 10;
-    public float headSize = .5f;
-    public Strand[] strands;
+    [Tooltip("Where along the length of hair should its center of mass be. From 0 to 1.")]
     public float middlePointLerp = .5f;
-
+    [Tooltip("Decides the frequency of hair waves.")]
     public float noiseScale = 2f;
+    [Tooltip("Hair animation speed. Changes based on player speed.")]
     public float noiseSpeed = 1f;
+    [Tooltip("Decides how high the waves of hair are.")]
     public float noiseAmplitude = 0.05f;
-
+    [Tooltip("Distance at which hair are considered fully stretched.")]
     public float maxDistance = 4;
+
+    [SerializeField, Tooltip("Regenerates hair in runtime.")]
+    private bool regenerateStrands = false;
+    [SerializeField, Tooltip("Nr of vertices on hair strands. Need to regenerate at runtime.")]
+    private int resolution = 20;
+    [SerializeField, Tooltip("How many strands of hair do we generate. Need to regenerate at runtime.")]
+    private int strandCount = 10;
+    [SerializeField, Tooltip("Size of max offset of hair. Need to regenerate at runtime.")]
+    private float headSize = .5f;
+    private Strand[] strands;
+
     void GenerateStrands()
     {
         strands = new Strand[strandCount];
