@@ -58,7 +58,7 @@ public class HairGenerator : MonoBehaviour
     void CalculateStrand(Strand strand)
     {
         float maxMiddleSize = (startSize + endSize) * 1.5f;
-        float minMiddleSize = .05f- (startSize + endSize)/3;
+        float minMiddleSize = .05f - (startSize + endSize) / 3;
 
         float distance = (endpoint.position - startpoint.position).magnitude;
         float distanceNormalized = distance / maxDistance;

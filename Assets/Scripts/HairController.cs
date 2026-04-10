@@ -19,7 +19,7 @@ public class HairController : MonoBehaviour
         springJoint.connectedBody = rb;
         springJoint.autoConfigureConnectedAnchor = false;
         hairGenerator.maxDistance = 2;
-        //to do: endsize can change based on dimensions of grabbed object
+        //to do: endsize can change based on dimensions of grabbed object.
         //hairGenerator.endSize = .2f;
         Grabbed = true;
     }
@@ -57,5 +57,4 @@ public class HairController : MonoBehaviour
         if (grabbedRb != null && !Grabbed) Grab(grabbedRb);
         if (grabbedRb == null && Grabbed) LetGo();
     }
-
 }
