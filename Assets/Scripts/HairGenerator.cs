@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+
 public class HairGenerator : MonoBehaviour
 {
     public Transform startpoint;
@@ -17,15 +18,15 @@ public class HairGenerator : MonoBehaviour
     public float startSize = 1f;
     public float middleSize = .5f;
     public float endSize = 0;
-    
+
     public int strandCount = 10;
     public float headSize = .5f;
     public Strand[] strands;
     public float middlePointLerp = .5f;
 
-    public float noiseScale = 2f; 
-    public float noiseSpeed = 1f;      
-    public float noiseAmplitude = 0.05f; 
+    public float noiseScale = 2f;
+    public float noiseSpeed = 1f;
+    public float noiseAmplitude = 0.05f;
 
     public float maxDistance = 4;
     void GenerateStrands()
@@ -34,7 +35,7 @@ public class HairGenerator : MonoBehaviour
 
         for (int i = 0; i < strandCount; i++)
         {
-            strands[i] = new Strand(headSize,resolution);
+            strands[i] = new Strand(headSize, resolution);
         }
     }
     void RemoveStrands()
@@ -47,7 +48,7 @@ public class HairGenerator : MonoBehaviour
     }
     void CalculateMidlepoint()
     {
-        Vector3 middlepointTargetPosition = Vector3.LerpUnclamped(startpoint.position, endpoint.position, middlePointLerp);  
+        Vector3 middlepointTargetPosition = Vector3.LerpUnclamped(startpoint.position, endpoint.position, middlePointLerp);
         float dt = Time.deltaTime;
         middlepointVelocity += (middlepointTargetPosition - middlepoint.position) * middlepointStiffness * dt * 60f;
         middlepointVelocity *= Mathf.Pow(dampness, dt * 60f);
@@ -57,20 +58,20 @@ public class HairGenerator : MonoBehaviour
     void CalculateStrand(Strand strand)
     {
         float maxMiddleSize = (startSize + endSize) * 1.5f;
-        float minMiddleSize = (startSize + endSize)/10-.1f;
+        float minMiddleSize = (startSize + endSize) / 10 - .1f;
 
         float distance = (endpoint.position - startpoint.position).magnitude;
-        float distanceNormalized = distance /  maxDistance;
+        float distanceNormalized = distance / maxDistance;
 
-        middleSize = Mathf.Lerp( maxMiddleSize, minMiddleSize,distanceNormalized);
-        if (strand.strand==null) strand.strand = GameObject.Instantiate(strandPrefab).GetComponent<LineRenderer>();
-        lineRenderer = strand.strand;   
+        middleSize = Mathf.Lerp(maxMiddleSize, minMiddleSize, distanceNormalized);
+        if (strand.strand == null) strand.strand = GameObject.Instantiate(strandPrefab).GetComponent<LineRenderer>();
+        lineRenderer = strand.strand;
         lineRenderer.positionCount = resolution;
         //lineRenderer.endColor = strand.color;
-         lineRenderer.colorGradient = strand.gradient;
+        lineRenderer.colorGradient = strand.gradient;
 
-        Vector3 A = startpoint.position+startpoint.right*strand.offset.x * startSize + startpoint.up*strand.offset.y * startSize;
-        Vector3 B = middlepoint.position + startpoint.right * strand.offset.x * middleSize + startpoint.up * strand.offset.y* middleSize;
+        Vector3 A = startpoint.position + startpoint.right * strand.offset.x * startSize + startpoint.up * strand.offset.y * startSize;
+        Vector3 B = middlepoint.position + startpoint.right * strand.offset.x * middleSize + startpoint.up * strand.offset.y * middleSize;
         Vector3 C = endpoint.position + startpoint.right * strand.offset.x * endSize + startpoint.up * strand.offset.y * endSize;
 
 
@@ -104,7 +105,6 @@ public class HairGenerator : MonoBehaviour
         GenerateStrands();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (regenerateStrands)
@@ -125,7 +125,7 @@ public class HairGenerator : MonoBehaviour
                2 * (1 - t) * t * B +
                Mathf.Pow(t, 2) * C;
     }
-}   
+}
 [System.Serializable]
 public class Strand
 {
@@ -135,7 +135,7 @@ public class Strand
     public Gradient gradient;
     public float noiseOffset;
     public Vector3[] positions;
-    public Strand(float headSize,int resolution)
+    public Strand(float headSize, int resolution)
     {
         positions = new Vector3[resolution];
         noiseOffset = UnityEngine.Random.Range(0f, 10f);

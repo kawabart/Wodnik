@@ -13,6 +13,7 @@ public class HairController : MonoBehaviour
     {
         grabbedRb = rb;
         hairGenerator.endpoint.GetComponent<Follower>().Target = rb.transform;
+        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = 0f;
         springJoint = this.gameObject.AddComponent<SpringJoint>();
         springJoint.connectedBody = rb;
         springJoint.autoConfigureConnectedAnchor = false;
@@ -23,10 +24,10 @@ public class HairController : MonoBehaviour
     {
         grabbedRb = null;
         hairGenerator.endpoint.GetComponent<Follower>().Target = defaultHairPosition;
+        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .05f;
         if (springJoint)
         {
             springJoint.connectedBody = null;
-            //springJoint.breakForce = 0;
             Destroy(springJoint);
             springJoint = null;
         }
@@ -37,15 +38,24 @@ public class HairController : MonoBehaviour
     {
         hairGenerator = GetComponentInChildren<HairGenerator>();
         rigidBody = GetComponent<Rigidbody>();
-        //springJoint = GetComponent <SpringJoint>();
         hairGenerator.endpoint.parent = null;
+        hairGenerator.middlepoint.parent = null;
         LetGo();
     }
 
 
     void Update()
     {
-        hairGenerator.noiseSpeed =.2f+ rigidBody.linearVelocity.magnitude/4;
+        if (!Grabbed)
+        {
+            hairGenerator.noiseSpeed = .2f + rigidBody.linearVelocity.magnitude / 2;
+            hairGenerator.noiseAmplitude = .25f;
+        }
+        else
+        {
+            hairGenerator.noiseSpeed = .2f;
+            hairGenerator.noiseAmplitude = .1f;
+        }
         if (grabbedRb != null && !Grabbed) Grab(grabbedRb);
         if (grabbedRb == null && Grabbed) LetGo();
     }
