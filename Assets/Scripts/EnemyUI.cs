@@ -3,14 +3,9 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
-public class EnemyUI : MonoBehaviour
+public partial class EnemyUI : MonoBehaviour
 {
-    public enum AIState
-    {
-        Idle, Investigating, Searching, Alerted
-    }
-
-    public AIState State;
+    public EnemyAIState State;
 
     private UIDocument document;
     private Label label;
@@ -29,23 +24,23 @@ public class EnemyUI : MonoBehaviour
         var angle = transform.parent.localEulerAngles.y;
         transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Euler(transform.localEulerAngles.x, 0, angle));
 
-        if (State == AIState.Idle)
+        if (State == EnemyAIState.Idle)
         {
             label.text = "";
         }
-        else if (State == AIState.Investigating)
+        else if (State == EnemyAIState.Investigating)
         {
             label.text = "?";
             color = Color.yellow;
             blinkingSpeed = 0;
         }
-        else if (State == AIState.Searching)
+        else if (State == EnemyAIState.Searching)
         {
             label.text = "??";
             color = Color.orange;
             blinkingSpeed = 3;
         }
-        else if (State == AIState.Alerted)
+        else if (State == EnemyAIState.Alerted)
         {
             label.text = "!!";
             color = Color.red;
