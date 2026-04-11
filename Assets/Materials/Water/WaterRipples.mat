@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water Topdown
-  m_Shader: {fileID: -6465566751694194690, guid: f37339edd3bdfb6428a98cfe52593e83, type: 3}
+  m_Name: WaterRipples
+  m_Shader: {fileID: -6465566751694194690, guid: d0089a606263ca447aca57b71b4ba4a7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,7 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _SkyTex:
-        m_Texture: {fileID: 2800000, guid: 62ab8a4149fe6b6498ab315116ea6a8b, type: 3}
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 8400000, guid: 3c0d65911454af442b5c1770a6386b85, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,22 +46,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.88
-    - _Metallic: 1
-    - _ParallaxStrength: 0.01
+    - _Alpha: 0.5
+    - _Frequency: 10
+    - _Metallic: 0
+    - _ParallaxStrength: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _SkyScale: 2.83
+    - _SkyScale: 0
     - _Smoothness: 0
-    - _WaterScale: 1
-    - _WaterScale_1: 12.14
+    - _Speed: 4
+    - _WaterScale: 10
     m_Colors:
-    - _Alpha: {r: 0.49056596, g: 0.49056596, b: 0.49056596, a: 1}
-    - _Color: {r: 0, g: 0.46703148, b: 1, a: 1}
-    - _Emission: {r: 0, g: 1.0760919, b: 3.688605, a: 0}
+    - _BlinkClamp: {r: 0, g: 1, b: 0, a: 0}
+    - _Color: {r: 0, g: 1, b: 0.6140351, a: 1}
+    - _Emission: {r: 1, g: 1, b: 1, a: 1}
+    - _MinMax: {r: 0, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7178385532337465715
+--- !u!114 &5519568178140454713
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
