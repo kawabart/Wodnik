@@ -61,12 +61,12 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    public float MaxSpeed = 3.0f;
+    public float MovementSpeed = 3.0f;
     public float Acceleration = 1;
 
     private void UpdatePositionDirection()
     {
-        rigidBody.AddForce(Acceleration * Time.fixedDeltaTime * moveInput, ForceMode.Acceleration);
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
 
         if (!IsZero(rigidBody.linearVelocity))
         {
@@ -112,7 +112,6 @@ public class PlayerController : MonoBehaviour
     {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
-        rigidBody.maxLinearVelocity = MaxSpeed;
         if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
