@@ -680,6 +680,7 @@ MonoBehaviour:
   MaxHealth: 2
   WoundedHealth: 1
   Health: 0
+  isPushing: 0
 --- !u!54 &6669696871531238574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -993,6 +994,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2911068633404390469, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3384512945747088540}
+    - targetCorrespondingSourceObject: {fileID: 2911068633404390469, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2889499961134776813}
     - targetCorrespondingSourceObject: {fileID: 2515927237439144528, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 306390625225916748}
@@ -1029,6 +1033,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2889499961134776813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275405156693791580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6913c3464e7de943885e7ea57ab673c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimatorController
+  playerController: {fileID: 5836883666691645028}
 --- !u!1 &7960958350333881673 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2515927237439144528, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}

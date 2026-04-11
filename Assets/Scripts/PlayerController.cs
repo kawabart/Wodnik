@@ -63,9 +63,15 @@ public class PlayerController : MonoBehaviour
 
     public float MovementSpeed = 3.0f;
     public float Acceleration = 1;
-
+    private bool IsMovementLocked()
+    {
+        bool locked = false;
+        if (isPushing) return true;
+        return locked;
+    }
     private void UpdatePositionDirection()
     {
+        if (IsMovementLocked()) moveInput =Vector3.zero;
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
 
         if (!IsZero(rigidBody.linearVelocity))
@@ -108,6 +114,48 @@ public class PlayerController : MonoBehaviour
     }
     #endregion
 
+    #region push
+    private InputAction push;
+    public bool isPushing = false;
+    public float pushForce = 10f;
+    public float pushRadius = 0.2f;
+    public float pushOffset = 0.2f;
+    void OnPush(InputAction.CallbackContext ctx)
+    {
+        Push();
+    }
+    void Push()
+    {
+        if (IsMovementLocked()) return;
+        isPushing = true;
+        animator.SetTrigger("push");
+        Debug.Log("Pushing starts...");
+    }
+    public void ApplyPushForce()
+    {
+        Debug.Log("Push!");
+        Vector3 center = transform.position + transform.forward * pushOffset;
+        Collider[] hits = Physics.OverlapSphere(center, pushRadius);
+        Vector3 force = transform.forward * pushForce;
+
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent<IPushable>(out var pushable))
+            {
+                pushable.Push(force);
+            }
+        }
+
+    }
+    public void EndPush()
+    {
+        isPushing = false;
+        
+        Debug.Log("Pushing ends.");
+    }
+
+    #endregion
+
     void Start()
     {
         MoveAction.Enable();
@@ -132,7 +180,17 @@ public class PlayerController : MonoBehaviour
         if (!IsAlive) return;
         UpdatePositionDirection();
     }
+    void OnEnable()
+    {
+        push = InputSystem.actions.FindAction("Push");
 
+        push.performed += OnPush;
+    }
+
+    void OnDisable()
+    {
+        push.performed -= OnPush;
+    }
     private static bool IsZero(Vector2 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
