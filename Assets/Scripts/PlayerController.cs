@@ -24,8 +24,8 @@ public class PlayerController : MonoBehaviour
     private Vector2 prevMousePos;
     private AimingDevice currentAimingDevice = AimingDevice.Mouse;
     public GameObject Hair;
-
-    private void UpdateHairDirection()
+    public Vector3 AimDirection = Vector3.zero;
+    private void UpdateAimDirection()
     {
         Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
         Vector2 mousePos = Mouse.current != null ? Mouse.current.position.value : prevMousePos;
@@ -42,14 +42,21 @@ public class PlayerController : MonoBehaviour
         if (currentAimingDevice == AimingDevice.Gamepad)
         {
             if (!IsZero(gamepadDirection))
-                RotateTowards(Hair, new Vector3(gamepadDirection.x, 0, gamepadDirection.y));
+                AimDirection = new Vector3(gamepadDirection.x, 0, gamepadDirection.y);
         }
         else if (currentAimingDevice == AimingDevice.Mouse)
         {
             prevMousePos = mousePos;
-            var mouseScreen = new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.y);
-            var mouseWorld = Camera.main.ScreenToWorldPoint(mouseScreen);
-            RotateTowards(Hair, transform.position - mouseWorld);
+            var mouseScreen = new Vector3(mousePos.x, mousePos.y, 0);
+           
+            Ray ray = Camera.main.ScreenPointToRay(mousePos);
+            Plane plane = new Plane(Vector3.up, transform.position);
+
+            if (plane.Raycast(ray, out float distance))
+            {
+                Vector3 mouseWorld = ray.GetPoint(distance);
+                AimDirection = mouseWorld - transform.position;
+            }
         }
     }
     #endregion
@@ -73,8 +80,12 @@ public class PlayerController : MonoBehaviour
     {
         if (IsMovementLocked()) moveInput =Vector3.zero;
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
-
-        if (!IsZero(rigidBody.linearVelocity))
+        if (isPushing)
+        {
+            float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
+            rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
+        }
+        else if (!IsZero(rigidBody.linearVelocity))
         {
             float angle = Mathf.Atan2(rigidBody.linearVelocity.x, rigidBody.linearVelocity.z) * Mathf.Rad2Deg;
             rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
@@ -128,6 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (IsMovementLocked()) return;
         isPushing = true;
+        UpdateAimDirection();
         animator.SetTrigger("push");
         Debug.Log("Pushing starts...");
     }
@@ -172,7 +184,7 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
-        UpdateHairDirection();
+        UpdateAimDirection();
     }
 
     void FixedUpdate()
