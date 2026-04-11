@@ -55,9 +55,14 @@ public class HairController : MonoBehaviour
 
     void Update()
     {
-        if (!Grabbed) hairGenerator.noiseSpeed = .2f + rigidBody.linearVelocity.magnitude / 2;
-        else hairGenerator.noiseSpeed = .2f;
-        if (grabbedRb != null && !Grabbed && springJoint == null) Grab(grabbedRb);
-        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed)) LetGo();
+        if (!Grabbed) 
+            hairGenerator.noiseSpeed = .5f + rigidBody.linearVelocity.magnitude / 2;
+        else 
+            hairGenerator.noiseSpeed = .2f;
+
+        if (grabbedRb != null && !Grabbed && springJoint == null) 
+            Grab(grabbedRb);
+        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed)) 
+            LetGo();
     }
 }
