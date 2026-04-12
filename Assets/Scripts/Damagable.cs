@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour, IDamageable
 {
     public float health = 10f;
     private SurfaceType surfaceType = null;
+    public bool DestroyOnDeath = true;
+    public UnityEvent onDeath;
     void Start()
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
@@ -25,6 +28,8 @@ public class Damageable : MonoBehaviour, IDamageable
 
     void Die()
     {
-        Destroy(gameObject);
+        onDeath.Invoke();
+        if (DestroyOnDeath)
+            Destroy(gameObject);
     }
 }
