@@ -7,6 +7,7 @@ public class Damageable : MonoBehaviour, IDamageable
     private SurfaceType surfaceType = null;
     public bool DestroyOnDeath = true;
     public UnityEvent onDeath;
+    public UnityEvent onHurt;
     void Start()
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
@@ -14,7 +15,7 @@ public class Damageable : MonoBehaviour, IDamageable
     public void TakeDamage(int amount)
     {
         if (amount < 1) return;
-
+        onHurt.Invoke();
         health -= amount;
 
         if (surfaceType!=null)
