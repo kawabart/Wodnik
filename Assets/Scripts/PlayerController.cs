@@ -124,6 +124,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         if (!IsAlive) return;
+
+        if (GetComponent<Surface>() != null)
+            EffectSpawner.Instance.SpawnHit(transform.position, GetComponent<Surface>().type);
+        else
+            EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
+
         Health = Math.Max(0, Health - Math.Max(0, damage));
         if (!IsAlive) Kill();
     }
