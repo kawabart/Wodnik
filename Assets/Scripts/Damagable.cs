@@ -4,7 +4,7 @@ public class Damageable : MonoBehaviour, IDamageable
 {
     public float health = 10f;
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
         health -= amount;
 

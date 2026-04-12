@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     #region hiding
     public bool Hidden
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     private bool IsMovementLocked()
     {
         bool locked = false;
+        if (!IsAlive) return true;
         if (isPushing) return true;
         return locked;
     }
@@ -111,18 +112,25 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            return IsAlive && Health <= WoundedHealth;
+            return IsAlive && Health < MaxHealth;
         }
     }
 
+    public void Kill()
+    {
+        Health = 0;
+        animator.SetBool("isDead",true);
+    }
     public void TakeDamage(int damage)
     {
+        if (!IsAlive) return;
         Health = Math.Max(0, Health - Math.Max(0, damage));
+        if (!IsAlive) Kill();
     }
 
-    public void Heal()
+    public void Heal(int heal)
     {
-        Health = MaxHealth;
+        Health = Math.Min(MaxHealth, Health + Math.Max(0, heal));
     }
     #endregion
 
@@ -192,7 +200,6 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!IsAlive) return;
         UpdatePositionDirection();
     }
     void OnEnable()
