@@ -186,6 +186,7 @@ public class PlayerController : MonoBehaviour
         moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
+        animator.SetBool("isPushing", isPushing);
         UpdateAimDirection();
     }
 
