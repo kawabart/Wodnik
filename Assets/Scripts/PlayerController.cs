@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
+            if (isPushing) return false;
             return visibilityController == null ? false : visibilityController.Hidden;
         }
     }
@@ -133,6 +134,7 @@ public class PlayerController : MonoBehaviour
     public float pushOffset = 0.2f;
     void OnPush(InputAction.CallbackContext ctx)
     {
+       
         Push();
     }
     void Push()
@@ -194,8 +196,9 @@ public class PlayerController : MonoBehaviour
     }
     void OnEnable()
     {
+        Debug.Log("Subscription");
         push = InputSystem.actions.FindAction("Push");
-
+        push.Enable();
         push.performed += OnPush;
     }
 
