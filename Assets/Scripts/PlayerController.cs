@@ -207,18 +207,21 @@ public class PlayerController : MonoBehaviour, IDamageable
         Debug.Log("Grab!");
         UpdateAimDirection();
         Vector3 targetPoint;
-        if (Physics.Raycast(transform.position, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask)) 
+        if (Physics.Raycast(transform.position+.2f*Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask)) 
             targetPoint = raycastHit.point;
         else 
             targetPoint = transform.position + AimDirection.normalized * GrabDistance;
 
         Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
         hairController.Probe(targetPoint);
+        bool foundGrabbable = false;
         foreach (var hit in hits)
         {
+            if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
                 grabbable.Grab(hairController);
+                foundGrabbable = true;
             }
         }
         IsGrabbing = true;
