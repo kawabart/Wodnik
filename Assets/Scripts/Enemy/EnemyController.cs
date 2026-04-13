@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Timer))]
+[RequireComponent(typeof(AgitationController))]
 public class EnemyController : MonoBehaviour
 {
 
@@ -16,25 +18,35 @@ public class EnemyController : MonoBehaviour
             behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
             rigidBody.isKinematic = true;
+            rigidBody.freezeRotation = true;
+            agitationController.enabled = true;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
+<<<<<<< HEAD
             rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             rigidBody.freezeRotation = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
+=======
+>>>>>>> c37fafc (refactored EnemyAI tree around enemy agitation)
             behaviorAgent.enabled = false;
+            navMeshAgent.enabled = false;
+            rigidBody.isKinematic = false;
+            rigidBody.freezeRotation = false;
+            agitationController.enabled = true;
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
         {
             rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             behaviorAgent.enabled = false;
-            rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
+            rigidBody.isKinematic = false;
             rigidBody.freezeRotation = false;
+            agitationController.enabled = false;
             Debug.Log("Enemy is dead.");
         }
     }
@@ -64,6 +76,8 @@ public class EnemyController : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private Timer timer;
 
+    private AgitationController agitationController;
+
     void Start()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -72,6 +86,7 @@ public class EnemyController : MonoBehaviour
         capsuleCollider = GetComponent<CapsuleCollider>();
         timer = GetComponent<Timer>();
         timer.Reset();
+        agitationController = GetComponent<AgitationController>();
     }
 
     void Update()
