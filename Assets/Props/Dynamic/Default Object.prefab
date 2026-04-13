@@ -170,7 +170,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  health: 2
+  health: 1
+  DestroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8797479730542030774
 MonoBehaviour:
   m_ObjectHideFlags: 0

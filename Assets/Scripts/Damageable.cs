@@ -29,6 +29,10 @@ public class Damageable : MonoBehaviour, IDamageable
 
     void Die()
     {
+        if (surfaceType != null)
+            EffectSpawner.Instance.SpawnHit(transform.position, surfaceType);
+        else
+            EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
         onDeath.Invoke();
         if (DestroyOnDeath)
             Destroy(gameObject);
