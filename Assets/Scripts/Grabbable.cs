@@ -9,10 +9,12 @@ public class Grabbable : MonoBehaviour, IGrabbable
 
     public void Grab(HairController hairController) 
     {
+        Debug.Log("I'm grabbed!");
         onGrab.Invoke();
+        hairController.Grab(this.GetComponent<Rigidbody>());
     }
     public void LetGo(HairController hairController)
     {
-        onLetGo.Invoke();
+        onLetGo.Invoke();  
     }
 }

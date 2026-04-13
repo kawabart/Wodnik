@@ -185,23 +185,48 @@ public class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     #region grab
+    private HairController hairController;
+    [SerializeField] private LayerMask grabMask;
+    public float GrabDistance = 2;
+    public float GrabAutoAim = .5f;
     private InputAction grab;
-    public IsGrabbing = false;
+    public bool IsGrabbing = false;
     void OnGrab(InputAction.CallbackContext ctx)
     {
-        if (!IsGrabbing)
-            Grab();
-        if (ctx.canceled)
-        {
-            LetGo();
-        }
+        if (IsGrabbing) return;
+        Grab();
+    }
+    void OnGrabLetGo(InputAction.CallbackContext ctx)
+    {
+        if (!IsGrabbing) return;
+
+        LetGo();
     }
     void Grab()
     {
+        Debug.Log("Grab!");
+        UpdateAimDirection();
+        Vector3 targetPoint;
+        if (Physics.Raycast(transform.position, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask)) 
+            targetPoint = raycastHit.point;
+        else 
+            targetPoint = transform.position + AimDirection.normalized * GrabDistance;
+
+        Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
+        hairController.Probe(targetPoint);
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent<IGrabbable>(out var grabbable))
+            {
+                grabbable.Grab(hairController);
+            }
+        }
         IsGrabbing = true;
     }
     void LetGo()
     {
+        Debug.Log("Grab ends.");
+        hairController.LetGo();
         IsGrabbing = false;
     }
     #endregion
@@ -209,6 +234,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         MoveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
+        hairController = GetComponent<HairController>();
         if (animator == null)
             animator = GetComponent<Animator>();
         prevMousePos = Mouse.current != null ? Mouse.current.position.value : Vector2.zero;
@@ -235,11 +261,17 @@ public class PlayerController : MonoBehaviour, IDamageable
         push = InputSystem.actions.FindAction("Push");
         push.Enable();
         push.performed += OnPush;
+        grab = InputSystem.actions.FindAction("Grab");
+        grab.Enable();
+        grab.performed += OnGrab;
+        grab.canceled += OnGrabLetGo;
     }
 
     void OnDisable()
     {
         push.performed -= OnPush;
+        grab.performed -= OnGrab;
+        grab.canceled -= OnGrabLetGo;
     }
     private static bool IsZero(Vector2 v)
     {
