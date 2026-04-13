@@ -106,10 +106,14 @@ public class LightController : MonoBehaviour
     {
         Vector3 direction = -lightComponent.transform.forward;
         RaycastHit hit;
-        Debug.DrawRay(target + Vector3.up, direction * directionalShadowCheckLength, Color.yellow, 1f);
+        
 
         if (!Physics.Raycast(target, direction, out hit, directionalShadowCheckLength, shadowCastingLayerMask))
+        {
+            Debug.DrawRay(target, direction * directionalShadowCheckLength, Color.yellow, .1f);
             return false;
+        }
+        Debug.DrawLine(target, hit.point, Color.gray, .1f);
         return true;
     }
     public float GetLightValueOnPoint(Vector3 target)
