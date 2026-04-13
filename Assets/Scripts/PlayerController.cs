@@ -184,6 +184,27 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     #endregion
 
+    #region grab
+    private InputAction grab;
+    public IsGrabbing = false;
+    void OnGrab(InputAction.CallbackContext ctx)
+    {
+        if (!IsGrabbing)
+            Grab();
+        if (ctx.canceled)
+        {
+            LetGo();
+        }
+    }
+    void Grab()
+    {
+        IsGrabbing = true;
+    }
+    void LetGo()
+    {
+        IsGrabbing = false;
+    }
+    #endregion
     void Start()
     {
         MoveAction.Enable();
