@@ -1,17 +1,13 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Timer))]
 public class EnemyController : MonoBehaviour
 {
+
     #region states
-    public enum EnemyState
-    {
-        Alive, Downed, Dead
-    }
     public EnemyState CurrentState = EnemyState.Alive;
 
-    public void ChangeStates(EnemyState newState)
+    public void ChangeState(EnemyState newState)
     {
         CurrentState = newState;
         if (newState == EnemyState.Alive)
@@ -40,7 +36,7 @@ public class EnemyController : MonoBehaviour
     private readonly float DOWNED_TIME = 10f;
     public void BecomeDowned()
     {
-        ChangeStates(EnemyState.Downed);
+        ChangeState(EnemyState.Downed);
         timer.Start();
     }
     #endregion
@@ -48,7 +44,7 @@ public class EnemyController : MonoBehaviour
     #region dead
     public void Kill()
     {
-        ChangeStates(EnemyState.Dead);
+        ChangeState(EnemyState.Dead);
         timer.Reset();
     }
     #endregion
@@ -56,6 +52,7 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rigidBody;
     private CapsuleCollider capsuleCollider;
     private Timer timer;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -92,7 +89,7 @@ public class EnemyController : MonoBehaviour
         if (timer.time >= DOWNED_TIME)
         {
             timer.Reset();
-            ChangeStates(EnemyState.Alive);
+            ChangeState(EnemyState.Alive);
         }
     }
 
