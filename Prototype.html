@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Nymph's Grasp - Stealth Action</title>
+    <style>
+        body { margin: 0; overflow: hidden; background: #051a05; font-family: sans-serif; }
+        canvas { display: block; cursor: crosshair; }
+        #ui { position: absolute; top: 10px; left: 10px; color: white; pointer-events: none; text-shadow: 2px 2px 2px black; }
+    </style>
+</head>
+<body>
+    <div id="ui">
+        <b>Nymph's Grasp</b><br>
+        WASD - Ruch | RMB (hold) - Chwyt (wciągnij wrogów do wody lub w krzaki)<br>
+        LMB - Atak, Dobicie (leżącego), Rzut - jeśli trzymasz broń. Q, E: specjalne atako, odpalane w trybie furii
+    
+    </div>
+    <canvas id="gameCanvas"></canvas>
+
+<script>
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// --- KONFIGURACJA I STAN ---
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const keys = {};
+const mouse = { x: 0, y: 0, left: false, right: false };
+const particles = [];
+
+// Parametry świata
+const WORLD = {
+    walls: [],
+    bushes: [],
+    water: [],
+    enemies: [],
+    toSpawn: [],
+    player: 
+    { 
+        x: 100, y: 100, size: 20, speed: 3.5, color: '#2ecc71', grabbedEnemy: null , 
+        hp:2,maxHP:2,
+        combo:0,comboTimer:0,comboTime:180,comboTimeExtra:240,
+        abilityCounter:0, abilityCount:5
+
+    },
+    level:0,
+    standing:0,
+};
+const GRAB_RANGE = 200;
+function getGrabRange(){
+    return GRAB_RANGE+10*Math.min(20,WORLD.player.combo);
+}
+// Zablokuj menu kontekstowe
+window.addEventListener('contextmenu', e => e.preventDefault());
+window.addEventListener('keydown', e => keys[e.code] = true);
+window.addEventListener('keyup', e => keys[e.code] = false);
+window.addEventListener('mousedown', e => { if(e.button === 0) mouse.left = true; if(e.button === 2) mouse.right = true; });
+window.addEventListener('mouseup', e => { if(e.button === 0) mouse.left = false; if(e.button === 2) mouse.right = false; });
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+window.addEventListener('keydown', e => {
+    keys[e.code] = true;
+
+    if (e.code === 'KeyR') {
+        restartGame();
+    }
+});
+
+// --- KLASY ---
+const lines = [];
+class Line {
+    constructor(x1, y1, x2, y2, color = "white", life = 30, width = 2) {
+        this.x1 = x1;
+        this.y1 = y1;
+        this.x2 = x2;
+        this.y2 = y2;
+
+        this.color = color;
+        this.life = life;
+        this.maxLife = life;
+
+        this.width = width;
+    }
+
+    update() {
+        this.life--;
+    }
+
+    draw() {
+        const t = this.life / this.maxLife; // fade
+
+        ctx.globalAlpha = t;
+        ctx.strokeStyle = this.color;
+        ctx.lineWidth = this.width * t;
+
+        ctx.beginPath();
+        ctx.moveTo(this.x1, this.y1);
+        ctx.lineTo(this.x2, this.y2);
+        ctx.stroke();
+
+        ctx.globalAlpha = 1;
+    }
+}
+class Particle {
+    constructor(x, y, color,speed=2) {
+        this.speedvalue = speed;
+        this.x = x; this.y = y;
+        this.vx = (Math.random() - 0.5) * 5*speed;
+        this.vy = (Math.random() - 0.5) * 5*speed;
+        this.life =.5;
+        this.color = color;
+    }
+    update() { this.x += this.vx; this.y += this.vy; this.life -= 0.02; }
+    draw() {
+        ctx.globalAlpha = this.life*2;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, 4, 4);
+        ctx.globalAlpha = 1.0;
+    }
+}
+function GetDistance(a,b){
+    const dist = Math.hypot(a.x - b.x, a.y - b.y);
+    return dist;
+}
+function AbilityStun(){
+    if (!canAbility()) return;
+    let affected = 0;
+    WORLD.enemies.forEach(e => {
+                if (!e.isDead && !e.item && e.state!=="DOWNED" && GetDistance(e,WORLD.player)<300){
+                    e.setStateDowned();
+                    affected ++;
+                    lines.push(new Line(
+                        e.x,
+                        e.y,
+                        WORLD.player.x,
+                        WORLD.player.y,
+                        "green",
+                        30,
+                        3
+                    ));
+                }
+            });
+    if (affected>0)
+        resetAbility();
+}
+function AbilityFinish(){
+    if (!canAbility()) return;
+    let affected = 0;
+    WORLD.enemies.forEach(e => {
+                if (!e.isDead && !e.item && e.state==="DOWNED"&& GetDistance(e,WORLD.player)<300){
+                    e.die("red");
+                    affected ++;
+                    lines.push(new Line(
+                        e.x,
+                        e.y,
+                        WORLD.player.x,
+                        WORLD.player.y,
+                        "red",
+                        30,
+                        3
+                    ));
+                }
+            });
+    if (affected>0)
+    resetAbility();
+}
+//constructor(x1, y1, x2, y2, color = "white", life = 30, width = 2) {
+function HurtPlayer(damage=1){
+    WORLD.player.hp-=1;
+    resetCombo();
+    if (WORLD.player.hp<1)WORLD.player.isDead=true;
+}
+function SpawnObject(x, y, def) {
+    const newEnemy = new Enemy(x, y, def);
+    WORLD.toSpawn.push(newEnemy);
+    return newEnemy;
+}
+function FlushSpawnQueue() {
+    for (let i = 0; i < WORLD.toSpawn.length; i++) {
+        WORLD.enemies.push(WORLD.toSpawn[i]);
+    }
+    
+    WORLD.toSpawn.length = 0; // szybkie czyszczenie tablicy
+}
+const ENEMY_DEFINITIONS = {
+    PEASANT:    { color: "purple"  ,blocking:true },
+    KNIGHT:     { color: "magenta" ,size:28,blocking:true,hp:2 },
+    ARCHER:     { color: "orange" ,size:16,hp:1,bullet:"ARROW", stopDistance:200,blocking:true},
+    ITEM:       {color:'cyan',item:true,size:10, state:"asdasd",speed:10},
+    ARROW:       {color:'orange',item:true,size:10, state:"bullet",speed:20,friendly:true},
+
+}
+
+class Enemy {
+    constructor(x, y,def={}) {
+        this.x = x; this.y = y;
+        this.def =def;// 
+        this.hp =def?.hp??1;
+        this.size = this.def?.size??22;
+        this.angle = Math.random() * Math.PI * 2;
+        this.state = this.def?.state ??'PATROL'; // PATROL, SUSPICIOUS, COMBAT, DOWNED
+        this.timer = 0;
+        this.speed = def?.speed??3.5;
+        this.patrolTarget = { x: x + (Math.random()-0.5)*200, y: y + (Math.random()-0.5)*200 };
+        this.item = def?.item??false;
+        this.flash = false;
+        this.downedTimer = 0;
+        this.isDead = false;
+        this.stopDistance = this.def?.stopDistance??30;
+        this.blocktimer=0;
+        //this.friendly = def?.friendly??false;
+    }
+    reset(){
+        this.flash = false;
+   
+    }
+    update() {
+        if (this.isDead) return;
+        this.blocktimer--;
+        if (this.state === 'DOWNED') {
+            this.downedTimer -= 1/10;
+            if (this.downedTimer <= 0) {
+                this.timer = 90;
+                this.state = 'SUSPICIOUS';
+                this.reset();
+            }
+
+            // Śmierć w wodzie
+            WORLD.water.forEach(w => {
+                if (!this.isDead &&
+                    this.x > w.x && this.x < w.x + w.w &&
+                    this.y > w.y && this.y < w.y + w.h) {
+                    this.die('blue');
+                }
+            });
+            return;
+        }
+
+        const distToPlayer = Math.hypot(WORLD.player.x - this.x, WORLD.player.y - this.y);
+        const canSee = this.checkVision();
+
+        if (this.state==='BULLET'){
+            this.timer --;
+            this.moveTowards(this.patrolTarget.x, this.patrolTarget.y, this.speed);
+            
+                WORLD.enemies.forEach(e => {
+                    if (this.friendly|| WORLD.player.grabbedEnemy===e){
+                    const dist = Math.hypot(e.x - this.x, e.y - this.y);
+                    const shoutDist =this.size+e.size;
+                    if (e!== this && shoutDist>dist && !e.item && !e.isDead){
+                       
+                            if (e.def.blocking && this.item)
+                                e.setStateDowned();
+                     
+                            //    e.die("red", false);
+                     
+                           // e.block();
+                        
+                        
+                        
+                        this.die("black", true);
+                       
+                    }
+                }
+                });
+            
+            if (!this.friendly && distToPlayer<25){ 
+                this.die("black", true);
+                HurtPlayer();
+            }
+            
+            if (Math.hypot(this.x - this.patrolTarget.x, this.y - this.patrolTarget.y) <15 || this.timer<0)
+                this.die('black',false);
+        }else if (this.item){
+            WORLD.water.forEach(w => {
+                if (!this.isDead &&
+                    this.x > w.x && this.x < w.x + w.w &&
+                    this.y > w.y && this.y < w.y + w.h) {
+                    this.die('blue');
+                }
+            });
+        }
+        // Logika Stanów
+        if (this.state === 'PATROL') {
+            this.timer --;
+            if (!this.stop)
+                this.moveTowards(this.patrolTarget.x, this.patrolTarget.y, this.speed/4);
+            if (Math.hypot(this.x - this.patrolTarget.x, this.y - this.patrolTarget.y) < 5 || this.timer<0) {
+                this.stop = Math.random()<.5;
+                this.timer = Math.random()*100+100;
+                if (this.stop)this.timer/=2;
+                
+                this.patrolTarget = { x: Math.random() * canvas.width, y: Math.random() * canvas.height };
+            }
+            if (canSee) { this.state = 'SUSPICIOUS'; this.timer = 60; }
+        } 
+        else if (this.state === 'SUSPICIOUS') {
+            
+            if (canSee){
+                this.timer++;
+                this.suspiciousPlace = {x:WORLD.player.x,y: WORLD.player.y};
+    
+            }
+            else{
+                this.timer-=.2;
+            }
+            if (this.suspiciousPlace?.x){
+                const dist = Math.hypot(this.suspiciousPlace.x - this.x, this.suspiciousPlace.y - this.y);
+                if (dist>10)
+                    this.moveTowards(this.suspiciousPlace.x, this.suspiciousPlace.y, this.speed*.4);  
+               // else this.timer = -1;
+                
+            }
+              
+            if (!canSee && this.timer<0) {
+                this.suspiciousPlace=null;
+                this.state = 'PATROL';
+            }
+            if (this.timer >100){
+                this.suspiciousPlace=null;
+                //shout
+                WORLD.enemies.forEach(e => {
+                    const dist = Math.hypot(e.x - this.x, e.y - this.y);
+                    const shoutDist =100;
+                    if (shoutDist>dist && !e.item && !e.isDead && e!==this && e.state!='COMBAT' && e.state != 'WINDUP'&& e.state != 'DOWNED'){
+                        if (e.state!== 'SUSPICIOUS') e.timer = 60;
+                        e.state = 'SUSPICIOUS';
+                        e.suspiciousPlace = {x:WORLD.player.x,y: WORLD.player.y};
+                       
+                    }
+                    
+                });
+                this.state = 'COMBAT';
+                this.timer=1;
+            }
+        } 
+        else if (this.state === 'COMBAT') {
+            this.timer++;
+            const attackTime = 50;
+            if (canSee)this.timer = Math.min(this.timer,attackTime)
+            const stopDistance = this.stopDistance;
+        const attackDistance = 30;
+            const  ShootDistance = 100;
+       
+                const dist = Math.hypot(WORLD.player.x - this.x, WORLD.player.y - this.y);
+            
+                if (dist > stopDistance) {
+                
+                    this.moveTowards(WORLD.player.x, WORLD.player.y, this.speed);
+                }
+                
+                
+
+                    // Atak (reset timera)
+                    if (distToPlayer <attackDistance && this.timer >=attackTime) {
+                        this.timer = 20;
+                        this.state = 'WINDUP';
+                    }else
+                    if (this.def?.bullet  && this.timer >=attackTime) {
+                        this.timer = 60;
+                        this.state = 'WINDUPRANGE';
+                    }
+                    
+        
+            if (!canSee && distToPlayer > 500 || !canSee && this.timer > 1000) this.state = 'PATROL';
+        } 
+        else if (this.state === 'WINDUP') {
+            if (distToPlayer > 40) this.state = 'COMBAT';
+            this.timer --;
+            if (this.timer<0) {
+                HurtPlayer();
+                for(let i=0; i<15; i++) particles.push(new Particle(WORLD.player.x, WORLD.player.y, 'red'));
+                this.state = 'COMBAT';
+            }
+            
+        } 
+        else if (this.state === 'WINDUPRANGE') {
+             
+            this.timer --;
+            this.moveTowards(WORLD.player.x, WORLD.player.y, this.speed/200);
+            if (this.timer<0) {
+                 
+                 spawnBullet(this.x,this.y,ENEMY_DEFINITIONS[this.def?.bullet]);
+                this.state = 'COMBAT';
+            }
+            
+        }
+
+        
+    }
+    setStateDowned(downedTimer=15){
+        if (this.item)return;
+        if (this.isDead)return;
+        if (this.state==="DOWNED")return;
+        increaseCombo();
+        this.state="DOWNED";
+        this.downedTimer = downedTimer;
+        if (canAbility()) this.downedTimer = downedTimer*2;
+    }
+    setState(state){
+        this.state=state;
+    }
+    isVulnerable(){
+        if (this.isDead) return false;
+       // if (canAbility()) return true;
+        if (!this.def.blocking)return true;
+        if (this.state==='PATROL')return true;
+        if (this.state==='SUSPICIOUS')return true;
+        if (this.state==='DOWNED')return true;
+        if (this.state==='WINDUP')return true;
+        if (this.state==='WINDUPRANGE')return true;
+
+        
+        return false;
+
+    }
+    checkHearing(entity={x:WORLD.player.x,y:WORLD.player.y,hidden:WORLD.player.hidden}) {
+        if (this.item) return false;
+        if (this.isDead) return false;
+        if (this.state==='DOWNED') return false;
+        if (this.state==='COMBAT') return false;
+        if (this.state==='WINDUP') return false;
+        const dist = Math.hypot(entity.x - this.x, entity.y - this.y);
+        if (dist > 100) return false;
+        return true;
+    }
+    checkVision(entity={x:WORLD.player.x,y:WORLD.player.y,hidden:WORLD.player.hidden}) {
+        if (this.item) return false;
+        if (this.isDead) return false;
+        if (this.state==='DOWNED') return false;
+        const dist = Math.hypot(entity.x - this.x, entity.y - this.y);
+        if (dist > 300) return false;
+        if (dist<20) return true;
+        if (entity.hidden && dist>30) return false;
+        const RAD_TO_DEG = 180 / Math.PI;
+        let angleToPlayer = Math.atan2(entity.y - this.y, entity.x - this.x) * RAD_TO_DEG;
+        let currentAngle = this.angle * RAD_TO_DEG;
+        let diff = Math.abs(angleToPlayer - currentAngle);
+        if (diff > 180) diff = 360 - diff;
+        const fovHalf = 60; 
+        const inCone = diff < fovHalf;
+
+        return inCone && isLineOfSightClear(this, entity);
+    }
+
+    moveTowards(tx, ty, spd) {
+        const angle = Math.atan2(ty - this.y, tx - this.x);
+        this.angle = angle;
+        const nextX = this.x + Math.cos(angle) * spd;
+        const nextY = this.y + Math.sin(angle) * spd;
+        
+        if (!checkWallCollision(nextX, nextY, this.size)) {
+            this.x = nextX;
+            this.y = nextY;
+        }else if (this.item){
+            this.die("black",false);
+        }
+    }
+    block(){
+        if (this.isDead) return;
+       // resetCombo();
+        this.blocktimer = 35;
+    }
+    die(particleColor = '#ff0000',hidden=false) {
+        //
+        let particleAmount = 15;
+        let particleSpeed =1;
+        if (canAbility()){
+            particleAmount*=2;
+            particleSpeed*=3;
+        }
+        
+        for(let i=0; i<particleAmount; i++) particles.push(new Particle(this.x, this.y, particleColor,particleSpeed));
+        this.isDead = true;
+        this.blocktimer = -1;
+        if (!this.item){
+            increaseCombo(this.hp);
+        }
+        WORLD.enemies.forEach(element => {
+            if (!this.item &&!hidden && element.checkVision(this)){
+          
+                    element.state='COMBAT';
+                
+                
+            }
+            if (this.item && element.checkHearing(this)){
+                    element.state = 'SUSPICIOUS'
+                    element.suspiciousPlace = {x:this.x,y:this.y};
+                    element.timer = 50;
+            }
+        });
+        this.state = 'DEAD';
+        if (!this.item){
+            const offsetsize = 40;
+            const yoffset = Math.random()*offsetsize-offsetsize/2;
+            const xoffset = Math.random()*offsetsize-offsetsize/2;
+            SpawnObject(this.x+xoffset,this.y+yoffset,ENEMY_DEFINITIONS.ITEM);
+        }
+        
+    }
+    hurt( particleColor = '#ff0000',hidden=false,damage = 1) {
+        increaseCombo();
+        for(let i=0; i<4*damage; i++) particles.push(new Particle(this.x, this.y, particleColor,2));
+        this.hp=Math.max(this.hp-1,0);
+        if (this.hp<1) this.die("red",hidden);
+       // SpawnObject(this.x,this.y,ENEMY_DEFINITIONS.ITEM);
+    }
+    draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.angle);
+        
+        // Ciało
+        if (this.isDead) {
+            ctx.fillStyle = '#7f8c8d'; // martwy = szary
+        } else if (this.state === 'DOWNED') {
+            ctx.fillStyle = this.def.color;
+        
+        } else {
+            ctx.fillStyle = this.def.color;
+        }
+        if (this.state === 'DOWNED' || this.state === 'DEAD' ) {
+            if (!this.item)
+            ctx.fillRect(-this.size/2, -this.size/2, this.size * 1.5, this.size);
+        } else {
+            ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+            // "Nos" / Kierunek
+            ctx.fillStyle = 'white';
+            if (!this.item){
+                ctx.fillRect(this.size/2 - 2, -5, 4, 4);
+                ctx.fillRect(this.size/2 - 2, 1, 4, 4);
+            }
+      
+        }
+        if (this.state === 'WINDUP'|| this.state === 'WINDUPRANGE') {
+            ctx.fillStyle = "rgba(255, 255, 255,"+(1-this.timer/100) +")";
+            ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+            
+        }
+        if (this.blocktimer>0) {
+
+            ctx.fillStyle = "rgba(100, 100, 100,"+(this.blocktimer/50) +")";
+            ctx.fillRect(-this.size/2, -this.size/2, this.size, this.size);
+            
+        }
+        
+        // Wskaźnik stanu
+        ctx.restore();
+        ctx.textAlign = 'center';     // poziomo (lewo/środek/prawo)
+        ctx.textBaseline = 'middle';  // pionowo (góra/środek/dół) 
+        if (this.blocktimer>0){
+            ctx.fillStyle = 'gray';
+            ctx.font = '20px Arial';
+            ctx.fillText('BLOCK', this.x , this.y - 25);
+        }
+        if (this.state === 'SUSPICIOUS') {
+            ctx.fillStyle = 'yellow';
+            ctx.font = '20px Arial';
+            ctx.fillText('?', this.x , this.y - 25);
+        }
+
+        if (this.state === 'COMBAT') {
+            ctx.fillStyle = 'red';
+            ctx.font = '20px Arial';
+            ctx.fillText('!', this.x, this.y - 25);
+        }
+
+        if (this.state === 'DOWNED') {
+            ctx.fillStyle = 'white';
+            ctx.font = '10px Arial';
+            ctx.fillText(Math.round(this.downedTimer), this.x , this.y - 25);
+        }
+        if (this.isVulnerable() && !this.item) {
+            ctx.fillStyle = 'black';
+
+            ctx.font = '20px Arial';
+            ctx.fillText("o", this.x, this.y);
+        }
+    }
+}
+
+// --- GENERACJA ŚWIATA ---
+function initWorld() {
+    for(let i=0; i<12   ; i++) {
+        const wallStart = {x: Math.random()*(canvas.width-100), y: Math.random()*(canvas.height-100)};
+      //  WORLD.walls.push({x:wallStart.x,y:wallStart.y, w: 40, h: 40});
+     //  WORLD.walls.push({x:wallStart.x,y:wallStart.y, w: 40, h: 40});
+    }
+    for(let i=0; i<12   ; i++) {
+      //  WORLD.walls.push({x: Math.random()*(canvas.width-100), y: Math.random()*(canvas.height-100), w: 20, h: 20});
+ 
+    }
+    for(let i=0; i<15+WORLD.level*.6; i++) WORLD.bushes.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, w: 40*Math.ceil(Math.random()*4/(1+WORLD.level/10)), h: 40*Math.ceil(Math.random()*4/(1+WORLD.level/10))});
+    for(let i=0; i<3; i++) WORLD.water.push({x: Math.random()*canvas.width, y: Math.random()*canvas.height, w: 200, h: 150});
+
+    for(let i=0; i<2+WORLD.level*WORLD.level/2; i++) WORLD.enemies.push(new Enemy(Math.random()*canvas.width, Math.random()*canvas.height,ENEMY_DEFINITIONS.PEASANT));
+    for(let i=0; i<-5+WORLD.level*2; i++) WORLD.enemies.push(new Enemy(Math.random()*canvas.width, Math.random()*canvas.height,ENEMY_DEFINITIONS.ARCHER));
+    for(let i=0; i<-2+WORLD.level*1.5; i++) WORLD.enemies.push(new Enemy(Math.random()*canvas.width, Math.random()*canvas.height,ENEMY_DEFINITIONS.KNIGHT));
+    //player bush
+    WORLD.bushes.push({x: WORLD.player.x-20,y: WORLD.player.y-20, w: 40*Math.ceil(Math.random()*2), h: 40*Math.ceil(Math.random()*2)});
+}
+function restartGame() {
+
+    // wyczyść świat
+    WORLD.walls.length = 0;
+    WORLD.bushes.length = 0;
+    WORLD.water.length = 0;
+    WORLD.enemies.length = 0;
+    WORLD.toSpawn.length = 0;
+    particles.length = 0;
+
+    // reset gracza
+    WORLD.player.x = 100;
+    WORLD.player.y = 100;
+    WORLD.player.hp = WORLD.player.maxHP;
+    WORLD.player.isDead = false;
+    WORLD.player.grabbedEnemy = null;
+    if (WORLD.standing===0) WORLD.level+=1;
+    // nowa mapa
+    initWorld();
+}
+// --- LOGIKA POMOCNICZA ---
+function checkWallCollision(x, y, size) {
+    return WORLD.walls.some(w => x + size/2 > w.x && x - size/2 < w.x + w.w && y + size/2 > w.y && y - size/2 < w.y + w.h);
+}
+
+function isLineOfSightClear(a, b) {
+    const dist = Math.hypot(b.x - a.x, b.y - a.y);
+    const step = 10;
+    const steps = dist / step;
+    for (let i = 0; i < steps; i++) {
+        const checkX = a.x + (b.x - a.x) * (i / steps);
+        const checkY = a.y + (b.y - a.y) * (i / steps);
+        if (checkWallCollision(checkX, checkY, 5)) return false;
+    }
+    return true;
+}
+function spawnBullet(x,y,def){
+    const newBullet = SpawnObject(x,y,def)
+    newBullet.patrolTarget={x:WORLD.player.x,y:WORLD.player.y};
+    newBullet.state = "BULLET";
+    newBullet.timer = 60;
+    newBullet.friendly = false;
+}
+function getEnemiesStanding(){
+    let standing = 0;
+    WORLD.enemies.forEach(e => {
+        if (!e.isDead && !e.item){
+            standing++;
+        }
+            
+    });
+    return standing;
+}
+function increaseCombo(incr =1){
+    WORLD.player.combo+=incr;
+    WORLD.player.comboTimer =WORLD.player.comboTimeExtra;//=canAbility() ? WORLD.player.comboTimeExtra : WORLD.player.comboTime;
+    WORLD.player.abilityCounter+=incr;
+}
+function resetCombo(){
+    WORLD.player.combo=0;
+    WORLD.player.comboTimer =0;
+    resetAbility();
+}
+function canAbility(){
+    if (WORLD.player.abilityCounter>=WORLD.player.abilityCount)return true;
+    return false;
+}
+function resetAbility(){
+    WORLD.player.abilityCounter=0;
+}
+// --- GŁÓWNA PĘTLA ---
+function update() {
+    // Ruch gracza
+    let dx = 0, dy = 0;
+    FlushSpawnQueue();
+    WORLD.standing=getEnemiesStanding();
+    
+    if (WORLD.player.comboTimer<0)
+        resetCombo();
+    else{
+        WORLD.player.comboTimer--;
+    }
+    if (!WORLD.player.isDead){
+        if (keys['KeyQ']) AbilityStun();
+        if (keys['KeyE']) AbilityFinish();
+
+        if (keys['KeyW']) dy -= WORLD.player.speed;
+        if (keys['KeyS']) dy += WORLD.player.speed;
+        if (keys['KeyA']) dx -= WORLD.player.speed;
+        if (keys['KeyD']) dx += WORLD.player.speed;
+
+        if (!checkWallCollision(WORLD.player.x + dx, WORLD.player.y, WORLD.player.size)) WORLD.player.x += dx;
+        if (!checkWallCollision(WORLD.player.x, WORLD.player.y + dy, WORLD.player.size)) WORLD.player.y += dy;
+
+        // Mechanika Włosów (Grab)
+        if (mouse.right) {
+            if (!WORLD.player.grabbedEnemy && !mouse.wasRight) {
+                // Próba łapania
+                WORLD.enemies.forEach(e => {
+                    const distToLine = Math.hypot(e.x - mouse.x, e.y - mouse.y); // Uproszczone: łap w pobliżu kursora
+                const distToPlayer = Math.hypot(e.x - WORLD.player.x, e.y - WORLD.player.y);
+                    if (distToLine < 40 && distToPlayer < getGrabRange() && !WORLD.player.grabbedEnemy){
+                        if(e.isVulnerable()){
+                            WORLD.player.grabbedEnemy = e;
+                            if (!e.item){
+                                e.setStateDowned();
+                                    e.suspiciousPlace = {x:WORLD.player.x,y: WORLD.player.y};
+                            }
+                        }else{
+                             e.block();
+                        }
+                        
+                        
+                        
+                    }
+                });
+            }
+        } else {
+            WORLD.player.grabbedEnemy = null;
+        }
+        if (WORLD.player.grabbedEnemy) WORLD.player.grabbedEnemy.suspiciousPlace = {x:WORLD.player.x,y: WORLD.player.y};
+        // Jeśli gracz jest w krzakach lub wodzie, jest niewidoczny
+            WORLD.player.hidden = false;
+            WORLD.bushes.concat(WORLD.water).forEach(area => {
+                if (WORLD.player.x > area.x && WORLD.player.x < area.x + area.w && 
+                    WORLD.player.y > area.y && WORLD.player.y < area.y + area.h) WORLD.player.hidden = true;
+            });
+            
+        // Ciągnięcie fizyczne
+        if (WORLD.player.grabbedEnemy) {
+            const e = WORLD.player.grabbedEnemy;
+            if (e.isDead) WORLD.player.grabbedEnemy=null;
+            else if (e.state!== 'DOWNED' && !e.item){
+                WORLD.player.grabbedEnemy=null;
+            }else{
+                const dist = Math.hypot(WORLD.player.x - e.x, WORLD.player.y - e.y);
+                if (dist > 30) {
+                    const angle = Math.atan2(WORLD.player.y - e.y, WORLD.player.x - e.x);
+                    const overshoot = e.item? 10:30;
+                    const moveX = Math.cos(angle) * (dist - overshoot) * 0.1;
+                    const moveY = Math.sin(angle) * (dist - overshoot) * 0.1;
+                    if(!checkWallCollision(e.x + moveX, e.y + moveY, e.size)) {
+                        e.x += moveX; e.y += moveY;
+                    }
+                }
+            }
+            
+        }
+
+        // Egzekucja
+        //if (keys['Space']) {
+       //  && (keys['ShiftLeft']  )
+        if (mouse.left) {
+            let armed = !mouse.wasLeft;
+            if (WORLD.player.grabbedEnemy && (WORLD.player.grabbedEnemy.item ||  canAbility())) {
+                //if (!WORLD.player.grabbedEnemy.item) resetAbility();
+                if(!WORLD.player.grabbedEnemy.item)
+                    resetAbility();
+                WORLD.player.grabbedEnemy.patrolTarget={x:mouse.x,y:mouse.y};
+                WORLD.player.grabbedEnemy.state = "BULLET";
+                WORLD.player.grabbedEnemy.timer = 30;
+                WORLD.player.grabbedEnemy.speed = 20;
+                WORLD.player.grabbedEnemy.friendly = true;
+                WORLD.player.grabbedEnemy.x = WORLD.player.x;
+                WORLD.player.grabbedEnemy.y = WORLD.player.y;
+                WORLD.player.grabbedEnemy=null;
+                
+            }else if (armed){
+                WORLD.enemies.forEach(e => {
+                if (Math.hypot(e.x - WORLD.player.x, e.y - WORLD.player.y) < 40 && armed) {
+                    if(e.state === 'DOWNED'){
+                        WORLD.player.hp =Math.min(WORLD.player.maxHP,WORLD.player.hp+1);
+                        //e.die("red",WORLD.player.hidden);
+                        e.hurt("red",WORLD.player.hidden);
+                        armed = false;
+                    }else if ( !e.item && armed){
+                         if( e.isVulnerable()){
+                            armed = false;
+                            //if (canAbility()) e.die();
+                            // else
+                            e.setStateDowned();
+                         }else{
+                            e.block();
+                         }
+                         
+                    } 
+                    
+                }
+            });
+            }
+            
+        }
+
+        if (WORLD.player.hp<WORLD.player.maxHP && Math.random()<.1)
+            for(let i=0; i<2*(WORLD.player.maxHP-WORLD.player.hp); i++) particles.push(new Particle(WORLD.player.x, WORLD.player.y, 'red'));
+    }
+    // Update reszty
+    WORLD.enemies.forEach(e => e.update());
+    for (let i = particles.length - 1; i >= 0; i--) {
+        particles[i].update();
+        if (particles[i].life <= 0) particles.splice(i, 1);
+    }
+    for (let i = lines.length - 1; i >= 0; i--) {
+        lines[i].update();
+        if (lines[i].life <= 0) lines.splice(i, 1);
+    }
+}
+let lineWidth = 1;
+function draw() {
+    ctx.fillStyle = '#051a05';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Woda
+    ctx.fillStyle = '#1a3a5a';
+    WORLD.water.forEach(w => ctx.fillRect(w.x, w.y, w.w, w.h));
+
+    // Krzaki
+    ctx.fillStyle = 'rgba(46, 204, 113, 0.4)';
+    WORLD.bushes.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+    // Mury
+    ctx.fillStyle = '#5d4037';
+    WORLD.walls.forEach(w => ctx.fillRect(w.x, w.y, w.w, w.h));
+
+    // Włosy (Lina)
+    if (WORLD.player.grabbedEnemy==null) {
+        ctx.beginPath();
+        ctx.strokeStyle = '#2ecc71';
+        if (mouse.wasRight)lineWidth*=.9;
+        else lineWidth=1;
+        ctx.lineWidth = 2*lineWidth;
+        ctx.moveTo(WORLD.player.x, WORLD.player.y);
+        const dx = mouse.x - WORLD.player.x;
+        const dy = mouse.y - WORLD.player.y;
+        const dist = Math.hypot(dx, dy);
+
+        const clampedDist = Math.min(dist, getGrabRange()*.9);
+        const angle = Math.atan2(dy, dx);
+
+        const endX = WORLD.player.x + Math.cos(angle) * clampedDist;
+        const endY = WORLD.player.y + Math.sin(angle) * clampedDist;
+        if (mouse.right)
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+        ctx.lineWidth = .1;
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+    }else{
+        ctx.beginPath();
+        ctx.strokeStyle = '#2ecc71';
+         ctx.lineWidth =4;
+        //ctx.setLineDash([5, 5]);
+        ctx.moveTo(WORLD.player.x, WORLD.player.y);
+        ctx.lineTo(WORLD.player.grabbedEnemy.x, WORLD.player.grabbedEnemy.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+    }
+
+    // Postacie
+    WORLD.enemies.forEach(e => e.draw());
+    particles.forEach(p => p.draw());
+    // Lines
+    lines.forEach(l => l.draw());
+    // Gracz
+    ctx.fillStyle = WORLD.player.color;
+    if (WORLD.player.hidden)ctx.globalAlpha=.2;
+    else ctx.globalAlpha=1;
+    ctx.fillRect(WORLD.player.x - 10, WORLD.player.y - 10, 20, 20);
+    if (canAbility()){
+        ctx.globalAlpha=.5;
+            ctx.fillStyle = 'cyan';
+            const wiggleSize = 10;
+            ctx.fillRect(WORLD.player.x - 10-wiggleSize/2+wiggleSize*Math.random(), WORLD.player.y - 10-wiggleSize/2+wiggleSize*Math.random(), 20, 20);
+    }
+    ctx.globalAlpha=1;
+    
+    if (WORLD.player.isDead){
+        ctx.fillStyle = 'red';
+        ctx.font = '30px Arial';
+        ctx.fillText("PRESS [R] TO RESTART", WORLD.player.x, WORLD.player.y-30);
+    }
+    if (WORLD.standing ===0){
+        ctx.fillStyle = 'lime';
+        ctx.font = '30px Arial';
+        ctx.fillText("PRESS [R] FOR NEXT LEVEL", WORLD.player.x, WORLD.player.y-30);
+    }
+    if (WORLD.player.hidden){
+        ctx.fillStyle = 'gray';
+        ctx.font = '10px Arial';
+        ctx.fillText("HIDDEN", WORLD.player.x, WORLD.player.y-30);
+    }
+    //UI
+     
+    ctx.fillStyle = 'green';
+        ctx.font = '30px Arial';
+        ctx.fillText("Level "+WORLD.level, canvas.width/2,100);
+
+    if (WORLD.player.combo>0){
+         ctx.fillStyle = 'black';
+        ctx.font = '30px Arial';
+        const wiggleSize = Math.min(8,WORLD.player.combo)/(canAbility()?1:2);
+        ctx.fillText("x"+WORLD.player.combo, canvas.width/2+Math.random()*wiggleSize,200+Math.random()*wiggleSize);
+        if (canAbility()){
+            ctx.fillStyle = 'cyan';
+            ctx.fillText("x"+WORLD.player.combo, canvas.width/2-3+Math.random()*wiggleSize/2,200-3+Math.random()*wiggleSize/2);
+        }
+         ctx.fillStyle = 'yellow';
+        ctx.fillText("x"+WORLD.player.combo, canvas.width/2-3+Math.random()*wiggleSize,200-3+Math.random()*wiggleSize);
+    }
+    requestAnimationFrame(() => {
+        update();
+        draw();
+        mouse.wasLeft = mouse.left;
+        mouse.wasRight = mouse.right;
+    });
+}
+
+restartGame();
+draw();
+</script>
+</body>
+</html>

@@ -7,15 +7,22 @@ public class PlayerPostProcessController : MonoBehaviour
     private PlayerController playerController;
     [SerializeField]
     private Volume volumeHidden;
+    [SerializeField]
+    private Volume volumeHurt;
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
     }
     public void Update()
     {
-        if (!volumeHidden) return;
-
-        if (playerController.Hidden) volumeHidden.weight += .1f;
-        else volumeHidden.weight *= .9f;
+        if (volumeHidden != null)
+        {
+            if (playerController.Hidden) volumeHidden.weight += .1f;
+            else volumeHidden.weight *= .9f;
+        }
+        if (volumeHurt != null)
+        {
+            volumeHurt.weight = (1 - playerController.Health / playerController.MaxHealth)*.5f;
+        }
     }
 }
