@@ -6,6 +6,8 @@ public class EnemyPerception : MonoBehaviour
 {
     [SerializeField]
     private PlayerController player = null;
+    [SerializeField]
+    private LayerMask percivedLayerMask;
     private Rigidbody playerRigidBody;
     [SerializeField]
     public EnemyPerceptionState PerceptionState = EnemyPerceptionState.Idle;
@@ -13,7 +15,6 @@ public class EnemyPerception : MonoBehaviour
 
     public float SightDistance = 2;
     public float SightFOVDegrees = 45;
-
     [SerializeField]
     public Vector3? LastPlayerPosition = null;
 
@@ -54,7 +55,7 @@ public class EnemyPerception : MonoBehaviour
         {
             return false;
         }
-        if (Physics.Raycast(rigidBody.worldCenterOfMass, direction, out hit, SightDistance))
+        if (Physics.Raycast(rigidBody.worldCenterOfMass, direction, out hit, SightDistance, percivedLayerMask))
         {
             if (hit.collider.gameObject == player.gameObject)
             {

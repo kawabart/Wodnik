@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5755142929968196438}
   - component: {fileID: 2674722579346512549}
   - component: {fileID: 1818012496744029230}
+  - component: {fileID: 5314799889649160681}
   m_Layer: 6
   m_Name: Bushes
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3720427854713455135}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.5263995, w: 0.8502374}
-  m_LocalPosition: {x: -0.384, y: 2.158, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -43,7 +44,7 @@ Transform:
   - {fileID: 6150226901452586663}
   - {fileID: 7881909571038572845}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -63.525}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &2674722579346512549
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -92,6 +93,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5314799889649160681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3720427854713455135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07b9d98cb55b3524a9d2d2de0ae1aa5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  timer: 0
+  duration: 2
+  shakeAmount: 10
+  shakeSpeed: 10
+  plants:
+  - {fileID: 4367987803915001189}
+  - {fileID: 8848992817039599358}
+  - {fileID: 153391164728213703}
+  - {fileID: 7139391054210828512}
+  - {fileID: 8041775656093470911}
+  - {fileID: 8230672557359383236}
+  - {fileID: 1768841724734629018}
+  - {fileID: 4892750033716199376}
+  - {fileID: 664844183746161440}
+  - {fileID: 6150226901452586663}
+  - {fileID: 7881909571038572845}
 --- !u!1001 &956882491219063729
 PrefabInstance:
   m_ObjectHideFlags: 0
