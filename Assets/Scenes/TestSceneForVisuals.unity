@@ -2764,14 +2764,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5836883666691645028, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
-      propertyPath: grab.m_Name
-      value: Grab
-      objectReference: {fileID: 0}
-    - target: {fileID: 5836883666691645028, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
-      propertyPath: push.m_Name
-      value: Push
-      objectReference: {fileID: 0}
     - target: {fileID: 7495267514894647918, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
       propertyPath: m_Name
       value: Player
@@ -5115,6 +5107,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: d70504f02e94939449faa3d7447a64e2, type: 3}
   m_PrefabInstance: {fileID: 1600706156}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1453921045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1259091542404412480, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
+  m_PrefabInstance: {fileID: 7749768137463440665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1600706156
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6482,16 +6479,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.998
       objectReference: {fileID: 0}
+    - target: {fileID: 5170169563059860416, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5170169563059860416, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1259091542404412480, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7749768137463440672}
   m_SourcePrefab: {fileID: 100100000, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
 --- !u!4 &7749768137463440666 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3646888842864017331, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
   m_PrefabInstance: {fileID: 7749768137463440665}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &7749768137463440667 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5170169563059860416, guid: 17d58b9131015264cb64ce8e6594e9d4, type: 3}
+  m_PrefabInstance: {fileID: 7749768137463440665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7749768137463440672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1453921045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbef91fdb11f2a47835719648881b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  onGrab:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7749768137463440667}
+        m_TargetAssemblyTypeName: UnityEngine.Rigidbody, UnityEngine
+        m_MethodName: set_isKinematic
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onLetGo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8069200985891159761
 PrefabInstance:
   m_ObjectHideFlags: 0
