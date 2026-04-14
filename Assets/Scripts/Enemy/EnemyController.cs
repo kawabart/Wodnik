@@ -24,13 +24,10 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
             behaviorAgent.enabled = false;
-            //transform.Rotate(new Vector3(90, 0, 0));
-            //rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
         {
-            //capsuleCollider.enabled = false;
             behaviorAgent.enabled = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
