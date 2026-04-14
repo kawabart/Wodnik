@@ -104,6 +104,7 @@ GameObject:
   - component: {fileID: 7629426649380350056}
   - component: {fileID: 4503014004726142115}
   - component: {fileID: 5341854413299382407}
+  - component: {fileID: 1633367569291961335}
   m_Layer: 7
   m_Name: DestroyableWall
   m_TagString: Untagged
@@ -206,6 +207,9 @@ MonoBehaviour:
   onDeath:
     m_PersistentCalls:
       m_Calls: []
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5341854413299382407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,3 +223,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   type: {fileID: 11400000, guid: eef41940116d0ef4785ad73069373de2, type: 2}
+--- !u!208 &1633367569291961335
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.095, y: 0.4, z: 0.53}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
+  m_TimeToStationary: 0.5

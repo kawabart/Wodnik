@@ -12,21 +12,26 @@ public class EnemyController : MonoBehaviour
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
-            rigidBody.freezeRotation = true;
+            behaviorAgent.enabled = true;
+            navMeshAgent.enabled = true;
+            rigidBody.isKinematic = true;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
             rigidBody.freezeRotation = false;
-            transform.Rotate(new Vector3(90, 0, 0));
-            rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            rigidBody.isKinematic = false;
+            navMeshAgent.enabled = false;
+            behaviorAgent.enabled = false;
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
         {
-            capsuleCollider.enabled = false;
-            rigidBody.isKinematic = true;
+            behaviorAgent.enabled = false;
+            rigidBody.isKinematic = false;
+            navMeshAgent.enabled = false;
+            rigidBody.freezeRotation = false;
             Debug.Log("Enemy is dead.");
         }
     }
@@ -36,6 +41,7 @@ public class EnemyController : MonoBehaviour
     private readonly float DOWNED_TIME = 10f;
     public void BecomeDowned()
     {
+        if (CurrentState == EnemyState.Dead) return;
         ChangeState(EnemyState.Downed);
         timer.Start();
     }
@@ -50,11 +56,15 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     private Rigidbody rigidBody;
+    private Unity.Behavior.BehaviorGraphAgent behaviorAgent;
+    private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
     private Timer timer;
 
     void Start()
     {
+        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        behaviorAgent = GetComponent<Unity.Behavior.BehaviorGraphAgent>();
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         timer = GetComponent<Timer>();
@@ -98,16 +108,4 @@ public class EnemyController : MonoBehaviour
         // For future need if it will be needed.
     }
 
-    // This method is addded for testig purposes. It will be replaced with proper methods later.
-    void OnCollisionEnter(Collision other)
-    {
-        if (CurrentState == EnemyState.Downed)
-        {
-            Kill();
-        }
-        else
-        {
-            BecomeDowned();
-        }
-    }
 }
