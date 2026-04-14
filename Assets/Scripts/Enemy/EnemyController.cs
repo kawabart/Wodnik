@@ -1,9 +1,11 @@
 using System;
+using Unity.Behavior;
 using UnityEngine;
 
 [RequireComponent(typeof(AgitationController))]
 [RequireComponent(typeof(EnemyPerception))]
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
+[RequireComponent(typeof(BehaviorGraphAgent))]
 public class EnemyController : MonoBehaviour
 {
 
@@ -12,6 +14,9 @@ public class EnemyController : MonoBehaviour
 
     public void ChangeState(EnemyState newState)
     {
+        var behaviorAgent = GetComponent<BehaviorGraphAgent>();
+        var navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
@@ -21,7 +26,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = true;
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
-            transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+            animator.SetTrigger("GetUp");
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
@@ -33,6 +38,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = false;
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
+            animator.SetTrigger("Downed");
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -44,6 +50,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.freezeRotation = false;
             agitationController.enabled = false;
             perceptionController.DectivateSenses();
+            animator.SetTrigger("Killed");
             Debug.Log("Enemy is dead.");
         }
     }
@@ -80,12 +87,15 @@ public class EnemyController : MonoBehaviour
             return agitationController.CurrentAgitationConfig;
         }
     }
+    private Animator animator;
+
     void Start()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         behaviorAgent = GetComponent<Unity.Behavior.BehaviorGraphAgent>();
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        animator = GetComponentInChildren<Animator>();
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
     }
@@ -126,4 +136,16 @@ public class EnemyController : MonoBehaviour
         // For future need if it will be needed.
     }
 
+    // This method is addded for testig purposes. It will be replaced with proper methods later.
+    // void OnCollisionEnter(Collision other)
+    // {
+    //     if (CurrentState == EnemyState.Downed)
+    //     {
+    //         Kill();
+    //     }
+    //     else
+    //     {
+    //         BecomeDowned();
+    //     }
+    // }
 }
