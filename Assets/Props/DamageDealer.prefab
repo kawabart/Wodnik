@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 915926223094736787}
   - component: {fileID: 1246124475404305107}
   - component: {fileID: 5170169563059860416}
+  - component: {fileID: 24157654446940226}
   m_Layer: 7
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -164,6 +165,23 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 14
   m_CollisionDetection: 0
+--- !u!114 &24157654446940226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259091542404412480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifierVolume
+  m_SerializedVersion: 0
+  m_Size: {x: 2, y: 2, z: 2}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Area: 5
+  m_AffectedAgents: ffffffff
 --- !u!1 &1617577160625708257
 GameObject:
   m_ObjectHideFlags: 0
