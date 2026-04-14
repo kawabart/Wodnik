@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
+            behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
             rigidBody.isKinematic = true;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -22,6 +23,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.freezeRotation = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
+            behaviorAgent.enabled = false;
             //transform.Rotate(new Vector3(90, 0, 0));
             //rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
             Debug.Log("Enemy is downed.");
@@ -29,6 +31,7 @@ public class EnemyController : MonoBehaviour
         else if (newState == EnemyState.Dead)
         {
             //capsuleCollider.enabled = false;
+            behaviorAgent.enabled = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
             rigidBody.freezeRotation = false;
@@ -41,6 +44,7 @@ public class EnemyController : MonoBehaviour
     private readonly float DOWNED_TIME = 10f;
     public void BecomeDowned()
     {
+        if (CurrentState == EnemyState.Dead) return;
         ChangeState(EnemyState.Downed);
         timer.Start();
     }
@@ -55,6 +59,7 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     private Rigidbody rigidBody;
+    private Unity.Behavior.BehaviorGraphAgent behaviorAgent;
     private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
     private Timer timer;
@@ -62,6 +67,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        behaviorAgent = GetComponent<Unity.Behavior.BehaviorGraphAgent>();
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         timer = GetComponent<Timer>();
@@ -105,18 +111,4 @@ public class EnemyController : MonoBehaviour
         // For future need if it will be needed.
     }
 
-    // This method is addded for testig purposes. It will be replaced with proper methods later.
-    /*
-    void OnCollisionEnter(Collision other)
-    {
-        if (CurrentState == EnemyState.Downed)
-        {
-            Kill();
-        }
-        else
-        {
-            BecomeDowned();
-        }
-    }
-    */
 }
