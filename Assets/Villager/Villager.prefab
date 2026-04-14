@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 7310089526607221230}
   - component: {fileID: 4045360216403811788}
   - component: {fileID: 1117001239175903178}
+  - component: {fileID: 5900466238471148114}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -275,6 +276,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Surface
   type: {fileID: 11400000, guid: 50cd10abcafffb645a4b963cec826a00, type: 2}
+--- !u!114 &5900466238471148114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
+  minVelocityToDamage: 8
+  damage: 1
 --- !u!1 &4001773003999863753
 GameObject:
   m_ObjectHideFlags: 0
