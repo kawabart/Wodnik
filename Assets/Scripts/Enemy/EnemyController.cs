@@ -12,21 +12,26 @@ public class EnemyController : MonoBehaviour
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
-            rigidBody.freezeRotation = true;
+            navMeshAgent.enabled = true;
+            rigidBody.isKinematic = true;
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
             rigidBody.freezeRotation = false;
-            transform.Rotate(new Vector3(90, 0, 0));
-            rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            rigidBody.isKinematic = false;
+            navMeshAgent.enabled = false;
+            //transform.Rotate(new Vector3(90, 0, 0));
+            //rigidBody.AddForce(transform.forward * 2f, ForceMode.Impulse);
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
         {
-            capsuleCollider.enabled = false;
-            rigidBody.isKinematic = true;
+            //capsuleCollider.enabled = false;
+            rigidBody.isKinematic = false;
+            navMeshAgent.enabled = false;
+            rigidBody.freezeRotation = false;
             Debug.Log("Enemy is dead.");
         }
     }
@@ -50,11 +55,13 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     private Rigidbody rigidBody;
+    private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
     private Timer timer;
 
     void Start()
     {
+        navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         timer = GetComponent<Timer>();
@@ -99,6 +106,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // This method is addded for testig purposes. It will be replaced with proper methods later.
+    /*
     void OnCollisionEnter(Collision other)
     {
         if (CurrentState == EnemyState.Downed)
@@ -110,4 +118,5 @@ public class EnemyController : MonoBehaviour
             BecomeDowned();
         }
     }
+    */
 }

@@ -16,6 +16,9 @@ GameObject:
   - component: {fileID: 7859215246814110254}
   - component: {fileID: 521171310936937621}
   - component: {fileID: 7635132580727919465}
+  - component: {fileID: 7310089526607221230}
+  - component: {fileID: 4045360216403811788}
+  - component: {fileID: 1117001239175903178}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Untagged
@@ -73,8 +76,8 @@ Rigidbody:
   m_GameObject: {fileID: 2729769001911704819}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0
+  m_LinearDamping: 0.2
+  m_AngularDamping: 0.2
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -86,7 +89,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
@@ -188,6 +191,90 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   CurrentState: 0
+--- !u!114 &7310089526607221230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd394f4998283d4c92074abc9429eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pushable
+  onPush:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: BecomeDowned
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4045360216403811788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  health: 2
+  DestroyOnDeath: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: Kill
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onHurt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: BecomeDowned
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1117001239175903178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c84b7e6e41c76b489d699d6456284d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Surface
+  type: {fileID: 11400000, guid: 50cd10abcafffb645a4b963cec826a00, type: 2}
 --- !u!1 &4001773003999863753
 GameObject:
   m_ObjectHideFlags: 0
