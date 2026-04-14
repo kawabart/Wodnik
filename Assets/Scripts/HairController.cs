@@ -11,7 +11,10 @@ public class HairController : MonoBehaviour
     public bool Grabbed = false;
     [SerializeField, Tooltip("Spring joint thats dynamically created (and removed) to attach rb thats grabbed by hair.")]
     private SpringJoint springJoint;
-
+    public void Probe(Vector3 probeLocation)
+    {
+        hairGenerator.endpoint.transform.position = probeLocation;
+    }
     public void Grab(Rigidbody rb)
     {
         grabbedRb = rb;
