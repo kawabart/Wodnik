@@ -7,11 +7,12 @@ public class Grabbable : MonoBehaviour, IGrabbable
     public UnityEvent onLetGo;
 
 
-    public void Grab(HairController hairController) 
+    public bool Grab(HairController hairController) 
     {
         Debug.Log("I'm grabbed!");
         onGrab.Invoke();
         hairController.Grab(this.GetComponent<Rigidbody>());
+        return true;
     }
     public void LetGo(HairController hairController)
     {

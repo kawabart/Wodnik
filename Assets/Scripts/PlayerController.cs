@@ -220,8 +220,8 @@ public class PlayerController : MonoBehaviour, IDamageable
             if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
-                grabbable.Grab(hairController);
-                foundGrabbable = true;
+                if (grabbable.Grab(hairController))
+                    foundGrabbable = true;
             }
         }
         IsGrabbing = true;
