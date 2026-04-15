@@ -34,7 +34,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.125, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2211107352892776228}
@@ -69,8 +69,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5835002253674127275}
   serializedVersion: 5
-  m_Mass: 2
-  m_LinearDamping: 1
+  m_Mass: 1.5
+  m_LinearDamping: 0.5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -100,7 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  minVelocityToDamage: 5
+  minVelocityToDamage: 3
+  increaseVelocityNeededForPlayer: 2
   damage: 2
 --- !u!114 &4503014004726142115
 MonoBehaviour:
@@ -185,7 +186,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 1.2619233
