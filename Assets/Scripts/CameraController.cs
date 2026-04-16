@@ -6,9 +6,11 @@ public class CameraController : MonoBehaviour
     private Camera camera;
     [SerializeField]
     private Camera mirrorCamera;
-
-    void Update()
+    [SerializeField]
+    private Follower follower;
+    void Start()
     {
-        mirrorCamera.fieldOfView = camera.fieldOfView;
+        follower = GetComponent<Follower>();
+        if (follower.Target == null) follower.Target = GameObject.FindWithTag("Player").transform;
     }
 }
