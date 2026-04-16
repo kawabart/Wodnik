@@ -5,6 +5,8 @@ public class TaintController : MonoBehaviour
     [SerializeField]
     private float taintDistance = 1;
     [SerializeField]
+    private float taintIncreaseStep = .1f;
+    [SerializeField]
     private SkinnedMeshRenderer meshRenderer;
     private Material material;
     void Start()
@@ -24,7 +26,7 @@ public class TaintController : MonoBehaviour
         {
             float fleshCut = Mathf.Max(0,material.GetFloat("_SurfaceFleshCut"));
             fleshCut =Mathf.Max(0, fleshCut);
-            material.SetFloat("_SurfaceFleshCut", Mathf.Min(.7f, fleshCut + .2f));
+            material.SetFloat("_SurfaceFleshCut", Mathf.Min(.7f, fleshCut + taintIncreaseStep));
         }
         if (surface.surfaceName == "Water") material.SetFloat("_SurfaceFleshCut", -1f);
     }
