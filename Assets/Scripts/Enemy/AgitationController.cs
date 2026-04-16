@@ -35,7 +35,7 @@ public class AgitationController : MonoBehaviour
 
     private void UpdateAgitation()
     {
-        if (AgitationLevel > AlarmedConfig.AgitationLevel)
+        if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
         {
             CurrentAgitationConfig = AlarmedConfig;
             AgitationState = AgitationState.Alarmed;
