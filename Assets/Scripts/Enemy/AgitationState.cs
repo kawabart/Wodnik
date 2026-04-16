@@ -3,5 +3,5 @@
 [BlackboardEnum]
 public enum AgitationState
 {
-    Unbothered, Irritated, Angry
+    Relaxed, Investigating, Alarmed
 }
