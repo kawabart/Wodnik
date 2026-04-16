@@ -1,18 +1,19 @@
 using System;
 using Unity.Behavior;
-using UnityEngine;
-using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using UnityEngine;
+using UnityEngine.UIElements;
+using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "Rotate GameObject towards Position", story: "Rotate [Object] towards [Position]", category: "Wodnik", id: "cd5ddb437386ac2619fe003d20a31d5d")]
-public partial class RotateGameObjectTowardsPositionAction : Action
+[NodeDescription(name: "Rotate Object towards AnotherObject", story: "Rotate [Object] towards [AnotherObject]", category: "Wodnik", id: "f61ef4942ea6ef8e80ce87465c692f63")]
+public partial class RotateObjectTowardsAnotherObjectAction : Action
 {
     [SerializeReference]
     public BlackboardVariable<GameObject> Object;
 
     [SerializeReference]
-    public BlackboardVariable<Vector3> Position;
+    public BlackboardVariable<GameObject> AnotherObject;
 
     [SerializeReference]
     public BlackboardVariable<float> AngularSpeed = new BlackboardVariable<float>(360.0f);
@@ -24,7 +25,7 @@ public partial class RotateGameObjectTowardsPositionAction : Action
 
     protected override Status OnStart()
     {
-        forward = (Position.Value - Object.Value.transform.position).normalized;
+        forward = (AnotherObject.Value.transform.position - Object.Value.transform.position).normalized;
         up = Object.Value.transform.up;
         return Status.Running;
     }
