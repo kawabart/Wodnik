@@ -50,7 +50,7 @@ public class AgitationController : MonoBehaviour
             CurrentAgitationConfig = RelaxedConfig;
             AgitationState = AgitationState.Relaxed;
         }
-        SuggestedSpeed = AlarmedConfig.MoveSpeed;
+        SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }
 
     private void IncreaseAgitation()
