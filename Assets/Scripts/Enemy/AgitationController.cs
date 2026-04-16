@@ -3,15 +3,11 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyPerception))]
 public class AgitationController : MonoBehaviour
 {
+    public float MinAgitation = 0, MaxAgitation = 100;
 
-    private const float MIN_AGITATION = 0, MAX_AGITATION = 100;
+    public AgitationStateConfig RelaxedConfig, InvestigatingConfig, AlarmedConfig;
 
-    public float InvestigatingAgitation = 30;
-    public float AlarmedAgitation = 99;
-
-    public float RelaxedSpeed = 3;
-    public float InvestigatingSpeed = 4;
-    public float AlarmedSpeed = 5;
+    private AgitationStateConfig CurrentAgitationConfig;
 
     private EnemyPerception perception;
     public float AgitationLevel = 0;
@@ -22,37 +18,52 @@ public class AgitationController : MonoBehaviour
     void Start()
     {
         perception = GetComponent<EnemyPerception>();
+        UpdateAgitation();
     }
 
     void Update()
     {
         if (perception.PerceptionState == EnemyPerceptionState.PlayerInSight)
         {
-            UpdateAgitation(100 * Time.deltaTime);
+            IncreaseAgitation();
         }
         else if (perception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
         {
-            UpdateAgitation(-10 * Time.deltaTime);
+            DecreaseAgitation();
         }
     }
 
-    private void UpdateAgitation(float change)
+    private void UpdateAgitation()
     {
-        AgitationLevel = Mathf.Clamp(AgitationLevel + change, MIN_AGITATION, MAX_AGITATION);
-        if (AgitationLevel < InvestigatingAgitation)
+        if (AgitationLevel > AlarmedConfig.AgitationLevel)
         {
-            AgitationState = AgitationState.Relaxed;
-            SuggestedSpeed = RelaxedSpeed;
+            CurrentAgitationConfig = AlarmedConfig;
+            AgitationState = AgitationState.Alarmed;
         }
-        else if (AgitationLevel < AlarmedAgitation)
+        else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
+            CurrentAgitationConfig = InvestigatingConfig;
             AgitationState = AgitationState.Investigating;
-            SuggestedSpeed = InvestigatingSpeed;
         }
         else
         {
-            AgitationState = AgitationState.Alarmed;
-            SuggestedSpeed = AlarmedSpeed;
+            CurrentAgitationConfig = RelaxedConfig;
+            AgitationState = AgitationState.Relaxed;
         }
+        SuggestedSpeed = AlarmedConfig.MoveSpeed;
+    }
+
+    private void IncreaseAgitation()
+    {
+        var change = CurrentAgitationConfig.AgitationPositiveRate * Time.deltaTime;
+        AgitationLevel = Mathf.Min(AgitationLevel + change, MaxAgitation);
+        UpdateAgitation();
+    }
+
+    private void DecreaseAgitation()
+    {
+        var change = CurrentAgitationConfig.AgitationNegativeRate * Time.deltaTime;
+        AgitationLevel = Mathf.Max(MinAgitation, AgitationLevel - change);
+        UpdateAgitation();
     }
 }
