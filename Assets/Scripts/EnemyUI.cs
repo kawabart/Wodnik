@@ -12,42 +12,53 @@ public partial class EnemyUI : MonoBehaviour
 
     private Color color = Color.white;
     private float blinkingSpeed = 5;
-
+    public AgitationController agitationController;
+    public EnemyController enemyController;
     void Start()
     {
         document = GetComponent<UIDocument>();
         label = document.rootVisualElement.Q<Label>();
+        agitationController = GetComponentInParent<AgitationController>();
+        enemyController = GetComponentInParent<EnemyController>();
     }
 
     void Update()
     {
+        if (enemyController.CurrentState!= EnemyState.Alive)
+        {
+            label.text = "";
+            return;
+        }
+
         var angle = transform.parent.localEulerAngles.y;
         transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Euler(transform.localEulerAngles.x, 0, angle));
 
         if (State == EnemyAIState.Idle)
         {
-            label.text = "";
+            label.text = "...";
+            blinkingSpeed = 0;
         }
         else if (State == EnemyAIState.Investigating)
         {
             label.text = "?";
-            color = Color.yellow;
             blinkingSpeed = 0;
         }
         else if (State == EnemyAIState.Searching)
         {
-            label.text = "??";
-            color = Color.orange;
+            label.text = "!?";
             blinkingSpeed = 3;
         }
         else if (State == EnemyAIState.Alerted)
         {
-            label.text = "!!";
-            color = Color.red;
+            label.text = "!";
             blinkingSpeed = 10;
         }
 
-        float alpha = (Mathf.Cos(Time.time * blinkingSpeed) + 1.0f) / 2.0f;
+        if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
+        if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;
+        if (agitationController.AgitationState == AgitationState.Alarmed) color = Color.red;
+        //blinkingSpeed = agitationController.AgitationLevel/5;
+        float alpha = agitationController.AgitationLevel / 100;//(Mathf.Cos(Time.time * blinkingSpeed) + 3f) / 4f;
         label.style.color = new StyleColor(color.WithAlpha(alpha));
     }
 }
