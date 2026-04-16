@@ -147,7 +147,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.8, z: 1}
+  m_Size: {x: 0.12, y: 0.8, z: 1}
   m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!54 &4780388431048752656
 Rigidbody:
@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   minVelocityToDamage: 5
+  increaseVelocityNeededForPlayer: 0
   damage: 1
 --- !u!114 &4503014004726142115
 MonoBehaviour:
@@ -233,7 +234,7 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.095, y: 0.4, z: 0.53}
+  m_Extents: {x: 0.1, y: 0.4, z: 0.53}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
