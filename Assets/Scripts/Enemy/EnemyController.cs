@@ -25,13 +25,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (newState == EnemyState.Downed)
         {
-<<<<<<< HEAD
             rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
-            rigidBody.freezeRotation = false;
-            rigidBody.isKinematic = false;
-            navMeshAgent.enabled = false;
-=======
->>>>>>> c37fafc (refactored EnemyAI tree around enemy agitation)
             behaviorAgent.enabled = false;
             navMeshAgent.enabled = false;
             rigidBody.isKinematic = false;
