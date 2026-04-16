@@ -12,6 +12,7 @@ public class EnemyController : MonoBehaviour
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
+            rigidBody.interpolation = RigidbodyInterpolation.None;
             behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
             rigidBody.isKinematic = true;
@@ -20,6 +21,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (newState == EnemyState.Downed)
         {
+            rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             rigidBody.freezeRotation = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
@@ -28,6 +30,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (newState == EnemyState.Dead)
         {
+            rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             behaviorAgent.enabled = false;
             rigidBody.isKinematic = false;
             navMeshAgent.enabled = false;
