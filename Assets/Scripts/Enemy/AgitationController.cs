@@ -40,7 +40,7 @@ public class AgitationController : MonoBehaviour
             CurrentAgitationConfig = AlarmedConfig;
             AgitationState = AgitationState.Alarmed;
         }
-        else if (AgitationLevel > InvestigatingConfig.AgitationLevel && AgitationState != AgitationState.Alarmed)
+        else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
             CurrentAgitationConfig = InvestigatingConfig;
             AgitationState = AgitationState.Investigating;
