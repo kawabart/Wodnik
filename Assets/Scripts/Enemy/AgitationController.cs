@@ -5,13 +5,9 @@ public class AgitationController : MonoBehaviour
 {
     public float MinAgitation = 0, MaxAgitation = 100;
 
-    [Tooltip("How fast agitation level increases when the enemy sees the player, per second.")]
-    public float AgitationPositiveRate = 50;
-
-    [Tooltip("How fast agitation level decreases when the enemy doesn't see the player, per second.")]
-    public float AgitationNegativeRate = 10;
-
     public AgitationStateConfig RelaxedConfig, InvestigatingConfig, AlarmedConfig;
+
+    private AgitationStateConfig CurrentAgitationConfig;
 
     private EnemyPerception perception;
     public float AgitationLevel = 0;
@@ -22,37 +18,52 @@ public class AgitationController : MonoBehaviour
     void Start()
     {
         perception = GetComponent<EnemyPerception>();
+        UpdateAgitation();
     }
 
     void Update()
     {
         if (perception.PerceptionState == EnemyPerceptionState.PlayerInSight)
         {
-            UpdateAgitation(AgitationPositiveRate * Time.deltaTime);
+            IncreaseAgitation();
         }
         else if (perception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
         {
-            UpdateAgitation(-AgitationNegativeRate * Time.deltaTime);
+            DecreaseAgitation();
         }
     }
 
-    private void UpdateAgitation(float change)
+    private void UpdateAgitation()
     {
-        AgitationLevel = Mathf.Clamp(AgitationLevel + change, MinAgitation, MaxAgitation);
         if (AgitationLevel > AlarmedConfig.AgitationLevel)
         {
+            CurrentAgitationConfig = AlarmedConfig;
             AgitationState = AgitationState.Alarmed;
-            SuggestedSpeed = AlarmedConfig.MoveSpeed;
         }
         else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
+            CurrentAgitationConfig = InvestigatingConfig;
             AgitationState = AgitationState.Investigating;
-            SuggestedSpeed = InvestigatingConfig.MoveSpeed;
         }
         else
         {
+            CurrentAgitationConfig = RelaxedConfig;
             AgitationState = AgitationState.Relaxed;
-            SuggestedSpeed = RelaxedConfig.MoveSpeed;
         }
+        SuggestedSpeed = AlarmedConfig.MoveSpeed;
+    }
+
+    private void IncreaseAgitation()
+    {
+        var change = CurrentAgitationConfig.AgitationPositiveRate * Time.deltaTime;
+        AgitationLevel = Mathf.Min(AgitationLevel + change, MaxAgitation);
+        UpdateAgitation();
+    }
+
+    private void DecreaseAgitation()
+    {
+        var change = CurrentAgitationConfig.AgitationNegativeRate * Time.deltaTime;
+        AgitationLevel = Mathf.Max(MinAgitation, AgitationLevel - change);
+        UpdateAgitation();
     }
 }
