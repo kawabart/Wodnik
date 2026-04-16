@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1089150309523561895}
   - component: {fileID: 756476067600884879}
   - component: {fileID: 4355304884184916963}
+  - component: {fileID: 2494889435573344884}
   - component: {fileID: 7859215246814110254}
   - component: {fileID: 521171310936937621}
   - component: {fileID: 7635132580727919465}
@@ -144,6 +145,26 @@ MonoBehaviour:
   PerceptionState: 0
   SightDistance: 2
   SightFOVDegrees: 90
+--- !u!114 &2494889435573344884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43c1c7695c6a21844a70a8407762ee1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgitationController
+  InvestigatingAgitation: 30
+  AlarmedAgitation: 99
+  RelaxedSpeed: 2
+  InvestigatingSpeed: 3
+  AlarmedSpeed: 4
+  AgitationLevel: 0
+  AgitationState: 0
+  SuggestedSpeed: 5
 --- !u!195 &7859215246814110254
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -290,6 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 8
+  increaseVelocityNeededForPlayer: 0
   damage: 1
 --- !u!114 &2221496193607636872
 MonoBehaviour:
