@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 6051282564482141266}
   - component: {fileID: 3593769007922279878}
   - component: {fileID: 4770092529281026665}
+  - component: {fileID: 6560096234441543116}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -206,7 +207,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 88.50037
+  field of view: 90.923775
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_StopNaN: 0
   m_Dithering: 0
   m_ClearDepth: 1
-  m_AllowXRRendering: 1
+  m_AllowXRRendering: 0
   m_AllowHDROutput: 1
   m_UseScreenCoordOverride: 0
   m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -291,3 +292,18 @@ MonoBehaviour:
   Target: {fileID: 0}
   Offset: {x: 0, y: 3, z: 0}
   SmoothTime: 0.2
+--- !u!114 &6560096234441543116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5035655626509428573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8280dc0a820154a92970dd844f40ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  camera: {fileID: 3683148718741460303}
+  mirrorCamera: {fileID: 339581663506323467}
+  follower: {fileID: 0}
