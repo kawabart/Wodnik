@@ -27,7 +27,7 @@ public class AgitationController : MonoBehaviour
         {
             IncreaseAgitation();
         }
-        else
+        else if (perception.PerceptionState == EnemyPerceptionState.Idle)
         {
             DecreaseAgitation();
         }
