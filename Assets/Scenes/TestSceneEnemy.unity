@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3603509
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3603510}
+  m_Layer: 0
+  m_Name: Waypoint2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3603510
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3603509}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.87, y: 0, z: -2.41}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 427599926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &52313278
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +464,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799305]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799305].Name
+      value: Waypoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 7278777247040799305
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799305].GUID.m_Value0
+      value: 16860283700451310531
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799305].GUID.m_Value1
+      value: 6823510728129152884
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799305].m_Value.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799305].m_Value.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1701915765}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799305].m_Value.Array.data[1]'
+      value: 
+      objectReference: {fileID: 497689302}
     - target: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_Name
       value: Villager (5)
@@ -526,6 +594,39 @@ Transform:
   - {fileID: 1223070130}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &427599925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 427599926}
+  m_Layer: 0
+  m_Name: Waypoints (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &427599926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427599925}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1705591834}
+  - {fileID: 3603510}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &465836775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -613,7 +714,7 @@ Transform:
   m_GameObject: {fileID: 497689302}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.56, y: 0, z: -2}
+  m_LocalPosition: {x: 0.54, y: 0, z: -2.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1240,7 +1341,7 @@ GameObject:
   m_Component:
   - component: {fileID: 957847851}
   m_Layer: 0
-  m_Name: Waypoints
+  m_Name: Waypoints (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1451,6 +1552,43 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799306]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799306].Name
+      value: Waypoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 7278777247040799306
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799306].GUID.m_Value0
+      value: 16860283700451310531
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799306].GUID.m_Value1
+      value: 6823510728129152884
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[7278777247040799306].m_Value.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799306].m_Value.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1705591833}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[7278777247040799306].m_Value.Array.data[1]'
+      value: 
+      objectReference: {fileID: 3603509}
     - target: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_Name
       value: Villager (3)
@@ -2561,6 +2699,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 957847851}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1705591833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1705591834}
+  m_Layer: 0
+  m_Name: Waypoint1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1705591834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705591833}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.18, y: 0, z: -0.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 427599926}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1741911221
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2937,3 +3106,4 @@ SceneRoots:
   - {fileID: 398236997}
   - {fileID: 957847851}
   - {fileID: 52313282}
+  - {fileID: 427599926}
