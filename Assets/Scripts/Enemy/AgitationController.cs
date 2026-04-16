@@ -3,15 +3,15 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyPerception))]
 public class AgitationController : MonoBehaviour
 {
+    public float MinAgitation = 0, MaxAgitation = 100;
 
-    private const float MIN_AGITATION = 0, MAX_AGITATION = 100;
+    [Tooltip("How fast agitation level increases when the enemy sees the player, per second.")]
+    public float AgitationPositiveRate = 50;
 
-    public float InvestigatingAgitation = 30;
-    public float AlarmedAgitation = 99;
+    [Tooltip("How fast agitation level decreases when the enemy doesn't see the player, per second.")]
+    public float AgitationNegativeRate = 10;
 
-    public float RelaxedSpeed = 3;
-    public float InvestigatingSpeed = 4;
-    public float AlarmedSpeed = 5;
+    public AgitationStateConfig RelaxedConfig, InvestigatingConfig, AlarmedConfig;
 
     private EnemyPerception perception;
     public float AgitationLevel = 0;
@@ -28,31 +28,31 @@ public class AgitationController : MonoBehaviour
     {
         if (perception.PerceptionState == EnemyPerceptionState.PlayerInSight)
         {
-            UpdateAgitation(100 * Time.deltaTime);
+            UpdateAgitation(AgitationPositiveRate * Time.deltaTime);
         }
         else if (perception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
         {
-            UpdateAgitation(-10 * Time.deltaTime);
+            UpdateAgitation(-AgitationNegativeRate * Time.deltaTime);
         }
     }
 
     private void UpdateAgitation(float change)
     {
-        AgitationLevel = Mathf.Clamp(AgitationLevel + change, MIN_AGITATION, MAX_AGITATION);
-        if (AgitationLevel < InvestigatingAgitation)
+        AgitationLevel = Mathf.Clamp(AgitationLevel + change, MinAgitation, MaxAgitation);
+        if (AgitationLevel > AlarmedConfig.AgitationLevel)
         {
-            AgitationState = AgitationState.Relaxed;
-            SuggestedSpeed = RelaxedSpeed;
+            AgitationState = AgitationState.Alarmed;
+            SuggestedSpeed = AlarmedConfig.MoveSpeed;
         }
-        else if (AgitationLevel < AlarmedAgitation)
+        else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
             AgitationState = AgitationState.Investigating;
-            SuggestedSpeed = InvestigatingSpeed;
+            SuggestedSpeed = InvestigatingConfig.MoveSpeed;
         }
         else
         {
-            AgitationState = AgitationState.Alarmed;
-            SuggestedSpeed = AlarmedSpeed;
+            AgitationState = AgitationState.Relaxed;
+            SuggestedSpeed = RelaxedConfig.MoveSpeed;
         }
     }
 }
