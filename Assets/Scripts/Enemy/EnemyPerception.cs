@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyPerception : MonoBehaviour
 {
     [SerializeField]
-    private EnemyController enemyController; 
+    private EnemyController enemyController;
     private AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -22,8 +22,16 @@ public class EnemyPerception : MonoBehaviour
     public EnemyPerceptionState PerceptionState = EnemyPerceptionState.Idle;
     private Rigidbody rigidBody;
 
+    [Header("Sight values modified by Scriptable")]
     public float SightDistance = 2;
     public float SightFOVDegrees = 45;
+    [Tooltip("Grace period in which enemy still has player in sight, even if they can't physically see them.")]
+    public float PredictPlayerPositionTime = 1;
+    public float PredictPlayerPositionTimer = 0;
+    [Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
+    public float NoticeHiddenPlayerDistance = .5f;
+
+
     [SerializeField]
     public Vector3? LastPlayerPosition = null;
 
@@ -43,7 +51,7 @@ public class EnemyPerception : MonoBehaviour
 
     void Update()
     {
-        UpdateValuesFromScriptable();
+        
         if (player != null)
         {
             if (KnowsPlayerPosition())
@@ -56,6 +64,7 @@ public class EnemyPerception : MonoBehaviour
                 PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
             }
         }
+        UpdateValuesFromScriptable();
     }
     void UpdateValuesFromScriptable()
     {
@@ -66,11 +75,7 @@ public class EnemyPerception : MonoBehaviour
         SightDistance = CurrentAgitationConfig.SightDistance;
         SightFOVDegrees = CurrentAgitationConfig.SightFOVDegrees;
 }
-    [Tooltip("Grace period in which enemy still has player in sight, even if they can't physically see them.")]
-    private float PredictPlayerPositionTime = 1;
-    private float PredictPlayerPositionTimer = 0;
-    [Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
-    private float NoticeHiddenPlayerDistance = .5f;
+    
     private bool KnowsPlayerPosition()
     {
         PredictPlayerPositionTimer -= Time.deltaTime;

@@ -20,7 +20,6 @@ public class EnemyController : MonoBehaviour
             navMeshAgent.enabled = true;
             rigidBody.isKinematic = true;
             agitationController.enabled = true;
-            perceptionController.enabled = true;
             perceptionController.ActivateSenses();
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
@@ -32,7 +31,6 @@ public class EnemyController : MonoBehaviour
             behaviorAgent.enabled = false;
             navMeshAgent.enabled = false;
             rigidBody.isKinematic = false;
-            rigidBody.freezeRotation = false;
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
             Debug.Log("Enemy is downed.");
