@@ -29,7 +29,7 @@ public class EnemyPerception : MonoBehaviour
     {
         if (player != null)
         {
-            if (DetectPlayer())
+            if (KnowsPlayerPosition())
             {
                 LastPlayerPosition = player.transform.position;
                 PerceptionState = EnemyPerceptionState.PlayerInSight;
@@ -39,6 +39,19 @@ public class EnemyPerception : MonoBehaviour
                 PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
             }
         }
+    }
+    [SerializeField, Tooltip("Grace period in which enemy still has player in sight, even if they can't physically see them.")]
+    private float PredictPlayerPositionTime = 1;
+    private float PredictPlayerPositionTimer = 0;
+    [SerializeField, Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
+    private float PhysicalTouchDistance = .1f;
+    private bool KnowsPlayerPosition()
+    {
+        PredictPlayerPositionTimer -= Time.deltaTime;
+        if (DetectPlayer()) PredictPlayerPositionTimer = PredictPlayerPositionTime;
+
+        if (PredictPlayerPositionTimer > 0) return true;
+        else return false;
     }
 
     private bool DetectPlayer()
@@ -51,6 +64,11 @@ public class EnemyPerception : MonoBehaviour
         {
             return false;
         }
+
+        float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
+        if (sqrDistance > SightDistance * SightDistance) return false;
+        if (sqrDistance < PhysicalTouchDistance * PhysicalTouchDistance) return true;
+
         if (player.Hidden)
         {
             return false;
