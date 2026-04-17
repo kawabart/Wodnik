@@ -231,6 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   CurrentState: 0
   DownedTime: 10
+  downedTimer: 0
 --- !u!114 &4355304884184916963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,6 +251,9 @@ MonoBehaviour:
   PerceptionState: 0
   SightDistance: 2.7
   SightFOVDegrees: 90
+  canSee: 1
+  canHear: 1
+  canTouch: 1
   PredictPlayerPositionTime: 0.1
   PhysicalTouchDistance: 0.5
 --- !u!114 &2494889435573344884

@@ -16,8 +16,10 @@ public class EnemyController : MonoBehaviour
             rigidBody.interpolation = RigidbodyInterpolation.None;
             behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
-            rigidBody.isKinematic = true; 
+            rigidBody.isKinematic = true;
             agitationController.enabled = true;
+            perceptionController.enabled = true;
+            perceptionController.ActivateSenses();
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
         }
@@ -30,6 +32,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = false;
             rigidBody.freezeRotation = false;
             agitationController.enabled = true;
+            perceptionController.DectivateSenses();
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -40,6 +43,7 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = false;
             rigidBody.freezeRotation = false;
             agitationController.enabled = false;
+            perceptionController.DectivateSenses();
             Debug.Log("Enemy is dead.");
         }
     }
@@ -67,8 +71,8 @@ public class EnemyController : MonoBehaviour
     private Unity.Behavior.BehaviorGraphAgent behaviorAgent;
     private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
-
     private AgitationController agitationController;
+    private EnemyPerception perceptionController;
 
     void Start()
     {
@@ -77,6 +81,7 @@ public class EnemyController : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
         agitationController = GetComponent<AgitationController>();
+        perceptionController = GetComponent<EnemyPerception>();
     }
 
     void Update()

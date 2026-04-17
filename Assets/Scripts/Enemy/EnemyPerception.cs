@@ -18,6 +18,11 @@ public class EnemyPerception : MonoBehaviour
     [SerializeField]
     public Vector3? LastPlayerPosition = null;
 
+    [Header("Active Senses")]
+    public bool canSee = true;
+    public bool canHear = true;
+    public bool canTouch = true;
+
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
@@ -53,9 +58,21 @@ public class EnemyPerception : MonoBehaviour
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
-
+    public void ActivateSenses()
+    {
+        canSee = true;
+        canHear = true;
+        canTouch = true;
+    }
+    public void DectivateSenses()
+    {
+        canSee = false;
+        canHear = false;
+        canTouch = false;
+    }
     private bool DetectPlayer()
     {
+        if (!canSee) return false;
         RaycastHit hit;
         var direction = playerRigidBody.worldCenterOfMass - rigidBody.worldCenterOfMass;
         direction.y = 0;
