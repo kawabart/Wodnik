@@ -7,7 +7,7 @@ public class AgitationController : MonoBehaviour
 
     public AgitationStateConfig RelaxedConfig, InvestigatingConfig, AlarmedConfig;
 
-    private AgitationStateConfig CurrentAgitationConfig;
+    public AgitationStateConfig CurrentAgitationConfig;
 
     private EnemyPerception perception;
     public float AgitationLevel = 0;
@@ -27,7 +27,7 @@ public class AgitationController : MonoBehaviour
         {
             IncreaseAgitation();
         }
-        else if (perception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
+        else if (perception.PerceptionState == EnemyPerceptionState.Idle)
         {
             DecreaseAgitation();
         }

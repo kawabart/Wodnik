@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Timer))]
 [RequireComponent(typeof(AgitationController))]
+[RequireComponent(typeof(EnemyPerception))]
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
 
@@ -18,19 +19,20 @@ public class EnemyController : MonoBehaviour
             behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
             rigidBody.isKinematic = true;
-            rigidBody.freezeRotation = true;
             agitationController.enabled = true;
+            perceptionController.ActivateSenses();
             transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
+            downedTimer = DownedTime;
             rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             behaviorAgent.enabled = false;
             navMeshAgent.enabled = false;
             rigidBody.isKinematic = false;
-            rigidBody.freezeRotation = false;
             agitationController.enabled = true;
+            perceptionController.DectivateSenses();
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -41,18 +43,20 @@ public class EnemyController : MonoBehaviour
             rigidBody.isKinematic = false;
             rigidBody.freezeRotation = false;
             agitationController.enabled = false;
+            perceptionController.DectivateSenses();
             Debug.Log("Enemy is dead.");
         }
     }
     #endregion
 
     #region downed
-    private readonly float DOWNED_TIME = 10f;
+    public float DownedTime = 10f;
+    [SerializeField]
+    private float downedTimer =0;
     public void BecomeDowned()
     {
         if (CurrentState == EnemyState.Dead) return;
         ChangeState(EnemyState.Downed);
-        timer.Start();
     }
     #endregion
 
@@ -60,7 +64,6 @@ public class EnemyController : MonoBehaviour
     public void Kill()
     {
         ChangeState(EnemyState.Dead);
-        timer.Reset();
     }
     #endregion
 
@@ -68,19 +71,23 @@ public class EnemyController : MonoBehaviour
     private Unity.Behavior.BehaviorGraphAgent behaviorAgent;
     private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
-    private Timer timer;
-
     private AgitationController agitationController;
-
+    private EnemyPerception perceptionController;
+    public AgitationStateConfig CurrentAgitationConfig
+    {
+        get
+        {
+            return agitationController.CurrentAgitationConfig;
+        }
+    }
     void Start()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         behaviorAgent = GetComponent<Unity.Behavior.BehaviorGraphAgent>();
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        timer = GetComponent<Timer>();
-        timer.Reset();
         agitationController = GetComponent<AgitationController>();
+        perceptionController = GetComponent<EnemyPerception>();
     }
 
     void Update()
@@ -108,11 +115,10 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDowned()
     {
-        if (timer.time >= DOWNED_TIME)
-        {
-            timer.Reset();
+        if (downedTimer <= 0)
             ChangeState(EnemyState.Alive);
-        }
+        else
+            downedTimer -= Time.deltaTime;
     }
 
     void UpdateDead()

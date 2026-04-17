@@ -84,8 +84,8 @@ public class LightController : MonoBehaviour
         Vector3 direction = target - transform.position;
         RaycastHit hit;
         if (!Physics.Raycast(target, direction, out hit, direction.magnitude, shadowCastingLayerMask))
-            return true;
-        return false;
+            return false;
+        return true;
     }
     private bool IsAngleRight(Vector3 target)
     {
