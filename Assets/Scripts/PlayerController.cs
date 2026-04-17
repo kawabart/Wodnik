@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Health = 0;
         animator.SetBool("isDead",true);
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject source)
     {
         if (!IsAlive) return;
 

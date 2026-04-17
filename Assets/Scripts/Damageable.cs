@@ -12,7 +12,7 @@ public class Damageable : MonoBehaviour, IDamageable
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
     }
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, GameObject source)
     {
         if (amount < 1) return;
         onHurt.Invoke();

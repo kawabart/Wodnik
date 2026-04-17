@@ -18,7 +18,7 @@ public class ImpactDamageDealer : MonoBehaviour
         if (damageable != null)
         {
             if (collision.collider.GetComponent<PlayerController>() && impactForce < minVelocityToDamage + increaseVelocityNeededForPlayer) return;
-            damageable.TakeDamage(damage);
+            damageable.TakeDamage(damage,gameObject);
         }
     }
 }
