@@ -5,6 +5,15 @@ using UnityEngine;
 public class EnemyPerception : MonoBehaviour
 {
     [SerializeField]
+    private EnemyController enemyController; 
+    private AgitationStateConfig CurrentAgitationConfig
+    {
+        get
+        {
+            return enemyController.CurrentAgitationConfig;
+        }
+    }
+    [SerializeField]
     private PlayerController player = null;
     [SerializeField]
     private LayerMask percivedLayerMask;
@@ -25,6 +34,8 @@ public class EnemyPerception : MonoBehaviour
 
     void Start()
     {
+        enemyController = GetComponent<EnemyController>();
+
         rigidBody = GetComponent<Rigidbody>();
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         playerRigidBody = player.GetComponent<Rigidbody>();
@@ -32,6 +43,7 @@ public class EnemyPerception : MonoBehaviour
 
     void Update()
     {
+        UpdateValuesFromScriptable();
         if (player != null)
         {
             if (KnowsPlayerPosition())
@@ -45,16 +57,28 @@ public class EnemyPerception : MonoBehaviour
             }
         }
     }
-    [SerializeField, Tooltip("Grace period in which enemy still has player in sight, even if they can't physically see them.")]
+    void UpdateValuesFromScriptable()
+    {
+        if (CurrentAgitationConfig == null) return;
+
+        PredictPlayerPositionTime = CurrentAgitationConfig.PredictPlayerPositionTime;
+        NoticeHiddenPlayerDistance = CurrentAgitationConfig.NoticeHiddenPlayerDistance;
+        SightDistance = CurrentAgitationConfig.SightDistance;
+        SightFOVDegrees = CurrentAgitationConfig.SightFOVDegrees;
+}
+    [Tooltip("Grace period in which enemy still has player in sight, even if they can't physically see them.")]
     private float PredictPlayerPositionTime = 1;
     private float PredictPlayerPositionTimer = 0;
-    [SerializeField, Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
-    private float PhysicalTouchDistance = .1f;
+    [Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
+    private float NoticeHiddenPlayerDistance = .5f;
     private bool KnowsPlayerPosition()
     {
         PredictPlayerPositionTimer -= Time.deltaTime;
-        if (DetectPlayer()) PredictPlayerPositionTimer = PredictPlayerPositionTime;
-
+        if (DetectPlayer())
+        {
+            PredictPlayerPositionTimer = PredictPlayerPositionTime;
+            return true;
+        }
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
@@ -84,7 +108,7 @@ public class EnemyPerception : MonoBehaviour
 
         float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
         if (sqrDistance > SightDistance * SightDistance) return false;
-        if (sqrDistance < PhysicalTouchDistance * PhysicalTouchDistance) return true;
+        if (sqrDistance < NoticeHiddenPlayerDistance * NoticeHiddenPlayerDistance) return true;
 
         if (player.Hidden)
         {

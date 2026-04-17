@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AgitationController))]
+[RequireComponent(typeof(EnemyPerception))]
+[RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
 
@@ -73,7 +75,13 @@ public class EnemyController : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
-
+    public AgitationStateConfig CurrentAgitationConfig
+    {
+        get
+        {
+            return agitationController.CurrentAgitationConfig;
+        }
+    }
     void Start()
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();

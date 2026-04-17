@@ -7,7 +7,7 @@ public class AgitationController : MonoBehaviour
 
     public AgitationStateConfig RelaxedConfig, InvestigatingConfig, AlarmedConfig;
 
-    private AgitationStateConfig CurrentAgitationConfig;
+    public AgitationStateConfig CurrentAgitationConfig;
 
     private EnemyPerception perception;
     public float AgitationLevel = 0;
