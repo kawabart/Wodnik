@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class ImpactDamageDealer : MonoBehaviour
 {
-    public float minVelocityToDamage = 5f;
-    public float increaseVelocityNeededForPlayer = 0f;
+    public float minVelocityToDamage = 3f;
+    public float increaseVelocityNeededForPlayer = 2f;
     public int damage = 1;
     
 
