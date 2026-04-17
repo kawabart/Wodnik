@@ -26,14 +26,17 @@ public partial class EnemyUI : MonoBehaviour
 
     void Update()
     {
-        if (enemyController.CurrentState!= EnemyState.Alive)
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        if (enemyController.CurrentState == EnemyState.Downed)
+        {
+            label.text = "zzZ";
+            return;
+        }
+        else if (enemyController.CurrentState!= EnemyState.Alive)
         {
             label.text = "";
             return;
         }
-
-        var angle = transform.parent.localEulerAngles.y;
-        transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Euler(transform.localEulerAngles.x, 0, angle));
 
         if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
         {
