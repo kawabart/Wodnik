@@ -16,6 +16,8 @@ public class EnemyPerception : MonoBehaviour
     [SerializeField]
     private PlayerController player = null;
     [SerializeField]
+    private Transform eyesPosition;
+    [SerializeField]
     private LayerMask percivedLayerMask;
     private Rigidbody playerRigidBody;
     [SerializeField]
@@ -63,6 +65,11 @@ public class EnemyPerception : MonoBehaviour
             {
                 PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
             }
+            else if (LastPlayerPosition == null)
+            {
+                PerceptionState = EnemyPerceptionState.Idle;
+
+            }
         }
         UpdateValuesFromScriptable();
     }
@@ -103,8 +110,9 @@ public class EnemyPerception : MonoBehaviour
     {
         if (!canSee) return false;
         RaycastHit hit;
-        var direction = playerRigidBody.worldCenterOfMass - rigidBody.worldCenterOfMass;
-        direction.y = 0;
+        Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f; 
+        var direction = targetPosition - eyesPosition.position;
+       // direction.y = 0;
         var angle = Vector3.Angle(transform.forward, direction);
         if (angle > SightFOVDegrees)
         {
@@ -119,13 +127,19 @@ public class EnemyPerception : MonoBehaviour
         {
             return false;
         }
-        if (Physics.Raycast(rigidBody.worldCenterOfMass, direction, out hit, SightDistance, percivedLayerMask))
+        if (Physics.Raycast(eyesPosition.position, direction, out hit, SightDistance, percivedLayerMask))
         {
+            Debug.DrawRay(eyesPosition.position, direction.normalized * SightDistance, Color.green);
+
             if (hit.collider.gameObject == player.gameObject)
             {
-                Debug.DrawRay(rigidBody.worldCenterOfMass, direction, Color.yellow);
+                Debug.DrawRay(eyesPosition.position, direction.normalized * SightDistance, Color.yellow);
                 return true;
             }
+        }
+        else
+        {
+            Debug.DrawRay(eyesPosition.position, direction.normalized * SightDistance, Color.red);
         }
 
         return false;
