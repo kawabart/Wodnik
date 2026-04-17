@@ -22,11 +22,11 @@ public partial class EnemyUI : MonoBehaviour
         agitationController = GetComponentInParent<AgitationController>();
         enemyController = GetComponentInParent<EnemyController>();
         enemyPerception = GetComponentInParent<EnemyPerception>();
+        SetPosition();
     }
 
     void Update()
     {
-        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         if (enemyController.CurrentState == EnemyState.Downed)
         {
             label.text = "zzZ";
@@ -57,5 +57,18 @@ public partial class EnemyUI : MonoBehaviour
 
         float alpha = agitationController.AgitationLevel / 100;
         label.style.color = new StyleColor(color.WithAlpha(alpha));
+    }
+
+    private void SetPosition()
+    {
+        Vector2 newPosition = RuntimePanelUtils.CameraTransformWorldToPanel(label.panel, transform.position, Camera.main);
+        newPosition.x = (newPosition.x - label.layout.width / 2);
+        newPosition.y = (newPosition.y - label.layout.height);
+        label.style.translate = newPosition;
+    }
+
+    private void LateUpdate()
+    {
+        SetPosition();
     }
 }
