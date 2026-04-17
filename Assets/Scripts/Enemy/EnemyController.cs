@@ -47,6 +47,7 @@ public class EnemyController : MonoBehaviour
 
     #region downed
     public float DownedTime = 10f;
+    [SerializeField]
     private float downedTimer =0;
     public void BecomeDowned()
     {
@@ -103,8 +104,10 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDowned()
     {
-        if (downedTimer<=0)
+        if (downedTimer <= 0)
             ChangeState(EnemyState.Alive);
+        else
+            downedTimer -= Time.deltaTime;
     }
 
     void UpdateDead()
