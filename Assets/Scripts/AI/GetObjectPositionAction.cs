@@ -13,6 +13,7 @@ public partial class GetObjectPositionAction : Action
 
     protected override Status OnStart()
     {
+        //To do: check if Position and Actor are not null, and return Status.Failure otherwise
         Position.Value = Actor.Value.transform.position;
         return Status.Success;
     }
