@@ -102,11 +102,11 @@ GameObject:
   - component: {fileID: 2037368621859222154}
   - component: {fileID: 1089150309523561895}
   - component: {fileID: 756476067600884879}
+  - component: {fileID: 7635132580727919465}
   - component: {fileID: 4355304884184916963}
   - component: {fileID: 2494889435573344884}
   - component: {fileID: 7859215246814110254}
   - component: {fileID: 521171310936937621}
-  - component: {fileID: 7635132580727919465}
   - component: {fileID: 7310089526607221230}
   - component: {fileID: 4045360216403811788}
   - component: {fileID: 1117001239175903178}
@@ -217,6 +217,20 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 2729769001911704819}
+--- !u!114 &7635132580727919465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0c80ceebb72c1f4394b6fa1dac68f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  CurrentState: 0
+  DownedTime: 10
 --- !u!114 &4355304884184916963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,9 +248,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 896
   PerceptionState: 0
-  SightDistance: 2
+  SightDistance: 2.7
   SightFOVDegrees: 90
-  PredictPlayerPositionTime: 0.5
+  PredictPlayerPositionTime: 0.1
   PhysicalTouchDistance: 0.5
 --- !u!114 &2494889435573344884
 MonoBehaviour:
@@ -294,19 +308,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Timer
   time: 0
   enable: 0
---- !u!114 &7635132580727919465
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729769001911704819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c80ceebb72c1f4394b6fa1dac68f4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  CurrentState: 0
 --- !u!114 &7310089526607221230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Damageable
   health: 2
-  DestroyOnDeath: 0
+  DestroyOnDeath: 1
   onDeath:
     m_PersistentCalls:
       m_Calls:
