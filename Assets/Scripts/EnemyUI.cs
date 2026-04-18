@@ -56,6 +56,6 @@ public partial class EnemyUI : MonoBehaviour
         if (agitationController.AgitationState == AgitationState.Alarmed) color = Color.red;
 
         float alpha = agitationController.AgitationLevel / 100;
-        label.style.color = new StyleColor(color.WithAlpha(alpha));
+        label.style.color = new StyleColor(new Color(color.r, color.g, color.b, alpha));
     }
 }
