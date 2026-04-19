@@ -12,6 +12,16 @@ public class EnemyController : MonoBehaviour
 
     #region states
     public EnemyState CurrentState = EnemyState.Alive;
+    private float aliveHeight;
+    private float aliveRadius;
+    private int aliveDirection;
+    private Vector3 aliveCenter;
+
+    [Header("Downed Collider Settings")]
+    public float downedHeight = 0.5f;
+    public float downedRadius = 0.1f;
+    public int downedDirection = 2; // 0 = X axis, 1 = Y axis, 2 = Z axis
+    public Vector3 downedCenter = new Vector3(0f, 0.1f, 0f);
 
     public void ChangeState(EnemyState newState)
     {
@@ -91,6 +101,7 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region downed
+    [Header("Timer settings")]
     public float DownedTime = 10f;
     [SerializeField]
     private float downedTimer = 0;
@@ -127,9 +138,19 @@ public class EnemyController : MonoBehaviour
     {
         navMeshAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         behaviorAgent = GetComponent<Unity.Behavior.BehaviorGraphAgent>();
+
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
+        if (capsuleCollider != null)
+        {
+            aliveHeight = capsuleCollider.height;
+            aliveRadius = capsuleCollider.radius;
+            aliveDirection = capsuleCollider.direction;
+            aliveCenter = capsuleCollider.center;
+        }
+
         animator = GetComponentInChildren<Animator>();
+
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
     }
