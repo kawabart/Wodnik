@@ -25,9 +25,6 @@ public class EnemyController : MonoBehaviour
 
     public void ChangeState(EnemyState newState)
     {
-        var behaviorAgent = GetComponent<BehaviorGraphAgent>();
-        var navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-
         const float aliveHeight = 0.9f;
         const float aliveRadius = 0.2f;
         const int aliveDirection = 1; // 1 = Y axis
@@ -120,7 +117,7 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     private Rigidbody rigidBody;
-    private Unity.Behavior.BehaviorGraphAgent behaviorAgent;
+    private BehaviorGraphAgent behaviorAgent;
     private UnityEngine.AI.NavMeshAgent navMeshAgent;
     private CapsuleCollider capsuleCollider;
     private AgitationController agitationController;
