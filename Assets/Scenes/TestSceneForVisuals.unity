@@ -4710,6 +4710,26 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: e56165ebb549cca4ebcb575c0e2044ce, type: 3}
   m_PrefabInstance: {fileID: 1223218531}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1235525371 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3789765816171153394, guid: 2a09a201efcbbda40a45124e32e357de, type: 3}
+  m_PrefabInstance: {fileID: 8069200985891159761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1235525379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1235525371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
+  minVelocityToDamage: 3
+  increaseVelocityNeededForPlayer: 2
+  damage: 1
 --- !u!1001 &1245072947
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9340,7 +9360,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 439793365801651804, guid: 2a09a201efcbbda40a45124e32e357de, type: 3}
       insertIndex: 3
       addedObject: {fileID: 714703284}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3789765816171153394, guid: 2a09a201efcbbda40a45124e32e357de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1235525379}
   m_SourcePrefab: {fileID: 100100000, guid: 2a09a201efcbbda40a45124e32e357de, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -28,7 +28,7 @@ public class HairAim : MonoBehaviour
         {
             endPoint.Target = playerController.targetedGrabObject.transform;
             hairGeneratorAiming.middlepointStiffness = 0.01f;
-            hairGeneratorAiming.dampness = .7f;
+            hairGeneratorAiming.dampness = .8f;
             endPoint.SmoothTime = 0.15f;
         }
     }
