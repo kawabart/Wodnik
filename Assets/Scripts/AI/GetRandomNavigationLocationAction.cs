@@ -13,17 +13,45 @@ public partial class GetRandomNavigationLocationAction : Action
     [SerializeReference] public BlackboardVariable<Vector3> Location;
     [SerializeReference] public BlackboardVariable<float> Range;
     [SerializeReference] public BlackboardVariable<Vector3> RandomLocation;
+    [SerializeReference] public BlackboardVariable<int> Attempts = new BlackboardVariable<int>(5);
 
     protected override Status OnStart()
     {
-        Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * Range.Value;
-        randomDirection.y = 0.0f;
-        var randomPosition = Location.Value + randomDirection;
+        NavMeshHit hit = new NavMeshHit();
+        for (int i = 0; i < Attempts.Value; i++)
+        {
+            Vector3 randomDirection = UnityEngine.Random.insideUnitSphere * Range.Value;
+            randomDirection.y = 0.0f;
+            var randomPosition = Location.Value + randomDirection;
+            if (NavMesh.SamplePosition(randomPosition, out hit, 0, NavMesh.AllAreas))
+                break;
+        }
 
-        NavMeshHit hit;
-        NavMesh.SamplePosition(randomPosition, out hit, Range.Value, 1);
-        RandomLocation.Value = hit.position;
+        if (!hit.hit)
+            return Status.Failure;
 
+        NavMeshPath path = new NavMeshPath();
+        var target = hit.position;
+        while (true)
+        {
+            NavMesh.CalculatePath(Location.Value, target, NavMesh.AllAreas, path);
+            if (path.status == NavMeshPathStatus.PathComplete)
+            {
+                break;
+            }
+            else if (path.status == NavMeshPathStatus.PathInvalid)
+            {
+                // target position is not reachable
+                return Status.Failure;
+            }
+            else if (path.status == NavMeshPathStatus.PathPartial)
+            {
+                // try reaching pre-final path point
+                target = path.corners[^2];
+            }
+        }
+
+        RandomLocation.Value = target;
         return Status.Success;
     }
 
