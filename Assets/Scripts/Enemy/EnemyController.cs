@@ -1,4 +1,5 @@
 using System;
+using System.Net.NetworkInformation;
 using Unity.Behavior;
 using UnityEngine;
 
@@ -59,7 +60,7 @@ public class EnemyController : MonoBehaviour
     #region downed
     public float DownedTime = 10f;
     [SerializeField]
-    private float downedTimer =0;
+    private float downedTimer = 0;
     public void BecomeDowned()
     {
         if (CurrentState == EnemyState.Dead) return;
