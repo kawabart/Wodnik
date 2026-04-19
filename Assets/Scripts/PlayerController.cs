@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             prevMousePos = mousePos;
             var mouseScreen = new Vector3(mousePos.x, mousePos.y, 0);
-           
+
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Plane plane = new Plane(Vector3.up, transform.position);
 
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     private void UpdatePositionDirection()
     {
-        if (IsMovementLocked()) moveInput =Vector3.zero;
+        if (IsMovementLocked()) moveInput = Vector3.zero;
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
         if (isPushing)
         {
@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Kill()
     {
         Health = 0;
-        animator.SetBool("isDead",true);
+        animator.SetBool("isDead", true);
     }
     public void TakeDamage(int damage, GameObject source)
     {
@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float pushOffset = 0.2f;
     void OnPush(InputAction.CallbackContext ctx)
     {
-       
+
         Push();
     }
     void Push()
@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void EndPush()
     {
         isPushing = false;
-        
+
         Debug.Log("Pushing ends.");
     }
 
@@ -202,29 +202,50 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         LetGo();
     }
-    void Grab()
+    public Transform targetedGrabObject = null;
+    Vector3 targetPoint = Vector3.zero;
+    void GetGrabTarget()
     {
-        Debug.Log("Grab!");
         UpdateAimDirection();
-        Vector3 targetPoint;
-        if (Physics.Raycast(transform.position+.2f*Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask)) 
+        if (Physics.Raycast(transform.position + .2f * Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
             targetPoint = raycastHit.point;
-        else 
+        /*
+        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, -5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+            targetPoint = raycastHit.point;
+        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, +5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+            targetPoint = raycastHit.point;
+        */
+        else
             targetPoint = transform.position + AimDirection.normalized * GrabDistance;
 
         Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
-        hairController.Probe(targetPoint);
+
         bool foundGrabbable = false;
         foreach (var hit in hits)
         {
             if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
-                if (grabbable.Grab(hairController))
+                if (grabbable.CanBeGrabbed())
+                {
                     foundGrabbable = true;
+                    targetedGrabObject = hit.transform;
+                }
             }
         }
-        IsGrabbing = true;
+
+        if (!foundGrabbable) targetedGrabObject = null;
+    }
+
+    void Grab()
+    {
+        Debug.Log("Grab!");
+        hairController.Probe(targetPoint);
+        if (targetedGrabObject == null) GetGrabTarget();
+        if (targetedGrabObject == null) return;
+        if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
+            IsGrabbing = true;
+       
     }
     void LetGo()
     {
@@ -251,7 +272,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
-        UpdateAimDirection();
+        GetGrabTarget();
     }
 
     void FixedUpdate()
