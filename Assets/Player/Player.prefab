@@ -576,6 +576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUI
   State: 0
+  agitationController: {fileID: 0}
+  enemyController: {fileID: 0}
+  enemyPerception: {fileID: 0}
 --- !u!1 &7495267514894647918
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +873,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37640eefde1065748b83f2c8060fac94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  taintSurfaceType: {fileID: 0}
+  taintDistance: 1
+  taintIncreaseStep: 0.1
   meshRenderer: {fileID: 3901953152113540333}
 --- !u!1 &8251382364123552091
 GameObject:
@@ -1087,6 +1091,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2911068633404390469, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2889499961134776813}
+    - targetCorrespondingSourceObject: {fileID: 2911068633404390469, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7309173407355068516}
     - targetCorrespondingSourceObject: {fileID: 2515927237439144528, guid: 4cb7c5c8c60f15e48a8025468e97f9e8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 306390625225916748}
@@ -1140,6 +1147,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6913c3464e7de943885e7ea57ab673c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimatorController
+  playerController: {fileID: 5836883666691645028}
+--- !u!114 &7309173407355068516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7275405156693791580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b691b818129c55341a833c0a4c9ffc6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerScaler
+  hiddenScale: {x: 0.3, y: 0.1, z: 0.3}
   playerController: {fileID: 5836883666691645028}
 --- !u!1 &7960958350333881673 stripped
 GameObject:
