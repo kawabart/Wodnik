@@ -207,18 +207,31 @@ public class PlayerController : MonoBehaviour, IDamageable
     void GetGrabTarget()
     {
         UpdateAimDirection();
-        if (Physics.Raycast(transform.position + .2f * Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+        RaycastHit raycastHit;
+        Vector3 heightOffset = 0.2f * Vector3.up;
+        if (Physics.Raycast(transform.position + heightOffset, AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
             targetPoint = raycastHit.point;
-        /*
-        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, -5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+        }
+        else if (Physics.Raycast(transform.position, AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
             targetPoint = raycastHit.point;
-        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, +5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+        }
+        else if (Physics.Raycast(transform.position + heightOffset, Quaternion.Euler(0f, -5f, 0f) * AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
             targetPoint = raycastHit.point;
-        */
+        }
+        else if (Physics.Raycast(transform.position + heightOffset, Quaternion.Euler(0f, 5f, 0f) * AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
+            targetPoint = raycastHit.point;
+        }
         else
+        {
             targetPoint = transform.position + AimDirection.normalized * GrabDistance;
+        }
 
-        Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
+        // teraz bezpiecznie
+        Collider[] hits = Physics.OverlapSphere(targetPoint, GrabAutoAim);
 
         bool foundGrabbable = false;
         foreach (var hit in hits)
@@ -245,7 +258,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (targetedGrabObject == null) return;
         if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
             IsGrabbing = true;
-       
+
     }
     void LetGo()
     {
