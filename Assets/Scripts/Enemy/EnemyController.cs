@@ -18,39 +18,72 @@ public class EnemyController : MonoBehaviour
         var behaviorAgent = GetComponent<BehaviorGraphAgent>();
         var navAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
+        const float aliveHeight = 0.9f;
+        const float aliveRadius = 0.2f;
+        const int aliveDirection = 1; // 1 = Y axis
+        Vector3 aliveCenter = new Vector3(0f, 0.3f, 0f);
+
+        const float downedHeight = 0.5f;
+        const float downedRadius = 0.1f;
+        const int downedDirection = 2; // 2 = Z axis
+        Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
+
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
+            capsuleCollider.height = aliveHeight;
+            capsuleCollider.radius = aliveRadius;
+            capsuleCollider.direction = aliveDirection;
+            capsuleCollider.center = aliveCenter;
+
             rigidBody.interpolation = RigidbodyInterpolation.None;
+
             behaviorAgent.enabled = true;
             navMeshAgent.enabled = true;
+
             rigidBody.isKinematic = true;
+
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
+
             animator.SetTrigger("GetUp");
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
             downedTimer = DownedTime;
-            rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
+
+            capsuleCollider.height = downedHeight;
+            capsuleCollider.radius = downedRadius;
+            capsuleCollider.direction = downedDirection;
+            capsuleCollider.center = downedCenter;
+
             behaviorAgent.enabled = false;
             navMeshAgent.enabled = false;
+
             rigidBody.isKinematic = false;
+
+            rigidBody.linearVelocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
+
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
+
             animator.SetTrigger("Downed");
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
         {
-            rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
+            // rigidBody.interpolation = RigidbodyInterpolation.Interpolate;
             behaviorAgent.enabled = false;
             navMeshAgent.enabled = false;
+
             rigidBody.isKinematic = false;
             rigidBody.freezeRotation = false;
+
             agitationController.enabled = false;
             perceptionController.DectivateSenses();
+
             animator.SetTrigger("Killed");
             Debug.Log("Enemy is dead.");
         }
