@@ -72,8 +72,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    public float SprintingSpeed = 3.0f;
-    public float WalkingSpeed = 1.5f;
+    public float SprintingSpeed = 4.0f;
+    public float WalkingSpeed = 2.0f;
     public float Acceleration = 1;
     private bool sprintInput = false;
 
