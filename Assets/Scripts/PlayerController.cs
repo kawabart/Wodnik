@@ -214,29 +214,51 @@ public class PlayerController : MonoBehaviour, IDamageable
         LetGo();
     }
 
-    void Grab()
+    public Transform targetedGrabObject = null;
+    Vector3 targetPoint = Vector3.zero;
+
+    void GetGrabTarget()
     {
-        Debug.Log("Grab!");
         UpdateAimDirection();
-        Vector3 targetPoint;
         if (Physics.Raycast(transform.position + .2f * Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
             targetPoint = raycastHit.point;
+        /*
+        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, -5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+            targetPoint = raycastHit.point;
+        else if (Physics.Raycast(transform.position, Quaternion.Euler(0f, +5, 0f) * AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask))
+            targetPoint = raycastHit.point;
+        */
         else
             targetPoint = transform.position + AimDirection.normalized * GrabDistance;
 
         Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
-        hairController.Probe(targetPoint);
+
         bool foundGrabbable = false;
         foreach (var hit in hits)
         {
             if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
-                if (grabbable.Grab(hairController))
+                if (grabbable.CanBeGrabbed())
+                {
                     foundGrabbable = true;
+                    targetedGrabObject = hit.transform;
+                }
             }
         }
-        IsGrabbing = true;
+
+        if (!foundGrabbable) targetedGrabObject = null;
+    }
+
+    void Grab()
+    {
+        Debug.Log("Grab!");
+        hairController.Probe(targetPoint);
+        if (targetedGrabObject == null) GetGrabTarget();
+        if (targetedGrabObject == null) return;
+        if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
+            IsGrabbing = true;
+       
     }
 
     void LetGo()
@@ -266,7 +288,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
-        UpdateAimDirection();
+        GetGrabTarget();
     }
 
     void FixedUpdate()
