@@ -17,7 +17,7 @@ public class VisibilityController : MonoBehaviour
         int hits = 0;
         foreach (var offset in checkOffsets)
         {
-            Vector3 positionToCheck = transform.position + offset;
+            Vector3 positionToCheck = transform.TransformPoint(offset);
             if (includeShadows && !IsInLight(positionToCheck)) hits++;
             else if (Physics.CheckSphere(positionToCheck, detectionSphereRadius, hidingLayers)) hits++;
         }
@@ -63,7 +63,7 @@ public class VisibilityController : MonoBehaviour
         Gizmos.color = Color.cyan;
         foreach (var offset in checkOffsets)
         {
-            Gizmos.DrawWireSphere(transform.position + offset, detectionSphereRadius);
+            Gizmos.DrawWireSphere(transform.TransformPoint(offset), detectionSphereRadius);
         }
     }
 }

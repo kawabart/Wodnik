@@ -26,7 +26,16 @@ public class HairController : MonoBehaviour
         springJoint.autoConfigureConnectedAnchor = false;
         hairGenerator.maxDistance = 1;
         //to do: endsize can change based on dimensions of grabbed object.
-        //hairGenerator.endSize = .2f;
+        var cols = grabbedRb.GetComponentsInChildren<Collider>();
+
+        Bounds bounds = cols[0].bounds;
+        for (int i = 1; i < cols.Length; i++)
+        {
+            bounds.Encapsulate(cols[i].bounds);
+        }
+
+        float minObjectSize = Mathf.Min(bounds.size.x, bounds.size.y, bounds.size.z);
+        hairGenerator.endSize = minObjectSize ;
         Grabbed = true;
     }
 
