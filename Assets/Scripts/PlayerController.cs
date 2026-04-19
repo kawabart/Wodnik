@@ -75,12 +75,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float SprintingSpeed = 3.0f;
     public float WalkingSpeed = 1.5f;
     public float Acceleration = 1;
-    public bool IsSprinting = true;
-
-    private void OnSprint(InputAction.CallbackContext context)
-    {
-        IsSprinting = !IsSprinting;
-    }
+    private bool sprintInput = false;
 
     private bool IsMovementLocked()
     {
@@ -93,7 +88,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void UpdatePositionDirection()
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (IsSprinting ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
         if (isPushing)
         {
             float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
@@ -267,6 +262,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void Update()
     {
         moveInput = new Vector3(moveAction.ReadValue<Vector2>().x, 0, moveAction.ReadValue<Vector2>().y);
+        sprintInput = sprintAction.ReadValue<float>() > 0.5f;
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
@@ -285,7 +281,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         moveAction.Enable();
         sprintAction = InputSystem.actions.FindAction("Sprint");
         sprintAction.Enable();
-        sprintAction.performed += OnSprint;
         push = InputSystem.actions.FindAction("Push");
         push.Enable();
         push.performed += OnPush;
@@ -297,7 +292,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void OnDisable()
     {
-        sprintAction.performed -= OnSprint;
         push.performed -= OnPush;
         grab.performed -= OnGrab;
         grab.canceled -= OnGrabLetGo;

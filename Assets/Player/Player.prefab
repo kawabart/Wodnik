@@ -641,97 +641,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   Hair: {fileID: 4368811902275011831}
   AimDirection: {x: 0, y: 0, z: 0}
-  MoveAction:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 94af5be8-d831-495d-a0a4-662d37aab275
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 2D Vector
-      m_Id: 3c1bb4d6-8371-4a14-a830-cfde5854b28c
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: a083c14c-5004-4065-8ce4-697b3692daba
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: c479d52e-62fd-4d82-aea2-0b60157d62f0
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: d1506b4e-982e-4612-a0ac-25bda0d07a34
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 794867bb-fd97-41fc-952e-971a6133fa97
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: 2D Vector
-      m_Id: cca83dd8-888b-4d67-b8e5-29052252fbcf
-      m_Path: 2DVector(mode=2)
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 43bebae8-b07e-49f8-8311-4a82032ca437
-      m_Path: <Gamepad>/leftStick/up
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 7e3221af-9245-4d18-88ef-8d739eb916f4
-      m_Path: <Gamepad>/leftStick/down
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: left
-      m_Id: be7d6dc2-f063-44ad-ba9c-2a6af05bb097
-      m_Path: <Gamepad>/leftStick/left
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 3529f625-4c66-48e1-8d07-f74b3b2219f6
-      m_Path: <Gamepad>/leftStick/right
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 8
-    m_Flags: 0
   animator: {fileID: 3384512945747088540}
-  MovementSpeed: 4
+  SprintingSpeed: 4
+  WalkingSpeed: 2
   Acceleration: 45
   MaxHealth: 2
   WoundedHealth: 1
