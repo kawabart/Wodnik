@@ -5,7 +5,7 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
 
-    public void changeCombatState()
+    public void ChangeCombatState()
     {
         if (behaviorAgent.BlackboardReference.GetVariableValue<EnemyPerceptionState>("EnemyPerceptionState", out var currentPerceptionState))
         {
@@ -26,16 +26,25 @@ public class AnimationController : MonoBehaviour
         }
     }
 
+    public void TriggerAttack()
+    {
+        animator.SetTrigger(attackHash);
+    }
+
     private BehaviorGraphAgent behaviorAgent;
     private Animator animator;
+    private MeleeDamageDealer meleeDamageDealer;
     private int isInCombatHash;
     private int isInInvestigative;
+    private int attackHash;
     void Start()
     {
         behaviorAgent = GetComponent<BehaviorGraphAgent>();
         animator = GetComponentInChildren<Animator>();
+        meleeDamageDealer = GetComponent<MeleeDamageDealer>();
         isInCombatHash = Animator.StringToHash("IsInCombat");
         isInInvestigative = Animator.StringToHash("IsInInvestigative");
+        attackHash = Animator.StringToHash("Attack");
     }
 
     void Update()
@@ -48,7 +57,7 @@ public class AnimationController : MonoBehaviour
             }
             else if (currentAgitationState == AgitationState.Alarmed)
             {
-                changeCombatState();
+                ChangeCombatState();
             } else
             {
                 animator.SetBool(isInInvestigative, false);
