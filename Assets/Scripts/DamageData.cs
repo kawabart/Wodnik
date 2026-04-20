@@ -8,27 +8,10 @@ public struct DamageData
     public GameObject source;
     public SurfaceType overrideSurface;
 
-    public DamageData(int amount)
-    {
-        this.amount = amount;
-        this.source = null;
-        this.overrideSurface = null;
-    }
-    public DamageData(int amount, SurfaceType overrideSurface)
-    {
-        this.amount = amount;
-        this.source = null;
-        this.overrideSurface = overrideSurface;
-    }
-    
-    public DamageData(int amount, SurfaceType overrideSurface, GameObject source)
+    public DamageData(int amount, SurfaceType overrideSurface = null, GameObject source = null)
     {
         this.amount = amount;
         this.source = source;
         this.overrideSurface = overrideSurface;
-    }
-    public DamageData newData(int amount = 0, SurfaceType overrideSurface = null, GameObject source = null)
-    {
-        return new DamageData(amount, overrideSurface, source);
     }
 }
