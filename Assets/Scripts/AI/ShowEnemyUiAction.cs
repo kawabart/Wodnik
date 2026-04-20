@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Show Enemy UI", story: "[Enemy] shows UI [state]", category: "Wodnik", id: "d2ed54851f951b31664eb3806ce414b8")]

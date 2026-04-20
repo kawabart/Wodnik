@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Get Object Position", story: "Get [actor] [position]", category: "Wodnik", id: "5db28bffc3ae3f6c60194fb5169f0e04")]

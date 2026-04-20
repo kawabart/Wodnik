@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Rotate GameObject towards Position", story: "Rotate [Object] towards [Position]", category: "Wodnik", id: "cd5ddb437386ac2619fe003d20a31d5d")]
