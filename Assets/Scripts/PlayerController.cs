@@ -89,13 +89,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void UpdatePositionDirection()
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
-       
+
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
         if (isTakedown)
         {
             TakedownUpdate();
         }
-        else if(isPushing)
+        else if (isPushing)
         {
             float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
             rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
@@ -337,7 +337,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 forwardDirection = takedownTarget.up;
         Vector3 upDirection = Vector3.up;
         Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
-        SmoothAlignToTarget(takedownTarget.transform.position+takedownTarget.transform.up*.3f, targetRotation,.5f);
+        SmoothAlignToTarget(takedownTarget.transform.position + takedownTarget.transform.up * .3f, targetRotation, .5f);
     }
     void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
     {
@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     public void KillTakedownTarget()
     {
-        takedownTarget.GetComponent<IDamageable>().TakeDamage(10,gameObject);
+        takedownTarget.GetComponent<IDamageable>().TakeDamage(10, gameObject);
     }
     #endregion
 
