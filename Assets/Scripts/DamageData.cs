@@ -2,16 +2,14 @@ using UnityEngine;
 
 public struct DamageData
 {
-    public int amount;
-    //public Vector3 point;
-    //public Vector3 direction;
-    public GameObject source;
-    public SurfaceType overrideSurface;
+    public int Amount { get; }
+    public GameObject Source { get; }
+    public SurfaceType OverrideSurface { get; }
 
     public DamageData(int amount, SurfaceType overrideSurface = null, GameObject source = null)
     {
-        this.amount = amount;
-        this.source = source;
-        this.overrideSurface = overrideSurface;
+        this.Amount = amount;
+        this.Source = source;
+        this.OverrideSurface = overrideSurface;
     }
 }

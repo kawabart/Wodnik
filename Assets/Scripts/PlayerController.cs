@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
-        Health = Math.Max(0, Health - Math.Max(0, damageData.amount));
+        Health = Math.Max(0, Health - Math.Max(0, damageData.Amount));
         if (!IsAlive) Kill();
     }
 
