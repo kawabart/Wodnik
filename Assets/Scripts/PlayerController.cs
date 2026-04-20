@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             return visibilityController == null ? false : visibilityController.Hidden;
         }
     }
+
     private VisibilityController visibilityController;
     #endregion
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private AimingDevice currentAimingDevice = AimingDevice.Mouse;
     public GameObject Hair;
     public Vector3 AimDirection = Vector3.zero;
+
     private void UpdateAimDirection()
     {
         Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
@@ -48,7 +50,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         else if (currentAimingDevice == AimingDevice.Mouse)
         {
             prevMousePos = mousePos;
-            var mouseScreen = new Vector3(mousePos.x, mousePos.y, 0);
 
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Plane plane = new Plane(Vector3.up, transform.position);
@@ -64,13 +65,18 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     #region movement
     private Rigidbody rigidBody;
-    public InputAction MoveAction;
+    private InputAction moveAction;
+    private InputAction sprintAction;
+
     [SerializeField]
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    public float MovementSpeed = 3.0f;
+    public float SprintingSpeed = 4.0f;
+    public float WalkingSpeed = 2.0f;
     public float Acceleration = 1;
+    private bool sprintInput = false;
+
     private bool IsMovementLocked()
     {
         bool locked = false;
@@ -78,10 +84,11 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (isPushing) return true;
         return locked;
     }
+
     private void UpdatePositionDirection()
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
         if (isPushing)
         {
             float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
@@ -146,11 +153,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float pushForce = 10f;
     public float pushRadius = 0.2f;
     public float pushOffset = 0.2f;
+
     void OnPush(InputAction.CallbackContext ctx)
     {
-
         Push();
     }
+
     void Push()
     {
         if (IsMovementLocked()) return;
@@ -159,6 +167,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetTrigger("push");
         Debug.Log("Pushing starts...");
     }
+
     public void ApplyPushForce()
     {
         Debug.Log("Push!");
@@ -175,10 +184,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
 
     }
+
     public void EndPush()
     {
         isPushing = false;
-
         Debug.Log("Pushing ends.");
     }
 
@@ -191,19 +200,23 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float GrabAutoAim = .5f;
     private InputAction grab;
     public bool IsGrabbing = false;
+
     void OnGrab(InputAction.CallbackContext ctx)
     {
         if (IsGrabbing) return;
         Grab();
     }
+
     void OnGrabLetGo(InputAction.CallbackContext ctx)
     {
         if (!IsGrabbing) return;
 
         LetGo();
     }
+
     public Transform targetedGrabObject = null;
     Vector3 targetPoint = Vector3.zero;
+
     void GetGrabTarget()
     {
         UpdateAimDirection();
@@ -259,6 +272,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             IsGrabbing = true;
 
     }
+
     void LetGo()
     {
         Debug.Log("Grab ends.");
@@ -266,9 +280,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         IsGrabbing = false;
     }
     #endregion
+
     void Start()
     {
-        MoveAction.Enable();
+        moveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
         hairController = GetComponent<HairController>();
         if (animator == null)
@@ -280,7 +295,8 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
+        moveInput = new Vector3(moveAction.ReadValue<Vector2>().x, 0, moveAction.ReadValue<Vector2>().y);
+        sprintInput = sprintAction.ReadValue<float>() > 0.5f;
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
@@ -291,9 +307,14 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         UpdatePositionDirection();
     }
+
     void OnEnable()
     {
         Debug.Log("Subscription");
+        moveAction = InputSystem.actions.FindAction("Move");
+        moveAction.Enable();
+        sprintAction = InputSystem.actions.FindAction("Sprint");
+        sprintAction.Enable();
         push = InputSystem.actions.FindAction("Push");
         push.Enable();
         push.performed += OnPush;
@@ -309,22 +330,14 @@ public class PlayerController : MonoBehaviour, IDamageable
         grab.performed -= OnGrab;
         grab.canceled -= OnGrabLetGo;
     }
+
     private static bool IsZero(Vector2 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
+
     private static bool IsZero(Vector3 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f) && Mathf.Approximately(v.z, 0.0f);
-    }
-
-    /**
-     * Rotating game objects to face certain direction using transform.up
-     * leads to issues with quaternion rotation, hence this helper.
-     **/
-    private static void RotateTowards(GameObject obj, Vector3 v)
-    {
-        float angle = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
-        obj.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 }
