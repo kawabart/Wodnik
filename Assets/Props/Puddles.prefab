@@ -51,6 +51,7 @@ GameObject:
   - component: {fileID: 4486790829389865492}
   - component: {fileID: 406659714059792773}
   - component: {fileID: 2852534696158873020}
+  - component: {fileID: 989513038473004938}
   m_Layer: 4
   m_Name: Water (4)
   m_TagString: Untagged
@@ -149,7 +150,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4486790829389865492
 MonoBehaviour:
@@ -193,6 +194,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5685207a1aa24faa0ce9032b1cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &989513038473004938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3315910959566061774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 10
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 6a402356d3f2c344593120a0ca147e88, type: 2}
 --- !u!1 &4160764152335194764
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +225,7 @@ GameObject:
   - component: {fileID: 192605558527988143}
   - component: {fileID: 5138739565804027203}
   - component: {fileID: 1683340522622356340}
+  - component: {fileID: 831263102644469986}
   m_Layer: 4
   m_Name: Water (5)
   m_TagString: Untagged
@@ -306,7 +324,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &192605558527988143
 MonoBehaviour:
@@ -350,6 +368,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5685207a1aa24faa0ce9032b1cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &831263102644469986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4160764152335194764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 10
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 6a402356d3f2c344593120a0ca147e88, type: 2}
 --- !u!1 &6445666475292154620
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +399,7 @@ GameObject:
   - component: {fileID: 5992703160182930648}
   - component: {fileID: 3232809097373309443}
   - component: {fileID: 1809812230438865973}
+  - component: {fileID: 8635070993635073263}
   m_Layer: 4
   m_Name: Water (1)
   m_TagString: Untagged
@@ -463,7 +498,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5992703160182930648
 MonoBehaviour:
@@ -507,6 +542,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5685207a1aa24faa0ce9032b1cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &8635070993635073263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6445666475292154620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 10
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 6a402356d3f2c344593120a0ca147e88, type: 2}
 --- !u!1 &7306240487702325539
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +573,7 @@ GameObject:
   - component: {fileID: 6336396404656256620}
   - component: {fileID: 2285052574734741507}
   - component: {fileID: 4213731794959719200}
+  - component: {fileID: 5588982348508934700}
   m_Layer: 4
   m_Name: Water (3)
   m_TagString: Untagged
@@ -620,7 +672,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6336396404656256620
 MonoBehaviour:
@@ -664,6 +716,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5685207a1aa24faa0ce9032b1cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &5588982348508934700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7306240487702325539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 10
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 6a402356d3f2c344593120a0ca147e88, type: 2}
 --- !u!1 &8692612031377350246
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,6 +747,7 @@ GameObject:
   - component: {fileID: 7201634739837133723}
   - component: {fileID: 5741352268237270220}
   - component: {fileID: 5795799818834436462}
+  - component: {fileID: 3694523539016636239}
   m_Layer: 4
   m_Name: Water (2)
   m_TagString: Untagged
@@ -777,7 +846,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &7201634739837133723
 MonoBehaviour:
@@ -821,3 +890,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5685207a1aa24faa0ce9032b1cae7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &3694523539016636239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8692612031377350246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 10
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 6a402356d3f2c344593120a0ca147e88, type: 2}

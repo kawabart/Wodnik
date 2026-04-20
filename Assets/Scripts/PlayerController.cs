@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Health = 0;
         animator.SetBool("isDead", true);
     }
-    public void TakeDamage(int damage, GameObject source)
+    public void TakeDamage(DamageData damageData)
     {
         if (!IsAlive) return;
 
@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
-        Health = Math.Max(0, Health - Math.Max(0, damage));
+        Health = Math.Max(0, Health - Math.Max(0, damageData.amount));
         if (!IsAlive) Kill();
     }
 
@@ -230,7 +230,6 @@ public class PlayerController : MonoBehaviour, IDamageable
             targetPoint = transform.position + AimDirection.normalized * GrabDistance;
         }
 
-        // teraz bezpiecznie
         Collider[] hits = Physics.OverlapSphere(targetPoint, GrabAutoAim);
 
         bool foundGrabbable = false;
