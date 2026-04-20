@@ -1,4 +1,3 @@
-using UnityEngine;
 public interface IGrabbable
 {
     bool Grab(HairController hairController);

@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Get agitation state", story: "Get [Enemy] [AgitationState]", category: "Wodnik", id: "6cecc4be74f131fa1eecc94024458aeb")]

@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Get suggested move speed", story: "Get [Object] [MoveSpeed]", category: "Wodnik", id: "97f96366f9d34d51331696cbd75b354a")]

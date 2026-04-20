@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Get Enemy Perception State", story: "Get [Enemy] perception state", category: "Wodnik", id: "664fda92c57fa3f3097399f90337372f")]
