@@ -345,7 +345,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     public void KillTakedownTarget()
     {
-        takedownTarget.GetComponent<IDamageable>().TakeDamage(10, gameObject);
+        takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(10));
     }
     #endregion
 
