@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         bool locked = false;
         if (!IsAlive) return true;
+        if (isTakedown) return true;
         if (isPushing) return true;
         return locked;
     }
@@ -88,8 +89,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     private void UpdatePositionDirection()
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
+       
         rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
-        if (isPushing)
+        if (isTakedown)
+        {
+            TakedownUpdate();
+        }
+        else if(isPushing)
         {
             float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
             rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
@@ -282,6 +288,68 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     #endregion
 
+    #region takedown
+    private InputAction takedown;
+    public bool isTakedown = false;
+    public Transform takedownTarget = null;
+    public float takedownRadius = .5f;
+    void OnTakedown(InputAction.CallbackContext ctx)
+    {
+        StartTakedown();
+    }
+
+    void StartTakedown()
+    {
+        if (IsMovementLocked()) return;
+        if (!GetTakedownTarget()) return;
+
+        isTakedown = true;
+        animator.SetTrigger("takedown");
+        Debug.Log("Takedown starts...");
+
+    }
+    bool GetTakedownTarget()
+    {
+        Vector3 center = transform.position;
+        Collider[] hits = Physics.OverlapSphere(center, takedownRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent<EnemyController>(out var enemy))
+            {
+                if (enemy.CurrentState == EnemyState.Downed)
+                {
+                    takedownTarget = enemy.transform;
+                    enemy.TurnPhysicsOff();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    void TakedownUpdate()
+    {
+        if (takedownTarget == null)
+        {
+            isTakedown = false;
+            return;
+        }
+        Vector3 forwardDirection = takedownTarget.up;
+        Vector3 upDirection = Vector3.up;
+        Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
+        SmoothAlignToTarget(takedownTarget.transform.position+takedownTarget.transform.up*.3f, targetRotation,.5f);
+    }
+    void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
+    {
+        rigidBody.MovePosition(Vector3.Lerp(rigidBody.position, targetPosition, lerpFactor));
+        rigidBody.MoveRotation(Quaternion.Slerp(rigidBody.rotation, targetRotation, lerpFactor));
+    }
+    public void KillTakedownTarget()
+    {
+        takedownTarget.GetComponent<IDamageable>().TakeDamage(10,gameObject);
+    }
+    #endregion
+
     void Start()
     {
         moveAction.Enable();
@@ -301,6 +369,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
+        animator.SetBool("isTakedown", isTakedown);
         GetGrabTarget();
     }
 
@@ -323,6 +392,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         grab.Enable();
         grab.performed += OnGrab;
         grab.canceled += OnGrabLetGo;
+        takedown = InputSystem.actions.FindAction("Takedown");
+        takedown.Enable();
+        takedown.performed += OnTakedown;
     }
 
     void OnDisable()
@@ -330,6 +402,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         push.performed -= OnPush;
         grab.performed -= OnGrab;
         grab.canceled -= OnGrabLetGo;
+        takedown.performed -= OnTakedown;
     }
 
     private static bool IsZero(Vector2 v)
