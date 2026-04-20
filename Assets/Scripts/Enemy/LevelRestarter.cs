@@ -13,17 +13,14 @@ public class LevelRestarter : MonoBehaviour
     private UIDocument restartUI;
     private Button restartButton;
 
-    public bool RestartEnabled
+    public bool IsRestartEnabled
     {
         set
         {
-            restartUI.enabled = value;
-            // UI hierarchy gets destroyed on enabled = false
+            restartUI.rootVisualElement.visible = value;
             if (value)
             {
                 restartAction.Enable();
-                restartButton = restartUI.rootVisualElement.Q<Button>();
-                restartButton.clicked += RestartButtonClicked;
             }
             else
             {
@@ -35,14 +32,26 @@ public class LevelRestarter : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        restartAction = InputSystem.actions.FindAction("Restart");
+        restartUI = GetComponent<UIDocument>();
     }
 
     void Start()
     {
-        restartAction = InputSystem.actions.FindAction("Restart");
+        IsRestartEnabled = false;
+    }
+
+    private void OnEnable()
+    {
         restartAction.performed += OnRestartLevelAction;
-        restartUI = GetComponent<UIDocument>();
-        RestartEnabled = false;
+        restartButton = restartUI.rootVisualElement.Q<Button>();
+        restartButton.clicked += RestartButtonClicked;
+    }
+
+    private void OnDisable()
+    {
+        restartAction.performed -= OnRestartLevelAction;
+        restartButton.clicked -= RestartButtonClicked;
     }
 
     private void RestartButtonClicked()
