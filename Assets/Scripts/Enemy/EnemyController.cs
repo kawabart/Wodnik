@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(AgitationController))]
@@ -52,7 +51,7 @@ public class EnemyController : MonoBehaviour
     #region downed
     public float DownedTime = 10f;
     [SerializeField]
-    private float downedTimer =0;
+    private float downedTimer = 0;
     public void BecomeDowned()
     {
         if (CurrentState == EnemyState.Dead) return;

@@ -22,7 +22,7 @@ public class PlayerPostProcessController : MonoBehaviour
         }
         if (volumeHurt != null)
         {
-            volumeHurt.weight = (1 - playerController.Health / playerController.MaxHealth)*.5f;
+            volumeHurt.weight = (1 - playerController.Health / playerController.MaxHealth) * .5f;
         }
     }
 }

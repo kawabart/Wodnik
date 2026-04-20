@@ -24,8 +24,8 @@ public class TaintController : MonoBehaviour
     {
         if (surface.surfaceName == "Flesh")
         {
-            float fleshCut = Mathf.Max(0,material.GetFloat("_SurfaceFleshCut"));
-            fleshCut =Mathf.Max(0, fleshCut);
+            float fleshCut = Mathf.Max(0, material.GetFloat("_SurfaceFleshCut"));
+            fleshCut = Mathf.Max(0, fleshCut);
             material.SetFloat("_SurfaceFleshCut", Mathf.Min(.7f, fleshCut + taintIncreaseStep));
         }
         if (surface.surfaceName == "Water") material.SetFloat("_SurfaceFleshCut", -1f);

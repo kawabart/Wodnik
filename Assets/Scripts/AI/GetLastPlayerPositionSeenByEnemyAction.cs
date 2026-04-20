@@ -1,8 +1,8 @@
 using System;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Get LastPlayerPosition seen by Enemy", story: "Get [LastPlayerPosition] seen by [Enemy]", category: "Action", id: "53d20c829f03ef3d09efadea22d01ed3")]

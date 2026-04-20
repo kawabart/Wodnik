@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 [RequireComponent(typeof(Light))]
 public class LightController : MonoBehaviour
@@ -23,7 +20,7 @@ public class LightController : MonoBehaviour
     private float directionalShadowCheckLength = 50;
 
     //Nonbinary inputs, that only affect gameplay when using GetLightValueOnPoint function. For now we only use binary IsInLight function.
-    [SerializeField] 
+    [SerializeField]
     private float brightness;
     [SerializeField, Tooltip("Affects value of light over distance.")]
     private AnimationCurve lightCurve;
@@ -106,7 +103,7 @@ public class LightController : MonoBehaviour
     {
         Vector3 direction = -lightComponent.transform.forward;
         RaycastHit hit;
-        
+
 
         if (!Physics.Raycast(target, direction, out hit, directionalShadowCheckLength, shadowCastingLayerMask))
         {

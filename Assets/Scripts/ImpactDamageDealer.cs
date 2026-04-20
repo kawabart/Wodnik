@@ -5,7 +5,7 @@ public class ImpactDamageDealer : MonoBehaviour
     public float minVelocityToDamage = 3f;
     public float increaseVelocityNeededForPlayer = 2f;
     public int damage = 1;
-    
+
 
     void OnCollisionEnter(Collision collision)
     {
@@ -18,7 +18,7 @@ public class ImpactDamageDealer : MonoBehaviour
         if (damageable != null)
         {
             if (collision.collider.GetComponent<PlayerController>() && impactForce < minVelocityToDamage + increaseVelocityNeededForPlayer) return;
-            damageable.TakeDamage(damage,gameObject);
+            damageable.TakeDamage(damage, gameObject);
         }
     }
 }

@@ -18,7 +18,7 @@ public class Damageable : MonoBehaviour, IDamageable
         onHurt.Invoke();
         health -= amount;
 
-        if (surfaceType!=null)
+        if (surfaceType != null)
             EffectSpawner.Instance.SpawnHit(transform.position, surfaceType);
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);

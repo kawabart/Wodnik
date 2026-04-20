@@ -2,7 +2,6 @@ using System;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]

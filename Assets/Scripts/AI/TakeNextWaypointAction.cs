@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Unity.Behavior;
+using Unity.Properties;
 using UnityEngine;
 using Action = Unity.Behavior.Action;
-using Unity.Properties;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Take next waypoint", story: "Take next [Waypoint] from [Waypoints]", category: "Wodnik", id: "76af6f9cd4940964ca538dd70ff8c1bf")]

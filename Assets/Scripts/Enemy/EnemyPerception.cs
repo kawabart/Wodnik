@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -53,7 +52,7 @@ public class EnemyPerception : MonoBehaviour
 
     void Update()
     {
-        
+
         if (player != null)
         {
             if (KnowsPlayerPosition())
@@ -81,8 +80,8 @@ public class EnemyPerception : MonoBehaviour
         NoticeHiddenPlayerDistance = CurrentAgitationConfig.NoticeHiddenPlayerDistance;
         SightDistance = CurrentAgitationConfig.SightDistance;
         SightFOVDegrees = CurrentAgitationConfig.SightFOVDegrees;
-}
-    
+    }
+
     private bool KnowsPlayerPosition()
     {
         PredictPlayerPositionTimer -= Time.deltaTime;
@@ -110,9 +109,9 @@ public class EnemyPerception : MonoBehaviour
     {
         if (!canSee) return false;
         RaycastHit hit;
-        Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f; 
+        Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f;
         var direction = targetPosition - eyesPosition.position;
-       // direction.y = 0;
+        // direction.y = 0;
         var angle = Vector3.Angle(transform.forward, direction);
         if (angle > SightFOVDegrees)
         {

@@ -36,7 +36,7 @@ public class HairController : MonoBehaviour
         }
 
         float minObjectSize = Mathf.Min(bounds.size.x, bounds.size.y, bounds.size.z);
-        hairGenerator.endSize = minObjectSize ;
+        hairGenerator.endSize = minObjectSize;
         Grabbed = true;
     }
 
@@ -68,14 +68,14 @@ public class HairController : MonoBehaviour
 
     void Update()
     {
-        if (!Grabbed) 
+        if (!Grabbed)
             hairGenerator.noiseSpeed = .5f + rigidBody.linearVelocity.magnitude / 2;
-        else 
+        else
             hairGenerator.noiseSpeed = .2f;
 
-        if (grabbedRb != null && !Grabbed && springJoint == null) 
+        if (grabbedRb != null && !Grabbed && springJoint == null)
             Grab(grabbedRb);
-        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed)) 
+        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed))
             LetGo();
     }
 
