@@ -127,6 +127,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         Health = 0;
         animator.SetBool("isDead", true);
+        LevelRestarter.Instance.RestartEnabled = true;
     }
     public void TakeDamage(int damage, GameObject source)
     {
