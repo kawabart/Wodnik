@@ -607,6 +607,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -120603478097856523, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.46
@@ -688,21 +692,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7859215246814110254, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_Speed
-      value: 4.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7859215246814110254, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_Acceleration
-      value: 20
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1985326030}
     - targetCorrespondingSourceObject: {fileID: 7425853477990797489, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -3722,49 +3715,6 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
---- !u!1 &1985326019 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-  m_PrefabInstance: {fileID: 316578570}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1985326020 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7635132580727919465, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-  m_PrefabInstance: {fileID: 316578570}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985326019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0c80ceebb72c1f4394b6fa1dac68f4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
---- !u!114 &1985326030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1985326019}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6dd394f4998283d4c92074abc9429eb7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  onPush:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1985326020}
-        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
-        m_MethodName: BecomeDowned
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &2064484375
 PrefabInstance:
   m_ObjectHideFlags: 0

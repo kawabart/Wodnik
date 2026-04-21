@@ -128,6 +128,7 @@ MonoBehaviour:
   Target: {fileID: 8432645710390128237}
   Offset: {x: 0, y: 0.02, z: 0}
   SmoothTime: 0
+  lateUpdate: 1
 --- !u!1 &2157511338164059800
 GameObject:
   m_ObjectHideFlags: 0
@@ -268,6 +269,7 @@ MonoBehaviour:
   Target: {fileID: 8432645710390128237}
   Offset: {x: 0, y: 0.02, z: 0}
   SmoothTime: 0
+  lateUpdate: 1
 --- !u!1 &4988120818298034387
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +366,7 @@ MonoBehaviour:
   Target: {fileID: 3244929055898141205}
   Offset: {x: 0, y: 0, z: 0}
   SmoothTime: 0
+  lateUpdate: 0
 --- !u!1 &6803896170225000975
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +523,8 @@ MonoBehaviour:
   IsGrabbing: 0
   targetedGrabObject: {fileID: 0}
   isTakedown: 0
+  takedownTarget: {fileID: 0}
+  takedownRadius: 0.5
 --- !u!54 &6669696871531238574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -712,6 +717,7 @@ MonoBehaviour:
   Target: {fileID: 3244929055898141205}
   Offset: {x: 0, y: 0, z: 0}
   SmoothTime: 0.15
+  lateUpdate: 0
 --- !u!1 &8251382364123552091
 GameObject:
   m_ObjectHideFlags: 0
