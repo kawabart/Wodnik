@@ -12,4 +12,8 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         playerController.EndPush();
     }
+    public void KillTakedownTarget()
+    {
+        playerController.KillTakedownTarget();
+    }
 }

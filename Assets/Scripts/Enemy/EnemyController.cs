@@ -57,6 +57,12 @@ public class EnemyController : MonoBehaviour
         if (CurrentState == EnemyState.Dead) return;
         ChangeState(EnemyState.Downed);
     }
+
+    public void TurnPhysicsOff()
+    {
+        rigidBody.isKinematic = true;
+        GetComponent<Collider>().enabled = false;
+    }
     #endregion
 
     #region dead

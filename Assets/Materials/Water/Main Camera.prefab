@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2607141422901801633}
   - component: {fileID: 339581663506323467}
-  - component: {fileID: 2203527274693126312}
   - component: {fileID: 1948810868715898306}
   m_Layer: 0
   m_Name: Mirror Camera
@@ -73,7 +72,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 455
+    m_Bits: 199
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 8439a01c1f5e9a043a84fb3791b6205c, type: 2}
   m_TargetDisplay: 0
@@ -85,14 +84,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &2203527274693126312
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3249310705276920703}
-  m_Enabled: 1
 --- !u!114 &1948810868715898306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,6 +285,7 @@ MonoBehaviour:
   Target: {fileID: 0}
   Offset: {x: 0, y: 3, z: 0}
   SmoothTime: 0.2
+  lateUpdate: 0
 --- !u!114 &6560096234441543116
 MonoBehaviour:
   m_ObjectHideFlags: 0
