@@ -128,7 +128,6 @@ MonoBehaviour:
   Target: {fileID: 8432645710390128237}
   Offset: {x: 0, y: 0.02, z: 0}
   SmoothTime: 0
-  lateUpdate: 1
 --- !u!1 &2157511338164059800
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,7 +268,6 @@ MonoBehaviour:
   Target: {fileID: 8432645710390128237}
   Offset: {x: 0, y: 0.02, z: 0}
   SmoothTime: 0
-  lateUpdate: 1
 --- !u!1 &4988120818298034387
 GameObject:
   m_ObjectHideFlags: 0
@@ -366,7 +364,6 @@ MonoBehaviour:
   Target: {fileID: 3244929055898141205}
   Offset: {x: 0, y: 0, z: 0}
   SmoothTime: 0
-  lateUpdate: 0
 --- !u!1 &6803896170225000975
 GameObject:
   m_ObjectHideFlags: 0
@@ -523,8 +520,6 @@ MonoBehaviour:
   IsGrabbing: 0
   targetedGrabObject: {fileID: 0}
   isTakedown: 0
-  takedownTarget: {fileID: 0}
-  takedownRadius: 0.5
 --- !u!54 &6669696871531238574
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -571,8 +566,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.15
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3365348062764258917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,7 +712,6 @@ MonoBehaviour:
   Target: {fileID: 3244929055898141205}
   Offset: {x: 0, y: 0, z: 0}
   SmoothTime: 0.15
-  lateUpdate: 0
 --- !u!1 &8251382364123552091
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +737,7 @@ Transform:
   m_GameObject: {fileID: 8251382364123552091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: -0.1658}
+  m_LocalPosition: {x: 0, y: 0.1446, z: -0.1658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
