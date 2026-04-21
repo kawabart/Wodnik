@@ -6,19 +6,29 @@ public class Follower : MonoBehaviour
     [SerializeField] private Vector3 Offset = Vector3.zero;
     public float SmoothTime = 0.3f;
     private Vector3 _currentVelocity = Vector3.zero;
+    [SerializeField] private bool lateUpdate = false;
+    void LerpPosition()
+    {
+        if (Target == null) return;
+
+        Vector3 targetPosition = Target.position + Offset;
+
+        transform.position = Vector3.SmoothDamp(
+            transform.position,
+            targetPosition,
+            ref _currentVelocity,
+            SmoothTime
+        );
+    }
     void Update()
     {
-        if (Target != null)
-        {
-            Vector3 targetPosition = Target.position + Offset;
+        if (!lateUpdate)
+            LerpPosition();
 
-            transform.position = Vector3.SmoothDamp(
-                transform.position,
-                targetPosition,
-                ref _currentVelocity,
-                SmoothTime
-            );
-        }
-
+    }
+    void LateUpdate()
+    {
+        if (lateUpdate)
+            LerpPosition();
     }
 }
