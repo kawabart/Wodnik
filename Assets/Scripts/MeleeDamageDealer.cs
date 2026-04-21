@@ -4,6 +4,9 @@ public class MeleeDamageDealer : MonoBehaviour
 {
     public int damage = 1;
     public LayerMask mask;
+    public bool isAttacking = false;
+
+    public Animator animator;
 
     [Header("Capsule")]
     public Transform pointA;
@@ -16,6 +19,11 @@ public class MeleeDamageDealer : MonoBehaviour
     public bool impulse = false;
     private float timer = 0;
 
+    void Start()
+    {
+        animator = GetComponentInChildren<Animator>();
+    }
+
     void Update()
     {
         timer -= Time.deltaTime;
@@ -26,7 +34,19 @@ public class MeleeDamageDealer : MonoBehaviour
         }
         if (impulse) DoImpulseAttack();
     }
-    public bool DoImpulseAttack()
+
+    public void StartAttack()
+    {
+        isAttacking = true;
+        if (animator != null)
+        {
+            animator.SetTrigger("Attack");
+        } else
+        {
+            Debug.LogWarning("MeleeDamageDealer doesn't have assigned Animator component!");
+        }
+    }
+    public void DoImpulseAttack()
     {
         //temporary
         weaponAttack.SetActive(true);
@@ -60,6 +80,11 @@ public class MeleeDamageDealer : MonoBehaviour
                 */
             }
         }
-        return true;
     }
+
+    public void FinishAttack()
+    {
+        isAttacking = false;
+    }
+
 }

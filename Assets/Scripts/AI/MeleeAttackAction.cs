@@ -10,19 +10,21 @@ public partial class MeleeAttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
 
+    private MeleeDamageDealer damageDealer;
     protected override Status OnStart()
     {
-        var component = Agent.Value.GetComponent<MeleeDamageDealer>();
-        if (component == null)
+        damageDealer = Agent.Value.GetComponent<MeleeDamageDealer>();
+        if (damageDealer == null)
             return Status.Failure;
-        var attackPerformed = component.DoImpulseAttack();
-        if (!attackPerformed)
-            return Status.Failure;
-        return Status.Success;
+        damageDealer.StartAttack();
+        return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
+        if (damageDealer == null) return Status.Failure;
+        if (damageDealer.isAttacking) return Status.Running;
+
         return Status.Success;
     }
 
