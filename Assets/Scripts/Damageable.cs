@@ -31,7 +31,7 @@ public class Damageable : MonoBehaviour, IDamageable
             Die(currentSurface);
     }
 
-    void Die(SurfaceType currentSurface = null)
+    public void Die(SurfaceType currentSurface = null)
     {
         if (currentSurface != null)
             EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);
