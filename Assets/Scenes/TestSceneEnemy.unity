@@ -211,6 +211,7 @@ MonoBehaviour:
   Target: {fileID: 525197335}
   Offset: {x: 0, y: 3, z: 0}
   SmoothTime: 0.3
+  lateUpdate: 0
 --- !u!114 &52313280
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,6 +646,35 @@ PrefabInstance:
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'managedReferences[5827363742204297549]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.Animator,
+        UnityEngine.AnimationModule]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[5827363742204297549].Name
+      value: Animator
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: m_BlackboardVariableOverridesList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[5827363742204297549].m_Value
+      value: 
+      objectReference: {fileID: 41380456}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 5827363742204297549
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[5827363742204297549].GUID.m_Value0
+      value: 38043881807366317
+      objectReference: {fileID: 0}
+    - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
+      propertyPath: managedReferences[5827363742204297549].GUID.m_Value1
+      value: 17864596060681530790
       objectReference: {fileID: 0}
     - target: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_Name
@@ -2801,7 +2831,7 @@ Transform:
   m_GameObject: {fileID: 1660386725}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.86, y: 1, z: -1.06}
+  m_LocalPosition: {x: -12.86, y: 0.71, z: -1.06}
   m_LocalScale: {x: 0.37347, y: 9.5882, z: 25.97}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3182,6 +3212,7 @@ MonoBehaviour:
   Target: {fileID: 525197335}
   Offset: {x: 0, y: 3, z: 0}
   SmoothTime: 0.3
+  lateUpdate: 0
 --- !u!1 &1701915765
 GameObject:
   m_ObjectHideFlags: 0

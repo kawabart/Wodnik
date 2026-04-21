@@ -38,6 +38,7 @@ public class MeleeDamageDealer : MonoBehaviour
     public void StartAttack()
     {
         isAttacking = true;
+        Debug.Log("Attack starts...");
         if (animator != null)
         {
             animator.SetTrigger("Attack");
@@ -48,6 +49,7 @@ public class MeleeDamageDealer : MonoBehaviour
     }
     public void DoImpulseAttack()
     {
+        Debug.Log("Attack casts damage!");
         //temporary
         weaponAttack.SetActive(true);
         weaponRest.SetActive(false);
@@ -80,10 +82,12 @@ public class MeleeDamageDealer : MonoBehaviour
                 */
             }
         }
+        isAttacking = false;
     }
 
     public void FinishAttack()
     {
+        Debug.Log("Attack Finished.");
         isAttacking = false;
     }
 
