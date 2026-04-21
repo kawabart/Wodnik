@@ -1,6 +1,7 @@
 using System;
 using System.Net.NetworkInformation;
 using UnityEngine;
+using Unity.Behavior;
 
 [RequireComponent(typeof(AgitationController))]
 [RequireComponent(typeof(EnemyPerception))]
