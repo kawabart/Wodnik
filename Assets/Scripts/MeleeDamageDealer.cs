@@ -67,7 +67,7 @@ public class MeleeDamageDealer : MonoBehaviour
             var dmg = hit.GetComponent<IDamageable>();
             if (dmg != null)
             {
-                dmg.TakeDamage(damage, gameObject);
+                dmg.TakeDamage(new DamageData(damage));
                 //can be expanded in the future
                 /*
                 dmg.TakeDamage(new DamageData

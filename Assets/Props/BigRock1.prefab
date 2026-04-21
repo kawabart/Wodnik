@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8917223128341168075}
   - component: {fileID: 10159866958501609}
   - component: {fileID: -8594171125954312303}
+  - component: {fileID: -2071641251135070779}
   m_Layer: 7
   m_Name: BigRock1
   m_TagString: Untagged
@@ -171,3 +172,23 @@ MonoBehaviour:
   minVelocityToDamage: 5
   increaseVelocityNeededForPlayer: 1
   damage: 1
+--- !u!114 &-2071641251135070779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010392617811242183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  health: 0
+  DestroyOnDeath: 0
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []

@@ -12,25 +12,29 @@ public class Damageable : MonoBehaviour, IDamageable
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
     }
-    public void TakeDamage(int amount, GameObject source)
+    public void TakeDamage(DamageData damageData)
     {
+        int amount = damageData.Amount;
         if (amount < 1) return;
         onHurt.Invoke();
         health -= amount;
+        SurfaceType currentSurface = surfaceType;
+        if (damageData.OverrideSurface != null)
+            currentSurface = damageData.OverrideSurface;
 
-        if (surfaceType!=null)
-            EffectSpawner.Instance.SpawnHit(transform.position, surfaceType);
+        if (surfaceType != null)
+            EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
         if (health <= 0)
-            Die();
+            Die(currentSurface);
     }
 
-    void Die()
+    void Die(SurfaceType currentSurface = null)
     {
-        if (surfaceType != null)
-            EffectSpawner.Instance.SpawnHit(transform.position, surfaceType);
+        if (currentSurface != null)
+            EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
         onDeath.Invoke();

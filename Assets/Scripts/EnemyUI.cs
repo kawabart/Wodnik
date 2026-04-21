@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -32,7 +31,7 @@ public partial class EnemyUI : MonoBehaviour
             label.text = "zzZ";
             return;
         }
-        else if (enemyController.CurrentState!= EnemyState.Alive)
+        else if (enemyController.CurrentState != EnemyState.Alive)
         {
             label.text = "";
             return;
@@ -50,12 +49,12 @@ public partial class EnemyUI : MonoBehaviour
         {
             label.text = "!";
         }
-        
+
         if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
         if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;
         if (agitationController.AgitationState == AgitationState.Alarmed) color = Color.red;
 
         float alpha = agitationController.AgitationLevel / 100;
-        label.style.color = new StyleColor(color.WithAlpha(alpha));
+        label.style.color = new StyleColor(new Color(color.r, color.g, color.b, alpha));
     }
 }

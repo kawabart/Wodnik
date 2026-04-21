@@ -1,9 +1,9 @@
 using System;
 using Unity.Behavior;
-using UnityEngine;
-using Action = Unity.Behavior.Action;
 using Unity.Properties;
+using UnityEngine;
 using UnityEngine.AI;
+using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
 [NodeDescription(name: "Update Enemy speed", story: "Update [Enemy] speed", category: "Wodnik", id: "4b0f805318c529108bc66dacc968b155")]

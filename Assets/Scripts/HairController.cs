@@ -3,6 +3,7 @@ using UnityEngine;
 public class HairController : MonoBehaviour
 {
     [SerializeField] HairGenerator hairGenerator;
+    private PlayerController playerController;
     private Rigidbody rigidBody;
     [SerializeField, Tooltip("Default position that hair end lerps to when it isn't attached to anything.")]
     private Transform defaultHairPosition;
@@ -26,7 +27,16 @@ public class HairController : MonoBehaviour
         springJoint.autoConfigureConnectedAnchor = false;
         hairGenerator.maxDistance = 1;
         //to do: endsize can change based on dimensions of grabbed object.
-        //hairGenerator.endSize = .2f;
+        var cols = grabbedRb.GetComponentsInChildren<Collider>();
+
+        Bounds bounds = cols[0].bounds;
+        for (int i = 1; i < cols.Length; i++)
+        {
+            bounds.Encapsulate(cols[i].bounds);
+        }
+
+        float minObjectSize = Mathf.Min(bounds.size.x, bounds.size.y, bounds.size.z);
+        hairGenerator.endSize = minObjectSize;
         Grabbed = true;
     }
 
@@ -58,14 +68,15 @@ public class HairController : MonoBehaviour
 
     void Update()
     {
-        if (!Grabbed) 
+        if (!Grabbed)
             hairGenerator.noiseSpeed = .5f + rigidBody.linearVelocity.magnitude / 2;
-        else 
+        else
             hairGenerator.noiseSpeed = .2f;
 
-        if (grabbedRb != null && !Grabbed && springJoint == null) 
+        if (grabbedRb != null && !Grabbed && springJoint == null)
             Grab(grabbedRb);
-        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed)) 
+        else if ((grabbedRb == null && Grabbed) || (grabbedRb != null && !Grabbed))
             LetGo();
     }
+
 }

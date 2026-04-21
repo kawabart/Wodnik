@@ -1,6 +1,5 @@
 using System;
 using System.Net.NetworkInformation;
-using Unity.Behavior;
 using UnityEngine;
 
 [RequireComponent(typeof(AgitationController))]
