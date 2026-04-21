@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,42 +11,50 @@ public partial class EnemyUI : MonoBehaviour
 
     private Color color = Color.white;
     private float blinkingSpeed = 5;
-
+    public AgitationController agitationController;
+    public EnemyController enemyController;
+    public EnemyPerception enemyPerception;
     void Start()
     {
         document = GetComponent<UIDocument>();
         label = document.rootVisualElement.Q<Label>();
+        agitationController = GetComponentInParent<AgitationController>();
+        enemyController = GetComponentInParent<EnemyController>();
+        enemyPerception = GetComponentInParent<EnemyPerception>();
     }
 
     void Update()
     {
-        var angle = transform.parent.localEulerAngles.y;
-        transform.SetLocalPositionAndRotation(transform.localPosition, Quaternion.Euler(transform.localEulerAngles.x, 0, angle));
-
-        if (State == EnemyAIState.Idle)
+        transform.rotation = Quaternion.Euler(90f, 0f, 0f);
+        if (enemyController.CurrentState == EnemyState.Downed)
+        {
+            label.text = "zzZ";
+            return;
+        }
+        else if (enemyController.CurrentState != EnemyState.Alive)
         {
             label.text = "";
-        }
-        else if (State == EnemyAIState.Investigating)
-        {
-            label.text = "?";
-            color = Color.yellow;
-            blinkingSpeed = 0;
-        }
-        else if (State == EnemyAIState.Searching)
-        {
-            label.text = "??";
-            color = Color.orange;
-            blinkingSpeed = 3;
-        }
-        else if (State == EnemyAIState.Alerted)
-        {
-            label.text = "!!";
-            color = Color.red;
-            blinkingSpeed = 10;
+            return;
         }
 
-        float alpha = (Mathf.Cos(Time.time * blinkingSpeed) + 1.0f) / 2.0f;
-        label.style.color = new StyleColor(color.WithAlpha(alpha));
+        if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
+        {
+            label.text = "...";
+        }
+        else if (enemyPerception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
+        {
+            label.text = "?";
+        }
+        else if (enemyPerception.PerceptionState == EnemyPerceptionState.PlayerInSight)
+        {
+            label.text = "!";
+        }
+
+        if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
+        if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;
+        if (agitationController.AgitationState == AgitationState.Alarmed) color = Color.red;
+
+        float alpha = agitationController.AgitationLevel / 100;
+        label.style.color = new StyleColor(new Color(color.r, color.g, color.b, alpha));
     }
 }

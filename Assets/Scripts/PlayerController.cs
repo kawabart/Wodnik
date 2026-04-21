@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             return visibilityController == null ? false : visibilityController.Hidden;
         }
     }
+
     private VisibilityController visibilityController;
     #endregion
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     private AimingDevice currentAimingDevice = AimingDevice.Mouse;
     public GameObject Hair;
     public Vector3 AimDirection = Vector3.zero;
+
     private void UpdateAimDirection()
     {
         Vector2 gamepadDirection = Gamepad.current != null ? Gamepad.current.rightStick.value : Vector2.zero;
@@ -48,8 +50,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         else if (currentAimingDevice == AimingDevice.Mouse)
         {
             prevMousePos = mousePos;
-            var mouseScreen = new Vector3(mousePos.x, mousePos.y, 0);
-           
+
             Ray ray = Camera.main.ScreenPointToRay(mousePos);
             Plane plane = new Plane(Vector3.up, transform.position);
 
@@ -64,25 +65,37 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     #region movement
     private Rigidbody rigidBody;
-    public InputAction MoveAction;
+    private InputAction moveAction;
+    private InputAction sprintAction;
+
     [SerializeField]
     private Animator animator;
     private Vector3 moveInput = Vector3.zero;
 
-    public float MovementSpeed = 3.0f;
+    public float SprintingSpeed = 4.0f;
+    public float WalkingSpeed = 2.0f;
     public float Acceleration = 1;
+    private bool sprintInput = false;
+
     private bool IsMovementLocked()
     {
         bool locked = false;
         if (!IsAlive) return true;
+        if (isTakedown) return true;
         if (isPushing) return true;
         return locked;
     }
+
     private void UpdatePositionDirection()
     {
-        if (IsMovementLocked()) moveInput =Vector3.zero;
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * MovementSpeed, Acceleration * Time.fixedDeltaTime);
-        if (isPushing)
+        if (IsMovementLocked()) moveInput = Vector3.zero;
+
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
+        if (isTakedown)
+        {
+            TakedownUpdate();
+        }
+        else if (isPushing)
         {
             float angle = Mathf.Atan2(AimDirection.x, AimDirection.z) * Mathf.Rad2Deg;
             rigidBody.MoveRotation(Quaternion.Euler(0, angle, 0));
@@ -119,9 +132,13 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void Kill()
     {
         Health = 0;
-        animator.SetBool("isDead",true);
+        animator.SetBool("isDead", true);
+        if (LevelRestarter.Instance != null)
+        {
+            LevelRestarter.Instance.IsRestartEnabled = true;
+        }
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(DamageData damageData)
     {
         if (!IsAlive) return;
 
@@ -130,7 +147,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
-        Health = Math.Max(0, Health - Math.Max(0, damage));
+        Health = Math.Max(0, Health - Math.Max(0, damageData.Amount));
         if (!IsAlive) Kill();
     }
 
@@ -146,11 +163,12 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float pushForce = 10f;
     public float pushRadius = 0.2f;
     public float pushOffset = 0.2f;
+
     void OnPush(InputAction.CallbackContext ctx)
     {
-       
         Push();
     }
+
     void Push()
     {
         if (IsMovementLocked()) return;
@@ -159,6 +177,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetTrigger("push");
         Debug.Log("Pushing starts...");
     }
+
     public void ApplyPushForce()
     {
         Debug.Log("Push!");
@@ -175,10 +194,10 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
 
     }
+
     public void EndPush()
     {
         isPushing = false;
-        
         Debug.Log("Pushing ends.");
     }
 
@@ -191,41 +210,79 @@ public class PlayerController : MonoBehaviour, IDamageable
     public float GrabAutoAim = .5f;
     private InputAction grab;
     public bool IsGrabbing = false;
+
     void OnGrab(InputAction.CallbackContext ctx)
     {
         if (IsGrabbing) return;
         Grab();
     }
+
     void OnGrabLetGo(InputAction.CallbackContext ctx)
     {
         if (!IsGrabbing) return;
 
         LetGo();
     }
-    void Grab()
-    {
-        Debug.Log("Grab!");
-        UpdateAimDirection();
-        Vector3 targetPoint;
-        if (Physics.Raycast(transform.position+.2f*Vector3.up, AimDirection, out RaycastHit raycastHit, GrabDistance, grabMask)) 
-            targetPoint = raycastHit.point;
-        else 
-            targetPoint = transform.position + AimDirection.normalized * GrabDistance;
 
-        Collider[] hits = Physics.OverlapSphere(raycastHit.point, GrabAutoAim);
-        hairController.Probe(targetPoint);
+    public Transform targetedGrabObject = null;
+    Vector3 targetPoint = Vector3.zero;
+
+    void GetGrabTarget()
+    {
+        UpdateAimDirection();
+        RaycastHit raycastHit;
+        Vector3 heightOffset = 0.2f * Vector3.up;
+        if (Physics.Raycast(transform.position + heightOffset, AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
+            targetPoint = raycastHit.point;
+        }
+        else if (Physics.Raycast(transform.position, AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
+            targetPoint = raycastHit.point;
+        }
+        else if (Physics.Raycast(transform.position + heightOffset, Quaternion.Euler(0f, -5f, 0f) * AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
+            targetPoint = raycastHit.point;
+        }
+        else if (Physics.Raycast(transform.position + heightOffset, Quaternion.Euler(0f, 5f, 0f) * AimDirection, out raycastHit, GrabDistance, grabMask))
+        {
+            targetPoint = raycastHit.point;
+        }
+        else
+        {
+            targetPoint = transform.position + AimDirection.normalized * GrabDistance;
+        }
+
+        Collider[] hits = Physics.OverlapSphere(targetPoint, GrabAutoAim);
+
         bool foundGrabbable = false;
         foreach (var hit in hits)
         {
             if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
-                if (grabbable.Grab(hairController))
+                if (grabbable.CanBeGrabbed())
+                {
                     foundGrabbable = true;
+                    targetedGrabObject = hit.transform;
+                }
             }
         }
-        IsGrabbing = true;
+
+        if (!foundGrabbable) targetedGrabObject = null;
     }
+
+    void Grab()
+    {
+        Debug.Log("Grab!");
+        hairController.Probe(targetPoint);
+        if (targetedGrabObject == null) GetGrabTarget();
+        if (targetedGrabObject == null) return;
+        if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
+            IsGrabbing = true;
+
+    }
+
     void LetGo()
     {
         Debug.Log("Grab ends.");
@@ -233,9 +290,72 @@ public class PlayerController : MonoBehaviour, IDamageable
         IsGrabbing = false;
     }
     #endregion
+
+    #region takedown
+    private InputAction takedown;
+    public bool isTakedown = false;
+    public Transform takedownTarget = null;
+    public float takedownRadius = .5f;
+    void OnTakedown(InputAction.CallbackContext ctx)
+    {
+        StartTakedown();
+    }
+
+    void StartTakedown()
+    {
+        if (IsMovementLocked()) return;
+        if (!GetTakedownTarget()) return;
+
+        isTakedown = true;
+        animator.SetTrigger("takedown");
+        Debug.Log("Takedown starts...");
+
+    }
+    bool GetTakedownTarget()
+    {
+        Vector3 center = transform.position;
+        Collider[] hits = Physics.OverlapSphere(center, takedownRadius);
+
+        foreach (var hit in hits)
+        {
+            if (hit.TryGetComponent<EnemyController>(out var enemy))
+            {
+                if (enemy.CurrentState == EnemyState.Downed)
+                {
+                    takedownTarget = enemy.transform;
+                    enemy.TurnPhysicsOff();
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    void TakedownUpdate()
+    {
+        if (takedownTarget == null)
+        {
+            isTakedown = false;
+            return;
+        }
+        Vector3 forwardDirection = takedownTarget.forward;
+        Vector3 upDirection = Vector3.up;
+        Quaternion targetRotation = Quaternion.LookRotation(-forwardDirection, upDirection);
+        SmoothAlignToTarget(takedownTarget.transform.position - takedownTarget.transform.forward * .2f, targetRotation, .5f);
+    }
+    void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
+    {
+        rigidBody.MovePosition(Vector3.Lerp(rigidBody.position, targetPosition, lerpFactor));
+        rigidBody.MoveRotation(Quaternion.Slerp(rigidBody.rotation, targetRotation, lerpFactor));
+    }
+    public void KillTakedownTarget()
+    {
+        takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(10));
+    }
+    #endregion
+
     void Start()
     {
-        MoveAction.Enable();
+        moveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
         hairController = GetComponent<HairController>();
         if (animator == null)
@@ -247,20 +367,27 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        moveInput = new Vector3(MoveAction.ReadValue<Vector2>().x, 0, MoveAction.ReadValue<Vector2>().y);
+        moveInput = new Vector3(moveAction.ReadValue<Vector2>().x, 0, moveAction.ReadValue<Vector2>().y);
+        sprintInput = sprintAction.ReadValue<float>() > 0.5f;
         animator.SetFloat("playerSpeed", rigidBody.linearVelocity.magnitude);
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
-        UpdateAimDirection();
+        animator.SetBool("isTakedown", isTakedown);
+        GetGrabTarget();
     }
 
     void FixedUpdate()
     {
         UpdatePositionDirection();
     }
+
     void OnEnable()
     {
         Debug.Log("Subscription");
+        moveAction = InputSystem.actions.FindAction("Move");
+        moveAction.Enable();
+        sprintAction = InputSystem.actions.FindAction("Sprint");
+        sprintAction.Enable();
         push = InputSystem.actions.FindAction("Push");
         push.Enable();
         push.performed += OnPush;
@@ -268,6 +395,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         grab.Enable();
         grab.performed += OnGrab;
         grab.canceled += OnGrabLetGo;
+        takedown = InputSystem.actions.FindAction("Takedown");
+        takedown.Enable();
+        takedown.performed += OnTakedown;
     }
 
     void OnDisable()
@@ -275,23 +405,16 @@ public class PlayerController : MonoBehaviour, IDamageable
         push.performed -= OnPush;
         grab.performed -= OnGrab;
         grab.canceled -= OnGrabLetGo;
+        takedown.performed -= OnTakedown;
     }
+
     private static bool IsZero(Vector2 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f);
     }
+
     private static bool IsZero(Vector3 v)
     {
         return Mathf.Approximately(v.x, 0.0f) && Mathf.Approximately(v.y, 0.0f) && Mathf.Approximately(v.z, 0.0f);
-    }
-
-    /**
-     * Rotating game objects to face certain direction using transform.up
-     * leads to issues with quaternion rotation, hence this helper.
-     **/
-    private static void RotateTowards(GameObject obj, Vector3 v)
-    {
-        float angle = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
-        obj.transform.rotation = Quaternion.Euler(0, angle, 0);
     }
 }
