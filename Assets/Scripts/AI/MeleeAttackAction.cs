@@ -24,7 +24,7 @@ public partial class MeleeAttackAction : Action
     {
         if (damageDealer == null) return Status.Failure;
         if (damageDealer.isAttacking) return Status.Running;
-
+        Debug.Log("Attack running");
         return Status.Success;
     }
 

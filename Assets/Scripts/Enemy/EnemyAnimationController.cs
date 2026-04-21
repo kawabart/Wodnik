@@ -46,6 +46,7 @@ public class EnemyAnimationController : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
         behaviorAgent = GetComponent<BehaviorGraphAgent>();
         enemyController = GetComponent<EnemyController>();
+        enemyPerception = GetComponent<EnemyPerception>();
         agitationController = GetComponent<AgitationController>();
         animator = GetComponentInChildren<Animator>();
         meleeDamageDealer = GetComponent<MeleeDamageDealer>();
