@@ -40,9 +40,13 @@ public class EnemyAnimationController : MonoBehaviour
     private int isInInvestigative;
     private int attackHash;
     private int speedHash;
+    private int vForwardHash;
+    private int vRightHash;
     private NavMeshAgent navMeshAgent;
+    private Rigidbody rb;
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         behaviorAgent = GetComponent<BehaviorGraphAgent>();
         enemyController = GetComponent<EnemyController>();
@@ -54,14 +58,28 @@ public class EnemyAnimationController : MonoBehaviour
         isInInvestigative = Animator.StringToHash("IsInInvestigative");
         attackHash = Animator.StringToHash("Attack");
         speedHash = Animator.StringToHash("Speed");
+        vForwardHash = Animator.StringToHash("vForward");
+        vRightHash = Animator.StringToHash("vRight");
     }
 
     void Update()
     {
+        
         if (navMeshAgent.enabled)
         {
             float speed = navMeshAgent.velocity.magnitude;
             animator.SetFloat(speedHash, speed);
+        }
+        else
+        {
+            Vector3 velocity = rb.velocity;
+            velocity.y = 0f;
+
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+
+            animator.SetFloat("vForward",localVelocity.z);
+            animator.SetFloat("vRight", localVelocity.x);
+
         }
         AgitationState currentAgitationState = agitationController.AgitationState;
         EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
