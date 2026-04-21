@@ -2,7 +2,7 @@ using Unity.Behavior;
 using UnityEngine;
 
 [RequireComponent(typeof(BehaviorGraphAgent))]
-public class AnimationController : MonoBehaviour
+public class EnemyAnimationController : MonoBehaviour
 {
 
     public void ChangeCombatState()
