@@ -72,7 +72,7 @@ public class EnemyAnimationController : MonoBehaviour
         }
         else
         {
-            Vector3 velocity = rb.velocity;
+            Vector3 velocity = rb.linearVelocity;
             velocity.y = 0f;
 
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
