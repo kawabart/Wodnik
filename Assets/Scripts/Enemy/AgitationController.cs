@@ -21,18 +21,6 @@ public class AgitationController : MonoBehaviour
         UpdateAgitation();
     }
 
-    void Update()
-    {
-        if (perception.PerceptionState == EnemyPerceptionState.PlayerInSight)
-        {
-            IncreaseAgitation();
-        }
-        else if (perception.PerceptionState == EnemyPerceptionState.Idle)
-        {
-            DecreaseAgitation();
-        }
-    }
-
     private void UpdateAgitation()
     {
         if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
@@ -53,14 +41,14 @@ public class AgitationController : MonoBehaviour
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }
 
-    private void IncreaseAgitation()
+    public void IncreaseAgitation(float multiplier)
     {
-        var change = CurrentAgitationConfig.AgitationPositiveRate * Time.deltaTime;
+        var change = CurrentAgitationConfig.AgitationPositiveRate * multiplier * Time.deltaTime;
         AgitationLevel = Mathf.Min(AgitationLevel + change, MaxAgitation);
         UpdateAgitation();
     }
 
-    private void DecreaseAgitation()
+    public void DecreaseAgitation()
     {
         var change = CurrentAgitationConfig.AgitationNegativeRate * Time.deltaTime;
         AgitationLevel = Mathf.Max(MinAgitation, AgitationLevel - change);

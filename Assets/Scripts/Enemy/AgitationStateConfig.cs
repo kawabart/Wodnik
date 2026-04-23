@@ -22,4 +22,7 @@ public class AgitationStateConfig : ScriptableObject
 
     [SerializeField, Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
     public float NoticeHiddenPlayerDistance = .5f;
+
+    [SerializeField, Tooltip("Curve that multiplies AgitationPositiveRate depending on disance.")]
+    public AnimationCurve VisibilityCurve = AnimationCurve.Constant(0, 1, 1);
 }

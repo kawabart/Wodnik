@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -22,6 +23,8 @@ public class EnemyPerception : MonoBehaviour
     [SerializeField]
     public EnemyPerceptionState PerceptionState = EnemyPerceptionState.Idle;
     private Rigidbody rigidBody;
+
+    private float distanceMultiplierNormalized = 0;
 
     [Header("Sight values modified by Scriptable")]
     public float SightDistance = 2;
@@ -71,6 +74,15 @@ public class EnemyPerception : MonoBehaviour
             }
         }
         UpdateValuesFromScriptable();
+
+        if (PerceptionState == EnemyPerceptionState.PlayerInSight)
+        {
+            enemyController.IncreaseAgitation(CurrentAgitationConfig.VisibilityCurve.Evaluate(distanceMultiplierNormalized));
+        }
+        else if (PerceptionState == EnemyPerceptionState.Idle)
+        {
+            enemyController.DecreaseAgitation();
+        }
     }
     void UpdateValuesFromScriptable()
     {
@@ -105,21 +117,29 @@ public class EnemyPerception : MonoBehaviour
         canHear = false;
         canTouch = false;
     }
+    
     private bool DetectPlayer()
     {
         if (!canSee) return false;
         RaycastHit hit;
         Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f;
+        
+        float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
+        if (sqrDistance > SightDistance * SightDistance)
+        {
+            distanceMultiplierNormalized = 0;
+            return false;
+        }
+        float distance = (player.transform.position - transform.position).magnitude;
+        distanceMultiplierNormalized = SightDistance == 0 ? 0 : 1 - distance / SightDistance;
         var direction = targetPosition - eyesPosition.position;
-        // direction.y = 0;
         var angle = Vector3.Angle(transform.forward, direction);
         if (angle > SightFOVDegrees)
         {
             return false;
         }
 
-        float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
-        if (sqrDistance > SightDistance * SightDistance) return false;
+        
         if (sqrDistance < NoticeHiddenPlayerDistance * NoticeHiddenPlayerDistance) return true;
 
         if (player.Hidden)

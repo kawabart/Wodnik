@@ -122,6 +122,15 @@ public class EnemyController : MonoBehaviour
     }
     #endregion
 
+    public void IncreaseAgitation(float multiplier = 1)
+    {
+        agitationController.IncreaseAgitation(multiplier);
+    }
+    public void DecreaseAgitation()
+    {
+        agitationController.DecreaseAgitation();
+    }
+
     private Rigidbody rigidBody;
     private BehaviorGraphAgent behaviorAgent;
     private UnityEngine.AI.NavMeshAgent navMeshAgent;
