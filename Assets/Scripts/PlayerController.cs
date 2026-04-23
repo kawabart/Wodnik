@@ -261,11 +261,10 @@ public class PlayerController : MonoBehaviour, IDamageable
             if (foundGrabbable) continue;
             if (hit.TryGetComponent<IGrabbable>(out var grabbable))
             {
-                if (grabbable.CanBeGrabbed())
-                {
-                    foundGrabbable = true;
-                    targetedGrabObject = hit.transform;
-                }
+
+                foundGrabbable = true;
+                targetedGrabObject = hit.transform;
+
             }
         }
 

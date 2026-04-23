@@ -3,6 +3,7 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using Unity.Behavior;
 
+[RequireComponent(typeof(EnemyAnimationController))]
 [RequireComponent(typeof(AgitationController))]
 [RequireComponent(typeof(EnemyPerception))]
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
@@ -129,6 +130,27 @@ public class EnemyController : MonoBehaviour
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
+    }
+    public bool TryBlocking()
+    {
+        if (!IsVulnerable())
+        {
+            Debug.Log("Attack blocked!");
+            agitationController.IncreaseAgitation(100);
+            GetComponent<EnemyAnimationController>().Block();
+            return true;
+        }
+        else return false;
+    }
+    public bool IsVulnerable()
+    {
+        //enemy has no weapon
+        //enemy is stunned
+        //player is behind enemy
+        if (CurrentState != EnemyState.Alive) return true;
+        if (perceptionController.PerceptionState == EnemyPerceptionState.Idle) return true;
+        if (agitationController.AgitationState != AgitationState.Alarmed) return true;
+        return false;
     }
 
     private Rigidbody rigidBody;

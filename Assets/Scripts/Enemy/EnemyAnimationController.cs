@@ -7,8 +7,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void ChangeCombatState()
     {
-        if (behaviorAgent.BlackboardReference.GetVariableValue<EnemyPerceptionState>("EnemyPerceptionState", out var currentPerceptionState))
-        {
+            EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
             if (currentPerceptionState == EnemyPerceptionState.PlayerInSight)
             {
                 animator.SetBool(isInCombatHash, true);
@@ -19,11 +18,10 @@ public class EnemyAnimationController : MonoBehaviour
                 animator.SetBool(isInCombatHash, false);
                 animator.SetBool(isInInvestigative, true);
             }
-        }
-        else
-        {
-            Debug.LogWarning("Could not find EnemyPerceptionState on the Blackboard!");
-        }
+    }
+    public void Block()
+    {
+        animator.SetTrigger(blockHash);
     }
 
     public void TriggerAttack()
@@ -42,6 +40,7 @@ public class EnemyAnimationController : MonoBehaviour
     private int speedHash;
     private int vForwardHash;
     private int vRightHash;
+    private int blockHash;
     private NavMeshAgent navMeshAgent;
     private Rigidbody rb;
     void Start()
@@ -60,6 +59,7 @@ public class EnemyAnimationController : MonoBehaviour
         speedHash = Animator.StringToHash("Speed");
         vForwardHash = Animator.StringToHash("vForward");
         vRightHash = Animator.StringToHash("vRight");
+        blockHash = Animator.StringToHash("Block");
     }
 
     void Update()
@@ -77,8 +77,8 @@ public class EnemyAnimationController : MonoBehaviour
 
             Vector3 localVelocity = transform.InverseTransformDirection(velocity);
 
-            animator.SetFloat("vForward",localVelocity.z);
-            animator.SetFloat("vRight", localVelocity.x);
+            animator.SetFloat(vForwardHash, localVelocity.z);
+            animator.SetFloat(vRightHash, localVelocity.x);
 
         }
         AgitationState currentAgitationState = agitationController.AgitationState;
