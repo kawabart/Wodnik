@@ -26,7 +26,7 @@ public class Pushable : MonoBehaviour, IPushable
         if (rb.isKinematic) rb.isKinematic = false;
         if (rotateInPushDirection)
         {
-            rb.MoveRotation(Quaternion.LookRotation(-force));
+            rb.MoveRotation(Quaternion.LookRotation(force));
         }
         rb.AddForce(force, ForceMode.Impulse);
         onPush.Invoke();

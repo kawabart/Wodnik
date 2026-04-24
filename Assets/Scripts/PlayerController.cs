@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         UpdateAimDirection();
         animator.SetTrigger("push");
         Debug.Log("Pushing starts...");
+        if (hairController.Grabbed) hairController.GrabbedRb.MovePosition(transform.position + AimDirection.normalized * pushOffset);
     }
 
     public void ApplyPushForce()
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 center = transform.position + transform.forward * pushOffset;
         Collider[] hits = Physics.OverlapSphere(center, pushRadius);
         Vector3 force = transform.forward * pushForce;
-
+        LetGo();
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<IPushable>(out var pushable))
@@ -192,7 +193,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 pushable.Push(force);
             }
         }
-
     }
 
     public void EndPush()
@@ -220,7 +220,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     void OnGrabLetGo(InputAction.CallbackContext ctx)
     {
         if (!IsGrabbing) return;
-
         LetGo();
     }
 
@@ -279,7 +278,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (targetedGrabObject == null) return;
         if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
             IsGrabbing = true;
-
     }
 
     void LetGo()

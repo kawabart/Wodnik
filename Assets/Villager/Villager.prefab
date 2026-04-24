@@ -15267,6 +15267,7 @@ GameObject:
   - component: {fileID: 2221496193607636872}
   - component: {fileID: -120603478097856523}
   - component: {fileID: 3484863596789031813}
+  - component: {fileID: 442502885161504546}
   m_Layer: 10
   m_Name: Villager
   m_TagString: Untagged
@@ -15343,7 +15344,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 96
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &756476067600884879
 MonoBehaviour:
@@ -15544,6 +15545,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 442502885161504546}
+        m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHurt:
     m_PersistentCalls:
       m_Calls:
@@ -15653,6 +15666,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d385187efcf64a86e8d460010ea80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationController
+--- !u!114 &442502885161504546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915b09ae047c1a24caf97a87b935ea4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Spawner
+  gameObjectToSpawn: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
 --- !u!1 &2730618384814251174
 GameObject:
   m_ObjectHideFlags: 0
