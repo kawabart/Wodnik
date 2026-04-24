@@ -148,8 +148,8 @@ public class EnemyController : MonoBehaviour
         //enemy is stunned
         //player is behind enemy
         if (CurrentState != EnemyState.Alive) return true;
-        if (perceptionController.PerceptionState == EnemyPerceptionState.Idle) return true;
         if (agitationController.AgitationState != AgitationState.Alarmed) return true;
+        if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
         return false;
     }
 
