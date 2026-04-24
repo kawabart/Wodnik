@@ -44,14 +44,14 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.018985212
-  m_TransitionOffset: 0.068259254
-  m_ExitTime: 0.5401298
+  m_TransitionDuration: 0.01451092
+  m_TransitionOffset: 0
+  m_ExitTime: 0.215238
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 0
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-9077204940600800356
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -94,9 +94,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.12937626
-  m_TransitionOffset: 0.11147541
-  m_ExitTime: 0.10168725
+  m_TransitionDuration: 0.1557377
+  m_TransitionOffset: 0.12600002
+  m_ExitTime: 0.103804365
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 1
@@ -327,7 +327,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: rig_enemy_AAA_attack
-  m_Speed: 3
+  m_Speed: 4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8202224142813313851}
@@ -354,8 +354,8 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BLOCK
-  m_Speed: 0.5
-  m_CycleOffset: 0
+  m_Speed: 1
+  m_CycleOffset: 0.1
   m_Transitions:
   - {fileID: -8638754037366386888}
   m_StateMachineBehaviours: []
@@ -367,7 +367,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9f5ec1470a2872348aabf9cae8f6bfbf, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9d6dea02b62718145b935f6c35f4b30b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -261,6 +261,7 @@ GameObject:
   - component: {fileID: 4884783026537327438}
   - component: {fileID: 7295801448177836606}
   - component: {fileID: 1715016410894010165}
+  - component: {fileID: 3100057209280679650}
   m_Layer: 7
   m_Name: Torch
   m_TagString: Untagged
@@ -410,6 +411,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Surface
   type: {fileID: 11400000, guid: 0c0d11609315c454297b80c15d2d8719, type: 2}
+--- !u!114 &3100057209280679650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8370742350168496654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshModifierVolume
+  m_SerializedVersion: 0
+  m_Size: {x: 15, y: 3, z: 15}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_Area: 5
+  m_AffectedAgents: ffffffff
 --- !u!1001 &7710005531046784807
 PrefabInstance:
   m_ObjectHideFlags: 0

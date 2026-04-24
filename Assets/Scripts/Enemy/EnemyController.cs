@@ -123,6 +123,7 @@ public class EnemyController : MonoBehaviour
     }
     #endregion
 
+    #region agitation
     public void IncreaseAgitation(float multiplier = 1)
     {
         agitationController.IncreaseAgitation(multiplier);
@@ -131,12 +132,18 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.DecreaseAgitation();
     }
+    #endregion
+
+    #region vulnerability
+    [SerializeField]
+    private float blockingAngle = 80;
     public bool TryBlocking()
     {
         if (!IsVulnerable())
         {
             Debug.Log("Attack blocked!");
             agitationController.IncreaseAgitation(100);
+            EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
             GetComponent<EnemyAnimationController>().Block();
             return true;
         }
@@ -150,8 +157,12 @@ public class EnemyController : MonoBehaviour
         if (CurrentState != EnemyState.Alive) return true;
         if (agitationController.AgitationState != AgitationState.Alarmed) return true;
         if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
+        //blocks if player is withing blocking angle from enemies facing direction
+        if (Vector3.Angle(player.transform.position - transform.position, transform.forward) > blockingAngle) return true;
         return false;
     }
+
+    #endregion
 
     private Rigidbody rigidBody;
     private BehaviorGraphAgent behaviorAgent;
@@ -159,6 +170,7 @@ public class EnemyController : MonoBehaviour
     private CapsuleCollider capsuleCollider;
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
+    private PlayerController player = null;
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -184,7 +196,7 @@ public class EnemyController : MonoBehaviour
         }
 
         animator = GetComponentInChildren<Animator>();
-
+        player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
     }

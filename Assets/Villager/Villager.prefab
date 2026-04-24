@@ -15402,6 +15402,7 @@ MonoBehaviour:
   downedCenter: {x: 0, y: 0.1, z: 0}
   DownedTime: 10
   downedTimer: 0
+  blockingAngle: 80
 --- !u!114 &4355304884184916963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15461,12 +15462,12 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.15
   m_Speed: 4.5
-  m_Acceleration: 15
+  m_Acceleration: 35
   avoidancePriority: 50
   m_AngularSpeed: 9999
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 0
+  m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 0.5
   m_BaseOffset: 0
@@ -15636,7 +15637,7 @@ MonoBehaviour:
   animator: {fileID: 2345566949072984734}
   pointA: {fileID: 3745930143036475342}
   pointB: {fileID: 2012412267910713999}
-  radius: 0.05
+  radius: 0.1
   weaponAttack: {fileID: 4587458057729143155}
   weaponRest: {fileID: 8582908713433859023}
   impulse: 0

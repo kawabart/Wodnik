@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1246124475404305107}
   - component: {fileID: 5170169563059860416}
   - component: {fileID: 24157654446940226}
+  - component: {fileID: 2274770792816444199}
+  - component: {fileID: 7267391690796602943}
   m_Layer: 7
   m_Name: DamageDealer
   m_TagString: Untagged
@@ -137,7 +139,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 0
-  damage: 1
+  increaseVelocityNeededForPlayer: 0
+  damage: 10
 --- !u!54 &5170169563059860416
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -161,7 +164,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 14
   m_CollisionDetection: 0
@@ -182,6 +185,40 @@ MonoBehaviour:
   m_Center: {x: 0, y: 0, z: 0}
   m_Area: 5
   m_AffectedAgents: ffffffff
+--- !u!114 &2274770792816444199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259091542404412480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbef91fdb11f2a47835719648881b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  onGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  onLetGo:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &7267391690796602943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1259091542404412480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dd394f4998283d4c92074abc9429eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pushable
+  onPush:
+    m_PersistentCalls:
+      m_Calls: []
+  rotateInPushDirection: 0
 --- !u!1 &1617577160625708257
 GameObject:
   m_ObjectHideFlags: 0
