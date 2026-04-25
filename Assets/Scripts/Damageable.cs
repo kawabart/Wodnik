@@ -27,6 +27,8 @@ public class Damageable : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
+        SoundEventSystem.Emit(transform.position, currentSurface.SoundRange, currentSurface.defaultDangerLevel);
+
         if (health <= 0)
             Die(currentSurface);
     }

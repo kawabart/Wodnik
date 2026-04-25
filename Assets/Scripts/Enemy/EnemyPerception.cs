@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyPerception : MonoBehaviour
+public class EnemyPerception : MonoBehaviour, ISoundListener
 {
     [SerializeField]
     private EnemyController enemyController;
@@ -35,6 +35,8 @@ public class EnemyPerception : MonoBehaviour
     [Tooltip("Distance in which the enemy detects player, even if they're hidden.")]
     public float NoticeHiddenPlayerDistance = .5f;
 
+    [SerializeField]
+    PercievedDangerLevels percievedDangerLevel = PercievedDangerLevels.None;
 
     [SerializeField]
     public Vector3? LastPlayerPosition = null;
@@ -62,14 +64,18 @@ public class EnemyPerception : MonoBehaviour
             {
                 LastPlayerPosition = player.transform.position;
                 PerceptionState = EnemyPerceptionState.PlayerInSight;
+                percievedDangerLevel = PercievedDangerLevels.Player;
             }
             else if (PerceptionState == EnemyPerceptionState.PlayerInSight)
             {
+                if (percievedDangerLevel == PercievedDangerLevels.Player)
+                    percievedDangerLevel = PercievedDangerLevels.MaybePlayer;
                 PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
             }
             else if (LastPlayerPosition == null)
             {
                 PerceptionState = EnemyPerceptionState.Idle;
+                percievedDangerLevel = PercievedDangerLevels.None;
 
             }
         }
@@ -104,6 +110,40 @@ public class EnemyPerception : MonoBehaviour
         }
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
+    }
+    public void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, Vector3 ?dangerPosition)
+    {
+        if (!canHear) return;
+        if (percievedDangerLevel > danger) return;
+        if (PerceptionState == EnemyPerceptionState.PlayerInSight) return;
+
+        if (dangerPosition == null) dangerPosition = position;
+        float agitationIncrement = 0;
+        float maxAgitationFromDanger = 100;
+        switch (danger)
+        {
+            case PercievedDangerLevels.Noise:
+                agitationIncrement = 20;
+                maxAgitationFromDanger = 50;
+                break;
+            case PercievedDangerLevels.Water:
+                agitationIncrement = 30;
+                break;
+            case PercievedDangerLevels.Distress:
+                agitationIncrement = 50;
+                break;
+            case PercievedDangerLevels.MaybePlayer:
+                agitationIncrement = 50;
+                break;
+            case PercievedDangerLevels.Player:
+                agitationIncrement = 100;
+                break;
+        }
+        enemyController.IncreaseAgitation(agitationIncrement, maxAgitationFromDanger);
+        PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
+        percievedDangerLevel = danger;
+        LastPlayerPosition = dangerPosition;
+
     }
     public void ActivateSenses()
     {

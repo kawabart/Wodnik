@@ -41,10 +41,11 @@ public class AgitationController : MonoBehaviour
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }
 
-    public void IncreaseAgitation(float multiplier)
+    public void IncreaseAgitation(float multiplier, float maxAgitationFromThis = 100)
     {
+        if (AgitationLevel > maxAgitationFromThis) return;
         var change = CurrentAgitationConfig.AgitationPositiveRate * multiplier * Time.deltaTime;
-        AgitationLevel = Mathf.Min(AgitationLevel + change, MaxAgitation);
+        AgitationLevel = Mathf.Min(AgitationLevel + change, maxAgitationFromThis);
         UpdateAgitation();
     }
 

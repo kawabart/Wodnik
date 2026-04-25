@@ -124,9 +124,9 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region agitation
-    public void IncreaseAgitation(float multiplier = 1)
+    public void IncreaseAgitation(float multiplier = 1,float maxAgitationFromThis = 100)
     {
-        agitationController.IncreaseAgitation(multiplier);
+        agitationController.IncreaseAgitation(multiplier, maxAgitationFromThis);
     }
     public void DecreaseAgitation()
     {
