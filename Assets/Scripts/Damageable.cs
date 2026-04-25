@@ -15,7 +15,6 @@ public class Damageable : MonoBehaviour, IDamageable
     public void TakeDamage(DamageData damageData)
     {
         int amount = damageData.Amount;
-       // if (amount < 1) return;
         onHurt.Invoke();
         health -= amount;
         SurfaceType currentSurface = surfaceType;
