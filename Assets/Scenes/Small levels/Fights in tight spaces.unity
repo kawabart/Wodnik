@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.0002
   m_LinearFogStart: 1.53
   m_LinearFogEnd: 3.86
-  m_AmbientSkyColor: {r: 0.26593092, g: 0.39788893, b: 0.6792453, a: 1}
+  m_AmbientSkyColor: {r: 0.0028034835, g: 0.13293192, b: 0.1981132, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
@@ -459,7 +459,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &60878379
@@ -907,7 +907,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &234938597
@@ -1066,7 +1066,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &248674947
@@ -1225,7 +1225,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &259732633
@@ -1444,7 +1444,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &284356692
@@ -1613,7 +1613,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &324450660
@@ -1907,7 +1907,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &378681580
@@ -2078,8 +2078,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 0.7216981, g: 0.90676665, b: 1, a: 1}
-  m_Intensity: 0.05
+  m_Color: {r: 0.5896226, g: 0.7437009, b: 1, a: 1}
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2592,7 +2592,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &626627034
@@ -2751,7 +2751,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &677772402
@@ -2910,7 +2910,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &718972277
@@ -3069,7 +3069,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &720789593
@@ -3228,7 +3228,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &744378355
@@ -3523,7 +3523,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &838405957
@@ -3804,7 +3804,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &886316056
@@ -4571,7 +4571,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &975100163
@@ -4873,7 +4873,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1001 &998482230
@@ -5011,7 +5011,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1003338881
@@ -5175,7 +5175,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1012809453
@@ -5339,7 +5339,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1050458639
@@ -5889,7 +5889,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1144863583
@@ -6048,7 +6048,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1153656668
@@ -6765,7 +6765,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1394615408
@@ -6929,7 +6929,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1465577755
@@ -7088,7 +7088,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1480129475
@@ -7252,7 +7252,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1510462441
@@ -7411,7 +7411,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1520631140
@@ -7639,7 +7639,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1562639578
@@ -7920,7 +7920,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1596392449
@@ -8486,7 +8486,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1694574337
@@ -8783,7 +8783,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1747757676
@@ -9118,7 +9118,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1783727729
@@ -9277,7 +9277,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1792506479
@@ -9537,7 +9537,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1839232789
@@ -9696,7 +9696,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1854184666
@@ -9855,7 +9855,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1902238694
@@ -10014,7 +10014,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1908513780
@@ -10295,7 +10295,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1955162144
@@ -10545,7 +10545,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &1995861713
@@ -10704,7 +10704,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &2009926509
@@ -10990,7 +10990,7 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
-  onDamage:
+  onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
 --- !u!65 &2126769084

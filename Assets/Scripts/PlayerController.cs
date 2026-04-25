@@ -336,8 +336,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         Vector3 forwardDirection = takedownTarget.forward;
         Vector3 upDirection = Vector3.up;
-        Quaternion targetRotation = Quaternion.LookRotation(-forwardDirection, upDirection);
-        SmoothAlignToTarget(takedownTarget.transform.position - takedownTarget.transform.forward * .2f, targetRotation, .5f);
+        Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
+        SmoothAlignToTarget(takedownTarget.transform.position + takedownTarget.transform.forward * .2f, targetRotation, .5f);
     }
     void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
     {
