@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 4780388431048752656}
   - component: {fileID: 8797479730542030774}
   - component: {fileID: 5341854413299382407}
+  - component: {fileID: 7986452314920438988}
+  - component: {fileID: -8583875206572929264}
+  - component: {fileID: -8834963306755177577}
   m_Layer: 11
   m_Name: DynamicRockSmall
   m_TagString: Untagged
@@ -30,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2211107352892776228}
@@ -65,7 +68,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5835002253674127275}
   serializedVersion: 5
-  m_Mass: 0.1
+  m_Mass: 0.5
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -113,6 +116,74 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   type: {fileID: 11400000, guid: dcb28e581464ed24c8b6bfbe39439773, type: 2}
+--- !u!114 &7986452314920438988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbef91fdb11f2a47835719648881b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  onGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  onLetGo:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-8583875206572929264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
+  minVelocityToDamage: 3
+  increaseVelocityNeededForPlayer: 2
+  damage: 0
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -8834963306755177577}
+        m_TargetAssemblyTypeName: Damageable, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: dcb28e581464ed24c8b6bfbe39439773, type: 2}
+          m_ObjectArgumentAssemblyTypeName: SurfaceType, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &-8834963306755177577
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  health: 1
+  DestroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6662237547938945770
 GameObject:
   m_ObjectHideFlags: 0
