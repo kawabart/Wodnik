@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
 
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? WalkingSpeed : SprintingSpeed), Acceleration * Time.fixedDeltaTime);
         if (isTakedown)
         {
             TakedownUpdate();
