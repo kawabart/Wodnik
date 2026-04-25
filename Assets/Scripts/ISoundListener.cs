@@ -2,7 +2,7 @@ using UnityEngine;
 
 public interface ISoundListener
 {
-    void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, Vector3 ?dangerPosition = null);
+    void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, GameObject source = null, Vector3? dangerPosition = null);
 }
 public enum PercievedDangerLevels
 {

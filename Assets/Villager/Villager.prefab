@@ -15428,6 +15428,7 @@ MonoBehaviour:
   PredictPlayerPositionTime: 0.1
   PredictPlayerPositionTimer: 0
   NoticeHiddenPlayerDistance: 0.5
+  percievedDangerLevel: 0
   canSee: 1
   canHear: 1
   canTouch: 1
@@ -15600,6 +15601,9 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 6
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2221496193607636872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15645,7 +15649,7 @@ MonoBehaviour:
   damage: 2
   mask:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 2432
   isAttacking: 0
   animator: {fileID: 2345566949072984734}
   pointA: {fileID: 3745930143036475342}

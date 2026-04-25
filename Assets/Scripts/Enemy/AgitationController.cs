@@ -25,6 +25,10 @@ public class AgitationController : MonoBehaviour
     {
         if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
         {
+            if (AgitationState != AgitationState.Alarmed)
+            {
+                //SoundEventSystem.Emit(transform.position, 3, PercievedDangerLevels.Distress,this.gameObject);
+            }
             CurrentAgitationConfig = AlarmedConfig;
             AgitationState = AgitationState.Alarmed;
         }

@@ -111,9 +111,10 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
-    public void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, Vector3 ?dangerPosition)
+    public void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, GameObject source = null, Vector3? dangerPosition = null)
     {
         if (!canHear) return;
+        if (source == this.gameObject) return;
         if (percievedDangerLevel > danger) return;
         if (PerceptionState == EnemyPerceptionState.PlayerInSight) return;
 
@@ -157,13 +158,13 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         canHear = false;
         canTouch = false;
     }
-    
+
     private bool DetectPlayer()
     {
         if (!canSee) return false;
         RaycastHit hit;
         Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f;
-        
+
         float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
         if (sqrDistance > SightDistance * SightDistance)
         {
@@ -179,7 +180,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
             return false;
         }
 
-        
+
         if (sqrDistance < NoticeHiddenPlayerDistance * NoticeHiddenPlayerDistance) return true;
 
         if (player.Hidden)
