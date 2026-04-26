@@ -3,7 +3,7 @@ using UnityEngine.Rendering;
 
 public static class SoundEventSystem
 {
-    public static void Emit(Vector3 position, float radius, PercievedDangerLevels type, GameObject source = null, Vector3 ? dangerPosition = null)
+    public static void Emit(Vector3 position, float radius, DangerLevel type, GameObject source = null, Vector3? dangerPosition = null)
     {
         Collider[] hits = Physics.OverlapSphere(position, radius);
         if (dangerPosition == null) dangerPosition = position;
@@ -13,7 +13,7 @@ public static class SoundEventSystem
             var listener = hit.GetComponent<ISoundListener>();
             if (listener != null)
             {
-                listener.OnSoundHeard(position, type, source=null, dangerPosition=null);
+                listener.OnSoundHeard(position, type, source, dangerPosition);
             }
         }
     }

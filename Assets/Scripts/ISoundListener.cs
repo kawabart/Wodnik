@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public interface ISoundListener
 {
-    void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, GameObject source = null, Vector3? dangerPosition = null);
+    void OnSoundHeard(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null);
 }
-public enum PercievedDangerLevels
+public enum DangerLevel
 {
     None,
     Noise, // any other noise

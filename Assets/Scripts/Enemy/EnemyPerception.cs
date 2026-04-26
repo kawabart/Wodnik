@@ -36,7 +36,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
     public float NoticeHiddenPlayerDistance = .5f;
 
     [SerializeField]
-    PercievedDangerLevels percievedDangerLevel = PercievedDangerLevels.None;
+    DangerLevel percievedDangerLevel = DangerLevel.None;
 
     [SerializeField]
     public Vector3? LastPlayerPosition = null;
@@ -64,18 +64,18 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
             {
                 LastPlayerPosition = player.transform.position;
                 PerceptionState = EnemyPerceptionState.PlayerInSight;
-                percievedDangerLevel = PercievedDangerLevels.Player;
+                percievedDangerLevel = DangerLevel.Player;
             }
             else if (PerceptionState == EnemyPerceptionState.PlayerInSight)
             {
-                if (percievedDangerLevel == PercievedDangerLevels.Player)
-                    percievedDangerLevel = PercievedDangerLevels.MaybePlayer;
+                if (percievedDangerLevel == DangerLevel.Player)
+                    percievedDangerLevel = DangerLevel.MaybePlayer;
                 PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
             }
             else if (LastPlayerPosition == null)
             {
                 PerceptionState = EnemyPerceptionState.Idle;
-                percievedDangerLevel = PercievedDangerLevels.None;
+                percievedDangerLevel = DangerLevel.None;
 
             }
         }
@@ -111,7 +111,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
-    public void OnSoundHeard(Vector3 position, PercievedDangerLevels danger, GameObject source = null, Vector3? dangerPosition = null)
+    public void OnSoundHeard(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
     {
         if (!canHear) return;
         if (source == this.gameObject) return;
@@ -121,26 +121,27 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         if (dangerPosition == null) dangerPosition = position;
         float agitationIncrement = 0;
         float maxAgitationFromDanger = 100;
+        //To do: move this functionality and values out of this method, so that they can be used elsewhere, not only by sound.
         switch (danger)
         {
-            case PercievedDangerLevels.Noise:
+            case DangerLevel.Noise:
                 agitationIncrement = 20;
                 maxAgitationFromDanger = 50;
                 break;
-            case PercievedDangerLevels.Water:
+            case DangerLevel.Water:
                 agitationIncrement = 40;
                 break;
-            case PercievedDangerLevels.Distress:
+            case DangerLevel.Distress:
                 agitationIncrement = 50;
                 break;
-            case PercievedDangerLevels.MaybePlayer:
-                agitationIncrement = 60;
+            case DangerLevel.MaybePlayer:
+                agitationIncrement = 80;
                 break;
-            case PercievedDangerLevels.Player:
+            case DangerLevel.Player:
                 agitationIncrement = 100;
                 break;
         }
-        enemyController.IncreaseAgitation(agitationIncrement, maxAgitationFromDanger);
+        enemyController.IncreaseAgitation(agitationIncrement, false, false, maxAgitationFromDanger);
         PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
         percievedDangerLevel = danger;
         LastPlayerPosition = dangerPosition;

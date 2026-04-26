@@ -7,6 +7,6 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        Instantiate(gameObjectToSpawn,transform.position, transform.rotation);
+        Instantiate(gameObjectToSpawn, transform.position, transform.rotation);
     }
 }

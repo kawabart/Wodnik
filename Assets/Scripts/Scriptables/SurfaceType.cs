@@ -7,6 +7,6 @@ public class SurfaceType : ScriptableObject
     public GameObject hitEffect;
 
     public float SoundRange = .5f;
-    public PercievedDangerLevels defaultDangerLevel = PercievedDangerLevels.None;
+    public DangerLevel defaultDangerLevel = DangerLevel.None;
     //public AudioClip hitSound;
 }

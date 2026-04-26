@@ -20,7 +20,6 @@ public class AgitationController : MonoBehaviour
         perception = GetComponent<EnemyPerception>();
         UpdateAgitation();
     }
-
     private void UpdateAgitation()
     {
         if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
@@ -28,10 +27,11 @@ public class AgitationController : MonoBehaviour
             if (AgitationState != AgitationState.Alarmed)
             {
                 AgitationState = AgitationState.Alarmed;
-                SoundEventSystem.Emit(transform.position, 3, PercievedDangerLevels.Distress,this.gameObject);
+                //Example of enemy informing other enemies about the location of the problem
+                SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
             }
             CurrentAgitationConfig = AlarmedConfig;
-            
+
         }
         else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
@@ -46,14 +46,21 @@ public class AgitationController : MonoBehaviour
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }
 
-    public void IncreaseAgitation(float multiplier, float maxAgitationFromThis = 100)
+    /// <summary>
+    /// Increases entity's agitation.
+    /// </summary>
+    /// <param name="input">Base increase to agitation.</param>
+    /// <param name="affectedByAgitationState">Should values from current agitation config should affect this increase?</param>
+    /// <param name="continous">Should this increase be affected by delta time (continous), or is it just one time input?.</param>
+    /// <param name="maxAgitationFromThis">This input won't increase agitation above said number.</param>
+    public void IncreaseAgitation(float input, bool affectedByAgitationState = true, bool continous = true, float maxAgitationFromThis = 100)
     {
         if (AgitationLevel > maxAgitationFromThis) return;
-        var change = CurrentAgitationConfig.AgitationPositiveRate * multiplier * Time.deltaTime;
-        AgitationLevel = Mathf.Min(AgitationLevel + change, maxAgitationFromThis);
+        if (continous) input *= Time.deltaTime;
+        if (affectedByAgitationState) input *= CurrentAgitationConfig.AgitationPositiveRate;
+        AgitationLevel = Mathf.Min(AgitationLevel + input, maxAgitationFromThis);
         UpdateAgitation();
     }
-
     public void DecreaseAgitation()
     {
         var change = CurrentAgitationConfig.AgitationNegativeRate * Time.deltaTime;
