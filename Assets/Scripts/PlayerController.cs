@@ -370,6 +370,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetBool("hidden", Hidden);
         animator.SetBool("isPushing", isPushing);
         animator.SetBool("isTakedown", isTakedown);
+        animator.SetBool("isMovementLocked", IsMovementLocked());
         GetGrabTarget();
     }
 

@@ -36,6 +36,7 @@ public class AgitationController : MonoBehaviour
                 shockTimer = shockTime;
                 AgitationState = AgitationState.Alarmed;
                 //Example of enemy informing other enemies about the location of the problem
+                SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
                 SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
             }
             if (shockTimer > 0)

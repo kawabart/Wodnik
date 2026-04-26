@@ -133,9 +133,10 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
                 break;
             case DangerLevel.Distress:
                 agitationIncrement = 50;
+                maxAgitationFromDanger = 90;
                 break;
             case DangerLevel.MaybePlayer:
-                agitationIncrement = 80;
+                agitationIncrement = 100;
                 break;
             case DangerLevel.Player:
                 agitationIncrement = 100;
