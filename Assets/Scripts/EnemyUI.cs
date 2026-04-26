@@ -36,8 +36,9 @@ public partial class EnemyUI : MonoBehaviour
             label.text = "";
             return;
         }
-
-        if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
+        if (agitationController.IsShocked())
+            label.text = "?!";
+        else if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
         {
             label.text = "...";
         }
@@ -49,6 +50,7 @@ public partial class EnemyUI : MonoBehaviour
         {
             label.text = "!";
         }
+        
 
         if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
         if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;

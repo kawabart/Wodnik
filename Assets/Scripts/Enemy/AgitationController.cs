@@ -17,7 +17,7 @@ public class AgitationController : MonoBehaviour
 
     private float shockTimer = 0;
     [SerializeField, Tooltip("Grace period where enemy is still vulnerable after entering Alerted state (in seconds)")]
-    private float shockTime = .5f;
+    private float shockTime = 1f;
     public bool IsShocked()
     {
         return shockTimer > 0;
