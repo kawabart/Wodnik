@@ -124,9 +124,16 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region agitation
-    public void IncreaseAgitation(float multiplier = 1)
+    /// <summary>
+    /// Increases entity's agitation.
+    /// </summary>
+    /// <param name="input">Base increase to agitation.</param>
+    /// <param name="affectedByAgitationState">Should values from current agitation config should affect this increase?</param>
+    /// <param name="continous">Should this increase be affected by delta time (continous), or is it just one time input?.</param>
+    /// <param name="maxAgitationFromThis">This input won't increase agitation above said number.</param>
+    public void IncreaseAgitation(float input, bool affectedByAgitationState = true, bool continous = true, float maxAgitationFromThis = 100)
     {
-        agitationController.IncreaseAgitation(multiplier);
+        agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
     public void DecreaseAgitation()
     {
@@ -142,7 +149,7 @@ public class EnemyController : MonoBehaviour
         if (!IsVulnerable())
         {
             Debug.Log("Attack blocked!");
-            agitationController.IncreaseAgitation(100);
+            agitationController.IncreaseAgitation(100,false,false);
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
             GetComponent<EnemyAnimationController>().Block();
             return true;

@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.0002
   m_LinearFogStart: 1.53
   m_LinearFogEnd: 3.86
-  m_AmbientSkyColor: {r: 0.26593092, g: 0.39788893, b: 0.6792453, a: 1}
+  m_AmbientSkyColor: {r: 0.0028034835, g: 0.13293192, b: 0.1981132, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 0
@@ -259,68 +259,6 @@ Transform:
   - {fileID: 1144863580}
   m_Father: {fileID: 934099374}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &54896350
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 934099374}
-    m_Modifications:
-    - target: {fileID: 208874659535124807, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_Name
-      value: RingOfFire
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.92
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
---- !u!4 &54896351 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8973202530386904727, guid: 2ead112c38b7ba04a8ebc22a2517b718, type: 3}
-  m_PrefabInstance: {fileID: 54896350}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &55625536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -459,6 +397,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &60878379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -759,6 +700,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: e56165ebb549cca4ebcb575c0e2044ce, type: 3}
   m_PrefabInstance: {fileID: 1099161328}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &206033831
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2074672426166381526, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_Name
+      value: DynamicRockSmall 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.9475251
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.000000042012488
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.8250237
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
 --- !u!1001 &208023084
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -904,6 +902,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &234938597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1060,6 +1061,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &248674947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1216,6 +1220,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &259732633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1432,6 +1439,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &284356692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1598,6 +1608,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &324450660
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1889,6 +1902,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &378681580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2057,8 +2073,8 @@ Light:
   m_Enabled: 1
   serializedVersion: 13
   m_Type: 1
-  m_Color: {r: 0.7216981, g: 0.90676665, b: 1, a: 1}
-  m_Intensity: 0.05
+  m_Color: {r: 0.5896226, g: 0.7437009, b: 1, a: 1}
+  m_Intensity: 0.1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -2571,6 +2587,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &626627034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2649,6 +2668,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626627030}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &662307251
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.5396123
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00000001756095
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.4491535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835002253674127275, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_Name
+      value: DynamicRockSmall (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
 --- !u!1 &677772398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2727,6 +2803,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &677772402
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2883,6 +2962,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &718972277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3039,6 +3121,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &720789593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3195,6 +3280,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &744378355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3487,6 +3575,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &838405957
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3765,6 +3856,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &886316056
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4049,7 +4143,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 589693085857358320, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.56
       objectReference: {fileID: 0}
     - target: {fileID: 589693085857358320, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4057,7 +4151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 589693085857358320, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.33
       objectReference: {fileID: 0}
     - target: {fileID: 589693085857358320, guid: bd5fd217cf496e349b7a6f38d4e0f141, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4171,7 +4265,6 @@ Transform:
   - {fileID: 577659014}
   - {fileID: 1038183701}
   - {fileID: 1819027080}
-  - {fileID: 54896351}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &942304782
@@ -4529,6 +4622,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &975100163
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4828,6 +4924,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &998482230
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4963,6 +5062,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1003338881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5124,6 +5226,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1012809453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5285,6 +5390,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1050458639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5832,6 +5940,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1144863583
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5988,6 +6099,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1153656668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6702,6 +6816,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1394615408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6863,6 +6980,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1465577755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7019,6 +7139,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1480129475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7180,6 +7303,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1510462441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7336,6 +7462,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1520631140
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7561,6 +7690,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1562639578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7839,6 +7971,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1596392449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8402,6 +8537,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1694574337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8696,6 +8834,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1747757676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9028,6 +9169,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1783727729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9184,6 +9328,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1792506479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9441,6 +9588,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1839232789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9597,6 +9747,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1854184666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9753,6 +9906,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1902238694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9909,6 +10065,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1908513780
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9987,6 +10146,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1908513776}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1917335688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2074672426166381526, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_Name
+      value: DynamicRockSmall 2 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.4252267
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000012689065
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.37174922
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7192700931604559436, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d5019b43d8f97f94dbdbe6e95b1ab7c2, type: 3}
 --- !u!1001 &1921641011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10187,6 +10403,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1955162144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10434,6 +10653,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &1995861713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10590,6 +10812,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2009926509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10668,6 +10893,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009926505}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &2018562821
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.2919781
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000000799496
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9106045
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3450104028632007217, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5835002253674127275, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
+      propertyPath: m_Name
+      value: DynamicRockSmall
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2f3d7ef97beb2947b538cf4acce2c03, type: 3}
 --- !u!1001 &2062681822
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10873,6 +11155,9 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &2126769084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11028,3 +11313,7 @@ SceneRoots:
   - {fileID: 934099374}
   - {fileID: 928574179}
   - {fileID: 1385266938}
+  - {fileID: 2018562821}
+  - {fileID: 206033831}
+  - {fileID: 662307251}
+  - {fileID: 1917335688}

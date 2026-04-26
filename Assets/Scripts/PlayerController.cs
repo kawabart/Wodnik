@@ -90,7 +90,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         if (IsMovementLocked()) moveInput = Vector3.zero;
 
-        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? SprintingSpeed : WalkingSpeed), Acceleration * Time.fixedDeltaTime);
+        rigidBody.linearVelocity = Vector3.MoveTowards(rigidBody.linearVelocity, moveInput * (sprintInput ? WalkingSpeed : SprintingSpeed), Acceleration * Time.fixedDeltaTime);
         if (isTakedown)
         {
             TakedownUpdate();
@@ -176,6 +176,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         UpdateAimDirection();
         animator.SetTrigger("push");
         Debug.Log("Pushing starts...");
+        if (hairController.Grabbed) hairController.GrabbedRb.MovePosition(transform.position + AimDirection.normalized * pushOffset);
     }
 
     public void ApplyPushForce()
@@ -184,7 +185,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 center = transform.position + transform.forward * pushOffset;
         Collider[] hits = Physics.OverlapSphere(center, pushRadius);
         Vector3 force = transform.forward * pushForce;
-
+        LetGo();
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<IPushable>(out var pushable))
@@ -192,7 +193,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 pushable.Push(force);
             }
         }
-
     }
 
     public void EndPush()
@@ -220,7 +220,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     void OnGrabLetGo(InputAction.CallbackContext ctx)
     {
         if (!IsGrabbing) return;
-
         LetGo();
     }
 
@@ -279,7 +278,6 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (targetedGrabObject == null) return;
         if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
             IsGrabbing = true;
-
     }
 
     void LetGo()
@@ -338,8 +336,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         Vector3 forwardDirection = takedownTarget.forward;
         Vector3 upDirection = Vector3.up;
-        Quaternion targetRotation = Quaternion.LookRotation(-forwardDirection, upDirection);
-        SmoothAlignToTarget(takedownTarget.transform.position - takedownTarget.transform.forward * .2f, targetRotation, .5f);
+        Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
+        SmoothAlignToTarget(takedownTarget.transform.position + takedownTarget.transform.forward * .2f, targetRotation, .5f);
     }
     void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
     {

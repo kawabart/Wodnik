@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Follower
   Target: {fileID: 8432645710390128237}
-  Offset: {x: 0, y: 0.02, z: 0}
+  Offset: {x: 0, y: 0.025, z: 0}
   SmoothTime: 0
   lateUpdate: 1
 --- !u!1 &2157511338164059800
@@ -519,7 +519,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   GrabDistance: 1
-  GrabAutoAim: 0.2
+  GrabAutoAim: 0.5
   IsGrabbing: 0
   targetedGrabObject: {fileID: 0}
   isTakedown: 0
@@ -571,7 +571,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.2
+  m_Radius: 0.1
   m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3365348062764258917
 MonoBehaviour:
@@ -589,8 +589,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 80
   checkOffsets:
-  - {x: 0, y: 0.05, z: 0.1}
-  - {x: 0, y: 0.05, z: -0.15}
+  - {x: 0, y: 0.05, z: 0.09}
+  - {x: 0, y: 0.05, z: -0.09}
   - {x: 0.05, y: 0.05, z: 0}
   - {x: -0.05, y: 0.05, z: 0}
   detectionSphereRadius: 0.05
@@ -624,7 +624,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   hairGenerator: {fileID: 2197120124417082117}
   defaultHairPosition: {fileID: 3244929055898141205}
-  grabbedRb: {fileID: 0}
+  GrabbedRb: {fileID: 0}
   Grabbed: 0
   springJoint: {fileID: 0}
 --- !u!114 &5605172680392529177
@@ -743,7 +743,7 @@ Transform:
   m_GameObject: {fileID: 8251382364123552091}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1446, z: -0.1658}
+  m_LocalPosition: {x: 0, y: 0.159, z: -0.1658}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7712,7 +7712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cd516935efcffb4ab25b74ef2d13e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  levelOfDarkening: 0.2
+  levelOfDarkening: 0.05
   playerController: {fileID: 5836883666691645028}
 --- !u!4 &8051520094044883430 stripped
 Transform:

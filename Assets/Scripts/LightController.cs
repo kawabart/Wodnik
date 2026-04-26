@@ -32,7 +32,7 @@ public class LightController : MonoBehaviour
     void Start()
     {
         lightComponent = GetComponent<Light>();
-        shadowCastingLayerMask = LayerMask.GetMask("Blockout");
+        shadowCastingLayerMask = LayerMask.GetMask("Blockout", "Dynamic");
         UpdateLight();
     }
     void UpdateLight()

@@ -15,7 +15,6 @@ public class Damageable : MonoBehaviour, IDamageable
     public void TakeDamage(DamageData damageData)
     {
         int amount = damageData.Amount;
-        if (amount < 1) return;
         onHurt.Invoke();
         health -= amount;
         SurfaceType currentSurface = surfaceType;
@@ -27,11 +26,13 @@ public class Damageable : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
+        SoundEventSystem.Emit(transform.position, currentSurface.SoundRange, currentSurface.defaultDangerLevel, this.gameObject);
+
         if (health <= 0)
             Die(currentSurface);
     }
 
-    void Die(SurfaceType currentSurface = null)
+    public void Die(SurfaceType currentSurface = null)
     {
         if (currentSurface != null)
             EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);

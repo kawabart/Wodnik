@@ -7,17 +7,17 @@ public class EnemyAnimationController : MonoBehaviour
 
     public void ChangeCombatState()
     {
-            EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
-            if (currentPerceptionState == EnemyPerceptionState.PlayerInSight)
-            {
-                animator.SetBool(isInCombatHash, true);
-                animator.SetBool(isInInvestigative, false);
-            }
-            else
-            {
-                animator.SetBool(isInCombatHash, false);
-                animator.SetBool(isInInvestigative, true);
-            }
+        EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
+        if (currentPerceptionState == EnemyPerceptionState.PlayerInSight)
+        {
+            animator.SetBool(isInCombatHash, true);
+            animator.SetBool(isInInvestigative, false);
+        }
+        else
+        {
+            animator.SetBool(isInCombatHash, false);
+            animator.SetBool(isInInvestigative, true);
+        }
     }
     public void Block()
     {
@@ -64,7 +64,7 @@ public class EnemyAnimationController : MonoBehaviour
 
     void Update()
     {
-        
+
         if (navMeshAgent.enabled)
         {
             float speed = navMeshAgent.velocity.magnitude;
