@@ -15,6 +15,13 @@ public class AgitationController : MonoBehaviour
 
     public float SuggestedSpeed = 5;
 
+    private float shockTimer = 0;
+    [SerializeField, Tooltip("Grace period where enemy is still vulnerable after entering Alerted state (in seconds)")]
+    private float shockTime = .5f;
+    public bool IsShocked()
+    {
+        return shockTimer > 0;
+    }
     void Start()
     {
         perception = GetComponent<EnemyPerception>();
@@ -26,10 +33,13 @@ public class AgitationController : MonoBehaviour
         {
             if (AgitationState != AgitationState.Alarmed)
             {
+                shockTimer = shockTime;
                 AgitationState = AgitationState.Alarmed;
                 //Example of enemy informing other enemies about the location of the problem
                 SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
             }
+            if (shockTimer > 0)
+                shockTimer -= Time.deltaTime;
             CurrentAgitationConfig = AlarmedConfig;
 
         }

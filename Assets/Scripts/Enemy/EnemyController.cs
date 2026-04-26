@@ -149,7 +149,7 @@ public class EnemyController : MonoBehaviour
         if (!IsVulnerable())
         {
             Debug.Log("Attack blocked!");
-            agitationController.IncreaseAgitation(100,false,false);
+            agitationController.IncreaseAgitation(100, false, false);
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
             GetComponent<EnemyAnimationController>().Block();
             return true;
@@ -166,6 +166,7 @@ public class EnemyController : MonoBehaviour
         if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
         //blocks if player is withing blocking angle from enemies facing direction
         if (Vector3.Angle(player.transform.position - transform.position, transform.forward) > blockingAngle) return true;
+        if (agitationController.IsShocked()) return true;
         return false;
     }
 
