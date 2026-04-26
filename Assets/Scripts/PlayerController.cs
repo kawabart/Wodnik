@@ -293,6 +293,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public bool isTakedown = false;
     public Transform takedownTarget = null;
     public float takedownRadius = .5f;
+    public float takedownSmooth = .5f;
     void OnTakedown(InputAction.CallbackContext ctx)
     {
         StartTakedown();
@@ -337,7 +338,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 forwardDirection = takedownTarget.forward;
         Vector3 upDirection = Vector3.up;
         Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
-        SmoothAlignToTarget(takedownTarget.transform.position + takedownTarget.transform.forward * .2f, targetRotation, .5f);
+        SmoothAlignToTarget(takedownTarget.transform.position + takedownTarget.transform.forward * .1f, targetRotation, takedownSmooth);
     }
     void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
     {

@@ -14,7 +14,7 @@ public class PlayerScaler : MonoBehaviour
     void Update()
     {
         if (playerController == null) return;
-        if (playerController.Hidden) transform.localScale = hiddenScale;
+        if (playerController.Hidden && !playerController.isTakedown) transform.localScale = hiddenScale;
         else transform.localScale = originalScale;
     }
 }
