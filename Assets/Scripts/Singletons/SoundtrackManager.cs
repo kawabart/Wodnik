@@ -11,6 +11,8 @@ public class SoundtrackManager : MonoBehaviour
     [SerializeField] private MusicLayer searchLayer;
     [SerializeField] private MusicLayer combatBgLayer;
     [SerializeField] private MusicLayer playerInSightLayer;
+    [SerializeField] private MusicLayer warcallLayer;
+    [SerializeField] private MusicLayer silentKillLayer;
     private void Awake()
     {
         Instance = this;
@@ -22,14 +24,16 @@ public class SoundtrackManager : MonoBehaviour
 
     void Update()
     {
-        if (playerController.Hidden== false) uncoverLayer.Activate();
+        if (playerController.Hidden == false) uncoverLayer.Activate();
         uncoverLayer.Tick(Time.deltaTime);
         combatLayer.Tick(Time.deltaTime);
         searchLayer.Tick(Time.deltaTime);
         combatBgLayer.Tick(Time.deltaTime);
         playerInSightLayer.Tick(Time.deltaTime);
+        warcallLayer.Tick(Time.deltaTime);
+        silentKillLayer.Tick(Time.deltaTime);
     }
-    public void ReportAgitation(float agitation, AgitationState agitationState, EnemyPerceptionState enemyPerceptionState)
+    public void ReportAgitation(float agitation, AgitationState agitationState, EnemyPerceptionState enemyPerceptionState, EnemyState enemyState = EnemyState.Alive)
     {
         if (agitationState == AgitationState.Alarmed)
         {
@@ -41,7 +45,15 @@ public class SoundtrackManager : MonoBehaviour
         {
             if (enemyPerceptionState == EnemyPerceptionState.PlayerInSight) playerInSightLayer.Activate();
         }
-        
+        if (enemyState == EnemyState.Dead)
+            if (combatLayer.IsActive())
+            {
+                warcallLayer.Activate();
+            }
+            else
+            {
+                silentKillLayer.Activate();
+            }
     }
 }
 [System.Serializable]
@@ -64,6 +76,7 @@ public class MusicLayer
     {
         active = true;
         timer = holdTime;
+        if (!source.loop) source.Play();
     }
 
     public void Deactivate()
@@ -73,7 +86,7 @@ public class MusicLayer
 
     public void Tick(float dt)
     {
-        
+
         timer -= dt;
 
 
@@ -81,5 +94,10 @@ public class MusicLayer
         float speed = (timer > 0f) ? fadeInSpeed : fadeOutSpeed;
 
         source.volume = Mathf.Lerp(source.volume, target, dt * speed);
+        if (source.volume < .01f) active = false;
+    }
+    public bool IsActive()
+    {
+        return active;
     }
 }
