@@ -13,6 +13,8 @@ public partial class GetSuggestedMoveSpeedAction : Action
 
     protected override Status OnStart()
     {
+        if (Object.Value == null)
+            return Status.Failure;
         var component = Object.Value.GetComponent<AgitationController>();
         if (component == null)
             return Status.Failure;
