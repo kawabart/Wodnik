@@ -1,5 +1,3 @@
-using System;
-using System.Net.NetworkInformation;
 using UnityEngine;
 using Unity.Behavior;
 
@@ -36,7 +34,6 @@ public class EnemyController : MonoBehaviour
         const int downedDirection = 2; // 2 = Z axis
         Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
 
-        CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
             capsuleCollider.height = aliveHeight;
@@ -57,7 +54,7 @@ public class EnemyController : MonoBehaviour
             animator.SetTrigger("GetUp");
             Debug.Log("Enemy recovered from being downed");
         }
-        else if (newState == EnemyState.Downed)
+        else if (newState == EnemyState.Downed || newState == EnemyState.Dragged)
         {
             downedTimer = DownedTime;
 
@@ -77,7 +74,8 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
 
-            animator.SetTrigger("Downed");
+            if (CurrentState != EnemyState.Downed && CurrentState != EnemyState.Dragged)
+                animator.SetTrigger("Downed");
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -95,18 +93,27 @@ public class EnemyController : MonoBehaviour
             animator.SetTrigger("Killed");
             Debug.Log("Enemy is dead.");
         }
+        CurrentState = newState;
     }
     #endregion
 
     #region downed
     [Header("Timer settings")]
     public float DownedTime = 10f;
+
     [SerializeField]
     private float downedTimer = 0;
+
     public void BecomeDowned()
     {
         if (CurrentState == EnemyState.Dead) return;
         ChangeState(EnemyState.Downed);
+    }
+
+    public void BecomeDragged()
+    {
+        if (CurrentState == EnemyState.Dead) return;
+        ChangeState(EnemyState.Dragged);
     }
 
     public void TurnPhysicsOff()
@@ -135,6 +142,7 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
+
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
@@ -144,6 +152,7 @@ public class EnemyController : MonoBehaviour
     #region vulnerability
     [SerializeField]
     private float blockingAngle = 80;
+
     public bool TryBlocking()
     {
         if (!IsVulnerable())
@@ -156,6 +165,7 @@ public class EnemyController : MonoBehaviour
         }
         else return false;
     }
+
     public bool IsVulnerable()
     {
         //enemy has no weapon
@@ -179,13 +189,9 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
-    public AgitationStateConfig CurrentAgitationConfig
-    {
-        get
-        {
-            return agitationController.CurrentAgitationConfig;
-        }
-    }
+
+    public AgitationStateConfig CurrentAgitationConfig => agitationController.CurrentAgitationConfig;
+
     private Animator animator;
 
     void Start()

@@ -2,25 +2,33 @@ using UnityEngine;
 
 public class HairController : MonoBehaviour
 {
-    [SerializeField] HairGenerator hairGenerator;
-    private PlayerController playerController;
+    [SerializeField]
+    private HairGenerator hairGenerator;
+
     private Rigidbody rigidBody;
+
     [SerializeField, Tooltip("Default position that hair end lerps to when it isn't attached to anything.")]
     private Transform defaultHairPosition;
+
     [SerializeField, Tooltip("Rigidbody of object that's currently grabbed by the hair. When null, hair returns to their default position. Drag and drop rigidbody to attach it.")]
     public Rigidbody GrabbedRb;
+
     public bool Grabbed = false;
+
     [SerializeField, Tooltip("Spring joint thats dynamically created (and removed) to attach rb thats grabbed by hair.")]
     private SpringJoint springJoint;
+
     public void Probe(Vector3 probeLocation)
     {
         hairGenerator.endpoint.transform.position = probeLocation;
     }
+
     public void Grab(Rigidbody rb)
     {
         GrabbedRb = rb;
-        hairGenerator.endpoint.GetComponent<Follower>().Target = rb.transform;
-        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = 0f;
+        Follower followerComponent = hairGenerator.endpoint.GetComponent<Follower>();
+        followerComponent.Target = rb.transform;
+        followerComponent.SmoothTime = 0f;
         hairGenerator.noiseAmplitude = .1f;
         springJoint = this.gameObject.AddComponent<SpringJoint>();
         springJoint.connectedBody = rb;
@@ -29,12 +37,12 @@ public class HairController : MonoBehaviour
         springJoint.connectedMassScale = 5;
         hairGenerator.maxDistance = 1;
         //to do: endsize can change based on dimensions of grabbed object.
-        var cols = GrabbedRb.GetComponentsInChildren<Collider>();
+        var colliderComponents = GrabbedRb.GetComponentsInChildren<Collider>();
 
-        Bounds bounds = cols[0].bounds;
-        for (int i = 1; i < cols.Length; i++)
+        Bounds bounds = colliderComponents[0].bounds;
+        for (int i = 1; i < colliderComponents.Length; i++)
         {
-            bounds.Encapsulate(cols[i].bounds);
+            bounds.Encapsulate(colliderComponents[i].bounds);
         }
 
         float minObjectSize = Mathf.Min(bounds.size.x, bounds.size.y, bounds.size.z);
@@ -45,8 +53,9 @@ public class HairController : MonoBehaviour
     public void LetGo()
     {
         GrabbedRb = null;
-        hairGenerator.endpoint.GetComponent<Follower>().Target = defaultHairPosition;
-        hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .08f;
+        Follower followerComponent = hairGenerator.endpoint.GetComponent<Follower>();
+        followerComponent.Target = defaultHairPosition;
+        followerComponent.SmoothTime = .08f;
         hairGenerator.noiseAmplitude = .25f;
         hairGenerator.endSize = .2f;
         if (springJoint)
@@ -71,14 +80,21 @@ public class HairController : MonoBehaviour
     void Update()
     {
         if (!Grabbed)
+        {
             hairGenerator.noiseSpeed = .5f + rigidBody.linearVelocity.magnitude / 2;
+        }
         else
+        {
             hairGenerator.noiseSpeed = .2f;
+        }
 
         if (GrabbedRb != null && !Grabbed && springJoint == null)
+        {
             Grab(GrabbedRb);
+        }
         else if ((GrabbedRb == null && Grabbed) || (GrabbedRb != null && !Grabbed))
+        {
             LetGo();
+        }
     }
-
 }

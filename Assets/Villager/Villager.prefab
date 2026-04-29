@@ -15259,7 +15259,6 @@ GameObject:
   - component: {fileID: 4355304884184916963}
   - component: {fileID: 2494889435573344884}
   - component: {fileID: 7859215246814110254}
-  - component: {fileID: 521171310936937621}
   - component: {fileID: 7310089526607221230}
   - component: {fileID: 4045360216403811788}
   - component: {fileID: 1117001239175903178}
@@ -15476,20 +15475,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &521171310936937621
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729769001911704819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f61915f0e347d14aa1e888a16fd149f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Timer
-  time: 0
-  enable: 0
 --- !u!114 &7310089526607221230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15622,7 +15607,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7635132580727919465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
-        m_MethodName: BecomeDowned
+        m_MethodName: BecomeDragged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15634,7 +15619,19 @@ MonoBehaviour:
         m_CallState: 2
   onLetGo:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: BecomeDowned
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-120603478097856523
 MonoBehaviour:
   m_ObjectHideFlags: 0

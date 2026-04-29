@@ -26,7 +26,7 @@ public partial class EnemyUI : MonoBehaviour
     void Update()
     {
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
-        if (enemyController.CurrentState == EnemyState.Downed)
+        if (enemyController.CurrentState == EnemyState.Downed || enemyController.CurrentState == EnemyState.Dragged)
         {
             label.text = "zzZ";
             return;

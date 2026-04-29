@@ -185,7 +185,8 @@ public class PlayerController : MonoBehaviour, IDamageable
         Vector3 center = transform.position + transform.forward * pushOffset;
         Collider[] hits = Physics.OverlapSphere(center, pushRadius);
         Vector3 force = transform.forward * pushForce;
-        LetGo();
+        if (IsGrabbing)
+            LetGo();
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<IPushable>(out var pushable))
@@ -224,6 +225,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
     public Transform targetedGrabObject = null;
+    private IGrabbable grabbedObject = null;
     Vector3 targetPoint = Vector3.zero;
 
     void GetGrabTarget()
@@ -254,20 +256,15 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         Collider[] hits = Physics.OverlapSphere(targetPoint, GrabAutoAim);
 
-        bool foundGrabbable = false;
+        targetedGrabObject = null;
         foreach (var hit in hits)
         {
-            if (foundGrabbable) continue;
-            if (hit.TryGetComponent<IGrabbable>(out var grabbable))
+            if (hit.TryGetComponent<IGrabbable>(out _))
             {
-
-                foundGrabbable = true;
                 targetedGrabObject = hit.transform;
-
+                return;
             }
         }
-
-        if (!foundGrabbable) targetedGrabObject = null;
     }
 
     void Grab()
@@ -277,13 +274,18 @@ public class PlayerController : MonoBehaviour, IDamageable
         if (targetedGrabObject == null) GetGrabTarget();
         if (targetedGrabObject == null) return;
         if (targetedGrabObject.GetComponent<IGrabbable>().Grab(hairController))
+        {
+            grabbedObject = targetedGrabObject.GetComponent<IGrabbable>();
             IsGrabbing = true;
+        }
     }
 
     void LetGo()
     {
         Debug.Log("Grab ends.");
-        hairController.LetGo();
+        targetedGrabObject = null;
+        grabbedObject.LetGo(hairController);
+        grabbedObject = null;
         IsGrabbing = false;
     }
     #endregion
@@ -318,7 +320,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             if (hit.TryGetComponent<EnemyController>(out var enemy))
             {
-                if (enemy.CurrentState == EnemyState.Downed)
+                if (enemy.CurrentState == EnemyState.Downed || enemy.CurrentState == EnemyState.Dragged)
                 {
                     takedownTarget = enemy.transform;
                     enemy.TurnPhysicsOff();

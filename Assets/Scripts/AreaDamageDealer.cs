@@ -15,7 +15,7 @@ public class AreaDamageDealer : MonoBehaviour
         if (!affectPlayer && other.GetComponent<PlayerController>()) return;
 
         var enemy = other.GetComponent<EnemyController>();
-        if (affectOnlyDowned && enemy != null && enemy.CurrentState != EnemyState.Downed)
+        if (affectOnlyDowned && enemy != null && enemy.CurrentState != EnemyState.Downed && enemy.CurrentState != EnemyState.Dragged)
             return;
 
         damageable.TakeDamage(new DamageData(damage, overrideSurface));
