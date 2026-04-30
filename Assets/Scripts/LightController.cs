@@ -79,10 +79,13 @@ public class LightController : MonoBehaviour
     private bool IsObscured(Vector3 target)
     {
         Vector3 direction = target - transform.position;
-        RaycastHit hit;
-        if (!Physics.Raycast(target, direction, out hit, direction.magnitude, shadowCastingLayerMask))
-            return false;
-        return true;
+        float distance = direction.magnitude;
+        direction.Normalize();
+
+        if (Physics.Raycast(transform.position, direction, distance, shadowCastingLayerMask))
+            return true;
+
+        return false;
     }
     private bool IsAngleRight(Vector3 target)
     {
