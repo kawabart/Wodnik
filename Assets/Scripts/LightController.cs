@@ -125,6 +125,7 @@ public class LightController : MonoBehaviour
 
     public void KillLight()
     {
+        isOn = false;
         lightComponent.enabled = false;
     }
 }
