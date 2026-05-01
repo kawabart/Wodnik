@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 8797479730542030774}
   - component: {fileID: 5341854413299382407}
   - component: {fileID: 3107227084606748351}
-  - component: {fileID: 8863141427955254666}
   m_Layer: 11
   m_Name: Weapon
   m_TagString: Untagged
@@ -84,10 +83,10 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.11719489, y: 0.04683453, z: 0.16186512}
-  m_Center: {x: -0.0016845763, y: 0.0021244287, z: 0.35859913}
+  m_Size: {x: 0.08756772, y: 0.013477877, z: 0.7193389}
+  m_Center: {x: -0.0030312687, y: 0.0021244287, z: 0.07986224}
 --- !u!114 &7629426649380350056
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,29 +184,6 @@ MonoBehaviour:
   onLetGo:
     m_PersistentCalls:
       m_Calls: []
---- !u!136 &8863141427955254666
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5835002253674127275}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.025
-  m_Height: 0.7395185
-  m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0.07975924}
 --- !u!1001 &3873075568828275500
 PrefabInstance:
   m_ObjectHideFlags: 0
