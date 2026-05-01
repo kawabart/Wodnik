@@ -6,7 +6,7 @@ public class Pushable : MonoBehaviour, IPushable
 {
     public UnityEvent onPush;
     private Rigidbody rb;
-    public bool rotateInPushDirection = false;
+    public int rotateInPushDirection = 0;
 
     private EnemyController enemyController;
     void Start()
@@ -24,9 +24,9 @@ public class Pushable : MonoBehaviour, IPushable
         }
         Debug.Log("I am pushed!");
         if (rb.isKinematic) rb.isKinematic = false;
-        if (rotateInPushDirection)
+        if (rotateInPushDirection !=0)
         {
-            rb.MoveRotation(Quaternion.LookRotation(force));
+            rb.MoveRotation(Quaternion.LookRotation(rotateInPushDirection * force));
         }
         rb.AddForce(force, ForceMode.Impulse);
         onPush.Invoke();
