@@ -1,0 +1,45 @@
+using UnityEditor;
+using UnityEngine;
+
+public class EnemyAppearance : MonoBehaviour
+{
+    [SerializeField] private Mesh[] beards;
+    [SerializeField] private Mesh[] hair;
+    [SerializeField] private Mesh[] moustaches;
+    [SerializeField] private SkinnedMeshRenderer beardMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer hairMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer moustacheMeshRenderer;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        RandomizeMeshes(beardMeshRenderer, beards);
+        RandomizeMeshes(hairMeshRenderer, hair);
+        RandomizeMeshes(moustacheMeshRenderer, moustaches);
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void RandomizeMeshes(SkinnedMeshRenderer meshRenderer, Mesh[] meshes)
+    {
+        if (!meshRenderer)
+            return;
+
+        if (meshes == null || meshes.Length == 0)
+        {
+            meshRenderer.sharedMesh = null;
+            meshRenderer.enabled = false;
+            return;
+        }
+
+        Mesh mesh = meshes[Random.Range(0, meshes.Length)];
+
+        meshRenderer.sharedMesh = mesh;
+        meshRenderer.enabled = mesh;
+    }
+}
