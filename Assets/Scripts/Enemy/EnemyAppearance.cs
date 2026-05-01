@@ -19,17 +19,11 @@ public class EnemyAppearance : MonoBehaviour
         RandomizeMeshes(hairMeshRenderer, hair);
         RandomizeMeshes(moustacheMeshRenderer, moustaches);
         Material hairMaterial = materials[Random.Range(0, materials.Length)];
-        Material clothesMaterial = materials[Random.Range(0, materials.Length)];
+        Material clothesMaterial = materials[0];//didn't like them too colorfull
         bodyMeshRenderer.sharedMaterial = clothesMaterial;
         beardMeshRenderer.sharedMaterial = hairMaterial;
         moustacheMeshRenderer.sharedMaterial = hairMaterial;
         hairMeshRenderer.sharedMaterial = hairMaterial;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void RandomizeMeshes(SkinnedMeshRenderer meshRenderer, Mesh[] meshes)
