@@ -9,6 +9,8 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer beardMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer hairMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer moustacheMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
+    [SerializeField] Material[] materials;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -16,7 +18,12 @@ public class EnemyAppearance : MonoBehaviour
         RandomizeMeshes(beardMeshRenderer, beards);
         RandomizeMeshes(hairMeshRenderer, hair);
         RandomizeMeshes(moustacheMeshRenderer, moustaches);
-
+        Material hairMaterial = materials[Random.Range(0, materials.Length)];
+        Material clothesMaterial = materials[Random.Range(0, materials.Length)];
+        bodyMeshRenderer.sharedMaterial = clothesMaterial;
+        beardMeshRenderer.sharedMaterial = hairMaterial;
+        moustacheMeshRenderer.sharedMaterial = hairMaterial;
+        hairMeshRenderer.sharedMaterial = hairMaterial;
     }
 
     // Update is called once per frame
