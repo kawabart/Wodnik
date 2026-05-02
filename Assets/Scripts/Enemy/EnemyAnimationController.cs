@@ -33,7 +33,7 @@ public class EnemyAnimationController : MonoBehaviour
     private AgitationController agitationController;
     private BehaviorGraphAgent behaviorAgent;
     private Animator animator;
-    private MeleeDamageDealer meleeDamageDealer;
+    private EnemyWeapon meleeDamageDealer;
     private int isInCombatHash;
     private int isInInvestigative;
     private int attackHash;
@@ -52,7 +52,7 @@ public class EnemyAnimationController : MonoBehaviour
         enemyPerception = GetComponent<EnemyPerception>();
         agitationController = GetComponent<AgitationController>();
         animator = GetComponentInChildren<Animator>();
-        meleeDamageDealer = GetComponent<MeleeDamageDealer>();
+        meleeDamageDealer = GetComponent<EnemyWeapon>();
         isInCombatHash = Animator.StringToHash("IsInCombat");
         isInInvestigative = Animator.StringToHash("IsInInvestigative");
         attackHash = Animator.StringToHash("Attack");

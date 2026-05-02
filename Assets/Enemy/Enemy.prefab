@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 2221496193607636872}
   - component: {fileID: -120603478097856523}
   - component: {fileID: 3484863596789031813}
-  - component: {fileID: 442502885161504546}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -443,9 +442,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 442502885161504546}
-        m_TargetAssemblyTypeName: Spawner, Assembly-CSharp
-        m_MethodName: Spawn
+      - m_Target: {fileID: -120603478097856523}
+        m_TargetAssemblyTypeName: EnemyWeapon, Assembly-CSharp
+        m_MethodName: DropWeapon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -542,21 +541,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2729769001911704819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57dee24b254a3df46b25e5d30a33d505, type: 3}
+  m_Script: {fileID: 11500000, guid: 9938fb4fe87ca5b429c5a6f30304be27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  damage: 2
+  damage: 1
   mask:
     serializedVersion: 2
     m_Bits: 2432
   isAttacking: 0
-  animator: {fileID: 1369768376345108921}
-  pointA: {fileID: 3745930143036475342}
-  pointB: {fileID: 2012412267910713999}
-  radius: 0.1
-  weaponAttack: {fileID: 4587458057729143155}
-  weaponRest: {fileID: 8582908713433859023}
-  impulse: 0
+  weaponScriptable: {fileID: 0}
+  weaponInHands: {fileID: 0}
+  radius: 0.5
+  weaponSlot: {fileID: 5493079808686513980}
 --- !u!114 &3484863596789031813
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -569,19 +565,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d385187efcf64a86e8d460010ea80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationController
---- !u!114 &442502885161504546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729769001911704819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 915b09ae047c1a24caf97a87b935ea4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Spawner
-  gameObjectToSpawn: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
 --- !u!1 &3128758144825413435
 GameObject:
   m_ObjectHideFlags: 0
@@ -952,6 +935,10 @@ PrefabInstance:
     - target: {fileID: 5849952938276184639, guid: a3db6639b3515e94883f7e12f5f1b9a1, type: 3}
       propertyPath: m_Name
       value: Weapon Fork
+      objectReference: {fileID: 0}
+    - target: {fileID: 5849952938276184639, guid: a3db6639b3515e94883f7e12f5f1b9a1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
