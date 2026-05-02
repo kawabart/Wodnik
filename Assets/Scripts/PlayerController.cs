@@ -167,6 +167,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     void OnPush(InputAction.CallbackContext ctx)
     {
         Push();
+        animator.SetTrigger("Mashing");
     }
 
     void Push()
@@ -297,6 +298,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     void OnTakedown(InputAction.CallbackContext ctx)
     {
         StartTakedown();
+        animator.SetTrigger("Mashing");
     }
 
     void StartTakedown()
@@ -321,6 +323,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 if (enemy.CurrentState == EnemyState.Downed)
                 {
                     takedownTarget = enemy.transform;
+                    enemy.BecomeDominated();
                     enemy.TurnPhysicsOff();
                     return true;
                 }
@@ -347,7 +350,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     public void KillTakedownTarget()
     {
-        takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(10));
+        Debug.Log("Taking down -1");
+        takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(1));
     }
     #endregion
 

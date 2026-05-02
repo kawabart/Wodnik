@@ -13,10 +13,12 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer helmetMeshRenderer;
     [SerializeField] Material[] materials;
+    Damageable damageable;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        damageable = GetComponentInParent<Damageable>();
         RandomizeMeshes(beardMeshRenderer, beards);
         RandomizeMeshes(hairMeshRenderer, hair);
         RandomizeMeshes(moustacheMeshRenderer, moustaches);
@@ -28,6 +30,10 @@ public class EnemyAppearance : MonoBehaviour
         moustacheMeshRenderer.sharedMaterial = hairMaterial;
         hairMeshRenderer.sharedMaterial = hairMaterial;
         helmetMeshRenderer.sharedMaterial = clothesMaterial;
+    }
+    private void Update()
+    {
+        if (damageable != null && damageable.health<=1) helmetMeshRenderer.enabled = false;
     }
 
     private void RandomizeMeshes(SkinnedMeshRenderer meshRenderer, Mesh[] meshes)

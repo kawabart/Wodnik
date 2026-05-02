@@ -18,12 +18,12 @@ public class Damageable : MonoBehaviour, IDamageable
         int amount = damageData.Amount;
         onHurt.Invoke();
         health -= amount;
+
         SurfaceType currentSurface = surfaceType;
         if (health>1 && armorSurface != null) currentSurface = armorSurface;
 
         if (damageData.OverrideSurface != null)
             currentSurface = damageData.OverrideSurface;
-
 
         if (surfaceType != null)
             EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);

@@ -466,6 +466,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: -7647388167650857081, guid: be6550935fc2af44c95152978c5c6d89, type: 3}
   - {fileID: 4488648699686667826, guid: be6550935fc2af44c95152978c5c6d89, type: 3}
+  helmets: []
   beardMeshRenderer: {fileID: 6740928068448383843}
   hairMeshRenderer: {fileID: 1442015494975017106}
   moustacheMeshRenderer: {fileID: 4618825210334790521}
@@ -3020,6 +3021,7 @@ MonoBehaviour:
   downedCenter: {x: 0, y: 0.1, z: 0}
   DownedTime: 5
   downedTimer: 0
+  IsDominated: 0
   blockingAngle: 80
 --- !u!114 &4355304884184916963
 MonoBehaviour:
@@ -3177,6 +3179,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  armorSurface: {fileID: 0}
 --- !u!114 &1117001239175903178
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3237,9 +3240,33 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: BecomeDominated
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLetGo:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7635132580727919465}
+        m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
+        m_MethodName: StopBeingDominated
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-120603478097856523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7568,7 +7595,7 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 7827734662751291282, guid: be6550935fc2af44c95152978c5c6d89, type: 3}
+  m_Mesh: {fileID: 0}
   m_Bones:
   - {fileID: 8951138105992698293}
   - {fileID: 5658220002531714147}

@@ -44,6 +44,12 @@ public class HairController : MonoBehaviour
 
     public void LetGo()
     {
+        if (GrabbedRb!= null)
+        {
+            IGrabbable grabbable = GrabbedRb?.GetComponent<IGrabbable>();
+            if (grabbable != null) grabbable.LetGo(this);
+        }
+        
         GrabbedRb = null;
         hairGenerator.endpoint.GetComponent<Follower>().Target = defaultHairPosition;
         hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .08f;

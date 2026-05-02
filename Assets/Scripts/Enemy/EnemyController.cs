@@ -103,10 +103,20 @@ public class EnemyController : MonoBehaviour
     public float DownedTime = 10f;
     [SerializeField]
     private float downedTimer = 0;
+    public bool IsDominated = false;
     public void BecomeDowned()
     {
-        if (CurrentState == EnemyState.Dead) return;
+        if (CurrentState != EnemyState.Alive) return;
         ChangeState(EnemyState.Downed);
+    }
+
+    public void BecomeDominated()
+    {
+        IsDominated = true;
+    }
+    public void StopBeingDominated()
+    {
+        IsDominated = false;
     }
 
     public void TurnPhysicsOff()
@@ -236,6 +246,8 @@ public class EnemyController : MonoBehaviour
     {
         if (downedTimer <= 0)
             ChangeState(EnemyState.Alive);
+        else if (IsDominated)
+            downedTimer = Math.Max(downedTimer,1);
         else
             downedTimer -= Time.deltaTime;
     }
