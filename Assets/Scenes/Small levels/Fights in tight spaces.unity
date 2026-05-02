@@ -710,11 +710,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &60878379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2001,11 +2003,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &234938597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2165,11 +2169,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &248674947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2339,11 +2345,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &259732633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2685,11 +2693,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &284356692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3324,11 +3334,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &378681580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5007,11 +5019,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &626627034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5422,11 +5436,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &718972277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5581,11 +5597,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &720789593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5802,11 +5820,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &744378355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6950,11 +6970,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &886316056
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7785,11 +7807,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e56165ebb549cca4ebcb575c0e2044ce, type: 3}
---- !u!4 &978264254 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-  m_PrefabInstance: {fileID: 1834961258}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &982093161
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7993,11 +8010,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1003338881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8157,11 +8176,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1012809453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8516,11 +8537,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1050458639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9183,11 +9206,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1153656668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9333,7 +9358,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.37
+      value: 11.74
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9341,7 +9366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.1800003
+      value: -2.14
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10390,7 +10415,6 @@ Transform:
   - {fileID: 1634558945}
   - {fileID: 479084628}
   - {fileID: 1063651293}
-  - {fileID: 978264254}
   - {fileID: 1282441459}
   - {fileID: 1295321509}
   - {fileID: 1938623577}
@@ -10568,11 +10592,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1394615408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10661,7 +10687,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.87
+      value: 7.81
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.y
@@ -10669,7 +10695,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.3199997
+      value: 1.23
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10929,11 +10955,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1465577755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11093,11 +11121,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1480129475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11272,11 +11302,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1510462441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11768,11 +11800,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1596392449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12513,7 +12547,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.62
+      value: 7.79
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.y
@@ -12521,7 +12555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.3199997
+      value: 2.55
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalRotation.w
@@ -12771,11 +12805,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1694574337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13270,11 +13306,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1747757676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13658,11 +13696,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1783727729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13817,11 +13857,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1792506479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14141,66 +14183,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c646e904fcb43f40b69a6388136f4a8, type: 3}
---- !u!1001 &1834961258
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1385266938}
-    m_Modifications:
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.5699997
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2729769001911704819, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      propertyPath: m_Name
-      value: Villager (40)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7425853477990797489, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-  m_SourcePrefab: {fileID: 100100000, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
 --- !u!4 &1835591512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: e56165ebb549cca4ebcb575c0e2044ce, type: 3}
@@ -14282,11 +14264,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1839232789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14503,11 +14487,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1854184666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14846,11 +14832,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1902238694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15005,11 +14993,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1908513780
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15539,11 +15529,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &1995861713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15833,11 +15825,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &2009926509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16097,7 +16091,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.87
+      value: 7.73
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.y
@@ -16105,7 +16099,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.5699997
+      value: 4.34
       objectReference: {fileID: 0}
     - target: {fileID: 250170677214683953, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: m_LocalRotation.w
@@ -16751,11 +16745,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!65 &2126769084
 BoxCollider:
   m_ObjectHideFlags: 0
