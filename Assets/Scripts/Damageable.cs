@@ -8,6 +8,7 @@ public class Damageable : MonoBehaviour, IDamageable
     public bool DestroyOnDeath = true;
     public UnityEvent onDeath;
     public UnityEvent onHurt;
+    public SurfaceType armorSurface;
     void Start()
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
@@ -18,8 +19,11 @@ public class Damageable : MonoBehaviour, IDamageable
         onHurt.Invoke();
         health -= amount;
         SurfaceType currentSurface = surfaceType;
+        if (health>1 && armorSurface != null) currentSurface = armorSurface;
+
         if (damageData.OverrideSurface != null)
             currentSurface = damageData.OverrideSurface;
+
 
         if (surfaceType != null)
             EffectSpawner.Instance.SpawnHit(transform.position, currentSurface);
