@@ -54,7 +54,7 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
 
-            animator.SetTrigger("GetUp");
+            animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
@@ -77,7 +77,7 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
 
-            animator.SetTrigger("Downed");
+            animator.SetBool("Downed", true);
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
