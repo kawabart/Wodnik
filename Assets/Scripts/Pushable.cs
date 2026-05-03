@@ -24,7 +24,7 @@ public class Pushable : MonoBehaviour, IPushable
         }
         Debug.Log("I am pushed!");
         if (rb.isKinematic) rb.isKinematic = false;
-        if (rotateInPushDirection !=0)
+        if (rotateInPushDirection != 0)
         {
             rb.MoveRotation(Quaternion.LookRotation(rotateInPushDirection * force));
         }

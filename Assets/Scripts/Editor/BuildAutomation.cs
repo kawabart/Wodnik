@@ -17,7 +17,7 @@ namespace Editor
             BuildTarget buildTarget = BuildTarget.WebGL; // Target platform
 
             var buildPathRelative = Path.Combine("Builds", buildTarget.ToString()); // Output path
-            
+
             var buildReport = BuildPipeline.BuildPlayer(scenes, buildPathRelative, buildTarget, buildOptions);
             if (buildReport.summary.result != BuildResult.Succeeded)
             {

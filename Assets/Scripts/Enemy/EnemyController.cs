@@ -1,7 +1,5 @@
-using System;
-using System.Net.NetworkInformation;
-using UnityEngine;
 using Unity.Behavior;
+using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimationController))]
 [RequireComponent(typeof(AgitationController))]

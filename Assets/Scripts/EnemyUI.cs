@@ -50,7 +50,7 @@ public partial class EnemyUI : MonoBehaviour
         {
             label.text = "!";
         }
-        
+
 
         if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
         if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;

@@ -42,7 +42,8 @@ public class MeleeDamageDealer : MonoBehaviour
         if (animator != null)
         {
             animator.SetTrigger("Attack");
-        } else
+        }
+        else
         {
             Debug.LogWarning("MeleeDamageDealer doesn't have assigned Animator component!");
         }
