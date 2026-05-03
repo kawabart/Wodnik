@@ -7,6 +7,7 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] private Mesh[] hair;
     [SerializeField] private Mesh[] moustaches;
     [SerializeField] private Mesh[] helmets;
+    [SerializeField] private Mesh[] bodies;
     [SerializeField] private SkinnedMeshRenderer beardMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer hairMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer moustacheMeshRenderer;
@@ -19,6 +20,7 @@ public class EnemyAppearance : MonoBehaviour
     void Start()
     {
         damageable = GetComponentInParent<Damageable>();
+        RandomizeMeshes(bodyMeshRenderer, bodies);
         RandomizeMeshes(beardMeshRenderer, beards);
         RandomizeMeshes(hairMeshRenderer, hair);
         RandomizeMeshes(moustacheMeshRenderer, moustaches);
