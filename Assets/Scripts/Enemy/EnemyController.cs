@@ -245,11 +245,17 @@ public class EnemyController : MonoBehaviour
     void UpdateDowned()
     {
         if (downedTimer <= 0)
+        {
             ChangeState(EnemyState.Alive);
+        }
         else if (IsDominated)
+        {
             downedTimer = Math.Max(downedTimer, 1);
+        }
         else
+        {
             downedTimer -= Time.deltaTime;
+        }
     }
 
     void UpdateDead()
