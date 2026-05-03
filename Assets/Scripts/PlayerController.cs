@@ -138,6 +138,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             LevelRestarter.Instance.IsRestartEnabled = true;
         }
     }
+ 
     public void TakeDamage(DamageData damageData)
     {
         if (!IsAlive) return;

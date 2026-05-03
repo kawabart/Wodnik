@@ -8,5 +8,4 @@ public class SurfaceType : ScriptableObject
 
     public float SoundRange = .5f;
     public DangerLevel defaultDangerLevel = DangerLevel.None;
-    //public AudioClip hitSound;
 }
