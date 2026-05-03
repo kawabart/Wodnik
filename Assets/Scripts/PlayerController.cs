@@ -351,7 +351,8 @@ public class PlayerController : MonoBehaviour, IDamageable
     public void KillTakedownTarget()
     {
         Debug.Log("Taking down -1");
-        takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(1));
+        if (takedownTarget!=null)
+            takedownTarget.GetComponent<IDamageable>().TakeDamage(new DamageData(1));
     }
     #endregion
 
