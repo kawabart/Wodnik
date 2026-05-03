@@ -242,17 +242,4 @@ public class EnemyController : MonoBehaviour
     {
         // For future need if it will be needed.
     }
-
-    // This method is addded for testig purposes. It will be replaced with proper methods later.
-    // void OnCollisionEnter(Collision other)
-    // {
-    //     if (CurrentState == EnemyState.Downed)
-    //     {
-    //         Kill();
-    //     }
-    //     else
-    //     {
-    //         BecomeDowned();
-    //     }
-    // }
 }

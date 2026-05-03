@@ -21,13 +21,4 @@ public partial class GetSuggestedMoveSpeedAction : Action
         MoveSpeed.Value = Object.Value.GetComponent<AgitationController>().SuggestedSpeed;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

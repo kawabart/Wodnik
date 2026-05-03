@@ -11,7 +11,6 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     [SerializeField] Material[] materials;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         RandomizeMeshes(beardMeshRenderer, beards);

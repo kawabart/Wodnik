@@ -10,7 +10,6 @@ public partial class EnemyUI : MonoBehaviour
     private Label label;
 
     private Color color = Color.white;
-    private float blinkingSpeed = 5;
     public AgitationController agitationController;
     public EnemyController enemyController;
     public EnemyPerception enemyPerception;

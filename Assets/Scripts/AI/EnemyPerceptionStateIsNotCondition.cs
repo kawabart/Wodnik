@@ -20,12 +20,4 @@ public partial class EnemyPerceptionStateIsNotCondition : Condition
             return false;
         }
     }
-
-    public override void OnStart()
-    {
-    }
-
-    public override void OnEnd()
-    {
-    }
 }

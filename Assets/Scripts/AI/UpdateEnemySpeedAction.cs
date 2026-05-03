@@ -16,13 +16,4 @@ public partial class UpdateEnemySpeedAction : Action
         Enemy.Value.GetComponent<NavMeshAgent>().speed = Enemy.Value.GetComponent<AgitationController>().SuggestedSpeed;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

@@ -4,7 +4,6 @@ public class Timer : MonoBehaviour
 {
     public float time = 0f;
     public bool enable = false;
-    // Update is called once per frame
     void Update()
     {
         if (enable)

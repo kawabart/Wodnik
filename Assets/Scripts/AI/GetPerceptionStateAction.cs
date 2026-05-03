@@ -18,13 +18,4 @@ public partial class GetPerceptionStateAction : Action
         PerceptionState.Value = perception.PerceptionState;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

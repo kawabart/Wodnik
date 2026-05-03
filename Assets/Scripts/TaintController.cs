@@ -34,8 +34,4 @@ public class TaintController : MonoBehaviour
     {
         material.SetFloat("_SurfaceFleshCut", -1f);
     }
-    void Update()
-    {
-
-    }
 }
