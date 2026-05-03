@@ -35,6 +35,7 @@ public class LightController : MonoBehaviour
         shadowCastingLayerMask = LayerMask.GetMask("Blockout", "Dynamic");
         UpdateLight();
     }
+ 
     void UpdateLight()
     {
         lightType = lightComponent.type;
@@ -45,6 +46,7 @@ public class LightController : MonoBehaviour
         brightness = lightComponent.intensity * lightBrightnessOverride;
 
     }
+ 
     private void Update()
     {
         if (realtime) UpdateLight();
@@ -72,10 +74,12 @@ public class LightController : MonoBehaviour
         }
         return true;
     }
+ 
     private bool IsInDistance(Vector3 target)
     {
         return Vector3.Distance(transform.position, target) <= range;
     }
+ 
     private bool IsObscured(Vector3 target)
     {
         Vector3 direction = target - transform.position;
@@ -87,6 +91,7 @@ public class LightController : MonoBehaviour
 
         return false;
     }
+
     private bool IsAngleRight(Vector3 target)
     {
         float viewAngle = lightComponent.spotAngle / 2;
@@ -102,6 +107,7 @@ public class LightController : MonoBehaviour
         if (angle > viewAngle) return false;
         return true;
     }
+
     private bool IsObscuredDirection(Vector3 target)
     {
         Vector3 direction = -lightComponent.transform.forward;
@@ -116,6 +122,7 @@ public class LightController : MonoBehaviour
         Debug.DrawLine(target, hit.point, Color.gray, .1f);
         return true;
     }
+
     public float GetLightValueOnPoint(Vector3 target)
     {
         float lightValue;

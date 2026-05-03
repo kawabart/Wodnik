@@ -29,6 +29,7 @@ public class VisibilityController : MonoBehaviour
     #region light and shadow
     [SerializeField] private bool includeShadows = false;
     private LightController[] lightControllers;
+
     void CollectLights()
     {
         //Can later be expanded so that some manager globally collects all lights in scene,
@@ -37,6 +38,7 @@ public class VisibilityController : MonoBehaviour
         //sources of light dynamically.
         lightControllers = FindObjectsByType<LightController>();
     }
+
     bool IsInLight(Vector3 position)
     {
         foreach (LightController light in lightControllers)
@@ -51,6 +53,7 @@ public class VisibilityController : MonoBehaviour
     {
         CollectLights();
     }
+    
     void FixedUpdate()
     {
         Hidden = CheckIfHidden();

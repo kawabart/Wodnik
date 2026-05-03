@@ -8,10 +8,12 @@ public class PlayerAnimatorController : MonoBehaviour
     {
         playerController.ApplyPushForce();
     }
+ 
     public void EndPush()
     {
         playerController.EndPush();
     }
+ 
     public void KillTakedownTarget()
     {
         playerController.KillTakedownTarget();

@@ -1,10 +1,10 @@
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+
 [RequireComponent(typeof(BehaviorGraphAgent))]
 public class EnemyAnimationController : MonoBehaviour
 {
-
     public void ChangeCombatState()
     {
         EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
@@ -19,6 +19,7 @@ public class EnemyAnimationController : MonoBehaviour
             animator.SetBool(isInInvestigative, true);
         }
     }
+ 
     public void Block()
     {
         animator.SetTrigger(blockHash);
@@ -28,6 +29,7 @@ public class EnemyAnimationController : MonoBehaviour
     {
         animator.SetTrigger(attackHash);
     }
+
     private EnemyController enemyController;
     private EnemyPerception enemyPerception;
     private AgitationController agitationController;
@@ -43,6 +45,7 @@ public class EnemyAnimationController : MonoBehaviour
     private int blockHash;
     private NavMeshAgent navMeshAgent;
     private Rigidbody rb;
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -105,7 +108,5 @@ public class EnemyAnimationController : MonoBehaviour
         {
             animator.SetBool(isInInvestigative, false);
         }
-
-
     }
 }

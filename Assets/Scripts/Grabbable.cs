@@ -7,10 +7,12 @@ public class Grabbable : MonoBehaviour, IGrabbable
     public UnityEvent onLetGo;
 
     private EnemyController enemyController;
+ 
     private void Start()
     {
         enemyController = GetComponent<EnemyController>();
     }
+  
     public bool Grab(HairController hairController)
     {
         if (!CanBeGrabbed()) return false;
@@ -19,11 +21,13 @@ public class Grabbable : MonoBehaviour, IGrabbable
         hairController.Grab(this.GetComponent<Rigidbody>());
         return true;
     }
+  
     public bool CanBeGrabbed()
     {
         if (enemyController != null && enemyController.TryBlocking()) return false;
         return true;
     }
+ 
     public void LetGo(HairController hairController)
     {
         onLetGo.Invoke();

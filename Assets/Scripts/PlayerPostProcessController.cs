@@ -9,10 +9,12 @@ public class PlayerPostProcessController : MonoBehaviour
     private Volume volumeHidden;
     [SerializeField]
     private Volume volumeHurt;
+ 
     private void Start()
     {
         playerController = GetComponent<PlayerController>();
     }
+ 
     public void Update()
     {
         if (volumeHidden != null)

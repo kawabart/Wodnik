@@ -8,6 +8,7 @@ public class TriggerEvent : MonoBehaviour
     public bool oneTime = false;
     public Rigidbody objectToTrigger = null;
     public LayerMask layerMask = -1;
+
     private void OnTriggerEnter(Collider other)
     {
         if (((1 << other.gameObject.layer) & layerMask) == 0) return;
@@ -20,6 +21,7 @@ public class TriggerEvent : MonoBehaviour
             EventTriggered();
         }
     }
+ 
     void EventTriggered()
     {
         onTrigger.Invoke();

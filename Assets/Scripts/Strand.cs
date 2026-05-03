@@ -9,6 +9,7 @@ public class Strand
     public Gradient gradient;
     public float noiseOffset;
     public Vector3[] positions;
+  
     public Strand(float headSize, int resolution)
     {
         positions = new Vector3[resolution];
@@ -23,4 +24,3 @@ public class Strand
         });
     }
 }
-

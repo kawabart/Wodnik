@@ -7,10 +7,12 @@ public class PlayerScaler : MonoBehaviour
     private Vector3 hiddenScale;
     [SerializeField]
     private PlayerController playerController;
+  
     void Start()
     {
         originalScale = transform.localScale;
     }
+  
     void Update()
     {
         if (playerController == null) return;

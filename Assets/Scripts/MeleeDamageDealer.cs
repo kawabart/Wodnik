@@ -48,6 +48,7 @@ public class MeleeDamageDealer : MonoBehaviour
             Debug.LogWarning("MeleeDamageDealer doesn't have assigned Animator component!");
         }
     }
+  
     public void DoImpulseAttack()
     {
         Debug.Log("Attack casts damage!");
@@ -91,5 +92,4 @@ public class MeleeDamageDealer : MonoBehaviour
         Debug.Log("Attack Finished.");
         isAttacking = false;
     }
-
 }

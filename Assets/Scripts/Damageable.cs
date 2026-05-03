@@ -8,10 +8,12 @@ public class Damageable : MonoBehaviour, IDamageable
     public bool DestroyOnDeath = true;
     public UnityEvent onDeath;
     public UnityEvent onHurt;
+ 
     void Start()
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
     }
+ 
     public void TakeDamage(DamageData damageData)
     {
         int amount = damageData.Amount;

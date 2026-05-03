@@ -18,10 +18,12 @@ public class PlayerMaterialController : MonoBehaviour
             originalEmissionColor = meshRenderer.materials[0].GetColor("_EmissionColor");
         }
     }
+ 
     private void Update()
     {
         UpdateEmission();
     }
+ 
     void UpdateEmission()
     {
         if (meshRenderer == null) return;
