@@ -20,7 +20,7 @@ public class Damageable : MonoBehaviour, IDamageable
         health -= amount;
 
         SurfaceType currentSurface = surfaceType;
-        if (health>1 && armorSurface != null) currentSurface = armorSurface;
+        if (health > 1 && armorSurface != null) currentSurface = armorSurface;
 
         if (damageData.OverrideSurface != null)
             currentSurface = damageData.OverrideSurface;

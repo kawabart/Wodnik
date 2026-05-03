@@ -33,7 +33,7 @@ public class EnemyAppearance : MonoBehaviour
     }
     private void Update()
     {
-        if (damageable != null && damageable.health<=1) helmetMeshRenderer.enabled = false;
+        if (damageable != null && damageable.health <= 1) helmetMeshRenderer.enabled = false;
     }
 
     private void RandomizeMeshes(SkinnedMeshRenderer meshRenderer, Mesh[] meshes)

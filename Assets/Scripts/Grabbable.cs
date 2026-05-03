@@ -21,7 +21,7 @@ public class Grabbable : MonoBehaviour, IGrabbable
     }
     public bool CanBeGrabbed()
     {
-        if (enemyController!=null && enemyController.TryBlocking()) return false;
+        if (enemyController != null && enemyController.TryBlocking()) return false;
         return true;
     }
     public void LetGo(HairController hairController)
