@@ -101,11 +101,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   minVelocityToDamage: 3
+  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
+  rb: {fileID: 0}
 --- !u!114 &4503014004726142115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +128,7 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  armorSurface: {fileID: 0}
 --- !u!114 &8797479730542030774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +183,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5835002253674127275}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 5f0214a5ddfa3a141b123d11ed1ffb96, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
