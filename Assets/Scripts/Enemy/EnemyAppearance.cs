@@ -16,7 +16,6 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] Material[] materials;
     Damageable damageable;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         damageable = GetComponentInParent<Damageable>();
@@ -33,6 +32,7 @@ public class EnemyAppearance : MonoBehaviour
         hairMeshRenderer.sharedMaterial = hairMaterial;
         helmetMeshRenderer.sharedMaterial = clothesMaterial;
     }
+
     private void Update()
     {
         if (damageable != null && damageable.health <= 1) helmetMeshRenderer.enabled = false;
