@@ -99,8 +99,7 @@ public class LightController : MonoBehaviour
         else
             Debug.DrawRay(transform.position, direction * 10, Color.yellow);
 
-        if (angle > viewAngle) return false;
-        return true;
+        return angle <= viewAngle;
     }
     private bool IsObscuredDirection(Vector3 target)
     {
@@ -118,12 +117,10 @@ public class LightController : MonoBehaviour
     }
     public float GetLightValueOnPoint(Vector3 target)
     {
-        float lightValue;
         float distance = Vector3.Distance(transform.position, target);
         float lerpValue = 1 - distance / range;
         lerpValue = lightCurve.Evaluate(lerpValue);
-        lightValue = Mathf.Lerp(0, brightness, lerpValue);
-        return lightValue;
+        return Mathf.Lerp(0, brightness, lerpValue);
     }
 
     public void KillLight()

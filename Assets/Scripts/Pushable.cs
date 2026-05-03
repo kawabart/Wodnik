@@ -33,7 +33,6 @@ public class Pushable : MonoBehaviour, IPushable
     }
     public bool CanBePushed()
     {
-        if (enemyController != null && enemyController.TryBlocking()) return false;
-        return true;
+        return enemyController == null || !enemyController.TryBlocking();
     }
 }

@@ -14,12 +14,9 @@ public partial class ShowEnemyUiAction : Action
     protected override Status OnStart()
     {
         var uiComponent = Enemy.Value.GetComponentInChildren<EnemyUI>();
-        if (uiComponent != null)
-        {
-            uiComponent.State = State;
-            return Status.Success;
-        }
-        return Status.Failure;
+        if (uiComponent == null) return Status.Failure;
+        uiComponent.State = State;
+        return Status.Success;
     }
 
     protected override Status OnUpdate()

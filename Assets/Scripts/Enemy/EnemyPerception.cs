@@ -107,8 +107,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
             PredictPlayerPositionTimer = PredictPlayerPositionTime;
             return true;
         }
-        if (PredictPlayerPositionTimer > 0) return true;
-        else return false;
+        return PredictPlayerPositionTimer > 0;
     }
     public void OnSoundHeard(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
     {
