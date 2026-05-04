@@ -704,7 +704,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5489169686699984090}
-  - component: {fileID: 2518258998067703421}
   - component: {fileID: 8980116265602303609}
   - component: {fileID: 257290998991122565}
   - component: {fileID: 3657414076323727455}
@@ -740,22 +739,6 @@ Transform:
   - {fileID: 7934983091590568637}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.04, y: -0.194, z: -0.118}
---- !u!114 &2518258998067703421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7352180860079479247}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cebb4fde8b0f1044bdc07118e42e480, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Follower
-  Target: {fileID: 0}
-  Offset: {x: 0, y: 0, z: 0}
-  SmoothTime: 3
-  lateUpdate: 0
 --- !u!114 &8980116265602303609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,6 +832,7 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  armorSurface: {fileID: 0}
 --- !u!1001 &7055470986658884221
 PrefabInstance:
   m_ObjectHideFlags: 0
