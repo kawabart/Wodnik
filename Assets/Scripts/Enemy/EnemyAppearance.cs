@@ -50,8 +50,14 @@ public class EnemyAppearance : MonoBehaviour
         }
 
         Mesh mesh = meshes[Random.Range(0, meshes.Length)];
-
+        if (mesh == null)
+        {
+            meshRenderer.sharedMesh = null;
+            meshRenderer.enabled = false;
+            return;
+        }
+    
         meshRenderer.sharedMesh = mesh;
-        meshRenderer.enabled = mesh;
+        meshRenderer.enabled = true;
     }
 }
