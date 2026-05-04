@@ -7,9 +7,9 @@ public class ImpactDamageDealer : MonoBehaviour
 
     public float increaseVelocityNeededForPlayer = 2f;
     public int damage = 1;
+
     public UnityEvent onDamageDeal;
 
-    [Header("Optional rigidbody functionality")]
     private Rigidbody rb;
     public float minSelfVelocityToDamage = 0f;
 
