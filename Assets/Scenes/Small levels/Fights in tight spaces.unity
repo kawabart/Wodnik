@@ -307,9 +307,9 @@ Transform:
   - {fileID: 60878376}
   - {fileID: 248674944}
   - {fileID: 234938594}
-  - {fileID: 1908513777}
   - {fileID: 1747757673}
   - {fileID: 1465577752}
+  - {fileID: 620577425}
   - {fileID: 1902238691}
   - {fileID: 720789590}
   - {fileID: 1050458636}
@@ -475,13 +475,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &60878379
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -633,7 +632,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -684,6 +683,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &72140764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 72140763}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &74749990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1770,13 +1774,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &234938597
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1936,13 +1939,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &248674947
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2107,13 +2109,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &259732633
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2455,13 +2456,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &284356692
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2886,7 +2886,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2937,6 +2937,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &366003403 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 366003402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &378681576
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,13 +3018,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &378681580
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4487,7 +4491,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4538,6 +4542,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &593502436 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 593502435}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &601822978
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4679,6 +4688,166 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 792244895119917979, guid: e5647c214b6d08140b411991606786cc, type: 3}
   m_PrefabInstance: {fileID: 1016597673}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &620577424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 620577425}
+  - component: {fileID: 620577430}
+  - component: {fileID: 620577429}
+  - component: {fileID: 620577428}
+  - component: {fileID: 620577427}
+  - component: {fileID: 620577426}
+  m_Layer: 7
+  m_Name: Cube (24)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &620577425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071062, z: -0, w: 0.7071074}
+  m_LocalPosition: {x: -10.52, y: 0.5, z: 13.55}
+  m_LocalScale: {x: 0.17962, y: 1, z: 2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 41812723}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!54 &620577426
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &620577427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
+  minVelocityToDamage: 3
+  increaseVelocityNeededForPlayer: 2
+  damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
+--- !u!65 &620577428
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &620577429
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_MaskInteraction: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &620577430
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620577424}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &622472628 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467149279821635290, guid: 26ef0f3be32080841900b73380cdce60, type: 3}
@@ -4765,13 +4934,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &626627034
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5247,13 +5415,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &718972277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5408,13 +5575,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &720789593
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5631,13 +5797,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &744378355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6589,13 +6754,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &886316056
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6869,7 +7033,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6920,6 +7084,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &924163572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 924163571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &927941929 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: 3febf5c5aca29a349a5619f6971d434f, type: 3}
@@ -7475,13 +7644,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1003338881
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7636,13 +7804,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1012809453
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7991,13 +8158,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1050458639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8399,7 +8565,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8450,6 +8616,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &1106992699 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 1106992698}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1137871243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8702,13 +8873,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1153656668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8907,7 +9077,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1385266938}
     m_Modifications:
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8915,7 +9085,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.00000014704489
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8927,15 +9097,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8961,6 +9131,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
+--- !u!4 &1171846401 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 792244895119917979, guid: 1ba500a224b624a4d86d7ccc3bcc8242, type: 3}
+  m_PrefabInstance: {fileID: 1171846400}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1200568063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9333,7 +9508,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9384,6 +9559,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &1224670987 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 1224670986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1240031861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5755142929968196438, guid: 37b07e27d01f7b6478c153b93d2bba13, type: 3}
@@ -9792,6 +9972,7 @@ Transform:
   - {fileID: 56120215}
   - {fileID: 537274519}
   - {fileID: 1664229735}
+  - {fileID: 1171846401}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1385609850
@@ -9995,13 +10176,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1394615408
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10358,13 +10538,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1465577755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10524,13 +10703,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1480129475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10755,13 +10933,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1510462441
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11188,13 +11365,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1596392449
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11279,7 +11455,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11330,6 +11506,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &1611046718 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 1611046717}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1611113066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11935,13 +12116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1694574337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12431,13 +12611,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1747757676
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12666,6 +12845,15 @@ Transform:
   - {fileID: 644301718}
   - {fileID: 882011756}
   - {fileID: 626240368}
+  - {fileID: 4646232052175048843}
+  - {fileID: 1106992699}
+  - {fileID: 366003403}
+  - {fileID: 924163572}
+  - {fileID: 1874153058}
+  - {fileID: 1611046718}
+  - {fileID: 72140764}
+  - {fileID: 1224670987}
+  - {fileID: 593502436}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1771605826 stripped
@@ -12809,13 +12997,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1783727729
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12970,13 +13157,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1792506479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13437,13 +13623,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1839232789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13660,13 +13845,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1854184666
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13870,7 +14054,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13921,6 +14105,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &1874153058 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 1874153057}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1875510733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 467149279821635290, guid: 26ef0f3be32080841900b73380cdce60, type: 3}
@@ -14002,13 +14191,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1902238694
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14086,167 +14274,6 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1902238690}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1908513776
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1908513777}
-  - component: {fileID: 1908513782}
-  - component: {fileID: 1908513781}
-  - component: {fileID: 1908513780}
-  - component: {fileID: 1908513779}
-  - component: {fileID: 1908513778}
-  m_Layer: 7
-  m_Name: Cube (20)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1908513777
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071062, z: -0, w: 0.7071074}
-  m_LocalPosition: {x: -10.85, y: 0.5, z: 12}
-  m_LocalScale: {x: 0.17962, y: 1, z: 2}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 41812723}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!54 &1908513778
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &1908513779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
-  minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
-  increaseVelocityNeededForPlayer: 2
-  damage: 1
-  onDamageDeal:
-    m_PersistentCalls:
-      m_Calls: []
-  rb: {fileID: 0}
---- !u!65 &1908513780
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1908513781
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1908513782
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1908513776}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1908877677 stripped
 Transform:
@@ -14634,13 +14661,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &1995861713
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14935,13 +14961,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &2009926509
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15660,13 +15685,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ImpactDamageDealer
   minVelocityToDamage: 3
-  minSelfVelocityToDamage: 0
   increaseVelocityNeededForPlayer: 2
   damage: 1
   onDamageDeal:
     m_PersistentCalls:
       m_Calls: []
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!65 &2126769084
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15880,7 +15904,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1753658875}
     m_Modifications:
     - target: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15931,6 +15955,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+--- !u!4 &4646232052175048843 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4868183977544905395, guid: ff35148dddfb36a43b41e4684a897cc6, type: 3}
+  m_PrefabInstance: {fileID: 4646232052175048842}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -15941,13 +15970,3 @@ SceneRoots:
   - {fileID: 934099374}
   - {fileID: 928574179}
   - {fileID: 1385266938}
-  - {fileID: 1171846400}
-  - {fileID: 4646232052175048842}
-  - {fileID: 1106992698}
-  - {fileID: 366003402}
-  - {fileID: 924163571}
-  - {fileID: 1874153057}
-  - {fileID: 1611046717}
-  - {fileID: 72140763}
-  - {fileID: 1224670986}
-  - {fileID: 593502435}
