@@ -13,12 +13,4 @@ public partial class EnemyStateIsNotEnemyStateCondition : Condition
     {
         return Enemy.Value.GetComponent<EnemyController>().CurrentState != EnemyState.Value;
     }
-
-    public override void OnStart()
-    {
-    }
-
-    public override void OnEnd()
-    {
-    }
 }

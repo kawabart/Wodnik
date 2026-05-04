@@ -13,8 +13,9 @@ public class ImpactDamageDealer : MonoBehaviour
 
     private void Start()
     {
-         rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
+ 
     void OnCollisionEnter(Collision collision)
     {
         float impactForce = collision.relativeVelocity.magnitude;

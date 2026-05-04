@@ -295,6 +295,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Transform takedownTarget = null;
     public float takedownRadius = .5f;
     public float takedownSmooth = .5f;
+ 
     void OnTakedown(InputAction.CallbackContext ctx)
     {
         StartTakedown();
@@ -311,6 +312,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         Debug.Log("Takedown starts...");
 
     }
+  
     bool GetTakedownTarget()
     {
         Vector3 center = transform.position;
@@ -331,6 +333,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         return false;
     }
+ 
     void TakedownUpdate()
     {
         if (takedownTarget == null)
@@ -343,11 +346,13 @@ public class PlayerController : MonoBehaviour, IDamageable
         Quaternion targetRotation = Quaternion.LookRotation(forwardDirection, upDirection);
         SmoothAlignToTarget(takedownTarget.transform.position - takedownTarget.transform.forward * .2f, targetRotation, takedownSmooth);
     }
+  
     void SmoothAlignToTarget(Vector3 targetPosition, Quaternion targetRotation, float lerpFactor = 0.2f)
     {
         rigidBody.MovePosition(Vector3.Lerp(rigidBody.position, targetPosition, lerpFactor));
         rigidBody.MoveRotation(Quaternion.Slerp(rigidBody.rotation, targetRotation, lerpFactor));
     }
+
     public void KillTakedownTarget()
     {
         if (takedownTarget != null)

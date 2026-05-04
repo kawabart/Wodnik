@@ -18,14 +18,5 @@ public partial class GetEnemyStateAction : Action
         State.Value = enemyController.CurrentState;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }
 

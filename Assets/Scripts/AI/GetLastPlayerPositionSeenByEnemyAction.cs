@@ -21,13 +21,4 @@ public partial class GetLastPlayerPositionSeenByEnemyAction : Action
         LastPlayerPosition.Value = position.Value;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

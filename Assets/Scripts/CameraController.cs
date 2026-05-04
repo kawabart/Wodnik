@@ -8,6 +8,7 @@ public class CameraController : MonoBehaviour
     private Camera mirrorCamera;
     [SerializeField]
     private Follower follower;
+ 
     void Start()
     {
         follower = GetComponent<Follower>();

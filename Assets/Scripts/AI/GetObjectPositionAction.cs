@@ -17,14 +17,5 @@ public partial class GetObjectPositionAction : Action
         Position.Value = Actor.Value.transform.position;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }
 

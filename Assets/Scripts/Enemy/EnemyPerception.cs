@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -13,6 +12,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
             return enemyController.CurrentAgitationConfig;
         }
     }
+  
     [SerializeField]
     private PlayerController player = null;
     [SerializeField]
@@ -90,6 +90,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
             enemyController.DecreaseAgitation();
         }
     }
+ 
     void UpdateValuesFromScriptable()
     {
         if (CurrentAgitationConfig == null) return;
@@ -111,6 +112,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
+ 
     public void OnSoundHeard(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
     {
         if (!canHear) return;
@@ -148,12 +150,14 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         LastPlayerPosition = dangerPosition;
 
     }
+ 
     public void ActivateSenses()
     {
         canSee = true;
         canHear = true;
         canTouch = true;
     }
+
     public void DectivateSenses()
     {
         canSee = false;

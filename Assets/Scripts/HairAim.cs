@@ -9,12 +9,14 @@ public class HairAim : MonoBehaviour
 
     [SerializeField]
     private Follower endPoint;
+  
     void Start()
     {
         playerController = GetComponent<PlayerController>();
         hairGeneratorAiming.middlepoint.transform.parent = null;
         hairGeneratorAiming.endpoint.transform.parent = null;
     }
+ 
     void Update()
     {
         if (playerController.targetedGrabObject == null)

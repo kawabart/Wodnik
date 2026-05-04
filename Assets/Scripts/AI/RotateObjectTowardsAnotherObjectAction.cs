@@ -42,9 +42,5 @@ public partial class RotateObjectTowardsAnotherObjectAction : Action
             return Status.Running;
         }
     }
-
-    protected override void OnEnd()
-    {
-    }
 }
 

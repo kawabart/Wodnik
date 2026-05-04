@@ -27,9 +27,5 @@ public partial class MeleeAttackAction : Action
         Debug.Log("Attack running");
         return Status.Success;
     }
-
-    protected override void OnEnd()
-    {
-    }
 }
 

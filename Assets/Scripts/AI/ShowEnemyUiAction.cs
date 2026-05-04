@@ -21,14 +21,5 @@ public partial class ShowEnemyUiAction : Action
         }
         return Status.Failure;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }
 

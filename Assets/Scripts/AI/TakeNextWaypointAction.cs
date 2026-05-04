@@ -27,13 +27,4 @@ public partial class TakeNextWaypointAction : Action
         }
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

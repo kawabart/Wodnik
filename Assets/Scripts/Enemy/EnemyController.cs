@@ -1,7 +1,5 @@
-using System;
-using System.Net.NetworkInformation;
-using UnityEngine;
 using Unity.Behavior;
+using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimationController))]
 [RequireComponent(typeof(AgitationController))]
@@ -104,6 +102,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float downedTimer = 0;
     public bool IsDominated = false;
+ 
     public void BecomeDowned()
     {
         if (CurrentState != EnemyState.Alive) return;
@@ -145,6 +144,7 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
+ 
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
@@ -166,6 +166,7 @@ public class EnemyController : MonoBehaviour
         }
         else return false;
     }
+ 
     public bool IsVulnerable()
     {
         //enemy has no weapon
@@ -189,6 +190,7 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
+ 
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -196,6 +198,7 @@ public class EnemyController : MonoBehaviour
             return agitationController.CurrentAgitationConfig;
         }
     }
+ 
     private Animator animator;
 
     void Start()
@@ -250,7 +253,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (IsDominated)
         {
-            downedTimer = Math.Max(downedTimer, 1);
+            downedTimer = Mathf.Max(downedTimer, 1);
         }
         else
         {
