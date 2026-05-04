@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
 
-            animator.SetTrigger("GetUp");
+            animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
@@ -71,7 +71,7 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
 
-            animator.SetTrigger("Downed");
+            animator.SetBool("Downed", true);
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -97,11 +97,21 @@ public class EnemyController : MonoBehaviour
     public float DownedTime = 10f;
     [SerializeField]
     private float downedTimer = 0;
+    public bool IsDominated = false;
  
     public void BecomeDowned()
     {
-        if (CurrentState == EnemyState.Dead) return;
+        if (CurrentState != EnemyState.Alive) return;
         ChangeState(EnemyState.Downed);
+    }
+
+    public void BecomeDominated()
+    {
+        IsDominated = true;
+    }
+    public void StopBeingDominated()
+    {
+        IsDominated = false;
     }
 
     public void TurnPhysicsOff()
@@ -227,9 +237,17 @@ public class EnemyController : MonoBehaviour
     void UpdateDowned()
     {
         if (downedTimer <= 0)
+        {
             ChangeState(EnemyState.Alive);
+        }
+        else if (IsDominated)
+        {
+            downedTimer = Mathf.Max(downedTimer, 1);
+        }
         else
+        {
             downedTimer -= Time.deltaTime;
+        }
     }
 
     void UpdateDead()

@@ -3,7 +3,7 @@ using UnityEngine;
 public class AnimationBridge : MonoBehaviour
 {
     [Tooltip("Drag the parent object (Enemy) in here")]
-    public MeleeDamageDealer parentDamageDealer;
+    public EnemyWeapon parentDamageDealer;
 
     public void PassDamageEvent()
     {

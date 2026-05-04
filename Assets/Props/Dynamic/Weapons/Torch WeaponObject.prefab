@@ -8,6 +8,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Size.x
+      value: 0.0015330887
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Size.y
+      value: 0.00076072157
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Size.z
+      value: 0.010811856
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Center.x
+      value: 0.000085493615
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Center.y
+      value: -0.000011169911
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264438597330048012, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: m_Center.z
+      value: 0.003441795
+      objectReference: {fileID: 0}
     - target: {fileID: 3450104028632007217, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -48,10 +72,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5341854413299382407, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: type
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c0d11609315c454297b80c15d2d8719, type: 2}
     - target: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
       propertyPath: m_Name
       value: Torch WeaponObject
       objectReference: {fileID: 0}
+    - target: {fileID: 7629426649380350056, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      propertyPath: onDamageDeal.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
+      value: 
+      objectReference: {fileID: 11400000, guid: 0c0d11609315c454297b80c15d2d8719, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 4343705791471291465, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
@@ -59,13 +91,61 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3450104028632007217, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4614854707358583364}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8630765607177379163}
+    - targetCorrespondingSourceObject: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4737945498792814452}
   m_SourcePrefab: {fileID: 100100000, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
 --- !u!4 &3603660001874884708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3450104028632007217, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
   m_PrefabInstance: {fileID: 2153845388317588053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5555728189806994942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5835002253674127275, guid: 34bf2b5f3b95d46498f1fc46ce098f7b, type: 3}
+  m_PrefabInstance: {fileID: 2153845388317588053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &8630765607177379163
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555728189806994942}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.005
+  m_Center: {x: 0, y: 0, z: 0.01}
+--- !u!114 &-4737945498792814452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5555728189806994942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a6abedeb9ac44a4c86aa20cfe1b57d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AreaDamageDealer
+  damage: 1
+  affectPlayer: 0
+  affectOnlyDowned: 1
+  overrideSurface: {fileID: 11400000, guid: 0c0d11609315c454297b80c15d2d8719, type: 2}
 --- !u!1001 &8734173304407146647
 PrefabInstance:
   m_ObjectHideFlags: 0
