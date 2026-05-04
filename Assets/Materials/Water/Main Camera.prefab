@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3249310705276920703}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: 0, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalPosition: {x: 0, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -158,7 +158,7 @@ Transform:
   m_GameObject: {fileID: 5035655626509428573}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Follower
   Target: {fileID: 0}
-  Offset: {x: 0, y: 3, z: 0}
+  Offset: {x: 0, y: 3.5, z: 0}
   SmoothTime: 0.2
   lateUpdate: 0
 --- !u!114 &6560096234441543116
@@ -298,8 +298,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f8280dc0a820154a92970dd844f40ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  camera: {fileID: 3683148718741460303}
-  mirrorCamera: {fileID: 339581663506323467}
   follower: {fileID: 0}
 --- !u!1 &9095505947501203305
 GameObject:
