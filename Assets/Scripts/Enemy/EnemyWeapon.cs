@@ -45,7 +45,7 @@ public class EnemyWeapon : MonoBehaviour
         foreach (var hit in hits)
         {
             var dmg = hit.GetComponent<IDamageable>();
-            if (dmg != null)
+            if (dmg != null && hit.gameObject != this.gameObject)
             {
                 dmg.TakeDamage(new DamageData(weaponScriptable.damage));
             }
