@@ -11,10 +11,6 @@ public class EnemyController : MonoBehaviour
 
     #region states
     public EnemyState CurrentState = EnemyState.Alive;
-    private float aliveHeight;
-    private float aliveRadius;
-    private int aliveDirection;
-    private Vector3 aliveCenter;
 
     [Header("Downed Collider Settings")]
     public float downedHeight = 0.5f;
@@ -208,13 +204,6 @@ public class EnemyController : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        if (capsuleCollider != null)
-        {
-            aliveHeight = capsuleCollider.height;
-            aliveRadius = capsuleCollider.radius;
-            aliveDirection = capsuleCollider.direction;
-            aliveCenter = capsuleCollider.center;
-        }
 
         animator = GetComponentInChildren<Animator>();
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
