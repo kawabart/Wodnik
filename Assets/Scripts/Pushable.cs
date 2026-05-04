@@ -1,5 +1,7 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using static Unity.Collections.AllocatorManager;
 
 [RequireComponent(typeof(Rigidbody))]
 public class Pushable : MonoBehaviour, IPushable
@@ -33,6 +35,10 @@ public class Pushable : MonoBehaviour, IPushable
     }
     public bool CanBePushed()
     {
-        return enemyController == null || !enemyController.TryBlocking();
+        // If this is a thing that can block attacks and is blocking attack, then attack failed.
+        if (enemyController != null && enemyController.TryBlocking()) return false;
+
+        // Attack succesfull.
+        return true;
     }
 }
