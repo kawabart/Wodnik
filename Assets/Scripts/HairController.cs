@@ -3,7 +3,6 @@ using UnityEngine;
 public class HairController : MonoBehaviour
 {
     [SerializeField] HairGenerator hairGenerator;
-    private PlayerController playerController;
     private Rigidbody rigidBody;
     [SerializeField, Tooltip("Default position that hair end lerps to when it isn't attached to anything.")]
     private Transform defaultHairPosition;
