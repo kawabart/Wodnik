@@ -99,8 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c404737c7f320344599a51641edb1f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  minVelocityToDamage: 4
-  minSelfVelocityToDamage: 0
+  minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 5
   damage: 1
   onDamageDeal:
@@ -118,7 +117,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  rb: {fileID: 0}
+  minSelfVelocityToDamage: 0
 --- !u!114 &4503014004726142115
 MonoBehaviour:
   m_ObjectHideFlags: 0
