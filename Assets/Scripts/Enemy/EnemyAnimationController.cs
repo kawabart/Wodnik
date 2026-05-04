@@ -30,12 +30,9 @@ public class EnemyAnimationController : MonoBehaviour
         animator.SetTrigger(attackHash);
     }
 
-    private EnemyController enemyController;
     private EnemyPerception enemyPerception;
     private AgitationController agitationController;
-    private BehaviorGraphAgent behaviorAgent;
     private Animator animator;
-    private MeleeDamageDealer meleeDamageDealer;
     private int isInCombatHash;
     private int isInInvestigative;
     private int attackHash;
@@ -50,12 +47,9 @@ public class EnemyAnimationController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        behaviorAgent = GetComponent<BehaviorGraphAgent>();
-        enemyController = GetComponent<EnemyController>();
         enemyPerception = GetComponent<EnemyPerception>();
         agitationController = GetComponent<AgitationController>();
         animator = GetComponentInChildren<Animator>();
-        meleeDamageDealer = GetComponent<MeleeDamageDealer>();
         isInCombatHash = Animator.StringToHash("IsInCombat");
         isInInvestigative = Animator.StringToHash("IsInInvestigative");
         attackHash = Animator.StringToHash("Attack");

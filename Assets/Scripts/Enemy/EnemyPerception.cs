@@ -22,7 +22,6 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
     private Rigidbody playerRigidBody;
     [SerializeField]
     public EnemyPerceptionState PerceptionState = EnemyPerceptionState.Idle;
-    private Rigidbody rigidBody;
 
     private float distanceMultiplierNormalized = 0;
 
@@ -50,7 +49,6 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
     {
         enemyController = GetComponent<EnemyController>();
 
-        rigidBody = GetComponent<Rigidbody>();
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         playerRigidBody = player.GetComponent<Rigidbody>();
     }
