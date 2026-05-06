@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Lerps position of a rigidbody between two points, based on normalized value from Grab Mechanism.
+/// </summary>
+/// 
+[RequireComponent(typeof(Rigidbody))]
 public class GateMechanism : MonoBehaviour
 {
     private Vector3 startingPoint;

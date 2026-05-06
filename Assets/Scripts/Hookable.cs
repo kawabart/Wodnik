@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Object that can be attached to a Hook object.
+/// </summary>
+[RequireComponent(typeof(Rigidbody))]
 public class Hookable : MonoBehaviour
 {
     private bool Hooked = false;

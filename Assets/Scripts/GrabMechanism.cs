@@ -1,5 +1,11 @@
 using UnityEngine;
 
+
+/// <summary>
+/// Generates value "Distance Normalized", that can be used by other mechanisms.
+/// Value is generated based on distance to an origin point. Can be used for any kind of input. 
+/// Can be paired with GateMechanism via Distance Normalized value.
+/// </summary>
 public class GrabMechanism : MonoBehaviour
 {
     [SerializeField] private float minDistance = .1f;

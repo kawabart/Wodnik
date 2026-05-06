@@ -1,6 +1,6 @@
 using UnityEngine;
 
-
+[RequireComponent(typeof(LineRenderer))]
 public class LineController : MonoBehaviour
 {
     private LineRenderer lineRenderer;

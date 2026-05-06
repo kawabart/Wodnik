@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Object with trigger collider, that Hookable object can be attached to.
+/// </summary>
 public class Hook : MonoBehaviour
 {
     public Hookable hookedObject = null;
