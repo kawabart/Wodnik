@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
+[RequireComponent(typeof(Rigidbody))]
 public class Grabbable : MonoBehaviour, IGrabbable
 {
     public UnityEvent onGrab;
