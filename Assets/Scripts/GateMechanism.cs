@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class GateMechanism : MonoBehaviour
 {
-     private Vector3 startingPoint;
-    [SerializeField] private Vector3 offset = new Vector3(0,1,0);
+    private Vector3 startingPoint;
+    [SerializeField] private Vector3 offset = new Vector3(0, 1, 0);
     [SerializeField] private GrabMechanism grabMechanism;
     private Rigidbody rb;
 

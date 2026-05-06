@@ -8,7 +8,7 @@ public class LineController : MonoBehaviour
 
     private void Start()
     {
-        lineRenderer =GetComponent<LineRenderer>();
+        lineRenderer = GetComponent<LineRenderer>();
     }
     private void Update()
     {
