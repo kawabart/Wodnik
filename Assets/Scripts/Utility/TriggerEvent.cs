@@ -24,6 +24,7 @@ public class TriggerEvent : MonoBehaviour
  
     void EventTriggered()
     {
+        if (!enabled) return;
         onTrigger.Invoke();
         if (oneTime) this.enabled = false;
     }
