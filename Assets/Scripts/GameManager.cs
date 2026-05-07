@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        transform.parent = null;
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -23,5 +24,11 @@ public class GameManager : MonoBehaviour
     }
 
     public int CurrentLevel = 0;
-    public int CurrentChaos = 0;
+    #region chaos
+    public float CurrentChaos = 0;
+    public void IncreaseChaos(float value)
+    {
+        CurrentChaos += value;
+    }
+    #endregion
 }
