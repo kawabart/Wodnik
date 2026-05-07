@@ -24,11 +24,11 @@ public class GameManager : MonoBehaviour
     }
 
     public int CurrentLevel = 0;
-    #region chaos
-    public float CurrentChaos = 0;
-    public void IncreaseChaos(float value)
+    #region infamy
+    public float CurrentInfamy = 0;
+    public void IncreaseInfamy(float value)
     {
-        CurrentChaos += value;
+        CurrentInfamy+= value;
     }
     #endregion
 }

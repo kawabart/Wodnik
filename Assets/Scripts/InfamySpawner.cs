@@ -12,7 +12,7 @@ public class InfamySpawner : MonoBehaviour
     private void Start()
     {
         if (Pivot != null) Pivot.gameObject.SetActive(false);
-        if (GameManager.Instance.CurrentChaos < InfamyTreshold + Random.Range(0, InfamyRandomOffset)) return;
+        if (GameManager.Instance.CurrentInfamy < InfamyTreshold + Random.Range(0, InfamyRandomOffset)) return;
         int randomIndex = Random.Range(0, objectsToSpawn.Length);
         onInfamyHightEnough.Invoke();
         if (objectsToSpawn.Length < 1 || objectsToSpawn[randomIndex] == null) return;

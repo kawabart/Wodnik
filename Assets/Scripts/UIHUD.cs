@@ -14,6 +14,6 @@ public class UIHUD : MonoBehaviour
 
     void Update()
     {
-        label.text = "Chaos: "+GameManager.Instance.CurrentChaos;
+        label.text = "Chaos: "+GameManager.Instance.CurrentInfamy;
     }
 }
