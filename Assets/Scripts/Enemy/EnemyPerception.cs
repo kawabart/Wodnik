@@ -56,6 +56,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
 
     void Update()
     {
+        ScanForSights();
 
         if (player != null)
         {
