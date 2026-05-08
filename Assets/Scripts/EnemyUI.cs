@@ -30,15 +30,13 @@ public partial class EnemyUI : MonoBehaviour
             if (!enemyController.IsSubdued)
             {
                 if (enemyController.IsDominated) label.text = "*choking*";
-                else label.text = "...";
+                else label.text = "";
             }
-
             else
             {
                 label.text = Mathf.Round(enemyController.DownedTimer * 10) / 10 + "s";
             }
 
-            //label.text = "zzZ";
             return;
         }
         else if (enemyController.CurrentState != EnemyState.Alive)
@@ -50,7 +48,7 @@ public partial class EnemyUI : MonoBehaviour
             label.text = "?!";
         else if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
         {
-            label.text = "—";
+            label.text = "...";
         }
         else if (enemyPerception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
         {
