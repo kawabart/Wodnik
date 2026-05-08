@@ -29,13 +29,13 @@ public partial class EnemyUI : MonoBehaviour
         {
             if (!enemyController.IsSubdued)
             {
-                if (enemyController.IsDominated) label.text = "*" +Mathf.Round((enemyController.ChokeTimer / enemyController.ChokeTime) *10)/10  + "*";
+                if (enemyController.IsDominated) label.text = "*choking*";
                 else label.text = "...";
             }
 
             else
             {
-                label.text = "zzZ(" + Mathf.Round(enemyController.DownedTimer*10)/10+")";
+                label.text = Mathf.Round(enemyController.DownedTimer*10)/10+"s";
             }
                 
             //label.text = "zzZ";
