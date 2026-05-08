@@ -35,9 +35,9 @@ public partial class EnemyUI : MonoBehaviour
 
             else
             {
-                label.text = Mathf.Round(enemyController.DownedTimer*10)/10+"s";
+                label.text = Mathf.Round(enemyController.DownedTimer * 10) / 10 + "s";
             }
-                
+
             //label.text = "zzZ";
             return;
         }

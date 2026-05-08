@@ -125,7 +125,7 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeDominated()
     {
-        
+
         //if (!IsSubdued) rigidBody.isKinematic = true;
         IsDominated = true;
     }
@@ -161,7 +161,7 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
- 
+
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
@@ -183,7 +183,7 @@ public class EnemyController : MonoBehaviour
         }
         else return false;
     }
- 
+
     public bool IsVulnerable()
     {
         //enemy has no weapon
@@ -207,7 +207,7 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
- 
+
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -215,7 +215,7 @@ public class EnemyController : MonoBehaviour
             return agitationController.CurrentAgitationConfig;
         }
     }
- 
+
     private Animator animator;
 
     void Start()
