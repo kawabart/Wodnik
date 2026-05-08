@@ -111,13 +111,10 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeSubdued()
     {
-       // bool resetPhysics = !rigidBody.isKinematic;
-       // if (resetPhysics) rigidBody.isKinematic = true;
+        rigidBody.isKinematic = !rigidBody.isKinematic;
         IsSubdued = true;
-        
-        // if (resetPhysics) rigidBody.isKinematic = false;
+        rigidBody.isKinematic = !rigidBody.isKinematic;
         BecomeDowned();
-        Physics.SyncTransforms();
         DownedTimer = SubduedTime;
     }
     public void BecomeDowned()
@@ -128,6 +125,7 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeDominated()
     {
+        
         //if (!IsSubdued) rigidBody.isKinematic = true;
         IsDominated = true;
     }
@@ -274,6 +272,7 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
+            ChokeTimer = 0;
             DownedTimer -= Time.deltaTime;
         }
     }
