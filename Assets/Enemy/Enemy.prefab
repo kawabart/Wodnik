@@ -2888,6 +2888,7 @@ GameObject:
   - component: {fileID: 2221496193607636872}
   - component: {fileID: -120603478097856523}
   - component: {fileID: 3484863596789031813}
+  - component: {fileID: -2390667575616309168}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -3042,7 +3043,7 @@ MonoBehaviour:
   eyesPosition: {fileID: 2878943518772700631}
   percivedLayerMask:
     serializedVersion: 2
-    m_Bits: 2944
+    m_Bits: 3968
   PerceptionState: 0
   SightDistance: 2.7
   SightFOVDegrees: 90
@@ -3124,6 +3125,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -2390667575616309168}
+        m_TargetAssemblyTypeName: VisualSight, Assembly-CSharp
+        m_MethodName: ResetSight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   rotateInPushDirection: -1
 --- !u!114 &4045360216403811788
 MonoBehaviour:
@@ -3154,9 +3167,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: -120603478097856523}
-        m_TargetAssemblyTypeName: EnemyWeapon, Assembly-CSharp
-        m_MethodName: DropWeapon
+      - m_Target: {fileID: -2390667575616309168}
+        m_TargetAssemblyTypeName: VisualSight, Assembly-CSharp
+        m_MethodName: ResetSight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3172,6 +3185,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7635132580727919465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
         m_MethodName: BecomeDowned
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -2390667575616309168}
+        m_TargetAssemblyTypeName: VisualSight, Assembly-CSharp
+        m_MethodName: ResetSight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3253,6 +3278,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: -2390667575616309168}
+        m_TargetAssemblyTypeName: VisualSight, Assembly-CSharp
+        m_MethodName: ResetSight
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onLetGo:
     m_PersistentCalls:
       m_Calls:
@@ -3301,6 +3338,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 854d385187efcf64a86e8d460010ea80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AnimationController
+--- !u!114 &-2390667575616309168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b749f5938e1147c4d9921594f35ba0b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  Discovered: 0
+  Danger: 3
+  Hidden: 0
 --- !u!1 &2770387815768199330
 GameObject:
   m_ObjectHideFlags: 0

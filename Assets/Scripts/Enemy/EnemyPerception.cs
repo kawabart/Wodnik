@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.Android;
 
 [RequireComponent(typeof(Rigidbody))]
-public class EnemyPerception : MonoBehaviour, ISoundListener
+public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
 {
     [SerializeField]
     private EnemyController enemyController;
@@ -110,18 +111,48 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         if (PredictPlayerPositionTimer > 0) return true;
         else return false;
     }
- 
+    public void ScanForSights()
+    {
+        if (!canSee) return;
+        Collider[] hits = Physics.OverlapSphere(
+        eyesPosition.position,
+        SightDistance,
+        percivedLayerMask
+        );
+        foreach (Collider hit in hits)
+        {
+            if ( hit.TryGetComponent<VisualSight>(out VisualSight sight))
+            {
+                sight.TryDiscover(this);
+            }
+        }
+    }
+
+    public bool OnSightWatched(Vector3 position, DangerLevel danger, GameObject source, Vector3? dangerPosition = null, bool hidden = false)
+    {
+        if (!canSee) return false;
+        if (!DetectWithSight(source, hidden)) return false;
+        ReactToDanger(position, danger, source, dangerPosition);
+        return true;
+    }
+
     public void OnSoundHeard(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
     {
         if (!canHear) return;
-        if (source == this.gameObject) return;
-        if (percievedDangerLevel > danger) return;
-        if (PerceptionState == EnemyPerceptionState.PlayerInSight) return;
+        ReactToDanger(position, danger, source, dangerPosition);
+    }
+
+    public bool ReactToDanger(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
+    {
+        
+        if (source == this.gameObject) return false;
+        if (percievedDangerLevel > danger) return false;
+        if (PerceptionState == EnemyPerceptionState.PlayerInSight) return false;
 
         if (dangerPosition == null) dangerPosition = position;
         float agitationIncrement = 0;
         float maxAgitationFromDanger = 100;
-        //To do: move this functionality and values out of this method, so that they can be used elsewhere, not only by sound.
+
         switch (danger)
         {
             case DangerLevel.Noise:
@@ -146,9 +177,9 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
         percievedDangerLevel = danger;
         LastPlayerPosition = dangerPosition;
-
+        return true;
     }
- 
+    
     public void ActivateSenses()
     {
         canSee = true;
@@ -162,14 +193,17 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         canHear = false;
         canTouch = false;
     }
-
     private bool DetectPlayer()
+    {
+        return DetectWithSight(player.gameObject, player.Hidden);
+    }
+    private bool DetectWithSight(GameObject source, bool hidden = false)
     {
         if (!canSee) return false;
         RaycastHit hit;
-        Vector3 targetPosition = playerRigidBody.transform.position + Vector3.up * .15f;
+        Vector3 targetPosition = source.transform.position + Vector3.up * .15f;
 
-        float sqrDistance = (player.transform.position - transform.position).sqrMagnitude;
+        float sqrDistance = (source.transform.position - transform.position).sqrMagnitude;
         if (sqrDistance > SightDistance * SightDistance)
         {
             distanceMultiplierNormalized = 0;
@@ -187,7 +221,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
 
         if (sqrDistance < NoticeHiddenPlayerDistance * NoticeHiddenPlayerDistance) return true;
 
-        if (player.Hidden)
+        if (hidden)
         {
             return false;
         }
@@ -195,7 +229,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener
         {
             Debug.DrawRay(eyesPosition.position, direction.normalized * SightDistance, Color.green);
 
-            if (hit.collider.gameObject == player.gameObject)
+            if (hit.collider.gameObject == source)
             {
                 Debug.DrawRay(eyesPosition.position, direction.normalized * SightDistance, Color.yellow);
                 return true;
