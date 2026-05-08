@@ -27,7 +27,18 @@ public partial class EnemyUI : MonoBehaviour
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         if (enemyController.CurrentState == EnemyState.Downed)
         {
-            label.text = "zzZ";
+            if (!enemyController.IsSubdued)
+            {
+                if (enemyController.IsDominated) label.text = "*" +Mathf.Round((enemyController.ChokeTimer / enemyController.ChokeTime) *10)/10  + "*";
+                else label.text = "...";
+            }
+
+            else
+            {
+                label.text = "zzZ(" + Mathf.Round(enemyController.DownedTimer*10)/10+")";
+            }
+                
+            //label.text = "zzZ";
             return;
         }
         else if (enemyController.CurrentState != EnemyState.Alive)
@@ -39,7 +50,7 @@ public partial class EnemyUI : MonoBehaviour
             label.text = "?!";
         else if (enemyPerception.PerceptionState == EnemyPerceptionState.Idle)
         {
-            label.text = "...";
+            label.text = "—";
         }
         else if (enemyPerception.PerceptionState == EnemyPerceptionState.PlayerSeenRecently)
         {

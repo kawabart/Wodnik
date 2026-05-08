@@ -3021,9 +3021,13 @@ MonoBehaviour:
   downedRadius: 0.1
   downedDirection: 2
   downedCenter: {x: 0, y: 0.1, z: 0}
-  DownedTime: 5
-  downedTimer: 0
+  DownedTime: 1
+  DownedTimer: 0
   IsDominated: 0
+  IsSubdued: 0
+  ChokeTime: 2
+  ChokeTimer: 0
+  SubduedTime: 30
   blockingAngle: 80
 --- !u!114 &4355304884184916963
 MonoBehaviour:
@@ -3171,7 +3175,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7635132580727919465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
-        m_MethodName: BecomeDowned
+        m_MethodName: BecomeSubdued
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

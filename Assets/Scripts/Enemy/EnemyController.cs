@@ -1,4 +1,5 @@
 using Unity.Behavior;
+using UnityEditor.Build;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimationController))]
@@ -20,6 +21,9 @@ public class EnemyController : MonoBehaviour
 
     public void ChangeState(EnemyState newState)
     {
+        if (CurrentState == newState) return;
+        CurrentState = newState;
+
         const float aliveHeight = 0.9f;
         const float aliveRadius = 0.2f;
         const int aliveDirection = 1; // 1 = Y axis
@@ -30,7 +34,6 @@ public class EnemyController : MonoBehaviour
         const int downedDirection = 2; // 2 = Z axis
         Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
 
-        CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
             capsuleCollider.height = aliveHeight;
@@ -48,12 +51,14 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
 
+            IsSubdued = false;
+
             animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
-            downedTimer = DownedTime;
+            DownedTimer = DownedTime;
 
             capsuleCollider.height = downedHeight;
             capsuleCollider.radius = downedRadius;
@@ -96,9 +101,25 @@ public class EnemyController : MonoBehaviour
     [Header("Timer settings")]
     public float DownedTime = 10f;
     [SerializeField]
-    private float downedTimer = 0;
+    public float DownedTimer = 0;
     public bool IsDominated = false;
- 
+    public bool IsSubdued = false;
+    public float ChokeTime = 2;
+    [SerializeField]
+    public float ChokeTimer = 0;
+    public float SubduedTime = 15;
+
+    public void BecomeSubdued()
+    {
+       // bool resetPhysics = !rigidBody.isKinematic;
+       // if (resetPhysics) rigidBody.isKinematic = true;
+        IsSubdued = true;
+        
+        // if (resetPhysics) rigidBody.isKinematic = false;
+        BecomeDowned();
+        Physics.SyncTransforms();
+        DownedTimer = SubduedTime;
+    }
     public void BecomeDowned()
     {
         if (CurrentState != EnemyState.Alive) return;
@@ -107,10 +128,12 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeDominated()
     {
+        //if (!IsSubdued) rigidBody.isKinematic = true;
         IsDominated = true;
     }
     public void StopBeingDominated()
     {
+        //if (!IsSubdued) rigidBody.isKinematic = false;
         IsDominated = false;
     }
 
@@ -236,17 +259,22 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDowned()
     {
-        if (downedTimer <= 0)
+        if (DownedTimer <= 0)
         {
             ChangeState(EnemyState.Alive);
         }
         else if (IsDominated)
         {
-            downedTimer = Mathf.Max(downedTimer, 1);
+            DownedTimer = Mathf.Max(DownedTimer, 1);
+            if (!IsSubdued)
+            {
+                ChokeTimer += Time.deltaTime;
+                if (ChokeTimer > ChokeTime) BecomeSubdued();
+            }
         }
         else
         {
-            downedTimer -= Time.deltaTime;
+            DownedTimer -= Time.deltaTime;
         }
     }
 
