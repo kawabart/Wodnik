@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ChangeInfamy : MonoBehaviour
 {
-    public void IncreaseInfamy(float value)
+    public void IncreaseInfamy(int value)
     {
         GameManager.Instance.IncreaseInfamy(value);
     }

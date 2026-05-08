@@ -25,9 +25,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager initialized");
         CurrentLevel = GetCurrentLevelIndex();
         Debug.Log("Current level is " + CurrentLevel);
+        LoadPreviousLevelData();
     }
 
     #region levels
+
     public int CurrentLevel = 0;
     public string[] LevelNames;
     private int GetCurrentLevelIndex()
@@ -40,23 +42,69 @@ public class GameManager : MonoBehaviour
     }
     public void CompleteLevel()
     {
-        CurrentLevel++;
+        SaveManager.SaveLevelResult(CurrentLevel, CurrentInfamy);
+        
         if (CurrentLevel >= LevelNames.Length)
         {
             Debug.Log("CONGRATS! You won! Game Over (in a good way). Achievement unlocked: Happily ever after...");
         }
         else
         {
-            SceneManager.LoadScene(LevelNames[CurrentLevel]);
+            CurrentLevel++;
+            LoadLevel(CurrentLevel);
+    
         }
     }
+    public void LoadLevel(int index)
+    {
+        LoadPreviousLevelData();
+        SceneManager.LoadScene(LevelNames[CurrentLevel]);
+        
+    }
+    public void RestartLevel()
+    {
+        LoadLevel(CurrentLevel);
+    }
+
     #endregion
 
     #region infamy
-    public float CurrentInfamy = 0;
-    public void IncreaseInfamy(float value)
+
+    public int CurrentInfamy = 0;
+    public int DefaultInfamy = 15;
+    public void IncreaseInfamy(int value)
     {
         CurrentInfamy += value;
     }
+    #endregion
+
+    #region save and load
+    private void LoadPreviousLevelData()
+    {
+        Debug.Log("Trying to load save data...");
+        int previousLevel = CurrentLevel - 1;
+
+        if (previousLevel <= 0)
+        {
+            CurrentInfamy = DefaultInfamy;
+
+            Debug.Log("No previous level save");
+            return;
+        }
+
+        if (SaveManager.HasLevelResult(previousLevel))
+        {
+            CurrentInfamy =
+                SaveManager.GetLevelInfamy(previousLevel);
+
+            Debug.Log("Loaded previous level result");
+        }
+        else
+        {
+            CurrentInfamy = DefaultInfamy;
+            Debug.Log("Using default values");
+        }
+    }
+
     #endregion
 }
