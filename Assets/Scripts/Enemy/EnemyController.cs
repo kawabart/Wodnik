@@ -125,13 +125,10 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeDominated()
     {
-
-        //if (!IsSubdued) rigidBody.isKinematic = true;
         IsDominated = true;
     }
     public void StopBeingDominated()
     {
-        //if (!IsSubdued) rigidBody.isKinematic = false;
         IsDominated = false;
     }
 
