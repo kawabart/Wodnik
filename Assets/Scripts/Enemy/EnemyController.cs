@@ -1,5 +1,4 @@
 using Unity.Behavior;
-using UnityEditor.Build;
 using UnityEngine;
 
 [RequireComponent(typeof(EnemyAnimationController))]
@@ -11,7 +10,7 @@ public class EnemyController : MonoBehaviour
 {
 
     #region states
-    public EnemyState CurrentState = EnemyState.Alive;
+    public EnemyState CurrentState { get; private set; } = EnemyState.Alive;
 
     [Header("Downed Collider Settings")]
     public float downedHeight = 0.5f;
@@ -99,14 +98,13 @@ public class EnemyController : MonoBehaviour
 
     #region downed
     [Header("Timer settings")]
-    public float DownedTime = 10f;
+    public float DownedTime = 2;
     [SerializeField]
     public float DownedTimer = 0;
-    public bool IsDominated = false;
-    public bool IsSubdued = false;
+    public bool IsDominated { get; private set; }
+    public bool IsSubdued { get; private set; }
     public float ChokeTime = 2;
-    [SerializeField]
-    public float ChokeTimer = 0;
+    public float ChokeTimer { get; private set; } = 0;
     public float SubduedTime = 15;
 
     public void BecomeSubdued()
@@ -126,6 +124,7 @@ public class EnemyController : MonoBehaviour
     public void BecomeDominated()
     {
         IsDominated = true;
+        BecomeDowned();
     }
     public void StopBeingDominated()
     {
@@ -183,9 +182,6 @@ public class EnemyController : MonoBehaviour
 
     public bool IsVulnerable()
     {
-        //enemy has no weapon
-        //enemy is stunned
-        //player is behind enemy
         if (CurrentState != EnemyState.Alive) return true;
         if (agitationController.AgitationState != AgitationState.Alarmed) return true;
         if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
