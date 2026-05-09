@@ -9,6 +9,7 @@ public class AgitationController : MonoBehaviour
 
     public AgitationStateConfig CurrentAgitationConfig;
 
+    private PerceptionSight perceptionSight;
     private EnemyPerception perception;
     public float AgitationLevel = 0;
     public AgitationState AgitationState = AgitationState.Relaxed;
@@ -27,6 +28,7 @@ public class AgitationController : MonoBehaviour
     void Start()
     {
         perception = GetComponent<EnemyPerception>();
+        perceptionSight = GetComponent<PerceptionSight>();
         UpdateAgitation();
     }
  
@@ -41,6 +43,8 @@ public class AgitationController : MonoBehaviour
                 //Example of enemy informing other enemies about the location of the problem
                 SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
                 SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
+
+                perceptionSight.SetSight(DangerLevel.Distress);
             }
             if (shockTimer > 0)
                 shockTimer -= Time.deltaTime;
@@ -49,13 +53,26 @@ public class AgitationController : MonoBehaviour
         }
         else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
-            CurrentAgitationConfig = InvestigatingConfig;
-            AgitationState = AgitationState.Investigating;
+
+            if (AgitationState != AgitationState.Investigating)
+            {
+                perceptionSight.DisableSight();
+            }
+                CurrentAgitationConfig = InvestigatingConfig;
+                
+                AgitationState = AgitationState.Investigating;
+            
         }
         else
         {
-            CurrentAgitationConfig = RelaxedConfig;
-            AgitationState = AgitationState.Relaxed;
+            if (AgitationState != AgitationState.Relaxed)
+            {
+                perceptionSight.DisableSight();
+            }
+                CurrentAgitationConfig = RelaxedConfig;
+                AgitationState = AgitationState.Relaxed;
+                
+            
         }
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }

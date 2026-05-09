@@ -33,6 +33,7 @@ public class EnemyController : MonoBehaviour
         CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
+            perceptionSight.DisableSight();
             capsuleCollider.height = aliveHeight;
             capsuleCollider.radius = aliveRadius;
             capsuleCollider.direction = aliveDirection;
@@ -53,6 +54,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (newState == EnemyState.Downed)
         {
+            perceptionSight.SetSight(DangerLevel.Distress);
             downedTimer = DownedTime;
 
             capsuleCollider.height = downedHeight;
@@ -186,7 +188,7 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
- 
+    private PerceptionSight perceptionSight;
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -209,6 +211,8 @@ public class EnemyController : MonoBehaviour
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
+
+        perceptionSight = GetComponent<PerceptionSight>();
     }
 
     void Update()

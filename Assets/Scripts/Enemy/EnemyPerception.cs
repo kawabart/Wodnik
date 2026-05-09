@@ -46,8 +46,12 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
     public bool canHear = true;
     public bool canTouch = true;
 
+    [SerializeField]
+    private float sensesTick = .5f;
+    private float sensesTickTimer = 0;
     void Start()
     {
+        sensesTickTimer = sensesTick * Random.value;
         enemyController = GetComponent<EnemyController>();
 
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
@@ -56,7 +60,12 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
 
     void Update()
     {
-        ScanForSights();
+        sensesTickTimer += Time.deltaTime;
+        while (sensesTickTimer> sensesTick)
+        {
+            ScanForSights();
+            sensesTickTimer -= sensesTick;
+        }
 
         if (player != null)
         {
@@ -122,9 +131,10 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         );
         foreach (Collider hit in hits)
         {
-            if ( hit.TryGetComponent<VisualSight>(out VisualSight sight))
+            if ( hit.TryGetComponent<PerceptionSight>(out PerceptionSight sight))
             {
-                sight.TryDiscover(this);
+                if (sight.gameObject!= gameObject)
+                    sight.TryDiscover(this);
             }
         }
     }
