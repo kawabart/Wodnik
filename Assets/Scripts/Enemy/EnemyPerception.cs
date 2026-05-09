@@ -49,6 +49,8 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
     [SerializeField]
     private float sensesTick = .5f;
     private float sensesTickTimer = 0;
+
+    private GameObject lastInvestigatedObject = null;
     void Start()
     {
         sensesTickTimer = sensesTick * Random.value;
@@ -163,7 +165,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         if (dangerPosition == null) dangerPosition = position;
         float agitationIncrement = 0;
         float maxAgitationFromDanger = 100;
-
+        lastInvestigatedObject = source;
         switch (danger)
         {
             case DangerLevel.Noise:

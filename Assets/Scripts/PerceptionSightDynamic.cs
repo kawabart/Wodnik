@@ -4,7 +4,7 @@ using UnityEngine;
 public class PerceptionSightDynamic : PerceptionSight
 {
     private Rigidbody rb;
-    private float minVelocity = .01f;
+    private float minVelocity = 1f;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -14,7 +14,8 @@ public class PerceptionSightDynamic : PerceptionSight
         if (rb == null) return;
         if (rb.linearVelocity.sqrMagnitude > minVelocity * minVelocity)
         {
-            SetSightWithTimeout(Timeout);
+            SetSightWithTimeout(1f);
+            OneTimeDiscovery = true;
         }
     }
 }
