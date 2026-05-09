@@ -100,7 +100,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float downedTimer = 0;
     public bool IsDominated = false;
- 
+
     public void BecomeDowned()
     {
         if (CurrentState != EnemyState.Alive) return;
@@ -142,7 +142,7 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
- 
+
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
@@ -164,7 +164,7 @@ public class EnemyController : MonoBehaviour
         }
         else return false;
     }
- 
+
     public bool IsVulnerable()
     {
         //enemy has no weapon
@@ -196,7 +196,7 @@ public class EnemyController : MonoBehaviour
             return agitationController.CurrentAgitationConfig;
         }
     }
- 
+
     private Animator animator;
 
     void Start()

@@ -19,19 +19,19 @@ public class AgitationController : MonoBehaviour
     private float shockTimer = 0;
     [SerializeField, Tooltip("Grace period where enemy is still vulnerable after entering Alerted state (in seconds)")]
     private float shockTime = 1f;
- 
+
     public bool IsShocked()
     {
         return shockTimer > 0;
     }
- 
+
     void Start()
     {
         perception = GetComponent<EnemyPerception>();
         perceptionSight = GetComponent<PerceptionSight>();
         UpdateAgitation();
     }
- 
+
     private void UpdateAgitation()
     {
         if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
@@ -58,10 +58,10 @@ public class AgitationController : MonoBehaviour
             {
                 perceptionSight.DisableSight();
             }
-                CurrentAgitationConfig = InvestigatingConfig;
-                
-                AgitationState = AgitationState.Investigating;
-            
+            CurrentAgitationConfig = InvestigatingConfig;
+
+            AgitationState = AgitationState.Investigating;
+
         }
         else
         {
@@ -69,10 +69,10 @@ public class AgitationController : MonoBehaviour
             {
                 perceptionSight.DisableSight();
             }
-                CurrentAgitationConfig = RelaxedConfig;
-                AgitationState = AgitationState.Relaxed;
-                
-            
+            CurrentAgitationConfig = RelaxedConfig;
+            AgitationState = AgitationState.Relaxed;
+
+
         }
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
     }
@@ -92,7 +92,7 @@ public class AgitationController : MonoBehaviour
         AgitationLevel = Mathf.Min(AgitationLevel + input, maxAgitationFromThis);
         UpdateAgitation();
     }
-  
+
     public void DecreaseAgitation()
     {
         var change = CurrentAgitationConfig.AgitationNegativeRate * Time.deltaTime;

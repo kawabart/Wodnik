@@ -38,7 +38,7 @@ public class PerceptionSight : MonoBehaviour
         Debug.Log("Failed to discover " + Danger.ToString());
     }
 
-    public void SetSightWithTimeout(float ?timeout)
+    public void SetSightWithTimeout(float? timeout)
     {
         SetSight(Danger, timeout);
     }

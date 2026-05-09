@@ -13,7 +13,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
             return enemyController.CurrentAgitationConfig;
         }
     }
-  
+
     [SerializeField]
     private PlayerController player = null;
     [SerializeField]
@@ -63,7 +63,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
     void Update()
     {
         sensesTickTimer += Time.deltaTime;
-        while (sensesTickTimer> sensesTick)
+        while (sensesTickTimer > sensesTick)
         {
             ScanForSights();
             sensesTickTimer -= sensesTick;
@@ -101,7 +101,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
             enemyController.DecreaseAgitation();
         }
     }
- 
+
     void UpdateValuesFromScriptable()
     {
         if (CurrentAgitationConfig == null) return;
@@ -133,9 +133,9 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         );
         foreach (Collider hit in hits)
         {
-            if ( hit.TryGetComponent<PerceptionSight>(out PerceptionSight sight))
+            if (hit.TryGetComponent<PerceptionSight>(out PerceptionSight sight))
             {
-                if (sight.gameObject!= gameObject)
+                if (sight.gameObject != gameObject)
                     sight.TryDiscover(this);
             }
         }
@@ -157,7 +157,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
 
     public bool ReactToDanger(Vector3 position, DangerLevel danger, GameObject source = null, Vector3? dangerPosition = null)
     {
-        
+
         if (source == this.gameObject) return false;
         if (percievedDangerLevel > danger) return false;
         if (PerceptionState == EnemyPerceptionState.PlayerInSight) return false;
@@ -192,7 +192,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         LastPlayerPosition = dangerPosition;
         return true;
     }
-    
+
     public void ActivateSenses()
     {
         canSee = true;
