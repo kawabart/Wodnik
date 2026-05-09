@@ -1,6 +1,7 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PerceptionSightDynamic : PerceptionSight
 {
     private Rigidbody rb;
