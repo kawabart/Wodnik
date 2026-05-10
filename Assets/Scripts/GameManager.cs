@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
     public void CompleteLevel()
     {
         SaveManager.SaveLevelResult(CurrentLevel, CurrentInfamy);
-        
+        CurrentLevel++;
         if (CurrentLevel >= LevelNames.Length)
         {
             Debug.Log("CONGRATS! You won! Game Over (in a good way). Achievement unlocked: Happily ever after...");
         }
         else
         {
-            CurrentLevel++;
+            
             LoadLevel(CurrentLevel);
     
         }
