@@ -10,7 +10,7 @@ public class EnemyController : MonoBehaviour
 {
 
     #region states
-    public EnemyState CurrentState { get; private set; } = EnemyState.Alive;
+    public EnemyState CurrentState = EnemyState.Alive;
 
     [Header("Downed Collider Settings")]
     public float downedHeight = 0.5f;
@@ -20,9 +20,6 @@ public class EnemyController : MonoBehaviour
 
     public void ChangeState(EnemyState newState)
     {
-        if (CurrentState == newState) return;
-        CurrentState = newState;
-
         const float aliveHeight = 0.9f;
         const float aliveRadius = 0.2f;
         const int aliveDirection = 1; // 1 = Y axis
@@ -33,6 +30,7 @@ public class EnemyController : MonoBehaviour
         const int downedDirection = 2; // 2 = Z axis
         Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
 
+        CurrentState = newState;
         if (newState == EnemyState.Alive)
         {
             perceptionSight.DisableSight();
@@ -51,15 +49,13 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
 
-            IsSubdued = false;
-            animator.SetBool("IsSubdued", false);
             animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
             perceptionSight.SetSight(DangerLevel.Distress);
-            DownedTimer = DownedTime;
+            downedTimer = DownedTime;
 
             capsuleCollider.height = downedHeight;
             capsuleCollider.radius = downedRadius;
@@ -100,23 +96,10 @@ public class EnemyController : MonoBehaviour
 
     #region downed
     [Header("Timer settings")]
-    public float DownedTime = 2;
-    public float DownedTimer { get; private set; } = 0;
-    public bool IsDominated { get; private set; }
-    public bool IsSubdued { get; private set; }
-    public float ChokeTime = 2;
-    public float ChokeTimer { get; private set; } = 0;
-    public float SubduedTime = 15;
-
-    public void BecomeSubdued()
-    {
-        rigidBody.isKinematic = !rigidBody.isKinematic;
-        IsSubdued = true;
-        animator.SetBool("IsSubdued", true);
-        rigidBody.isKinematic = !rigidBody.isKinematic;
-        BecomeDowned();
-        DownedTimer = SubduedTime;
-    }
+    public float DownedTime = 10f;
+    [SerializeField]
+    private float downedTimer = 0;
+    public bool IsDominated = false;
 
     public void BecomeDowned()
     {
@@ -127,7 +110,6 @@ public class EnemyController : MonoBehaviour
     public void BecomeDominated()
     {
         IsDominated = true;
-        BecomeDowned();
     }
     public void StopBeingDominated()
     {
@@ -185,6 +167,9 @@ public class EnemyController : MonoBehaviour
 
     public bool IsVulnerable()
     {
+        //enemy has no weapon
+        //enemy is stunned
+        //player is behind enemy
         if (CurrentState != EnemyState.Alive) return true;
         if (agitationController.AgitationState != AgitationState.Alarmed) return true;
         if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
@@ -204,7 +189,6 @@ public class EnemyController : MonoBehaviour
     private EnemyPerception perceptionController;
     private PlayerController player = null;
     private PerceptionSight perceptionSight;
-	
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -256,23 +240,17 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDowned()
     {
-        if (DownedTimer <= 0)
+        if (downedTimer <= 0)
         {
             ChangeState(EnemyState.Alive);
         }
         else if (IsDominated)
         {
-            DownedTimer = Mathf.Max(DownedTimer, 1);
-            if (!IsSubdued)
-            {
-                ChokeTimer += Time.deltaTime;
-                if (ChokeTimer > ChokeTime) BecomeSubdued();
-            }
+            downedTimer = Mathf.Max(downedTimer, 1);
         }
         else
         {
-            ChokeTimer = 0;
-            DownedTimer -= Time.deltaTime;
+            downedTimer -= Time.deltaTime;
         }
     }
 

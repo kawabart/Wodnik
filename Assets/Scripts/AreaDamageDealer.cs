@@ -5,7 +5,6 @@ public class AreaDamageDealer : MonoBehaviour
     public int damage = 10;
     public bool affectPlayer = false;
     public bool affectOnlyDowned = false;
-    public bool affectOnlySubdued = false;
     public SurfaceType overrideSurface;
 
     void OnTriggerEnter(Collider other)
@@ -18,8 +17,7 @@ public class AreaDamageDealer : MonoBehaviour
         var enemy = other.GetComponent<EnemyController>();
         if (affectOnlyDowned && enemy != null && enemy.CurrentState != EnemyState.Downed)
             return;
-        if (affectOnlySubdued && enemy != null && !enemy.IsSubdued)
-            return;
+
         damageable.TakeDamage(new DamageData(damage, overrideSurface));
     }
 }

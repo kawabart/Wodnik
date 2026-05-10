@@ -27,16 +27,7 @@ public partial class EnemyUI : MonoBehaviour
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         if (enemyController.CurrentState == EnemyState.Downed)
         {
-            if (!enemyController.IsSubdued)
-            {
-                if (enemyController.IsDominated) label.text = "";
-                else label.text = "";
-            }
-            else
-            {
-                label.text = "";
-            }
-
+            label.text = "zzZ";
             return;
         }
         else if (enemyController.CurrentState != EnemyState.Alive)
