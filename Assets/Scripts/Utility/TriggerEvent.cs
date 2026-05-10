@@ -21,7 +21,7 @@ public class TriggerEvent : MonoBehaviour
             EventTriggered();
         }
     }
- 
+
     void EventTriggered()
     {
         if (!enabled) return;
