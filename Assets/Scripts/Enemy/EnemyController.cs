@@ -52,7 +52,7 @@ public class EnemyController : MonoBehaviour
             perceptionController.ActivateSenses();
 
             IsSubdued = false;
-
+            animator.SetBool("IsSubdued", false);
             animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
@@ -112,6 +112,7 @@ public class EnemyController : MonoBehaviour
     {
         rigidBody.isKinematic = !rigidBody.isKinematic;
         IsSubdued = true;
+        animator.SetBool("IsSubdued", true);
         rigidBody.isKinematic = !rigidBody.isKinematic;
         BecomeDowned();
         DownedTimer = SubduedTime;
