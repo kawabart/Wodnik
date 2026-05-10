@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 8797479730542030774}
   - component: {fileID: 5341854413299382407}
   - component: {fileID: 3107227084606748351}
+  - component: {fileID: -3150641207802710427}
   m_Layer: 7
   m_Name: Default Object
   m_TagString: Untagged
@@ -160,6 +161,10 @@ MonoBehaviour:
   minVelocityToDamage: 5
   increaseVelocityNeededForPlayer: 0
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!114 &4503014004726142115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +185,7 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  armorSurface: {fileID: 0}
 --- !u!114 &8797479730542030774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,6 +201,7 @@ MonoBehaviour:
   onPush:
     m_PersistentCalls:
       m_Calls: []
+  rotateInPushDirection: 0
 --- !u!114 &5341854413299382407
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,3 +233,20 @@ MonoBehaviour:
   onLetGo:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3150641207802710427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170ed40127685d445a980321cfdbfd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionSightDynamic
+  Active: 0
+  Discovered: 0
+  Danger: 1
+  Hidden: 0
+  OneTimeDiscovery: 0
