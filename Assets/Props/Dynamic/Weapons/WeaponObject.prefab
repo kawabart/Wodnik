@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8797479730542030774}
   - component: {fileID: 5341854413299382407}
   - component: {fileID: 3107227084606748351}
+  - component: {fileID: -7323903174123389696}
   m_Layer: 11
   m_Name: WeaponObject
   m_TagString: Untagged
@@ -186,6 +187,23 @@ MonoBehaviour:
   onLetGo:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-7323903174123389696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170ed40127685d445a980321cfdbfd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionSightDynamic
+  Active: 0
+  Discovered: 0
+  Danger: 1
+  Hidden: 0
+  OneTimeDiscovery: 0
 --- !u!1001 &6198185044982018610
 PrefabInstance:
   m_ObjectHideFlags: 0
