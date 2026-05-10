@@ -3017,14 +3017,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c80ceebb72c1f4394b6fa1dac68f4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  CurrentState: 0
   downedHeight: 0.5
   downedRadius: 0.1
   downedDirection: 2
   downedCenter: {x: 0, y: 0.1, z: 0}
-  DownedTime: 5
-  downedTimer: 0
-  IsDominated: 0
+  DownedTime: 0.5
+  ChokeTime: 1
+  SubduedTime: 30
   blockingAngle: 80
 --- !u!114 &4355304884184916963
 MonoBehaviour:
@@ -3173,7 +3172,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7635132580727919465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
-        m_MethodName: BecomeDowned
+        m_MethodName: BecomeSubdued
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3319,7 +3318,7 @@ MonoBehaviour:
   Discovered: 0
   Danger: 0
   Hidden: 0
-  OneTimeDiscovery: 0
+  OneTimeDiscovery: 1
 --- !u!1 &2770387815768199330
 GameObject:
   m_ObjectHideFlags: 0
