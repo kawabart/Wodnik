@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour
 
         if (newState == EnemyState.Alive)
         {
+            perceptionSight.DisableSight();
             capsuleCollider.height = aliveHeight;
             capsuleCollider.radius = aliveRadius;
             capsuleCollider.direction = aliveDirection;
@@ -57,6 +58,7 @@ public class EnemyController : MonoBehaviour
         }
         else if (newState == EnemyState.Downed)
         {
+            perceptionSight.SetSight(DangerLevel.Distress);
             DownedTimer = DownedTime;
 
             capsuleCollider.height = downedHeight;
@@ -99,8 +101,7 @@ public class EnemyController : MonoBehaviour
     #region downed
     [Header("Timer settings")]
     public float DownedTime = 2;
-    [SerializeField]
-    public float DownedTimer = 0;
+    public float DownedTimer { get; private set; } = 0;
     public bool IsDominated { get; private set; }
     public bool IsSubdued { get; private set; }
     public float ChokeTime = 2;
@@ -115,6 +116,7 @@ public class EnemyController : MonoBehaviour
         BecomeDowned();
         DownedTimer = SubduedTime;
     }
+
     public void BecomeDowned()
     {
         if (CurrentState != EnemyState.Alive) return;
@@ -200,7 +202,8 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
-
+    private PerceptionSight perceptionSight;
+	
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -223,6 +226,8 @@ public class EnemyController : MonoBehaviour
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
+
+        perceptionSight = GetComponent<PerceptionSight>();
     }
 
     void Update()

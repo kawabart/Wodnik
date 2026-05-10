@@ -19,6 +19,7 @@ public class HairController : MonoBehaviour
   
     public void Grab(Rigidbody rb)
     {
+        rb.isKinematic = false;
         GrabbedRb = rb;
         hairGenerator.endpoint.GetComponent<Follower>().Target = rb.transform;
         hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = 0f;
@@ -48,7 +49,7 @@ public class HairController : MonoBehaviour
         if (GrabbedRb != null)
         {
             IGrabbable grabbable = GrabbedRb?.GetComponent<IGrabbable>();
-            if (grabbable != null) grabbable.LetGo(this);
+            if (grabbable != null) grabbable.LetGo();
         }
 
         GrabbedRb = null;
