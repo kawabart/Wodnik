@@ -117,13 +117,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8665389352679004204}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.08729497, y: -0.70169765, z: -0.08729497, w: 0.70169765}
-  m_LocalPosition: {x: -0.104, y: 0.071, z: -0.00022115285}
+  m_LocalRotation: {x: 0.170208, y: -0.6863157, z: 0.170208, w: 0.6863157}
+  m_LocalPosition: {x: -0.1196, y: 0.1203, z: -0.00022115285}
   m_LocalScale: {x: 0.24184708, y: 0.08005623, z: 0.2418471}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3965210503712421213}
-  m_LocalEulerAnglesHint: {x: -14.183, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 27.857, y: -90, z: 0}
 --- !u!108 &5301766701650324127
 Light:
   m_ObjectHideFlags: 0
@@ -135,10 +135,10 @@ Light:
   serializedVersion: 13
   m_Type: 0
   m_Color: {r: 1, g: 0.4195217, b: 0.1273585, a: 1}
-  m_Intensity: 0.7
-  m_Range: 2
+  m_Intensity: 1.5
+  m_Range: 2.5
   m_SpotAngle: 160.15796
-  m_InnerSpotAngle: 127.78891
+  m_InnerSpotAngle: 151.61215
   m_CookieSize2D: {x: 0.5, y: 0.5}
   m_Shadows:
     m_Type: 1
@@ -147,7 +147,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -202,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalLightData
   m_UsePipelineSettings: 1
-  m_AdditionalLightsShadowResolutionTier: 2
+  m_AdditionalLightsShadowResolutionTier: 1
   m_CustomShadowLayers: 0
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
@@ -255,15 +255,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9db41a8f1cb48444bb61ff1bc14b8e40, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9db41a8f1cb48444bb61ff1bc14b8e40, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9db41a8f1cb48444bb61ff1bc14b8e40, type: 3}
       propertyPath: m_LocalScale.z
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9db41a8f1cb48444bb61ff1bc14b8e40, type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,7 +425,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
