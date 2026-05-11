@@ -13,6 +13,7 @@ public class EnemyAppearance : MonoBehaviour
     [SerializeField] private SkinnedMeshRenderer bodyMeshRenderer;
     [SerializeField] private SkinnedMeshRenderer helmetMeshRenderer;
     [SerializeField] Material[] materials;
+    [SerializeField] Material[] hairMaterials;
     Damageable damageable;
 
     void Start()
@@ -23,7 +24,7 @@ public class EnemyAppearance : MonoBehaviour
         RandomizeMeshes(hairMeshRenderer, hair);
         RandomizeMeshes(moustacheMeshRenderer, moustaches);
         RandomizeMeshes(helmetMeshRenderer, helmets);
-        Material hairMaterial = materials[Random.Range(0, materials.Length)];
+        Material hairMaterial = hairMaterials[Random.Range(0, materials.Length)];
         Material clothesMaterial = materials[Random.Range(0, materials.Length)];
         bodyMeshRenderer.sharedMaterial = clothesMaterial;
         beardMeshRenderer.sharedMaterial = hairMaterial;
