@@ -65,6 +65,6 @@ public class LevelRestarter : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.RestartLevel();
     }
 }

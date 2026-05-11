@@ -2889,6 +2889,7 @@ GameObject:
   - component: {fileID: -120603478097856523}
   - component: {fileID: 3484863596789031813}
   - component: {fileID: -3894158876318657210}
+  - component: {fileID: 5930163577353343702}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -3021,9 +3022,9 @@ MonoBehaviour:
   downedRadius: 0.1
   downedDirection: 2
   downedCenter: {x: 0, y: 0.1, z: 0}
-  DownedTime: 0.5
-  ChokeTime: 1
-  SubduedTime: 30
+  DownedTime: 1
+  ChokeTime: 2
+  SubduedTime: 15
   blockingAngle: 80
 --- !u!114 &4355304884184916963
 MonoBehaviour:
@@ -3163,6 +3164,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5930163577353343702}
+        m_TargetAssemblyTypeName: ChangeInfamy, Assembly-CSharp
+        m_MethodName: IncreaseInfamy
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3316,9 +3329,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PerceptionSight
   Active: 0
   Discovered: 0
-  Danger: 0
+  Danger: 4
   Hidden: 0
   OneTimeDiscovery: 1
+--- !u!114 &5930163577353343702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729769001911704819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12bae036a9c088468850237bf8d7b51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangeInfamy
 --- !u!1 &2770387815768199330
 GameObject:
   m_ObjectHideFlags: 0
