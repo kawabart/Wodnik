@@ -6,11 +6,21 @@ public class PerceptionSight : MonoBehaviour
     public bool Active = false;
     public bool Discovered = false;
     public DangerLevel Danger;
-    public bool Hidden = false;
     public bool OneTimeDiscovery = false;
     public float? Timeout = null;
     public bool CanBeDiscovered => Active && !Discovered;
-
+    private VisibilityController visibilityController;
+    public bool Hidden
+    {
+        get
+        {
+            return visibilityController == null ? false : visibilityController.Hidden;
+        }
+    }
+    private void Start()
+    {
+        visibilityController = GetComponent<VisibilityController>();
+    }
     private void Update()
     {
         if (Timeout != null)

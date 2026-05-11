@@ -159,25 +159,25 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
     {
 
         if (source == this.gameObject) return false;
-        if (percievedDangerLevel > danger) return false;
-        if (PerceptionState == EnemyPerceptionState.PlayerInSight) return false;
+        
 
         if (dangerPosition == null) dangerPosition = position;
         float agitationIncrement = 0;
         float maxAgitationFromDanger = 100;
-        lastInvestigatedObject = source;
+        
         switch (danger)
         {
             case DangerLevel.Noise:
                 agitationIncrement = 20;
-                maxAgitationFromDanger = 50;
+                maxAgitationFromDanger = 80;
                 break;
             case DangerLevel.Water:
                 agitationIncrement = 40;
+                maxAgitationFromDanger = 99;
                 break;
             case DangerLevel.Distress:
-                agitationIncrement = 50;
-                maxAgitationFromDanger = 90;
+                agitationIncrement = 40;
+                maxAgitationFromDanger = 99;
                 break;
             case DangerLevel.MaybePlayer:
                 agitationIncrement = 100;
@@ -186,10 +186,15 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
                 agitationIncrement = 100;
                 break;
         }
+        
+        
         enemyController.IncreaseAgitation(agitationIncrement, false, false, maxAgitationFromDanger);
+        if (percievedDangerLevel > danger) return false;
+        if (PerceptionState == EnemyPerceptionState.PlayerInSight) return false;
+        lastInvestigatedObject = source;
+        LastPlayerPosition = dangerPosition;
         PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
         percievedDangerLevel = danger;
-        LastPlayerPosition = dangerPosition;
         return true;
     }
 
