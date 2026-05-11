@@ -17,7 +17,7 @@ public class EnemyController : MonoBehaviour
     public float downedRadius = 0.1f;
     public int downedDirection = 2; // 0 = X axis, 1 = Y axis, 2 = Z axis
     public Vector3 downedCenter = new Vector3(0f, 0.1f, 0f);
-
+    
     public void ChangeState(EnemyState newState)
     {
         if (CurrentState == newState) return;
@@ -99,7 +99,7 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region downed
-    [Header("Timer settings")]
+    [Header("Downed timer settings")]
     public float DownedTime = 2;
     public float DownedTimer { get; private set; } = 0;
     public bool IsDominated { get; private set; }
@@ -107,6 +107,9 @@ public class EnemyController : MonoBehaviour
     public float ChokeTime = 2;
     public float ChokeTimer { get; private set; } = 0;
     public float SubduedTime = 15;
+
+    [SerializeField]
+    private ParticleSystem chokingParticle;
 
     public void BecomeSubdued()
     {
@@ -126,12 +129,14 @@ public class EnemyController : MonoBehaviour
 
     public void BecomeDominated()
     {
+        chokingParticle.Play();
         IsDominated = true;
         BecomeDowned();
     }
     public void StopBeingDominated()
     {
         IsDominated = false;
+        chokingParticle.Stop();
     }
 
     public void TurnPhysicsOff()
