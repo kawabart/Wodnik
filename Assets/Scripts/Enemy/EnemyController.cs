@@ -174,7 +174,6 @@ public class EnemyController : MonoBehaviour
     {
         if (!IsVulnerable())
         {
-            Debug.Log("Attack blocked!");
             agitationController.IncreaseAgitation(100, false, false);
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
             GetComponent<EnemyAnimationController>().Block();

@@ -392,7 +392,6 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void OnEnable()
     {
-        Debug.Log("Subscription");
         moveAction = InputSystem.actions.FindAction("Move");
         moveAction.Enable();
         sprintAction = InputSystem.actions.FindAction("Sprint");

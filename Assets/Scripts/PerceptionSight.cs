@@ -1,5 +1,6 @@
 using UnityEngine;
 
+//Point of interest - something that can catch enemy's attention.
 public class PerceptionSight : MonoBehaviour
 {
     public bool Active = false;
@@ -31,11 +32,9 @@ public class PerceptionSight : MonoBehaviour
         if (!CanBeDiscovered) return;
         if (watcher.OnSightWatched(transform.position, Danger, this.gameObject, null, Hidden))
         {
-            Debug.Log("Discovering " + Danger.ToString());
             if (OneTimeDiscovery)
                 Discovered = true;
         }
-        Debug.Log("Failed to discover " + Danger.ToString());
     }
 
     public void SetSightWithTimeout(float? timeout)
@@ -51,11 +50,9 @@ public class PerceptionSight : MonoBehaviour
     public void SetSight(DangerLevel dangerLevel, float? timeout = null)
     {
         Timeout = timeout;
-        Debug.Log("setting sight to " + dangerLevel.ToString());
         Danger = dangerLevel;
         Discovered = false;
         Active = true;
-
     }
 
     public void DisableSight()
