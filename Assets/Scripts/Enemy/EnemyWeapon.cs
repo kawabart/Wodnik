@@ -47,6 +47,9 @@ public class EnemyWeapon : MonoBehaviour
             var dmg = hit.GetComponent<IDamageable>();
             if (dmg != null && hit.gameObject != this.gameObject)
             {
+                //damage only downed enemies
+                if (hit.TryGetComponent<EnemyController>(out EnemyController enemyController) && enemyController.CurrentState == EnemyState.Alive) continue;
+
                 dmg.TakeDamage(new DamageData(weaponScriptable.damage));
             }
         }
