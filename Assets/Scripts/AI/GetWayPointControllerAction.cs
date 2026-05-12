@@ -37,8 +37,7 @@ public partial class GetWayPointControllerAction : Action
 
         if (timer <= 0f)
         {
-            Component.Value.StopInteraction();
-            Animator.Value.SetTrigger("EndIdle");
+            
             return Status.Success;
         }
             
@@ -48,7 +47,8 @@ public partial class GetWayPointControllerAction : Action
 
     protected override void OnEnd()
     {
-        
+        Component.Value.StopInteraction();
+        Animator.Value.SetTrigger("EndIdle");
     }
 }
 
