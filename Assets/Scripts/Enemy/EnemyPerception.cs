@@ -176,8 +176,8 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
                 maxAgitationFromDanger = Mathf.Max(30, GameManager.Instance.CurrentInfamy*2);
                 break;
             case DangerLevel.Distress:
-                agitationIncrement = 40;
-                maxAgitationFromDanger = 99;
+                agitationIncrement = Mathf.Max(40, GameManager.Instance.CurrentInfamy * 3);
+                maxAgitationFromDanger = 100;
                 break;
             case DangerLevel.MaybePlayer:
                 agitationIncrement = 100;
