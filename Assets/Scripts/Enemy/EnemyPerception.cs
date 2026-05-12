@@ -120,8 +120,7 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
             PredictPlayerPositionTimer = PredictPlayerPositionTime;
             return true;
         }
-        if (PredictPlayerPositionTimer > 0) return true;
-        else return false;
+        return PredictPlayerPositionTimer > 0;
     }
     public void ScanForSights()
     {

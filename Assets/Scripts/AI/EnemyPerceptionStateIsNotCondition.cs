@@ -11,13 +11,6 @@ public partial class EnemyPerceptionStateIsNotCondition : Condition
 
     public override bool IsTrue()
     {
-        if (Enemy.Value.GetComponent<EnemyPerception>().PerceptionState != PerceptionState.Value)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return Enemy.Value.GetComponent<EnemyPerception>().PerceptionState != PerceptionState.Value;
     }
 }

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         get
         {
             if (isPushing) return false;
-            return visibilityController == null ? false : visibilityController.Hidden;
+            return visibilityController != null && visibilityController.Hidden;
         }
     }
 
@@ -79,11 +79,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     private bool IsMovementLocked()
     {
-        bool locked = false;
-        if (!IsAlive) return true;
-        if (isTakedown) return true;
-        if (isPushing) return true;
-        return locked;
+        return !IsAlive || isTakedown || isPushing;
     }
 
     private void UpdatePositionDirection()
