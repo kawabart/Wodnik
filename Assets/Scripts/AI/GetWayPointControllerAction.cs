@@ -21,8 +21,9 @@ public partial class GetWayPointControllerAction : Action
         {
             Component.Value = wayPointController;
             timer = wayPointController.InteractionTime;
-            Animator.Value.speed =1f;
+            Animator.Value.speed = 1f;
             Animator.Value.CrossFade(wayPointController.StateName, 0.05f);
+            Component.Value.StartInteraction();
             return Status.Running;
         }
         return Status.Failure;
@@ -30,6 +31,9 @@ public partial class GetWayPointControllerAction : Action
 
     protected override Status OnUpdate()
     {
+        if (Object.Value == null) return Status.Failure;
+        if (Component.Value == null) return Status.Failure;
+
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
@@ -40,6 +44,7 @@ public partial class GetWayPointControllerAction : Action
 
     protected override void OnEnd()
     {
+        Component.Value.StopInteraction();
         Animator.Value.SetTrigger("EndIdle");
     }
 }
