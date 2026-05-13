@@ -2,6 +2,7 @@ using System;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.AI;
 using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
@@ -21,18 +22,35 @@ public partial class RotateObjectTowardsAnotherObjectAction : Action
     public BlackboardVariable<float> TargetAngle = new BlackboardVariable<float>(1.0f);
 
     private Vector3 forward, up;
+    private Rigidbody rb;
+    private NavMeshAgent agent;
 
     protected override Status OnStart()
     {
         forward = (AnotherObject.Value.transform.position - Object.Value.transform.position).normalized;
         up = Object.Value.transform.up;
+        agent = Object.Value.GetComponent<NavMeshAgent>();
+        rb = Object.Value.GetComponent<Rigidbody>();
         return Status.Running;
     }
 
     protected override Status OnUpdate()
     {
         var newRotation = Vector3.RotateTowards(Object.Value.transform.forward, forward, Mathf.Deg2Rad * AngularSpeed * Time.deltaTime, 0);
-        Object.Value.GetComponent<Rigidbody>().MoveRotation(Quaternion.LookRotation(newRotation, up));
+        Quaternion targetRotation = Quaternion.LookRotation(newRotation, up);
+        if (agent != null)
+        {
+            Object.Value.transform.rotation = targetRotation;
+        }
+        else if (rb != null)
+        {
+            rb.MoveRotation(targetRotation);
+        }
+        else
+        {
+            Object.Value.transform.rotation = targetRotation;
+        }
+
         if (Vector3.Angle(newRotation, forward) <= TargetAngle)
         {
             return Status.Success;

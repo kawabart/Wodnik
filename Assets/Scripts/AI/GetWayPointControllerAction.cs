@@ -21,7 +21,8 @@ public partial class GetWayPointControllerAction : Action
         {
             Component.Value = wayPointController;
             timer = wayPointController.InteractionTime;
-            Animator.Value.CrossFade(wayPointController.StateName, 0.01f);
+            Animator.Value.speed = 1f;
+            Animator.Value.CrossFadeInFixedTime(wayPointController.StateName, 0.3f, 0, 0f);
             Component.Value.StartInteraction();
             return Status.Running;
         }
@@ -32,15 +33,15 @@ public partial class GetWayPointControllerAction : Action
     {
         if (Object.Value == null) return Status.Failure;
         if (Component.Value == null) return Status.Failure;
-
+        Animator.Value.speed = 1f;
         timer -= Time.deltaTime;
 
         if (timer <= 0f)
         {
-            
+
             return Status.Success;
         }
-            
+
 
         return Status.Running;
     }
