@@ -2644,7 +2644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: managedReferences[7192978969330712642].m_Value.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: 'managedReferences[7192978969330712642].m_Value.Array.data[0]'
@@ -16594,6 +16594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046691718}
+  - component: {fileID: 1046691719}
   m_Layer: 0
   m_Name: Points Enemy Guard Variant (2)
   m_TagString: Untagged
@@ -16620,6 +16621,21 @@ Transform:
   - {fileID: 786706942}
   m_Father: {fileID: 915631776}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1046691719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1046691717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815f4807cf6d5d846ab962e7a8d0c6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WayPointsCollector
+  behaviorTreeRunner: {fileID: 1909599635}
+  blackboardVariableName: Waypoints
+  waypoints: []
 --- !u!1001 &1050465059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16750,6 +16766,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26ef0f3be32080841900b73380cdce60, type: 3}
+--- !u!114 &1053411658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
+  m_PrefabInstance: {fileID: 154892236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
 --- !u!4 &1059834905 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441617084886346850, guid: 25f8c3cda96c98646b173309ff387c7b, type: 3}
@@ -21891,6 +21918,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1440052627}
+  - component: {fileID: 1440052628}
   m_Layer: 0
   m_Name: Points Enemy Guard Variant (3)
   m_TagString: Untagged
@@ -21915,6 +21943,21 @@ Transform:
   - {fileID: 1696332826}
   m_Father: {fileID: 915631776}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1440052628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1440052626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 815f4807cf6d5d846ab962e7a8d0c6d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WayPointsCollector
+  behaviorTreeRunner: {fileID: 1053411658}
+  blackboardVariableName: Waypoints
+  waypoints: []
 --- !u!4 &1442257384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 441617084886346850, guid: 25f8c3cda96c98646b173309ff387c7b, type: 3}
@@ -27238,7 +27281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[2]'
@@ -27254,7 +27297,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: managedReferences[7192978969330712642].m_Value.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
       propertyPath: 'managedReferences[7192978969330712642].m_Value.Array.data[0]'
@@ -27326,6 +27369,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 792244895119917979, guid: 2176ee13ad89412498a79048249035d5, type: 3}
   m_PrefabInstance: {fileID: 1909599619}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1909599635 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 286502590975018021, guid: 2176ee13ad89412498a79048249035d5, type: 3}
+  m_PrefabInstance: {fileID: 1909599619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0038c16c34866b4f9e25c9c0dc0f7e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.BehaviorGraphAgent
 --- !u!1001 &1911145857
 PrefabInstance:
   m_ObjectHideFlags: 0

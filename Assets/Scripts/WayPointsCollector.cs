@@ -10,6 +10,11 @@ public class WayPointsCollector : MonoBehaviour
     private List<GameObject> waypoints;
 
     [ContextMenu("Collect Waypoints (Editor)")]
+
+    private void Awake()
+    {
+        CollectWaypoints();
+    }
     private void CollectWaypoints()
     {
         waypoints = new();
@@ -27,7 +32,7 @@ public class WayPointsCollector : MonoBehaviour
 
         behaviorTreeRunner.BlackboardReference.SetVariableValue(
             blackboardVariableName,
-            waypoints.ToArray()
+            waypoints//.ToArray()
         );
 
         Debug.Log($"Collected {waypoints.Count} waypoints");
