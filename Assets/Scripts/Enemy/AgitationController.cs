@@ -31,30 +31,38 @@ public class AgitationController : MonoBehaviour
         perceptionSight = GetComponent<PerceptionSight>();
         UpdateAgitation();
     }
-
+    private bool isInShock = false;
     private void UpdateAgitation()
     {
         if (AgitationLevel > AlarmedConfig.AgitationLevel || AgitationLevel > RelaxedConfig.AgitationLevel && CurrentAgitationConfig == AlarmedConfig)
         {
             if (AgitationState != AgitationState.Alarmed)
             {
+                isInShock = true;
                 shockTimer = shockTime;
                 AgitationState = AgitationState.Alarmed;
                 //Example of enemy informing other enemies about the location of the problem
-                SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
-                SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
 
                 perceptionSight.SetSight(DangerLevel.Distress);
             }
             if (shockTimer > 0)
+            {
                 shockTimer -= Time.deltaTime;
+            }
+            else if (isInShock)
+            {
+                SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
+                SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
+
+                isInShock = false;
+            }
             CurrentAgitationConfig = AlarmedConfig;
 
         }
         else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
             if (AgitationState != AgitationState.Investigating)
-            {  
+            {
                 perceptionSight.DisableSight();
             }
             CurrentAgitationConfig = InvestigatingConfig;
