@@ -189,11 +189,12 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         
         
         enemyController.IncreaseAgitation(agitationIncrement, false, false, maxAgitationFromDanger);
-        if (percievedDangerLevel > danger) return false;
+         
         if (PerceptionState == EnemyPerceptionState.PlayerInSight) return false;
         lastInvestigatedObject = source;
         LastPlayerPosition = dangerPosition;
         PerceptionState = EnemyPerceptionState.PlayerSeenRecently;
+        if (percievedDangerLevel > danger) return false;
         percievedDangerLevel = danger;
         return true;
     }
