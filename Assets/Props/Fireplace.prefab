@@ -117,13 +117,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4699484849607652223}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.35600984, y: -0.61188537, z: 0.3519263, w: 0.6123735}
-  m_LocalPosition: {x: -0.025, y: 0.1253, z: -0}
+  m_LocalRotation: {x: 0.09329798, y: -0.7017557, z: 0.563377, w: 0.42595872}
+  m_LocalPosition: {x: -0.042910047, y: 0.13552971, z: 0.0008903809}
   m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5489169686699984090}
-  m_LocalEulerAnglesHint: {x: 60.077, y: -90.263, z: -0.535}
+  m_LocalEulerAnglesHint: {x: 60.481, y: -90.271, z: 45.099}
 --- !u!33 &8332895243827649363
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -468,7 +468,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7212843486989968667}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8999089228674208529
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -761,7 +761,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 362822129227752026, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.172
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 362822129227752026, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: m_LocalPosition.z
@@ -794,6 +794,10 @@ PrefabInstance:
     - target: {fileID: 362822129227752026, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3047495369056061243, guid: e137ccf432b4dfa468349542b0367270, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3047495369056061243, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -850,6 +854,10 @@ PrefabInstance:
     - target: {fileID: 3047495369056061243, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
       value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3213586622705015901, guid: e137ccf432b4dfa468349542b0367270, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 9121682930922215927, guid: e137ccf432b4dfa468349542b0367270, type: 3}
       propertyPath: m_Name
