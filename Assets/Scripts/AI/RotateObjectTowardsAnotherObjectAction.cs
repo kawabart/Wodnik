@@ -21,16 +21,24 @@ public partial class RotateObjectTowardsAnotherObjectAction : Action
     [SerializeReference]
     public BlackboardVariable<float> TargetAngle = new BlackboardVariable<float>(1.0f);
 
+    [SerializeReference]
+    public BlackboardVariable<bool> JustMatchRotation = new BlackboardVariable<bool>(false);
+
     private Vector3 forward, up;
     private Rigidbody rb;
     private NavMeshAgent agent;
 
     protected override Status OnStart()
     {
-        forward = (AnotherObject.Value.transform.position - Object.Value.transform.position).normalized;
+        if (JustMatchRotation.Value == true)
+            forward = (AnotherObject.Value.transform.forward);
+        else
+            forward = (AnotherObject.Value.transform.position - Object.Value.transform.position).normalized;
+
         up = Object.Value.transform.up;
         agent = Object.Value.GetComponent<NavMeshAgent>();
         rb = Object.Value.GetComponent<Rigidbody>();
+
         return Status.Running;
     }
 
@@ -38,6 +46,7 @@ public partial class RotateObjectTowardsAnotherObjectAction : Action
     {
         var newRotation = Vector3.RotateTowards(Object.Value.transform.forward, forward, Mathf.Deg2Rad * AngularSpeed * Time.deltaTime, 0);
         Quaternion targetRotation = Quaternion.LookRotation(newRotation, up);
+
         if (agent != null)
         {
             Object.Value.transform.rotation = targetRotation;
