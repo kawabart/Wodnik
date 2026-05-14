@@ -9,7 +9,6 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         get
         {
-            if (isPushing) return false;
             return visibilityController == null ? false : visibilityController.Hidden;
         }
     }

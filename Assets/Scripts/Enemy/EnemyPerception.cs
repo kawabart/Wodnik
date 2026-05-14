@@ -169,14 +169,14 @@ public class EnemyPerception : MonoBehaviour, ISoundListener, ISightWatcher
         {
             case DangerLevel.Noise:
                 agitationIncrement = 40;
-                maxAgitationFromDanger = Mathf.Max(20, GameManager.Instance.CurrentInfamy);
+                maxAgitationFromDanger = 90;
                 break;
             case DangerLevel.Water:
                 agitationIncrement = 40;
-                maxAgitationFromDanger = Mathf.Max(30, GameManager.Instance.CurrentInfamy*2);
+                maxAgitationFromDanger = 90;
                 break;
             case DangerLevel.Distress:
-                agitationIncrement = Mathf.Max(40, GameManager.Instance.CurrentInfamy * 3);
+                agitationIncrement = 80;
                 maxAgitationFromDanger = 100;
                 break;
             case DangerLevel.MaybePlayer:

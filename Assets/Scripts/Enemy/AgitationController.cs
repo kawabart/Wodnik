@@ -53,9 +53,8 @@ public class AgitationController : MonoBehaviour
         }
         else if (AgitationLevel > InvestigatingConfig.AgitationLevel)
         {
-
             if (AgitationState != AgitationState.Investigating)
-            {
+            {  
                 perceptionSight.DisableSight();
             }
             CurrentAgitationConfig = InvestigatingConfig;
@@ -71,7 +70,6 @@ public class AgitationController : MonoBehaviour
             }
             CurrentAgitationConfig = RelaxedConfig;
             AgitationState = AgitationState.Relaxed;
-
 
         }
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
