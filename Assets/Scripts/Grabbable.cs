@@ -27,12 +27,18 @@ public class Grabbable : MonoBehaviour, IGrabbable
         return true;
     }
 
-    public bool CanBeGrabbed()
+
+    public bool TryGrabbing()
     {
         if (enemyController != null && enemyController.TryBlocking()) return false;
         return true;
     }
  
+    public bool CanBeGrabbed()
+    {
+        if (!enabled) return false;
+        return true;
+    }
     public void ForceLetGo()
 
     {

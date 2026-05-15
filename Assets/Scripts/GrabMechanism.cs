@@ -17,12 +17,14 @@ public class GrabMechanism : MonoBehaviour
 
     public void Update()
     {
-        GetDistanceNormalized();
+      //  GetDistanceNormalized();
         if (DistanceNormalized >= 1) grabbable.ForceLetGo();
     }
     public float GetDistanceNormalized()
     {
         float currentDistance = Vector3.Distance(startPosition.position, endPosition.position);
+        if (currentDistance < minDistance) currentDistance = minDistance;
+        if (currentDistance > maxDistance) currentDistance = maxDistance;
         DistanceNormalized = Mathf.InverseLerp(minDistance, maxDistance, currentDistance);
         return DistanceNormalized;
     }

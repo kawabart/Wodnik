@@ -281,6 +281,7 @@ public class PlayerController : MonoBehaviour, IDamageable
             if (!hit.TryGetComponent<IGrabbable>(out var grabbable))
                 continue;
 
+            if (!grabbable.CanBeGrabbed()) continue;
             Vector3 targetPosition = hit.bounds.center;
 
             Vector3 directionToTarget = (targetPosition - rayOrigin).normalized;

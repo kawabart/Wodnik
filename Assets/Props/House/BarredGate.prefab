@@ -219,6 +219,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6246798819586722707}
+        m_TargetAssemblyTypeName: Grabbable, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 612031731481821870}
+        m_TargetAssemblyTypeName: Grabbable, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   onLetGo:
     m_PersistentCalls:
       m_Calls: []
@@ -292,6 +316,30 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1794540791247168163}
         m_TargetAssemblyTypeName: Pushable, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 6246798819586722707}
+        m_TargetAssemblyTypeName: Grabbable, Assembly-CSharp
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 612031731481821870}
+        m_TargetAssemblyTypeName: Grabbable, Assembly-CSharp
         m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
@@ -429,6 +477,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7004168380685205938, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1471327633049981685}
+    - targetCorrespondingSourceObject: {fileID: 7004168380685205938, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6246798819586722707}
   m_SourcePrefab: {fileID: 100100000, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
 --- !u!4 &200971678369128964 stripped
 Transform:
@@ -461,6 +512,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   rotateInPushDirection: 0
+--- !u!114 &6246798819586722707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978530901195172880}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbef91fdb11f2a47835719648881b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  onGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  onLetGo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8252750126107421303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -536,6 +605,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7004168380685205938, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1794540791247168163}
+    - targetCorrespondingSourceObject: {fileID: 7004168380685205938, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 612031731481821870}
   m_SourcePrefab: {fileID: 100100000, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
 --- !u!1 &1419872532188801989 stripped
 GameObject:
@@ -558,6 +630,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   rotateInPushDirection: 0
+--- !u!114 &612031731481821870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1419872532188801989}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbef91fdb11f2a47835719648881b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Grabbable
+  onGrab:
+    m_PersistentCalls:
+      m_Calls: []
+  onLetGo:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &6082906641045562833 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2805034341767565222, guid: 852efe3b36bcb424e8c74d52873cc542, type: 3}
