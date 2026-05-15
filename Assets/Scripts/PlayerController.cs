@@ -179,20 +179,34 @@ public class PlayerController : MonoBehaviour, IDamageable
         Debug.Log("Pushing starts...");
         if (hairController.Grabbed) hairController.GrabbedRb.MovePosition(transform.position + AimDirection.normalized * pushOffset);
     }
-
+    public LayerMask pushBlockMask;
     public void ApplyPushForce()
     {
         Debug.Log("Push!");
         Vector3 center = transform.position + transform.forward * pushOffset;
         Collider[] hits = Physics.OverlapSphere(center, pushRadius);
         Vector3 force = transform.forward * pushForce;
+        Vector3 rayOrigin = transform.position;
         LetGo();
         foreach (var hit in hits)
         {
-            if (hit.TryGetComponent<IPushable>(out var pushable))
+            if (!hit.TryGetComponent<IPushable>(out var pushable))
+                continue;
+
+            Vector3 targetPoint = hit.bounds.center;
+            Vector3 direction = (targetPoint - rayOrigin).normalized;
+            float distance = Vector3.Distance(rayOrigin, targetPoint);
+
+            if (Physics.Raycast(rayOrigin, direction, out RaycastHit raycastHit, distance,pushBlockMask))
             {
-                pushable.Push(force);
+                if (raycastHit.transform != hit.transform &&
+                    !raycastHit.transform.IsChildOf(hit.transform))
+                {
+                    continue;
+                }
             }
+
+            pushable.Push(force);
         }
     }
 
@@ -230,8 +244,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     void GetGrabTarget()
     {
         UpdateAimDirection();
+
         RaycastHit raycastHit;
         Vector3 heightOffset = 0.2f * Vector3.up;
+
         if (Physics.Raycast(transform.position + heightOffset, AimDirection, out raycastHit, GrabDistance, grabMask))
         {
             targetPoint = raycastHit.point;
@@ -255,20 +271,43 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         Collider[] hits = Physics.OverlapSphere(targetPoint, GrabAutoAim);
 
-        bool foundGrabbable = false;
+        Transform bestTarget = null;
+        float bestDot = -1f;
+
+        Vector3 rayOrigin = transform.position + heightOffset;
+
         foreach (var hit in hits)
         {
-            if (foundGrabbable) continue;
-            if (hit.TryGetComponent<IGrabbable>(out var grabbable))
+            if (!hit.TryGetComponent<IGrabbable>(out var grabbable))
+                continue;
+
+            Vector3 targetPosition = hit.bounds.center;
+
+            Vector3 directionToTarget = (targetPosition - rayOrigin).normalized;
+
+            // how close to aiming direction
+            float dot = Vector3.Dot(AimDirection.normalized, directionToTarget);
+
+            // check for wall again
+            float distance = Vector3.Distance(rayOrigin, targetPosition);
+
+            if (Physics.Raycast(rayOrigin, directionToTarget, out RaycastHit obstructionHit, distance, grabMask))
             {
+                if (obstructionHit.transform != hit.transform &&
+                    !obstructionHit.transform.IsChildOf(hit.transform))
+                {
+                    continue;
+                }
+            }
 
-                foundGrabbable = true;
-                targetedGrabObject = hit.transform;
-
+            if (dot > bestDot)
+            {
+                bestDot = dot;
+                bestTarget = hit.transform;
             }
         }
 
-        if (!foundGrabbable) targetedGrabObject = null;
+        targetedGrabObject = bestTarget;
     }
 
     void Grab()

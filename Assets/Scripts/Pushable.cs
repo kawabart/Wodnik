@@ -9,14 +9,14 @@ public class Pushable : MonoBehaviour, IPushable
     public int rotateInPushDirection = 0;
 
     private EnemyController enemyController;
-  
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         enemyController = GetComponent<EnemyController>();
     }
-    
+
     public void Push(Vector3 force)
     {
         if (!CanBePushed())
@@ -30,12 +30,17 @@ public class Pushable : MonoBehaviour, IPushable
         {
             rb.MoveRotation(Quaternion.LookRotation(rotateInPushDirection * force));
         }
+        if (TryGetComponent<ImpactDamageDealer>(out ImpactDamageDealer damageDealer))
+        {
+            damageDealer.OverrideDamageForTime();
+        }
         rb.AddForce(force, ForceMode.Impulse);
         onPush.Invoke();
     }
-  
+
     public bool CanBePushed()
     {
+        if (!enabled) return false;
         if (enemyController != null && enemyController.TryBlocking()) return false;
         return true;
     }

@@ -51,10 +51,9 @@ public class AgitationController : MonoBehaviour
             }
             else if (isInShock)
             {
-                SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
-                SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);
-
                 isInShock = false;
+                SoundEventSystem.Emit(transform.position, 1f, DangerLevel.MaybePlayer, this.gameObject, perception.LastPlayerPosition);
+                SoundEventSystem.Emit(transform.position, 3.5f, DangerLevel.Distress, this.gameObject, perception.LastPlayerPosition);      
             }
             CurrentAgitationConfig = AlarmedConfig;
 

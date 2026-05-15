@@ -20,6 +20,6 @@ public class AreaDamageDealer : MonoBehaviour
             return;
         if (affectOnlySubdued && enemy != null && !enemy.IsSubdued)
             return;
-        damageable.TakeDamage(new DamageData(damage, overrideSurface));
+        damageable.TakeDamage(new DamageData(damage, overrideSurface,gameObject));
     }
 }

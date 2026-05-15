@@ -282,9 +282,9 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.069169156
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -303,6 +303,10 @@ MonoBehaviour:
   minVelocityToDamage: 3
   increaseVelocityNeededForPlayer: 5
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!54 &4940369248085781898
 Rigidbody:
   m_ObjectHideFlags: 0
