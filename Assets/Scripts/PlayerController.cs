@@ -360,6 +360,15 @@ public class PlayerController : MonoBehaviour, IDamageable
 
         foreach (var hit in hits)
         {
+            if (hit.TryGetComponent<UseTrigger>(out var useTrigger))
+            {
+                if (useTrigger.IsUsable)
+                {
+                    takedownTarget = useTrigger.transform;
+                    useTrigger.StartUsing();
+                    return true;
+                }
+            }
             if (hit.TryGetComponent<EnemyController>(out var enemy))
             {
                 if (enemy.CurrentState == EnemyState.Downed)
