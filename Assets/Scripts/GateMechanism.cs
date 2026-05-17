@@ -20,6 +20,6 @@ public class GateMechanism : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(Vector3.Lerp(startingPoint, startingPoint + offset, grabMechanism.DistanceNormalized));
+        rb.MovePosition(Vector3.Lerp(startingPoint, startingPoint + offset, grabMechanism.GetDistanceNormalized()));
     }
 }

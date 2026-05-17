@@ -1,7 +1,7 @@
 using Unity.Behavior;
+using UnityEditorInternal;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimationController))]
 [RequireComponent(typeof(AgitationController))]
 [RequireComponent(typeof(EnemyPerception))]
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
@@ -181,7 +181,10 @@ public class EnemyController : MonoBehaviour
         {
             agitationController.IncreaseAgitation(100, false, false);
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
-            GetComponent<EnemyAnimationController>().Block();
+            if (TryGetComponent<EnemyAnimationController>(out var enemyAnimationController))
+            {
+                enemyAnimationController.Block();
+            }
             return true;
         }
         else return false;

@@ -5,4 +5,5 @@ public interface IGrabbable
     void LetGo();
 
     bool CanBeGrabbed();
+
 }
