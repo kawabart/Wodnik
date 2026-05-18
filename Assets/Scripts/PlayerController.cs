@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Android.LowLevel;
 
 public class PlayerController : MonoBehaviour, IDamageable
 {
@@ -335,24 +336,45 @@ public class PlayerController : MonoBehaviour, IDamageable
     public Transform takedownTarget = null;
     public float takedownRadius = .5f;
     public float takedownSmooth = .5f;
- 
+
     void OnTakedown(InputAction.CallbackContext ctx)
     {
         StartTakedown();
         animator.SetTrigger("Mashing");
     }
-
+ 
     void StartTakedown()
     {
         if (IsMovementLocked()) return;
-        if (!GetTakedownTarget()) return;
+        if (!TakedownTarget()) return;
 
         isTakedown = true;
         animator.SetTrigger("takedown");
         Debug.Log("Takedown starts...");
 
     }
-  
+    bool TakedownTarget()
+    {
+        if (takedownTarget == null) return false;
+        if (takedownTarget.TryGetComponent<UseTrigger>(out var useTrigger))
+        {
+            if (useTrigger.IsUsable)
+            {
+                useTrigger.StartUsing();
+                return true;
+            }
+        }
+        if (takedownTarget.TryGetComponent<EnemyController>(out var enemy))
+        {
+            if (enemy.CurrentState == EnemyState.Downed)
+            {
+                enemy.BecomeDominated();
+                enemy.TurnPhysicsOff();
+                return true;
+            }
+        }
+        return false;
+    }
     bool GetTakedownTarget()
     {
         Vector3 center = transform.position;
@@ -365,7 +387,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 if (useTrigger.IsUsable)
                 {
                     takedownTarget = useTrigger.transform;
-                    useTrigger.StartUsing();
                     return true;
                 }
             }
@@ -374,8 +395,6 @@ public class PlayerController : MonoBehaviour, IDamageable
                 if (enemy.CurrentState == EnemyState.Downed)
                 {
                     takedownTarget = enemy.transform;
-                    enemy.BecomeDominated();
-                    enemy.TurnPhysicsOff();
                     return true;
                 }
             }
@@ -411,6 +430,7 @@ public class PlayerController : MonoBehaviour, IDamageable
 
     void Start()
     {
+        GameManager.Instance.CurrentPlayer = this;
         moveAction.Enable();
         rigidBody = GetComponent<Rigidbody>();
         hairController = GetComponent<HairController>();
@@ -431,6 +451,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetBool("isTakedown", isTakedown);
         animator.SetBool("isMovementLocked", IsMovementLocked());
         GetGrabTarget();
+        GetTakedownTarget();
     }
 
     void FixedUpdate()

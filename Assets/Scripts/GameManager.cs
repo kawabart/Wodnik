@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-
+    public PlayerController CurrentPlayer = null;
     private void Awake()
     {
         if (Instance != null)
