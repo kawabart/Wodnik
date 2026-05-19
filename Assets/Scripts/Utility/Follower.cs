@@ -7,6 +7,7 @@ public class Follower : MonoBehaviour
     public float SmoothTime = 0.3f;
     private Vector3 _currentVelocity = Vector3.zero;
     [SerializeField] private bool lateUpdate = false;
+  
     void LerpPosition()
     {
         if (Target == null) return;
@@ -20,12 +21,14 @@ public class Follower : MonoBehaviour
             SmoothTime
         );
     }
+  
     void Update()
     {
         if (!lateUpdate)
             LerpPosition();
 
     }
+ 
     void LateUpdate()
     {
         if (lateUpdate)

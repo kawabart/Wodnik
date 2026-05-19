@@ -8,16 +8,22 @@ public class Damageable : MonoBehaviour, IDamageable
     public bool DestroyOnDeath = true;
     public UnityEvent onDeath;
     public UnityEvent onHurt;
+    public SurfaceType armorSurface;
+
     void Start()
     {
         if (GetComponent<Surface>()) surfaceType = GetComponent<Surface>().type;
     }
+ 
     public void TakeDamage(DamageData damageData)
     {
         int amount = damageData.Amount;
         onHurt.Invoke();
         health -= amount;
+
         SurfaceType currentSurface = surfaceType;
+        if (health > 1 && armorSurface != null) currentSurface = armorSurface;
+
         if (damageData.OverrideSurface != null)
             currentSurface = damageData.OverrideSurface;
 
@@ -26,7 +32,12 @@ public class Damageable : MonoBehaviour, IDamageable
         else
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
 
-        SoundEventSystem.Emit(transform.position, currentSurface.SoundRange, currentSurface.defaultDangerLevel, this.gameObject);
+        if (surfaceType != null)
+            SoundEventSystem.Emit(
+                transform.position, 
+                currentSurface.SoundRange, 
+                currentSurface.defaultDangerLevel, 
+                this.gameObject);
 
         if (health <= 0)
             Die(currentSurface);

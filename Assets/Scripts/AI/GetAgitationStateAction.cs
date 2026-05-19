@@ -18,13 +18,4 @@ public partial class GetAgitationStateAction : Action
         AgitationState.Value = enemyController.AgitationState;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

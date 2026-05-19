@@ -10,22 +10,17 @@ public partial class GetSuggestedMoveSpeedAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Object;
     [SerializeReference] public BlackboardVariable<float> MoveSpeed;
+    [SerializeReference] public BlackboardVariable<float> LocalMultiplier = new(1f);
 
     protected override Status OnStart()
     {
+        if (LocalMultiplier == null) LocalMultiplier = new BlackboardVariable<float>(1f);
+        if (Object.Value == null)
+            return Status.Failure;
         var component = Object.Value.GetComponent<AgitationController>();
         if (component == null)
             return Status.Failure;
-        MoveSpeed.Value = Object.Value.GetComponent<AgitationController>().SuggestedSpeed;
+        MoveSpeed.Value = Object.Value.GetComponent<AgitationController>().SuggestedSpeed * LocalMultiplier;
         return Status.Success;
-    }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }

@@ -10,10 +10,10 @@ public partial class MeleeAttackAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Agent;
 
-    private MeleeDamageDealer damageDealer;
+    private EnemyWeapon damageDealer;
     protected override Status OnStart()
     {
-        damageDealer = Agent.Value.GetComponent<MeleeDamageDealer>();
+        damageDealer = Agent.Value.GetComponent<EnemyWeapon>();
         if (damageDealer == null)
             return Status.Failure;
         damageDealer.StartAttack();
@@ -26,10 +26,6 @@ public partial class MeleeAttackAction : Action
         if (damageDealer.isAttacking) return Status.Running;
         Debug.Log("Attack running");
         return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
     }
 }
 

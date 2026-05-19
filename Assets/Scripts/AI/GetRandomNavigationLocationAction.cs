@@ -54,13 +54,4 @@ public partial class GetRandomNavigationLocationAction : Action
         RandomLocation.Value = target;
         return Status.Success;
     }
-
-    protected override Status OnUpdate()
-    {
-        return Status.Success;
-    }
-
-    protected override void OnEnd()
-    {
-    }
 }

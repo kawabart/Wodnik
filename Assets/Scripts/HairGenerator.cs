@@ -52,6 +52,7 @@ public class HairGenerator : MonoBehaviour
             strands[i] = new Strand(headSize, resolution);
         }
     }
+ 
     void RemoveStrands()
     {
         foreach (Strand strand in strands)
@@ -61,6 +62,7 @@ public class HairGenerator : MonoBehaviour
         }
         strands = new Strand[0];
     }
+ 
     void CalculateMidlepoint()
     {
         Vector3 middlepointTargetPosition = Vector3.LerpUnclamped(startpoint.position, endpoint.position, middlePointLerp);
@@ -116,6 +118,7 @@ public class HairGenerator : MonoBehaviour
 
         strand.strand.SetPositions(strand.positions);
     }
+
     void Start()
     {
         GenerateStrands();

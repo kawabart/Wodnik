@@ -10,7 +10,6 @@ public partial class EnemyUI : MonoBehaviour
     private Label label;
 
     private Color color = Color.white;
-    private float blinkingSpeed = 5;
     public AgitationController agitationController;
     public EnemyController enemyController;
     public EnemyPerception enemyPerception;
@@ -28,7 +27,16 @@ public partial class EnemyUI : MonoBehaviour
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         if (enemyController.CurrentState == EnemyState.Downed)
         {
-            label.text = "zzZ";
+            if (!enemyController.IsSubdued)
+            {
+                if (enemyController.IsDominated) label.text = "";
+                else label.text = "";
+            }
+            else
+            {
+                label.text = "";
+            }
+
             return;
         }
         else if (enemyController.CurrentState != EnemyState.Alive)
@@ -50,7 +58,7 @@ public partial class EnemyUI : MonoBehaviour
         {
             label.text = "!";
         }
-        
+
 
         if (agitationController.AgitationState == AgitationState.Relaxed) color = Color.white;
         if (agitationController.AgitationState == AgitationState.Investigating) color = Color.yellow;

@@ -3,7 +3,6 @@ using UnityEngine;
 public class HairController : MonoBehaviour
 {
     [SerializeField] HairGenerator hairGenerator;
-    private PlayerController playerController;
     private Rigidbody rigidBody;
     [SerializeField, Tooltip("Default position that hair end lerps to when it isn't attached to anything.")]
     private Transform defaultHairPosition;
@@ -12,12 +11,15 @@ public class HairController : MonoBehaviour
     public bool Grabbed = false;
     [SerializeField, Tooltip("Spring joint thats dynamically created (and removed) to attach rb thats grabbed by hair.")]
     private SpringJoint springJoint;
+ 
     public void Probe(Vector3 probeLocation)
     {
         hairGenerator.endpoint.transform.position = probeLocation;
     }
+  
     public void Grab(Rigidbody rb)
     {
+        rb.isKinematic = false;
         GrabbedRb = rb;
         hairGenerator.endpoint.GetComponent<Follower>().Target = rb.transform;
         hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = 0f;
@@ -44,6 +46,12 @@ public class HairController : MonoBehaviour
 
     public void LetGo()
     {
+        if (GrabbedRb != null)
+        {
+            IGrabbable grabbable = GrabbedRb?.GetComponent<IGrabbable>();
+            if (grabbable != null) grabbable.LetGo();
+        }
+
         GrabbedRb = null;
         hairGenerator.endpoint.GetComponent<Follower>().Target = defaultHairPosition;
         hairGenerator.endpoint.GetComponent<Follower>().SmoothTime = .08f;
@@ -80,5 +88,4 @@ public class HairController : MonoBehaviour
         else if ((GrabbedRb == null && Grabbed) || (GrabbedRb != null && !Grabbed))
             LetGo();
     }
-
 }

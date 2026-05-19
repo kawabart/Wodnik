@@ -11,7 +11,9 @@ public class VisibilityController : MonoBehaviour
     private float detectionSphereRadius = 0.5f;
     [SerializeField, Tooltip("How many points can remain shown for the whole object to be considered hidden. Should be smaller then length of checkOffsets. Leave at 0 if you want all points to be accounted for.")]
     private int detectionPointsLeniency = 0;
-
+    [SerializeField, Tooltip("Tick for how often Hidden is checked.")]
+    private float tick = 0f;
+    private float tickCounter = 0f;
     bool CheckIfHidden()
     {
         int hits = 0;
@@ -29,6 +31,7 @@ public class VisibilityController : MonoBehaviour
     #region light and shadow
     [SerializeField] private bool includeShadows = false;
     private LightController[] lightControllers;
+
     void CollectLights()
     {
         //Can later be expanded so that some manager globally collects all lights in scene,
@@ -37,6 +40,7 @@ public class VisibilityController : MonoBehaviour
         //sources of light dynamically.
         lightControllers = FindObjectsByType<LightController>();
     }
+
     bool IsInLight(Vector3 position)
     {
         foreach (LightController light in lightControllers)
@@ -49,11 +53,20 @@ public class VisibilityController : MonoBehaviour
 
     private void Start()
     {
-        CollectLights();
+        if (includeShadows)
+            CollectLights();
+        tickCounter = tick * Random.value;
     }
+    
     void FixedUpdate()
     {
-        Hidden = CheckIfHidden();
+        tickCounter += Time.fixedDeltaTime;
+        if (tickCounter >= tick)
+        {
+            Hidden = CheckIfHidden();
+            tickCounter = 0;
+        }
+            
     }
 
     private void OnDrawGizmosSelected()

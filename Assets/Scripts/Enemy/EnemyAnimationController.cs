@@ -1,10 +1,10 @@
 using Unity.Behavior;
 using UnityEngine;
 using UnityEngine.AI;
+
 [RequireComponent(typeof(BehaviorGraphAgent))]
 public class EnemyAnimationController : MonoBehaviour
 {
-
     public void ChangeCombatState()
     {
         EnemyPerceptionState currentPerceptionState = enemyPerception.PerceptionState;
@@ -19,6 +19,7 @@ public class EnemyAnimationController : MonoBehaviour
             animator.SetBool(isInInvestigative, true);
         }
     }
+ 
     public void Block()
     {
         animator.SetTrigger(blockHash);
@@ -28,12 +29,11 @@ public class EnemyAnimationController : MonoBehaviour
     {
         animator.SetTrigger(attackHash);
     }
-    private EnemyController enemyController;
+
     private EnemyPerception enemyPerception;
     private AgitationController agitationController;
-    private BehaviorGraphAgent behaviorAgent;
     private Animator animator;
-    private MeleeDamageDealer meleeDamageDealer;
+    private EnemyWeapon meleeDamageDealer;
     private int isInCombatHash;
     private int isInInvestigative;
     private int attackHash;
@@ -43,16 +43,15 @@ public class EnemyAnimationController : MonoBehaviour
     private int blockHash;
     private NavMeshAgent navMeshAgent;
     private Rigidbody rb;
+ 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        behaviorAgent = GetComponent<BehaviorGraphAgent>();
-        enemyController = GetComponent<EnemyController>();
         enemyPerception = GetComponent<EnemyPerception>();
         agitationController = GetComponent<AgitationController>();
         animator = GetComponentInChildren<Animator>();
-        meleeDamageDealer = GetComponent<MeleeDamageDealer>();
+        meleeDamageDealer = GetComponent<EnemyWeapon>();
         isInCombatHash = Animator.StringToHash("IsInCombat");
         isInInvestigative = Animator.StringToHash("IsInInvestigative");
         attackHash = Animator.StringToHash("Attack");
@@ -105,7 +104,5 @@ public class EnemyAnimationController : MonoBehaviour
         {
             animator.SetBool(isInInvestigative, false);
         }
-
-
     }
 }

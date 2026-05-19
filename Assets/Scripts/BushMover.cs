@@ -14,6 +14,7 @@ public class BushMover : MonoBehaviour
     {
         InitializePlants();
     }
+
     void Update()
     {
         //to do: add culling for squared distance to player
@@ -23,6 +24,7 @@ public class BushMover : MonoBehaviour
             timer -= Time.deltaTime;
         }
     }
+ 
     void InitializePlants()
     {
         originalRotations = new Quaternion[plants.Length];
@@ -31,6 +33,7 @@ public class BushMover : MonoBehaviour
             originalRotations[i] = plants[i].transform.localRotation;
         }
     }
+ 
     void AnimatePlants(float timer)
     {
         for (int i = 0; i < plants.Length; i++)
@@ -46,6 +49,7 @@ public class BushMover : MonoBehaviour
             plants[i].transform.localRotation = originalRotations[i] * shakeRot;
         }
     }
+ 
     void OnTriggerEnter(Collider other)
     {
         if (other.attachedRigidbody != null)

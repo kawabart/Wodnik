@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5341854413299382407}
   - component: {fileID: 9080292005361565184}
   - component: {fileID: 3486485213603658527}
+  - component: {fileID: 7646105418149676830}
   m_Layer: 11
   m_Name: DynamicRock
   m_TagString: Untagged
@@ -103,6 +104,10 @@ MonoBehaviour:
   minVelocityToDamage: 2
   increaseVelocityNeededForPlayer: 3
   damage: 2
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!114 &4503014004726142115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  health: 10
+  health: 5
   DestroyOnDeath: 1
   onDeath:
     m_PersistentCalls:
@@ -123,6 +128,7 @@ MonoBehaviour:
   onHurt:
     m_PersistentCalls:
       m_Calls: []
+  armorSurface: {fileID: 0}
 --- !u!114 &8797479730542030774
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +199,23 @@ CapsuleCollider:
   m_Height: 1.2619233
   m_Direction: 1
   m_Center: {x: 0, y: 0.042373657, z: 0}
+--- !u!114 &7646105418149676830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5835002253674127275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170ed40127685d445a980321cfdbfd2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerceptionSightDynamic
+  Active: 0
+  Discovered: 0
+  Danger: 1
+  Hidden: 0
+  OneTimeDiscovery: 0
 --- !u!1 &6662237547938945770
 GameObject:
   m_ObjectHideFlags: 0

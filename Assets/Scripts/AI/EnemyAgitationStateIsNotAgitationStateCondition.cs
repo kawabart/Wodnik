@@ -13,12 +13,4 @@ public partial class EnemyAgitationStateIsNotAgitationStateCondition : Condition
     {
         return Enemy.Value.GetComponent<AgitationController>().AgitationState != AgitationState.Value;
     }
-
-    public override void OnStart()
-    {
-    }
-
-    public override void OnEnd()
-    {
-    }
 }

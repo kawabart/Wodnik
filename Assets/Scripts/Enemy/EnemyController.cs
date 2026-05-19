@@ -1,9 +1,7 @@
-using System;
-using System.Net.NetworkInformation;
-using UnityEngine;
 using Unity.Behavior;
+using UnityEditorInternal;
+using UnityEngine;
 
-[RequireComponent(typeof(EnemyAnimationController))]
 [RequireComponent(typeof(AgitationController))]
 [RequireComponent(typeof(EnemyPerception))]
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
@@ -12,21 +10,18 @@ public class EnemyController : MonoBehaviour
 {
 
     #region states
-    public EnemyState CurrentState = EnemyState.Alive;
-    private float aliveHeight;
-    private float aliveRadius;
-    private int aliveDirection;
-    private Vector3 aliveCenter;
+    public EnemyState CurrentState { get; private set; } = EnemyState.Alive;
 
     [Header("Downed Collider Settings")]
     public float downedHeight = 0.5f;
     public float downedRadius = 0.1f;
     public int downedDirection = 2; // 0 = X axis, 1 = Y axis, 2 = Z axis
     public Vector3 downedCenter = new Vector3(0f, 0.1f, 0f);
-
+    
     public void ChangeState(EnemyState newState)
     {
         if (CurrentState == newState) return;
+
         const float aliveHeight = 0.9f;
         const float aliveRadius = 0.2f;
         const int aliveDirection = 1; // 1 = Y axis
@@ -37,11 +32,14 @@ public class EnemyController : MonoBehaviour
         const int downedDirection = 2; // 2 = Z axis
         Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
 
+
         SoundtrackManager.Instance.ReportAgitation(agitationController.AgitationLevel, agitationController.AgitationState, perceptionController.PerceptionState, newState);
 
         CurrentState = newState;
+
         if (newState == EnemyState.Alive)
         {
+            perceptionSight.DisableSight();
             capsuleCollider.height = aliveHeight;
             capsuleCollider.radius = aliveRadius;
             capsuleCollider.direction = aliveDirection;
@@ -57,12 +55,15 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.ActivateSenses();
 
-            animator.SetTrigger("GetUp");
+            IsSubdued = false;
+            animator.SetBool("IsSubdued", false);
+            animator.SetBool("Downed", false);
             Debug.Log("Enemy recovered from being downed");
         }
         else if (newState == EnemyState.Downed)
         {
-            downedTimer = DownedTime;
+            perceptionSight.SetSight(DangerLevel.Distress);
+            DownedTimer = DownedTime;
 
             capsuleCollider.height = downedHeight;
             capsuleCollider.radius = downedRadius;
@@ -80,7 +81,7 @@ public class EnemyController : MonoBehaviour
             agitationController.enabled = true;
             perceptionController.DectivateSenses();
 
-            animator.SetTrigger("Downed");
+            animator.SetBool("Downed", true);
             Debug.Log("Enemy is downed.");
         }
         else if (newState == EnemyState.Dead)
@@ -102,14 +103,44 @@ public class EnemyController : MonoBehaviour
     #endregion
 
     #region downed
-    [Header("Timer settings")]
-    public float DownedTime = 10f;
+    [Header("Downed timer settings")]
+    public float DownedTime = 2;
+    public float DownedTimer { get; private set; } = 0;
+    public bool IsDominated { get; private set; }
+    public bool IsSubdued { get; private set; }
+    public float ChokeTime = 2;
+    public float ChokeTimer { get; private set; } = 0;
+    public float SubduedTime = 15;
+
     [SerializeField]
-    private float downedTimer = 0;
+    private ParticleSystem chokingParticle;
+
+    public void BecomeSubdued()
+    {
+        rigidBody.isKinematic = !rigidBody.isKinematic;
+        IsSubdued = true;
+        animator.SetBool("IsSubdued", true);
+        rigidBody.isKinematic = !rigidBody.isKinematic;
+        BecomeDowned();
+        DownedTimer = SubduedTime;
+    }
+
     public void BecomeDowned()
     {
-        if (CurrentState == EnemyState.Dead) return;
+        if (CurrentState != EnemyState.Alive) return;
         ChangeState(EnemyState.Downed);
+    }
+
+    public void BecomeDominated()
+    {
+        chokingParticle.Play();
+        IsDominated = true;
+        BecomeDowned();
+    }
+    public void StopBeingDominated()
+    {
+        IsDominated = false;
+        chokingParticle.Stop();
     }
 
     public void TurnPhysicsOff()
@@ -138,6 +169,7 @@ public class EnemyController : MonoBehaviour
     {
         agitationController.IncreaseAgitation(input, affectedByAgitationState, continous, maxAgitationFromThis);
     }
+
     public void DecreaseAgitation()
     {
         agitationController.DecreaseAgitation();
@@ -151,19 +183,19 @@ public class EnemyController : MonoBehaviour
     {
         if (!IsVulnerable())
         {
-            Debug.Log("Attack blocked!");
             agitationController.IncreaseAgitation(100, false, false);
             EffectSpawner.Instance.SpawnHit(transform.position, Vector3.up);
-            GetComponent<EnemyAnimationController>().Block();
+            if (TryGetComponent<EnemyAnimationController>(out var enemyAnimationController))
+            {
+                enemyAnimationController.Block();
+            }
             return true;
         }
         else return false;
     }
+
     public bool IsVulnerable()
     {
-        //enemy has no weapon
-        //enemy is stunned
-        //player is behind enemy
         if (CurrentState != EnemyState.Alive) return true;
         if (agitationController.AgitationState != AgitationState.Alarmed) return true;
         if (perceptionController.PerceptionState != EnemyPerceptionState.PlayerInSight) return true;
@@ -182,6 +214,8 @@ public class EnemyController : MonoBehaviour
     private AgitationController agitationController;
     private EnemyPerception perceptionController;
     private PlayerController player = null;
+    private PerceptionSight perceptionSight;
+	
     public AgitationStateConfig CurrentAgitationConfig
     {
         get
@@ -189,6 +223,7 @@ public class EnemyController : MonoBehaviour
             return agitationController.CurrentAgitationConfig;
         }
     }
+
     private Animator animator;
 
     void Start()
@@ -198,18 +233,13 @@ public class EnemyController : MonoBehaviour
 
         rigidBody = GetComponent<Rigidbody>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        if (capsuleCollider != null)
-        {
-            aliveHeight = capsuleCollider.height;
-            aliveRadius = capsuleCollider.radius;
-            aliveDirection = capsuleCollider.direction;
-            aliveCenter = capsuleCollider.center;
-        }
 
         animator = GetComponentInChildren<Animator>();
         player = (PlayerController)FindAnyObjectByType(typeof(PlayerController));
         agitationController = GetComponent<AgitationController>();
         perceptionController = GetComponent<EnemyPerception>();
+
+        perceptionSight = GetComponent<PerceptionSight>();
     }
 
     void Update()
@@ -237,27 +267,28 @@ public class EnemyController : MonoBehaviour
 
     void UpdateDowned()
     {
-        if (downedTimer <= 0)
+        if (DownedTimer <= 0)
+        {
             ChangeState(EnemyState.Alive);
+        }
+        else if (IsDominated)
+        {
+            DownedTimer = Mathf.Max(DownedTimer, 1);
+            if (!IsSubdued)
+            {
+                ChokeTimer += Time.deltaTime;
+                if (ChokeTimer > ChokeTime) BecomeSubdued();
+            }
+        }
         else
-            downedTimer -= Time.deltaTime;
+        {
+            ChokeTimer = 0;
+            DownedTimer -= Time.deltaTime;
+        }
     }
 
     void UpdateDead()
     {
         // For future need if it will be needed.
     }
-
-    // This method is addded for testig purposes. It will be replaced with proper methods later.
-    // void OnCollisionEnter(Collision other)
-    // {
-    //     if (CurrentState == EnemyState.Downed)
-    //     {
-    //         Kill();
-    //     }
-    //     else
-    //     {
-    //         BecomeDowned();
-    //     }
-    // }
 }

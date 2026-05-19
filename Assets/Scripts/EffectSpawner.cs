@@ -4,6 +4,7 @@ public class EffectSpawner : MonoBehaviour
 {
     public TaintController taintController;
     public static EffectSpawner Instance;
+ 
     void Awake()
     {
         Instance = this;
