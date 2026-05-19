@@ -75,6 +75,7 @@ public class GameManager : MonoBehaviour
     public void IncreaseInfamy(int value)
     {
         CurrentInfamy += value;
+        CurrentInfamy = Mathf.Max(0, Mathf.Min(100, CurrentInfamy + value));
     }
     #endregion
 
