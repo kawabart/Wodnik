@@ -377,9 +377,10 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
     bool GetTakedownTarget()
     {
+        if (isTakedown) return false;
         Vector3 center = transform.position;
         Collider[] hits = Physics.OverlapSphere(center, takedownRadius);
-
+        
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<UseTrigger>(out var useTrigger))
@@ -399,6 +400,7 @@ public class PlayerController : MonoBehaviour, IDamageable
                 }
             }
         }
+        takedownTarget = null;
         return false;
     }
  

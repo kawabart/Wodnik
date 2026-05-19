@@ -4694,7 +4694,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3150316663098235994, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -26.5
       objectReference: {fileID: 0}
     - target: {fileID: 3150316663098235994, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4702,7 +4702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3150316663098235994, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 3150316663098235994, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4739,7 +4739,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3517459709492663189, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 951361290133870874, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
 --- !u!1 &1753658874
 GameObject:
@@ -5945,6 +5951,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[7192979052170576195].m_Value.Array.data[0]'
       value: 
       objectReference: {fileID: 848157930}
+    - target: {fileID: 2517226389540221280, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
+      propertyPath: IsUsable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3407894050262269768, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.99144477
@@ -6005,12 +6015,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 355667311788087841, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8383855033844257164}
-    - targetCorrespondingSourceObject: {fileID: 355667311788087841, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8383855033844257175}
     - targetCorrespondingSourceObject: {fileID: 6620241194353101938, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
@@ -6760,39 +6764,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 355667311788087841, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
   m_PrefabInstance: {fileID: 1047666882369345720}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8383855033844257164
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383855033844257163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b749f5938e1147c4d9921594f35ba0b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PerceptionSight
-  Active: 0
-  Discovered: 0
-  Danger: 0
-  OneTimeDiscovery: 0
 --- !u!54 &8383855033844257172 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2904011870737440043, guid: 28932cfe5d156104e90729983eafcf20, type: 3}
   m_PrefabInstance: {fileID: 1047666882369345720}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8383855033844257175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8383855033844257163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc3c586de29bc11409f7b27593eb7af9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HogAnimationController
 --- !u!1001 &9058989354597095261
 PrefabInstance:
   m_ObjectHideFlags: 0
