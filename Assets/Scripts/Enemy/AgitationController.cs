@@ -80,6 +80,7 @@ public class AgitationController : MonoBehaviour
 
         }
         SuggestedSpeed = CurrentAgitationConfig.MoveSpeed;
+        SoundtrackManager.Instance.ReportAgitation(AgitationLevel, AgitationState, perception.PerceptionState);
     }
 
     /// <summary>

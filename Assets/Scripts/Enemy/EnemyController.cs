@@ -21,7 +21,6 @@ public class EnemyController : MonoBehaviour
     public void ChangeState(EnemyState newState)
     {
         if (CurrentState == newState) return;
-        CurrentState = newState;
 
         const float aliveHeight = 0.9f;
         const float aliveRadius = 0.2f;
@@ -32,6 +31,11 @@ public class EnemyController : MonoBehaviour
         const float downedRadius = 0.1f;
         const int downedDirection = 2; // 2 = Z axis
         Vector3 downedCenter = new Vector3(0f, downedRadius, 0f);
+
+
+        SoundtrackManager.Instance.ReportAgitation(agitationController.AgitationLevel, agitationController.AgitationState, perceptionController.PerceptionState, newState);
+
+        CurrentState = newState;
 
         if (newState == EnemyState.Alive)
         {
