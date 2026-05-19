@@ -375,6 +375,8 @@ GameObject:
   - component: {fileID: 980060145248646816}
   - component: {fileID: 2951739773900491611}
   - component: {fileID: 7806260201368888085}
+  - component: {fileID: 2173109871001601158}
+  - component: {fileID: 2917789408525142920}
   m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
@@ -508,7 +510,19 @@ MonoBehaviour:
   damage: 0
   onDamageDeal:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2173109871001601158}
+        m_TargetAssemblyTypeName: Damageable, Assembly-CSharp
+        m_MethodName: Die
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: eef41940116d0ef4785ad73069373de2, type: 2}
+          m_ObjectArgumentAssemblyTypeName: SurfaceType, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   minSelfVelocityToDamage: 3
 --- !u!114 &2951739773900491611
 MonoBehaviour:
@@ -544,6 +558,40 @@ MonoBehaviour:
   onLetGo:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2173109871001601158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677453458638437016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08127671ff88672428503281c24d6289, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Damageable
+  health: 1
+  DestroyOnDeath: 1
+  onDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  onHurt:
+    m_PersistentCalls:
+      m_Calls: []
+  armorSurface: {fileID: 0}
+--- !u!114 &2917789408525142920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677453458638437016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c84b7e6e41c76b489d699d6456284d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Surface
+  type: {fileID: 11400000, guid: eef41940116d0ef4785ad73069373de2, type: 2}
 --- !u!1 &6485659543418835015
 GameObject:
   m_ObjectHideFlags: 0
