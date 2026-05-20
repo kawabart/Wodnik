@@ -1,5 +1,4 @@
 using Unity.Behavior;
-using UnityEditorInternal;
 using UnityEngine;
 
 [RequireComponent(typeof(AgitationController))]
