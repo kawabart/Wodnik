@@ -127,7 +127,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9144674228260129208}
   serializedVersion: 5
-  m_Mass: 0.1
+  m_Mass: 1
   m_LinearDamping: 5
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -236,19 +236,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pushable
   onPush:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5428214248346213833}
-        m_TargetAssemblyTypeName: Damageable, Assembly-CSharp
-        m_MethodName: Die
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 88015d707671768458570137dcfd2127, type: 2}
-          m_ObjectArgumentAssemblyTypeName: SurfaceType, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   rotateInPushDirection: 0
 --- !u!114 &7945260976810091904
 MonoBehaviour:
@@ -277,5 +265,4 @@ MonoBehaviour:
   Active: 0
   Discovered: 0
   Danger: 1
-  Hidden: 0
   OneTimeDiscovery: 0
