@@ -47,13 +47,13 @@ public class GameManager : MonoBehaviour
         if (CurrentLevel >= LevelNames.Length)
         {
             Debug.Log("CONGRATS! You won! Game Over (in a good way). Achievement unlocked: Happily ever after...");
+            CurrentLevel = 0;
         }
-        else
-        {
+         
             
             LoadLevel(CurrentLevel);
     
-        }
+      
     }
     public void LoadLevel(int index)
     {
