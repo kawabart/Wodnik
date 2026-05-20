@@ -150,33 +150,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 427599926}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &41380454 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3690802316156881374, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-  m_PrefabInstance: {fileID: 316578570}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &41380456
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41380454}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: eb3502173cd98094ea17058416f1267b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &122110000
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +287,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!65 &142087149
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -522,7 +499,7 @@ PrefabInstance:
     - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: managedReferences[5827363742204297549].m_Value
       value: 
-      objectReference: {fileID: 41380456}
+      objectReference: {fileID: 0}
     - target: {fileID: 756476067600884879, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
       value: 5827363742204297549
@@ -554,9 +531,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7425853477990797489, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
       insertIndex: -1
       addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 3690802316156881374, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 41380456}
   m_SourcePrefab: {fileID: 100100000, guid: de23e3c13c2818f4d8465a58f6bf0160, type: 3}
 --- !u!1 &398236995
 GameObject:
@@ -603,7 +577,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.033333335
+  m_VoxelSize: 0.016666668
   m_MinRegionArea: 0.2
   m_NavMeshData: {fileID: 23800000, guid: f9bed8285a1663b439d0ad7655248660, type: 2}
   m_BuildHeightMesh: 0
@@ -905,6 +879,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!1001 &718255341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1504,6 +1482,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!1001 &1050352729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1936,6 +1918,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!65 &1321777353
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2238,6 +2224,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!65 &1545070651
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2540,6 +2530,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!65 &1660386728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2746,6 +2740,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!1 &1701915765
 GameObject:
   m_ObjectHideFlags: 0
@@ -3327,6 +3325,10 @@ MonoBehaviour:
   minVelocityToDamage: 4
   increaseVelocityNeededForPlayer: 2
   damage: 1
+  onDamageDeal:
+    m_PersistentCalls:
+      m_Calls: []
+  minSelfVelocityToDamage: 0
 --- !u!1001 &2064484375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3533,7 +3535,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3517459709492663189, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 951361290133870874, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 577718ad436e15a46925b74da40ff61b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

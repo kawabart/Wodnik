@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class TriggerEvent : MonoBehaviour
 {
     public UnityEvent onTrigger;
+    public UnityEvent onTriggerExit;
     public bool oneTime = false;
     public Rigidbody objectToTrigger = null;
     public LayerMask layerMask = -1;
@@ -21,11 +22,28 @@ public class TriggerEvent : MonoBehaviour
             EventTriggered();
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & layerMask) == 0) return;
+        if (objectToTrigger != null)
+        {
+            if (other.attachedRigidbody == objectToTrigger) EventTriggered();
+        }
+        else
+        {
+            ExitEventTriggered();
+        }
+    }
 
     void EventTriggered()
     {
         if (!enabled) return;
         onTrigger.Invoke();
         if (oneTime) this.enabled = false;
+    }
+    void ExitEventTriggered()
+    {
+        if (!enabled) return;
+        onTriggerExit.Invoke();
     }
 }
